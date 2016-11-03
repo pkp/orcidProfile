@@ -99,6 +99,9 @@ class OrcidProfilePlugin extends GenericPlugin {
 			case 'author/submit/step3.tpl':
 				$templateMgr->register_outputfilter(array(&$this, 'submitFilter'));
 				break;
+            case 'user/login.tpl':
+                $templateMgr->register_outputfilter(array(&$this, 'loginFilter'));
+				break;
 		}
 		return false;
 	}
@@ -115,6 +118,36 @@ class OrcidProfilePlugin extends GenericPlugin {
 		} else {
 			return ORCID_OAUTH_URL_SANDBOX;
 		}
+	}
+
+    /**
+     * Output filter adds ORCiD interaction to login form.
+     * @param $output string
+     * @param $templateMgr TemplateManager
+     * @return $string
+     */
+	function loginFilter($output, &$templateMgr) {
+        $sessionManager = SessionManager::getManager();
+        $userSession = $sessionManager->getUserSession();
+
+		if (preg_match('/<form id="signinForm"[^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) {
+			$match = $matches[0][0];
+			$offset = $matches[0][1];
+			$journal = Request::getJournal();
+
+			$templateMgr->assign(array(
+				'targetOp' => 'login',
+				'orcidProfileOauthPath' => $this->getOauthPath(),
+				'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
+			));
+
+			$newOutput = substr($output, 0, $offset);
+			$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidLogin.tpl');
+			$newOutput .= substr($output, $offset);
+			$output = $newOutput;
+		}
+		$templateMgr->unregister_outputfilter('loginFilter');
+		return $output;
 	}
 
 	/**

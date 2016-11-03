@@ -20,6 +20,7 @@
 	<message key="plugins.generic.orcidProfile.noData">Couldn\'t find any data from ORCID.</message>
 	<message key="plugins.generic.orcidProfile.emailOrOrcid">Email address or ORCID iD:</message>
 	<message key="plugins.generic.orcidProfile.submitAction">Submit</message>
+  <message key="plugins.generic.orcidProfile.linkMessage">Create or Connect your ORCID iD</message>
 	<message key="plugins.generic.orcidProfile.manager.orcidProfileSettings">ORCID Profile Settings</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.description">Configure the ORCID API for use in pulling ORCID profile information into the user profile.</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath">ORCID API</message>
