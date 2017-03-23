@@ -7,9 +7,11 @@
  * Copyright (c) 2014-2016 Simon Fraser University Library
  * Copyright (c) 2003-2016 John Willinsky
  * Distributed under the GNU GPL v2 or later. For full terms see the file docs/COPYING.
- *
+ * 
+ * Contributed by 4Science. 
+ * 
  * @class OrcidHandler
- * @ingroup plugins_generic_orcidprofile
+ * @ingroup plugins_generic_orcidprofile 
  *
  * @brief Pass off internal ORCID API requests to ORCID
  */

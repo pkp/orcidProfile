@@ -12,9 +12,12 @@ Copyright © 2015-2016 University of Pittsburgh
 
 Licensed under GPL 2 or better.
 
+Contributed by 4Science (http://www.4science.it).
+
 ## Features:
 
  * Hooks into the User Profile, Registration, and Submission (step 3) forms
+ * Searchs for co-authors ORCIDs
  * Requests ORCIDs of authors via email
 
 ## Install:
