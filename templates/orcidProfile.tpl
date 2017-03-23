@@ -13,10 +13,10 @@
 
 function openORCID() {ldelim}
 	var oauthWindow = window.open("{$orcidProfileOauthPath|escape}authorize?client_id={$orcidClientId|urlencode}&response_type=code&scope=/authenticate&redirect_uri={url|urlencode page="orcidapi" op="orcidAuthorize" targetOp=$targetOp params=$params escape=false}", "_blank", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
-	oauthWindow.opener = self;
+	console.log(self);
+    oauthWindow.opener = self;
 	return false;
 {rdelim}
 </script>
 
-<button id="connect-orcid-button" onclick="return openORCID();"><img id="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24" height="24" alt="{translate key='plugins.generic.orcidProfile.submitAction'}"/>Create or Connect your ORCID iD</button>
-<br />
+<button id="connect-orcid-button" onclick="return openORCID();"><img class="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24" height="24" alt="{translate key='plugins.generic.orcidProfile.submitAction'}"/>{translate key='plugins.generic.orcidProfile.connect'}</button>

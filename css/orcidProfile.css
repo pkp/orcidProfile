@@ -1,4 +1,4 @@
-#connect-orcid-button{
+#connect-orcid-button, #search-orcid-button, button[id^="search-orcid-button-"], button[id^="remove-orcid-button-"] {
 	border: 1px solid #D3D3D3;
 	padding: .3em;
 	background-color: #fff;
@@ -9,17 +9,22 @@
 	font-weight: bold;
 	font-size: .8em;
 	line-height: 24px;
+    margin: .3em;
 	vertical-align: middle;
 }
 
-#connect-orcid-button:hover{
+#connect-orcid-button:hover, button[id^="search-orcid-button-"]:hover{
 	border: 1px solid #338caf;
 	color: #338caf;
 }
 
-#orcid-id-logo{
+.orcid-id-logo{
 	display: block;
 	margin: 0 .5em 0 0;
 	padding: 0;
 	float: left;
+}
+
+.search-content {
+    padding: 10px !important;
 }

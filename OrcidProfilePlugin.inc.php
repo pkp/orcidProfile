@@ -26,6 +26,7 @@ define('ORCID_API_URL_MEMBER_SANDBOX', 'https://api.sandbox.orcid.org/');
 define('OAUTH_TOKEN_URL', 'oauth/token');
 define('ORCID_API_VERSION_URL', 'v1.2/');
 define('ORCID_PROFILE_URL', 'orcid-profile');
+define('ORCID_BIO_URL', 'orcid-bio');
 
 class OrcidProfilePlugin extends GenericPlugin {
 	/**
@@ -60,6 +61,13 @@ class OrcidProfilePlugin extends GenericPlugin {
 	function getHandlerPath() {
 		return $this->getPluginPath() . DIRECTORY_SEPARATOR . 'pages';
 	}
+    
+    /**
+     * Get the template path for this plugin.
+     */
+    function getTemplatePath() {
+        return parent::getTemplatePath() . 'templates/';
+    }    
 
 	/**
 	 * Hook callback: register pages for each sushi-lite method
@@ -84,10 +92,10 @@ class OrcidProfilePlugin extends GenericPlugin {
 	function handleTemplateDisplay($hookName, $args) {
 		$templateMgr =& $args[0];
 		$template =& $args[1];
-                $request =& PKPApplication::getRequest();
+        $request =& PKPApplication::getRequest();
 
-                // Assign our private stylesheet.
-                $templateMgr->addStylesheet($request->getBaseUrl() . '/' . $this->getStyleSheet());
+        // Assign our private stylesheet.
+        $templateMgr->addStylesheet($request->getBaseUrl() . '/' . $this->getStyleSheet());
 
 		switch ($template) {
 			case 'user/register.tpl':
@@ -97,6 +105,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				$templateMgr->register_outputfilter(array(&$this, 'profileFilter'));
 				break;
 			case 'author/submit/step3.tpl':
+            case 'submission/metadata/metadataEdit.tpl':
 				$templateMgr->register_outputfilter(array(&$this, 'submitFilter'));
 				break;
 		}
@@ -183,31 +192,52 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 * @param $templateMgr TemplateManager
 	 * @return $string
 	 */
-	function submitFilter($output, &$templateMgr) {
-		if (preg_match('/<input type="text" class="textField" name="authors\[0\]\[orcid\][^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) {
-			$match = $matches[0][0];
-			$offset = $matches[0][1];
-			$journal = Request::getJournal();
+	function submitFilter($output, &$templateMgr) {  
+		if (preg_match_all('/<input type="text" (class="textField" )?name="authors\[(?<indexes>\d+)\]\[orcid\][^>]+>/', $output, $matches_all, PREG_OFFSET_CAPTURE)) {
+			foreach($matches_all[0] as $key => $matches){
+                $index = $matches_all['indexes'][$key][0];
+                $orcidInputId = "authors-{$index}-orcid";
+                $match = $matches[0];
+                if ($index == 0) {                    
+                    $offset = $matches[1];
+                    $orcidButtonId = 'connect-orcid-button';
+                } else {
+                    $newOutput = null;
+                    // Finding new offset after output changes
+                    preg_match('/<input type="text" (class="textField" )?name="authors\[' . $index . '\]\[orcid\][^>]+>/', $output, $new_matches, PREG_OFFSET_CAPTURE);    
+                    $offset = $new_matches[0][1];
+                    $orcidButtonId = 'search-orcid-button-' . $index;
+                }
+			    $journal = Request::getJournal();
+    
+			    // Entering the registration without ORCiD; present the button.
+			    $templateMgr->assign(array(
+				    'targetOp' => 'submit',
+				    'orcidProfileOauthPath' => $this->getOauthPath(),
+				    'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
+				    'params' => array('articleId'     => Request::getUserVar('articleId'), 
+                                      'authorIndex'   => $index,
+                                      'orcidButtonId' => $orcidButtonId,
+                                      'orcidInputId'  => $orcidInputId)
+			    ));
 
-			// Entering the registration without ORCiD; present the button.
-			$templateMgr->assign(array(
-				'targetOp' => 'submit',
-				'orcidProfileOauthPath' => $this->getOauthPath(),
-				'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
-				'params' => array('articleId' => Request::getUserVar('articleId')),
-			));
-
-			$newOutput = substr($output, 0, $offset + strlen($match) - 1);
-			$newOutput .= ' readonly=\'readonly\'><br />';
-			$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfile.tpl');
-			$newOutput .= '<button id="remove-orcid-button">Remove ORCID ID</button>
-				<script>$("#remove-orcid-button").click(function(event) {
-					event.preventDefault();
-					$("#authors-0-orcid").val("");
-					$("#connect-orcid-button").show();
-				});</script>';
-			$newOutput .= substr($output, $offset + strlen($match));
-			$output = $newOutput;
+			    $newOutput = substr($output, 0, $offset + strlen($match) - 1);
+			    $newOutput .= ' readonly=\'readonly\'>';
+                if ($index == 0) {
+			        $newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfile.tpl');
+                } else {                    
+                    $newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfileSearch.tpl');
+                }
+			    $newOutput .= '<button id="remove-orcid-button-' . $index . '" style="display:none">' . __('plugins.generic.orcidProfile.removeOrcidId') . '</button>
+				    <script>$("#remove-orcid-button-' . $index . '").click(function(event) {
+					    event.preventDefault();
+					    $("#authors-' . $index . '-orcid").val("");
+					    $("#' . $orcidButtonId . '").show();
+                        $(this).hide();
+				    });</script>';
+			    $newOutput .= substr($output, $offset + strlen($match));
+			    $output = $newOutput;
+            }
 		}
 		$templateMgr->unregister_outputfilter('submitFilter');
 		return $output;
