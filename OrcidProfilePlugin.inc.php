@@ -144,6 +144,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'targetOp' => 'register',
 				'orcidProfileOauthPath' => $this->getOauthPath(),
 				'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
+                'params' => array('orcidButtonVisible' => true)
 			));
 
 			$newOutput = substr($output, 0, $offset);
@@ -172,6 +173,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'targetOp' => 'profile',
 				'orcidProfileOauthPath' => $this->getOauthPath(),
 				'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
+                'params' => array('orcidButtonVisible' => true)
 			));
 
 			$newOutput = substr($output, 0, $offset+strlen($match));
@@ -210,17 +212,30 @@ class OrcidProfilePlugin extends GenericPlugin {
                     $offset = $new_matches[0][1];
                     $orcidButtonId = 'search-orcid-button-' . $index;
                 }
+
 			    $journal = Request::getJournal();
+                
+                // show/hide buttons
+                if (preg_match('/value=\"(.*?)\"/', $match, $match_value)) {
+                    if (!empty($match_value[1])) {
+                        $orcidButtonVisible = false;
+                        $removeButtonStyle  = '';    
+                    } else {
+                        $orcidButtonVisible = true;
+                        $removeButtonStyle  = 'style="display:none;"'; 
+                    }   
+                }
     
 			    // Entering the registration without ORCiD; present the button.
 			    $templateMgr->assign(array(
 				    'targetOp' => 'submit',
 				    'orcidProfileOauthPath' => $this->getOauthPath(),
 				    'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
-				    'params' => array('articleId'     => Request::getUserVar('articleId'), 
-                                      'authorIndex'   => $index,
-                                      'orcidButtonId' => $orcidButtonId,
-                                      'orcidInputId'  => $orcidInputId)
+				    'params' => array('articleId'          => Request::getUserVar('articleId'), 
+                                      'authorIndex'        => $index,
+                                      'orcidButtonId'      => $orcidButtonId,
+                                      'orcidButtonVisible' => $orcidButtonVisible,
+                                      'orcidInputId'       => $orcidInputId)
 			    ));
 
 			    $newOutput = substr($output, 0, $offset + strlen($match) - 1);
@@ -230,7 +245,7 @@ class OrcidProfilePlugin extends GenericPlugin {
                 } else {                    
                     $newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfileSearch.tpl');
                 }
-			    $newOutput .= '<button id="remove-orcid-button-' . $index . '" style="display:none">' . __('plugins.generic.orcidProfile.removeOrcidId') . '</button>
+			    $newOutput .= '<button id="remove-orcid-button-' . $index . '" ' . $removeButtonStyle . '>' . __('plugins.generic.orcidProfile.removeOrcidId') . '</button>
 				    <script>$("#remove-orcid-button-' . $index . '").click(function(event) {
 					    event.preventDefault();
 					    $("#authors-' . $index . '-orcid").val("");

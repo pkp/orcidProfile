@@ -20,4 +20,4 @@ function openSearchORCID() {ldelim}
 {rdelim}
 </script>
 
-<button id="{$params.orcidButtonId}" onclick="return openSearchORCID();"><img class="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24" height="24" alt="{translate key='plugins.generic.orcidProfile.submitAction'}"/>Search the ORCID iD</button>
+<button id="{$params.orcidButtonId}" onclick="return openSearchORCID();" {if !$params.orcidButtonVisible}style="display:none;" {/if}><img class="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24" height="24" alt="{translate key='plugins.generic.orcidProfile.submitAction'}"/>Search the ORCID iD</button>

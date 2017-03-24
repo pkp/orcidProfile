@@ -21,4 +21,4 @@ function openORCID() {ldelim}
 {rdelim}
 </script>
 
-<button id="connect-orcid-button" onclick="return openORCID();"><img class="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24" height="24" alt="{translate key='plugins.generic.orcidProfile.submitAction'}"/>{translate key='plugins.generic.orcidProfile.connect'}</button>
+<button id="connect-orcid-button" onclick="return openORCID();" {if !$params.orcidButtonVisible}style="display:none;" {/if}><img class="orcid-id-logo" src="http://orcid.org/sites/default/files/images/orcid_24x24.png" width="24" height="24" alt="{translate key='plugins.generic.orcidProfile.submitAction'}"/>{translate key='plugins.generic.orcidProfile.connect'}</button>
