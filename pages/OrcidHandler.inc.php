@@ -163,14 +163,15 @@ class OrcidHandler extends Handler {
                             
                             $profile = $plugin->getOrcidProfile($orcidiD);
                             
-                            if (!is_null($profile['orcid-profile']['orcid-bio']['researcher-urls'])) {
-                                $researcherUrls = array();
+                            $researcherUrls = array();
+                            if (!is_null($profile['orcid-profile']['orcid-bio']['researcher-urls'])) {                                
                                 foreach ($profile['orcid-profile']['orcid-bio']['researcher-urls']['researcher-url'] as $researcherUrl) {
                                     $researcherUrls[] = $researcherUrl['url-name']['value'] . ' - ' . $researcherUrl['url']['value'];    
                                 }
                             }
-                            if (!is_null($profile['orcid-profile']['orcid-activities']['affiliations'])) {
-                                $affiliations = array();
+                            
+                            $affiliations = array();
+                            if (!is_null($profile['orcid-profile']['orcid-activities']['affiliations'])) {                                
                                 foreach ($profile['orcid-profile']['orcid-activities']['affiliations']['affiliation'] as $affiliation) {
                                     $affiliations[] = $affiliation['organization']['name'];    
                                 }  
