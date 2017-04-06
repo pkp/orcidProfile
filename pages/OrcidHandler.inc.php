@@ -187,8 +187,7 @@ class OrcidHandler extends Handler {
                     }
                 }
                     
-                // Paginate results.
-                                   
+                // Paginate results.         
                 // Instantiate article iterator.
                 import('lib.pkp.classes.core.VirtualArrayIterator');
                 $iterator = new VirtualArrayIterator($orcidSearchResults, $totalResults, $profilesPage, $itemsPerPage);

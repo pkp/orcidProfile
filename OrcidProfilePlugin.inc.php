@@ -266,22 +266,11 @@ class OrcidProfilePlugin extends GenericPlugin {
                     // Closing round bracket if it is left open
                     $querySearch .= ')';    
                 }                  
-                //$querySearch = '(given-names:' . $searchName . ' AND family-name:' . $searchLastname . ') OR email:' . $searchEmail;
-                /*if ($searchName && $searchLastname && $searchEmail) {
-                    $querySearch .= '(given-names:' . $searchName . ' AND family-name:' . $searchLastname . ') OR email:' . $searchEmail;
-                } elseif ($searchName && $searchLastname) {
-                    $querySearch .= 'given-names:' . $searchName . ' AND family-name:' . $searchLastname;
-                } elseif ($searchName) {
-                    $querySearch .= 'given-names:' . $searchName;
-                } elseif ($searchLastname) {
-                    $querySearch .= 'family-name:' . $searchLastname;
-                } else {
-                    $querySearch .= 'email:' . $searchEmail;
-                }*/
                 
                 $queryPage = array('start' => ($page - 1),
                                    'rows'  => $itemsPerPage);
                 $query = http_build_query(array_merge(array('q' => $querySearch), $queryPage));
+                
                 // Performing search
                 $curl = curl_init();
                 curl_setopt_array($curl, array(

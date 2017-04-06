@@ -18,7 +18,7 @@ Contributed by 4Science (http://www.4science.it).
 
  * Hooks into the User Profile, Registration, and Submission (step 3) forms
  * Searchs for co-authors ORCIDs
- * Requests ORCIDs of authors via email
+ * Requests ORCIDs of co-authors via email
 
 ## Install:
 
@@ -26,8 +26,8 @@ Contributed by 4Science (http://www.4science.it).
  * Run `tools/upgrade.php upgrade` to allow the system to recognize the new plugin.
  * Enable this plugin within the administration interface.
  * Set up [an application with ORCID](https://orcid.org/developer-tools).
-  * The URI and description are to reassure users.
-  * The redirect URI can be anything within your OJS/OMP installation.
-  * ORCID will give you a client ID and secret.
+ * The URI and description are to reassure users.
+ * The redirect URI can be anything within your OJS/OMP installation.
+ * ORCID will give you a client ID and secret.
  * Consider the settings within the administation interface.
-  * Enter the client and secret from the ORCID application setup.
+ * Enter the client and secret from the ORCID application setup.
