@@ -7,8 +7,8 @@
 Plugin for PKP user profiles (tested with OJS 2.x)
 
 Copyright © 2015-2016 University of Pittsburgh
-<br />Copyright © 2014-2016 Simon Fraser University Library
-<br />Copyright © 2003-2016 John Willinsky
+<br />Copyright © 2014-2017 Simon Fraser University Library
+<br />Copyright © 2003-2017 John Willinsky
 
 Licensed under GPL 2 or better.
 

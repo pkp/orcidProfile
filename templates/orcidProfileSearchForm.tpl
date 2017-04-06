@@ -1,14 +1,14 @@
 {**
  * plugins/generic/orcidProfile/orcidProfile.tpl
  *
- * Copyright (c) 2015-2016 University of Pittsburgh
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2015-2017 University of Pittsburgh
+ * Copyright (c) 2014-2017 Simon Fraser University Library
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
- * Contributed by 4Science.
+ * Contributed by 4Science (http://www.4science.it).
  *
- * ORCID Profile authorization form
+ * ORCID Profile search form
  *
  *}
 
@@ -64,8 +64,8 @@
     <script type="text/javascript">        
         
         $(document).ready(function(){
-            $("#search-orcid-name").val('');
-            $("#search-orcid-lastname").val('');
+            $("#searchOrcidName").val('');
+            $("#searchOrcidLastname").val('');
             $("#search-orcid-email").val('');            
         });        
     </script>
@@ -73,12 +73,12 @@
 
 <h3>{translate key='plugins.generic.orcidProfile.searchPageTitle'}</h3>
 <div id="content">
-    <form method="post" action="{url|escape page="orcidapi" op="orcidSearch" targetOp="search" orcidInputId=$orcidInputId orcidButtonId=$orcidButtonId authorIndex=$authorIndex escape=false}">
+    <form method="post" action="{url|escape page="orcidapi" op="orcidSearch" targetOp="search" orcidInputId=$orcidInputId orcidButtonId=$orcidButtonId authorIndex=$authorIndex profilesPage=1 escape=false}">
         <table width="100%" class="data">
 
             <tr valign="top">
                 <td width="20%" class="label">{translate key='user.firstName'}</td>
-                <td width="80%" class="value"><input type="text" class="textField" name="search-orcid-name" id="search-orcid-name" value="" size="30" maxlength="100" /></td>
+                <td width="80%" class="value"><input type="text" class="textField" name="searchOrcidName" id="searchOrcidName" value="" size="30" maxlength="100" /></td>
             </tr>
             <tr valign="top">
                 <td>&nbsp;</td>
@@ -86,7 +86,7 @@
             </tr>            
             <tr valign="top">
                 <td width="20%" class="label">{translate key='user.lastName'}</td>
-                <td width="80%" class="value"><input type="text" class="textField" name="search-orcid-lastname" id="search-orcid-lastname" value="" size="30" maxlength="100" /></td>
+                <td width="80%" class="value"><input type="text" class="textField" name="searchOrcidLastname" id="searchOrcidLastname" value="" size="30" maxlength="100" /></td>
             </tr>
             <tr valign="top">
                 <td>&nbsp;</td>
@@ -102,7 +102,7 @@
             </tr>
             <tr valign="top">
                 <td width="20%" class="label">{translate key='user.email'}</td>
-                <td width="80%" class="value"><input type="text" class="textField" name="search-orcid-email" id="search-orcid-email" value="" size="30" maxlength="100" /></td>
+                <td width="80%" class="value"><input type="text" class="textField" name="searchOrcidEmail" id="searchOrcidEmail" value="" size="30" maxlength="100" /></td>
             </tr>
 
             <tr valign="top">

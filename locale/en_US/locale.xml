@@ -4,12 +4,12 @@
 <!--
   * plugins/generic/orcidPlugin/locale/en_US/locale.xml
   *
-  * Copyright (c) 2015-2016 University of Pittsburgh
-  * Copyright (c) 2014-2016 Simon Fraser University Library
-  * Copyright (c) 2003-2016 John Willinsky
+  * Copyright (c) 2015-2017 University of Pittsburgh
+  * Copyright (c) 2014-2017 Simon Fraser University Library
+  * Copyright (c) 2003-2017 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   *
-  * Contributed by 4Science. 
+  * Contributed by 4Science (http://www.4science.it). 
   *
   * ORCID Profile plugin localization strings
   -->
@@ -25,14 +25,18 @@
     <message key="plugins.generic.orcidProfile.connect">Create or Connect your ORCID iD</message>
     <message key="plugins.generic.orcidProfile.searchOrcidId">Search the ORCID iD</message>
     <message key="plugins.generic.orcidProfile.removeOrcidId">Remove ORCID iD</message>
+    <message key="plugins.generic.orcidProfile.affiliations">Affiliations</message>
+    <message key="plugins.generic.orcidProfile.researcherUrl">Researcher Url</message>
     <message key="plugins.generic.orcidProfile.searchAndOr">and / or</message>
     <message key="plugins.generic.orcidProfile.searchPageTitle">Search public ORCID registry data</message>    
     <message key="plugins.generic.orcidProfile.searchResultsList">Choose and select the exact match from the list below:</message>
-	<message key="plugins.generic.orcidProfile.searchResultsList">Choose and select the exact match from the list below:</message>
+	<message key="plugins.generic.orcidProfile.searchResultsNotice">If you are not sure to choose the exact match it is better to skip this step and leave ORCID iD field empty.</message>
     <message key="plugins.generic.orcidProfile.privateEmail">Not viewable</message>
     <message key="plugins.generic.orcidProfile.noResults">No search results</message>
 	<message key="plugins.generic.orcidProfile.manager.orcidProfileSettings">ORCID Profile Settings</message>
-	<message key="plugins.generic.orcidProfile.manager.settings.description">Configure the ORCID API for use in pulling ORCID profile information into the user profile.</message>
+    <message key="plugins.generic.orcidProfile.manager.settings.description">Configure the ORCID API for use in pulling ORCID profile information into the user profile.</message>
+    <message key="plugins.generic.orcidProfile.manager.settings.pagePerItemDescription">The number of items per page in the overall list of ranked ORCID profile search results.</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.pagePerItem">Items per page</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath">ORCID API</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public">Public</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox">Public Sandbox</message>

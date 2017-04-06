@@ -3,12 +3,12 @@
 /**
  * @file plugins/generic/orcidProfile/OrcidHandler.inc.php
  *
- * Copyright (c) 2015-2016 University of Pittsburgh
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2015-2017 University of Pittsburgh
+ * Copyright (c) 2014-2017 Simon Fraser University Library
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2 or later. For full terms see the file docs/COPYING.
  * 
- * Contributed by 4Science. 
+ * Contributed by 4Science (http://www.4science.it). 
  * 
  * @class OrcidHandler
  * @ingroup plugins_generic_orcidprofile 
@@ -24,46 +24,21 @@ class OrcidHandler extends Handler {
 	 * @param $args array
 	 * @param $request Request
 	 */
-	function orcidAuthorize($args, &$request) {
+	function orcidAuthorize($args, &$request) { 
 		$journal = Request::getJournal();
 		$op = Request::getRequestedOp();
 		$plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
 
 		// fetch the access token
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => $plugin->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_HTTPHEADER => array('Accept: application/json'),
-			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => http_build_query(array(
-				'code' => Request::getUserVar('code'),
-				'grant_type' => 'authorization_code',
-				'client_id' => $plugin->getSetting($journal->getId(), 'orcidClientId'),
-				'client_secret' => $plugin->getSetting($journal->getId(), 'orcidClientSecret')
-			))
-		));
-		$result = curl_exec($curl);
-		$response = json_decode($result, true);
+		$response = $plugin->fetchAccessToken(Request::getUserVar('code'));
 
-		curl_setopt_array($curl, array(
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_URL =>  $url = $plugin->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($response['orcid']) . '/' . ORCID_PROFILE_URL,
-			CURLOPT_POST => false,
-			CURLOPT_HTTPHEADER => array('Accept: application/json'),
-		));
-		$result = curl_exec($curl);
-		$info = curl_getinfo($curl);
-		if ($info['http_code'] == 200) {
-			$json = json_decode($result, true);
-		}
-
+        $profile = $plugin->getOrcidProfile($response['orcid']);
 		switch (Request::getUserVar('targetOp')) {
 			case 'register':
 				echo '<html><body><script type="text/javascript">
-					opener.document.getElementById("firstName").value = ' . json_encode($json['orcid-profile']['orcid-bio']['personal-details']['given-names']['value']) . ';
-					opener.document.getElementById("lastName").value = ' . json_encode($json['orcid-profile']['orcid-bio']['personal-details']['family-name']['value']) . ';
-					opener.document.getElementById("email").value = ' . json_encode($json['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value']) . ';
+					opener.document.getElementById("firstName").value = ' . json_encode($profile['orcid-profile']['orcid-bio']['personal-details']['given-names']['value']) . ';
+					opener.document.getElementById("lastName").value = ' . json_encode($profile['orcid-profile']['orcid-bio']['personal-details']['family-name']['value']) . ';
+					opener.document.getElementById("email").value = ' . json_encode($profile['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value']) . ';
 					opener.document.getElementById("orcid").value = ' . json_encode('http://orcid.org/' . $response['orcid']). ';
 					opener.document.getElementById("connect-orcid-button").style.display = "none";
 					window.close();
@@ -101,22 +76,8 @@ class OrcidHandler extends Handler {
 		$plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
 		$templateMgr =& TemplateManager::getManager($request);
 
-		// fetch the access token
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => $plugin->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_HTTPHEADER => array('Accept: application/json'),
-			CURLOPT_POST => true,
-			CURLOPT_POSTFIELDS => http_build_query(array(
-				'code' => Request::getUserVar('code'),
-				'grant_type' => 'authorization_code',
-				'client_id' => $plugin->getSetting($journal->getId(), 'orcidClientId'),
-				'client_secret' => $plugin->getSetting($journal->getId(), 'orcidClientSecret')
-			))
-		));
-		$result = curl_exec($curl);
-		$response = json_decode($result, true);
+        // fetch the access token
+        $response = $plugin->fetchAccessToken(Request::getUserVar('code'));
 
 		if (!isset($response['orcid'])) {
 			$templateMgr->assign(array(
@@ -174,75 +135,71 @@ class OrcidHandler extends Handler {
             case 'form':                
                 $templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchForm.tpl');
                 break;
-            case 'search':  
-                $journal = Request::getJournal(); //
-                $name = $request->getUserVar('search-orcid-name');
-                $lastname = $request->getUserVar('search-orcid-lastname');
-                $email = $request->getUserVar('search-orcid-email');
-                $orcidSearchResults = array();
-                if (($name && $lastname) || $email) {
-                    // Obtaining a search token
-                    $curl = curl_init();  
-                    curl_setopt_array($curl, array(
-                        CURLOPT_FAILONERROR => true,
-                        CURLOPT_URL => $url = $plugin->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_HTTPHEADER => array('Accept: application/json'),
-                        CURLOPT_POST => true,
-                        CURLOPT_POSTFIELDS => http_build_query(array(
-                            'scope' => '/read-public',
-                            'grant_type' => 'client_credentials',
-                            'client_id' => $plugin->getSetting($journal->getId(), 'orcidClientId'),
-                            'client_secret' => $plugin->getSetting($journal->getId(), 'orcidClientSecret')
-                        ))
-                    ));
-                    $result = curl_exec($curl);
-                    // Close request to clear up some resources
-                    curl_close($curl);
-                    if ($result) {                    
-                        $response = json_decode($result, true);
-                        $query = '?q=';
-                        if ($name && $lastname && $email) {
-                            $query .= '(given-names:' . $name . '+AND+family-name:' . $lastname . ')+OR+email:' . $email;
-                        } elseif ($name && $lastname) {
-                            $query .= 'given-names:' . $name . '+AND+family-name:' . $lastname;
-                        } else {
-                            $query .= 'email:' . $email;
-                        }
-                        
-                        // Performing search
-                        $curl = curl_init();
-                        curl_setopt_array($curl, array(
-                            CURLOPT_FAILONERROR    => true,
-                            CURLOPT_RETURNTRANSFER => true,
-                            CURLOPT_HTTPHEADER => array('Accept: application/json',
-                                                        'Content-Type: application/orcid+xml',
-                                                        'Authorization: Bearer ' . $response['access_token']),
-                            CURLOPT_POST => false,
-                            CURLOPT_URL => $url = $plugin->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . 'search/' . ORCID_BIO_URL . '/' . $query,
-                        ));   
-                        $result = curl_exec($curl);
-                        if ($result) {
-                            // Processing results                             
-                            $response = json_decode($result, true);
-                            if ($response['orcid-search-results']['num-found'] > 0) {
-                                foreach($response['orcid-search-results']['orcid-search-result'] as $resultItem) {
-                                    $name = $resultItem['orcid-profile']['orcid-bio']['personal-details']['given-names']['value'];
-                                    $lastname = $resultItem['orcid-profile']['orcid-bio']['personal-details']['family-name']['value'];
-                                    $email = $resultItem['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value'];
-                                    $orcidiD = $resultItem['orcid-profile']['orcid-identifier']['uri'];
-                                    $orcidSearchResults[] = array('name' => $name,
-                                                                  'lastname' => $lastname,
-                                                                  'email' => $email,
-                                                                  'orcidiD' => $orcidiD);
+            case 'search': 
+                $journal = Request::getJournal();
+                $totalResults = 0;
+                $orcidSearchResults = array();                 
+                 
+                $searchName = $request->getUserVar('searchOrcidName');
+                $searchLastname = $request->getUserVar('searchOrcidLastname');
+                $searchEmail = $request->getUserVar('searchOrcidEmail');            
+                $profilesPage = (int) $request->getUserVar('profilesPage');
+                $itemsPerPage = $plugin->getSetting($journal->getId(), 'itemsPerPage');
+                
+                $templateMgr->assign_by_ref('itemsPerPage', $itemsPerPage);
+
+                $result = $plugin->searchProfile($searchName, $searchLastname, $searchEmail, $profilesPage, $itemsPerPage);
+                 
+                if ($result) {
+                    // Processing results                             
+                    $totalResults = $result['orcid-search-results']['num-found'];
+                    if ($totalResults > 0) {
+                        foreach($result['orcid-search-results']['orcid-search-result'] as $resultItem) {
+                            $name = $resultItem['orcid-profile']['orcid-bio']['personal-details']['given-names']['value'];
+                            $lastname = $resultItem['orcid-profile']['orcid-bio']['personal-details']['family-name']['value'];
+                            $email = $resultItem['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value'];                                
+                            $orcidUri = $resultItem['orcid-profile']['orcid-identifier']['uri'];
+                            $orcidiD = $resultItem['orcid-profile']['orcid-identifier']['path'];
+                            
+                            $profile = $plugin->getOrcidProfile($orcidiD);
+                            
+                            if (!is_null($profile['orcid-profile']['orcid-bio']['researcher-urls'])) {
+                                $researcherUrls = array();
+                                foreach ($profile['orcid-profile']['orcid-bio']['researcher-urls']['researcher-url'] as $researcherUrl) {
+                                    $researcherUrls[] = $researcherUrl['url-name']['value'] . ' - ' . $researcherUrl['url']['value'];    
                                 }
                             }
+                            if (!is_null($profile['orcid-profile']['orcid-activities']['affiliations'])) {
+                                $affiliations = array();
+                                foreach ($profile['orcid-profile']['orcid-activities']['affiliations']['affiliation'] as $affiliation) {
+                                    $affiliations[] = $affiliation['organization']['name'];    
+                                }  
+                            }                                      
+                            
+                            $orcidSearchResults[] = array('name' => $name,
+                                                          'lastname' => $lastname,
+                                                          'email' => $email,
+                                                          'orcidiD' => $orcidUri,
+                                                          'affiliations' => $affiliations,
+                                                          'researcherUrls' => $researcherUrls
+                                                          );
                         }
                     }
-                    
                 }
-                $templateMgr->assign_by_ref('orcidSearchResults', $orcidSearchResults);
+                    
+                // Paginate results.
+                                   
+                // Instantiate article iterator.
+                import('lib.pkp.classes.core.VirtualArrayIterator');
+                $iterator = new VirtualArrayIterator($orcidSearchResults, $totalResults, $profilesPage, $itemsPerPage);
+
+                // Prepare and display the article template.
+                $templateMgr->assign_by_ref('orcidSearchResults', $iterator);
+                $templateMgr->assign_by_ref('searchOrcidName', $searchName);
+                $templateMgr->assign_by_ref('searchOrcidLastname', $searchLastname);
+                $templateMgr->assign_by_ref('searchOrcidEmail', $searchEmail);                                                                        
                 $templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchResults.tpl');
+             
                 break;
             default: assert(false);
         }        

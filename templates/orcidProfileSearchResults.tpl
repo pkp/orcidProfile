@@ -1,14 +1,14 @@
 {**
- * plugins/generic/orcidProfile/orcidProfile.tpl
+ * plugins/generic/orcidProfile/orcidProfileSearchResults.tpl
  *
- * Copyright (c) 2015-2016 University of Pittsburgh
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2015-2017 University of Pittsburgh
+ * Copyright (c) 2014-2017 Simon Fraser University Library
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
- * Contributed by 4Science.
+ * Contributed by 4Science (http://www.4science.it).
  *
- * ORCID Profile authorization form
+ * ORCID Profile search results
  *
  *}
 
@@ -65,10 +65,11 @@
         
         $(document).ready(function(){
             $("#orcidSearchResultsSubmit").click(function(event) {
+                event.preventDefault();
                 var profiles = {/literal}{$orcidSearchResults|@json_encode}{literal};                
                 var authorIndex = {/literal}{$authorIndex}{literal};                
-                var profileSelectedIndex = $("#orcidSearchResults").val();
-                var profileSelected = profiles[profileSelectedIndex];
+                var profileSelectedIndex = $("input[name=orcidProfile]:checked").val();
+                var profileSelected = profiles.theArray[profileSelectedIndex];
                 
                 opener.document.getElementById("{/literal}{$orcidButtonId}{literal}").style.display = "none";;
                 opener.document.getElementById("remove-orcid-button-" + authorIndex).style.display = "inline";;
@@ -84,6 +85,10 @@
                 }
                 window.close();
                 
+            });
+            
+            $("#orcidSearchResultsBack").click(function(event) {
+                document.location.href = "{/literal}{url|escape:"javascript" page="orcidapi" op="orcidSearch" targetOp="form" orcidInputId=$orcidInputId orcidButtonId=$orcidButtonId authorIndex=$authorIndex escape=false}{literal}";
             });              
         });
     
@@ -92,25 +97,67 @@
 
 <h3>{translate key='plugins.generic.orcidProfile.searchPageTitle'}</h3>
 <div id="content" class="search-content">
-    {if $orcidSearchResults|@count > 0}
-        {capture "default"}
-            {translate key='plugins.generic.orcidProfile.privateEmail}
-        {/capture}
-        <p>{translate key='plugins.generic.orcidProfile.searchResultsList'}</p>
-        <select name="orcidSearchResults" id="orcidSearchResults" size="5" class="selectMenu" style="width: 100%; height:180px;">        
-            {foreach from=$orcidSearchResults key="index" item=profile}            
-                <option value="{$index}">{$profile.name} {$profile.lastname} - {translate key='user.email'} : {$profile.email|default:$smarty.capture.default}</option>
-            {/foreach}
-            
+    <p>{translate key='plugins.generic.orcidProfile.searchResultsList'}</p>    
+    <form action="{plugin_url path="process"}" method="post" id="issuesForm">
+        <input type="hidden" name="target" value="issue" />
+        <table width="100%" class="listing">
+            <tr>
+                <td colspan="5" class="headseparator">&nbsp;</td>
+            </tr>
+            <tr class="heading" valign="top">
+                <td width="5%">&nbsp;</td>
+                <td width="25%">{translate key="plugins.generic.openAIRE.projectID"}</td>
+                <td width="25%">{translate key="user.email"}</td>
+                <td width="25%">{translate key="plugins.generic.orcidProfile.affiliations"}</td>
+                <td width="20%">{translate key="plugins.generic.orcidProfile.researcherUrl"}</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="headseparator">&nbsp;</td>
+            </tr>
+            {capture "default"}
+                {translate key='plugins.generic.orcidProfile.privateEmail}
+            {/capture}
 
-        </select>
+            {iterate from=orcidSearchResults key="index" item=profile}
+                <tr valign="middle">
+                    <td><input type="radio" name="orcidProfile" value='{$index}'/></td>
+                    <td>{$profile.name|escape} {$profile.lastname|escape}</td>
+                    <td>{$profile.email|default:$smarty.capture.default}</td>
+                    <td>
+                        {foreach from=$profile.affiliations item=affiliation}
+                            <p>{$affiliation}</p>
+                        {/foreach}                  
+                    </td>
+                    <td>
+                        {foreach from=$profile.researcherUrls item=researcherUrl}
+                            <p>{$researcherUrl}</p>
+                        {/foreach}                   
+                    </td>                    
+                </tr>
+                <tr>
+                    <td colspan="5" class="separator">&nbsp;</td>
+                </tr>
+            {/iterate}
+            {if $orcidSearchResults->wasEmpty()}
+                <tr valign="top">
+                    <td colspan="5">{translate key='plugins.generic.orcidProfile.noData'}</td>
+                </tr>            
+                <tr>
+                    <td colspan="5" class="endseparator">&nbsp;</td>
+                </tr>
+            {else}
+                <tr>
+                    <td colspan="2" align="left">{page_info iterator=$orcidSearchResults}</td>
+                    <td colspan="3" align="right">{page_links anchor="profiles" name="profiles" targetOp="search" searchOrcidName=$searchOrcidName searchOrcidLastname=$searchOrcidLastname searchOrcidEmail=$searchOrcidEmail iterator=$orcidSearchResults}</td>
+                </tr>
+            {/if}
+        </table>
+        <p><b>{translate key='plugins.generic.orcidProfile.searchResultsNotice'}</b></p>
         <p>
-            <input id="orcidSearchResultsSubmit" type="submit" value="{translate key='plugins.generic.orcidProfile.submitAction'}" class="button defaultButton"> <input type="button" value="{translate key="common.cancel"}" class="button" onclick="window.history.back();">
+            <input id="orcidSearchResultsSubmit" type="submit" value="{translate key='plugins.generic.orcidProfile.submitAction'}" class="button defaultButton">            
+            <input id="orcidSearchResultsBack" type="button" value="{translate key='common.back'}" class="button">           
+            <input type="button" value="{translate key='common.close'}" class="button" onclick="window.close();">
         </p>
-    {else}
-        <h4>{translate key='plugins.generic.orcidProfile.noData'}</h4>
-        <p>
-            <input type="button" value="{translate key='common.back'}" class="button" onclick="window.history.back();">
-        </p>
-    {/if}
+    </form>
+
 </div>
