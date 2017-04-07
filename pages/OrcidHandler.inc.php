@@ -157,7 +157,7 @@ class OrcidHandler extends Handler {
                         foreach($result['orcid-search-results']['orcid-search-result'] as $resultItem) {
                             $name = $resultItem['orcid-profile']['orcid-bio']['personal-details']['given-names']['value'];
                             $lastname = $resultItem['orcid-profile']['orcid-bio']['personal-details']['family-name']['value'];
-                            $email = $resultItem['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value'];                                
+                            $email = isset($resultItem['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value'])?$resultItem['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value']:null;                                
                             $orcidUri = $resultItem['orcid-profile']['orcid-identifier']['uri'];
                             $orcidiD = $resultItem['orcid-profile']['orcid-identifier']['path'];
                             
