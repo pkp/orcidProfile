@@ -51,7 +51,7 @@ class OrcidProfileSettingsForm extends Form {
 		$this->_data = array(
 			'orcidProfileAPIPath' => $plugin->getSetting($journalId, 'orcidProfileAPIPath'),
 			'orcidClientId' => $plugin->getSetting($journalId, 'orcidClientId'),
-            'orcidClientSecret' => $plugin->getSetting($journalId, 'orcidClientSecret'),
+			'orcidClientSecret' => $plugin->getSetting($journalId, 'orcidClientSecret'),
 			'itemsPerPage' => $plugin->getSetting($journalId, 'itemsPerPage'),
 		);
 	}
@@ -62,7 +62,7 @@ class OrcidProfileSettingsForm extends Form {
 	function readInputData() {
 		$this->readUserVars(array('orcidProfileAPIPath'));
 		$this->readUserVars(array('orcidClientId'));
-        $this->readUserVars(array('orcidClientSecret'));
+		$this->readUserVars(array('orcidClientSecret'));
 		$this->readUserVars(array('itemsPerPage'));
 	}
 
@@ -75,7 +75,7 @@ class OrcidProfileSettingsForm extends Form {
 
 		$plugin->updateSetting($journalId, 'orcidProfileAPIPath', trim($this->getData('orcidProfileAPIPath'), "\"\';"), 'string');
 		$plugin->updateSetting($journalId, 'orcidClientId', $this->getData('orcidClientId'), 'string');
-        $plugin->updateSetting($journalId, 'orcidClientSecret', $this->getData('orcidClientSecret'), 'string');
+		$plugin->updateSetting($journalId, 'orcidClientSecret', $this->getData('orcidClientSecret'), 'string');
 		$plugin->updateSetting($journalId, 'itemsPerPage', $this->getData('itemsPerPage'), 'string');
 	}
 }

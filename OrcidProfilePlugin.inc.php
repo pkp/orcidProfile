@@ -63,13 +63,13 @@ class OrcidProfilePlugin extends GenericPlugin {
 	function getHandlerPath() {
 		return $this->getPluginPath() . DIRECTORY_SEPARATOR . 'pages';
 	}
-    
-    /**
-     * Get the template path for this plugin.
-     */
-    function getTemplatePath() {
-        return parent::getTemplatePath() . 'templates/';
-    }    
+
+	/**
+	 * Get the template path for this plugin.
+	 */
+	function getTemplatePath() {
+		return parent::getTemplatePath() . 'templates/';
+	}
 
 	/**
 	 * Hook callback: register pages for each sushi-lite method
@@ -94,10 +94,10 @@ class OrcidProfilePlugin extends GenericPlugin {
 	function handleTemplateDisplay($hookName, $args) {
 		$templateMgr =& $args[0];
 		$template =& $args[1];
-        $request =& PKPApplication::getRequest();
+		$request =& PKPApplication::getRequest();
 
-        // Assign our private stylesheet.
-        $templateMgr->addStylesheet($request->getBaseUrl() . '/' . $this->getStyleSheet());
+		// Assign our private stylesheet.
+		$templateMgr->addStylesheet($request->getBaseUrl() . '/' . $this->getStyleSheet());
 
 		switch ($template) {
 			case 'user/register.tpl':
@@ -107,7 +107,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				$templateMgr->register_outputfilter(array(&$this, 'profileFilter'));
 				break;
 			case 'author/submit/step3.tpl':
-            case 'submission/metadata/metadataEdit.tpl':
+			case 'submission/metadata/metadataEdit.tpl':
 				$templateMgr->register_outputfilter(array(&$this, 'submitFilter'));
 				break;
 		}
@@ -128,170 +128,175 @@ class OrcidProfilePlugin extends GenericPlugin {
 		}
 	}
 
-    /**
-     * Obtain a search token
-     * @return $string
-     */
-    function getAccessToken() {
-        $journal = Request::getJournal();
-        
-        // Obtaining a search token
-        $curl = curl_init();  
-        curl_setopt_array($curl, array(
-            CURLOPT_FAILONERROR => true,
-            CURLOPT_URL => $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => array('Accept: application/json'),
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => http_build_query(array(
-                'scope' => '/read-public',
-                'grant_type' => 'client_credentials',
-                'client_id' => $this->getSetting($journal->getId(), 'orcidClientId'),
-                'client_secret' => $this->getSetting($journal->getId(), 'orcidClientSecret')
-            ))
-        ));
-        $result = curl_exec($curl);
-        // Close request to clear up some resources
-        curl_close($curl);
-        if ($result) {
-            $response = json_decode($result, true);
-            $returner = $response['access_token'];
-        } else {
-            $returner = false;
-        }
-        return $returner;
-    }
-    
-    /**
-     * Return the entire ORCID record
-     * @param $orcidiD string
-     * @return $array
-     */    
-    function getOrcidProfile($orcidiD) {
-        $journal = Request::getJournal();
-        
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL =>  $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcidiD) . '/' . ORCID_PROFILE_URL,
-            CURLOPT_POST => false,
-            CURLOPT_HTTPHEADER => array('Accept: application/json'),
-        ));
-        $result = curl_exec($curl);
-        $info = curl_getinfo($curl);
-        curl_close($curl);
-        if ($info['http_code'] == 200) {
-            $returner = json_decode($result, true);
-        } else {
-            $returner = false;            
-        }
-        return $returner;        
-    }
-    
-    /**
-    * Fetch the access token     
-    * @param $token string
-    * @return $array
-    */
-    function fetchAccessToken($token) {
-        $journal = Request::getJournal();
-        
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => array('Accept: application/json'),
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => http_build_query(array(
-                'code' => $token,
-                'grant_type' => 'authorization_code',
-                'client_id' => $this->getSetting($journal->getId(), 'orcidClientId'),
-                'client_secret' => $this->getSetting($journal->getId(), 'orcidClientSecret')
-            ))
-        ));
-        $result = curl_exec($curl);
-        curl_close($curl);
-        
-        if ($result) {
-            $returner = json_decode($result, true);
-        } else {
-            $returner = false;
-        }
-        return $returner;                
-    }
-    
-    /**
-     * Perform search in ORCiD archive     
-     * @param $searchName string
-     * @param $searchLastname string
-     * @param $searchEmail string
-     * @param $page integer
-     * @param $itemsPerPage integer
-     * @return $array
-     */
-    function searchProfile($searchName, $searchLastname, $searchEmail, $page, $itemsPerPage) {
-        $journal = Request::getJournal();
-        $returner = false;
-        
-        if ($searchName || $searchLastname || $searchEmail) {
-            $accessToken = $this->getAccessToken();
+	/**
+	* Obtain a search token
+	* @return $string
+	*/
+	function getAccessToken() {
+		$journal = Request::getJournal();
 
-            if ($accessToken) {
-                $searchParams = array('given-names' => $searchName,
-                                      'family-name' => $searchLastname,
-                                      'email'       => $searchEmail);
-                
-                $querySearch = '';
-                // Building search query
-                foreach ($searchParams as $searchKey => $paramValue) {
-                    if ($paramValue) {
-                        switch ($searchKey) {
-                            case 'given-names' :
-                                $brackets = false;
-                                $searchLogicOp = '';
-                                break;
-                            case 'family-name' :
-                                $brackets = false;
-                                $searchLogicOp = ' AND ';
-                                break;
-                            case 'email' :
-                                $brackets = true;
-                                $searchLogicOp = ' OR ';
-                                break;                                                                
-                        }
-                        $querySearch .= ((!empty($querySearch) && $brackets)?')':'') . ((!empty($querySearch))?$searchLogicOp:'(') . $searchKey . ':' . $paramValue;
-                    }
-                }
-                if (!$brackets) {
-                    // Closing round bracket if it is left open
-                    $querySearch .= ')';    
-                }                  
-                
-                $queryPage = array('start' => ($page - 1),
-                                   'rows'  => $itemsPerPage);
-                $query = http_build_query(array_merge(array('q' => $querySearch), $queryPage));
-                
-                // Performing search
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                    CURLOPT_FAILONERROR    => true,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_HTTPHEADER => array('Accept: application/json',
-                                                'Content-Type: application/orcid+xml',
-                                                'Authorization: Bearer ' . $accessToken),
-                    CURLOPT_POST => false,
-                    CURLOPT_URL => $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . 'search/' . ORCID_BIO_URL . '/?' . $query,
-                ));   
-                $result = curl_exec($curl);
-                if ($result) {                                                      
-                    $returner = json_decode($result, true);
-                }              
-            }
-        }
-        
-        return $returner;
-    }
-    
+		// Obtaining a search token
+		$curl = curl_init();  
+		curl_setopt_array($curl, array(
+			CURLOPT_FAILONERROR => true,
+			CURLOPT_URL => $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_HTTPHEADER => array('Accept: application/json'),
+			CURLOPT_POST => true,
+			CURLOPT_POSTFIELDS => http_build_query(array(
+				'scope' => '/read-public',
+				'grant_type' => 'client_credentials',
+				'client_id' => $this->getSetting($journal->getId(), 'orcidClientId'),
+				'client_secret' => $this->getSetting($journal->getId(), 'orcidClientSecret')
+			))
+		));
+		$result = curl_exec($curl);
+		// Close request to clear up some resources
+		curl_close($curl);
+
+		if ($result) {
+			$response = json_decode($result, true);
+			$returner = $response['access_token'];
+		} else {
+			$returner = false;
+		}
+		return $returner;
+	}
+
+	/**
+	 * Return the entire ORCID record
+	 * @param $orcidiD string
+	 * @return $array
+	 */
+	function getOrcidProfile($orcidiD) {
+		$journal = Request::getJournal();
+
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_URL =>  $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcidiD) . '/' . ORCID_PROFILE_URL,
+			CURLOPT_POST => false,
+			CURLOPT_HTTPHEADER => array('Accept: application/json'),
+		));
+		$result = curl_exec($curl);
+		$info = curl_getinfo($curl);
+		curl_close($curl);
+
+		if ($info['http_code'] == 200) {
+			$returner = json_decode($result, true);
+		} else {
+			$returner = false;
+		}
+		return $returner;
+	}
+
+	/**
+	 * Fetch the access token
+	 * @param $token string
+	 * @return $array
+	 */
+	function fetchAccessToken($token) {
+		$journal = Request::getJournal();
+
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => $this->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_HTTPHEADER => array('Accept: application/json'),
+			CURLOPT_POST => true,
+			CURLOPT_POSTFIELDS => http_build_query(array(
+				'code' => $token,
+				'grant_type' => 'authorization_code',
+				'client_id' => $this->getSetting($journal->getId(), 'orcidClientId'),
+				'client_secret' => $this->getSetting($journal->getId(), 'orcidClientSecret')
+			))
+		));
+		$result = curl_exec($curl);
+		curl_close($curl);
+
+		if ($result) {
+		$returner = json_decode($result, true);
+		} else {
+		$returner = false;
+		}
+		return $returner;
+	}
+
+	/**
+	 * Perform search in ORCiD archive
+	 * @param $searchName string
+	 * @param $searchLastname string
+	 * @param $searchEmail string
+	 * @param $page integer
+	 * @param $itemsPerPage integer
+	 * @return $array
+	 */
+	function searchProfile($searchName, $searchLastname, $searchEmail, $page, $itemsPerPage) {
+		$journal = Request::getJournal();
+		$returner = false;
+
+		if ($searchName || $searchLastname || $searchEmail) {
+			$accessToken = $this->getAccessToken();
+
+			if ($accessToken) {
+				$searchParams = array(
+					'given-names' => $searchName,
+					'family-name' => $searchLastname,
+					'email'       => $searchEmail);
+
+				$querySearch = '';
+				// Building search query
+				foreach ($searchParams as $searchKey => $paramValue) {
+					if ($paramValue) {
+						switch ($searchKey) {
+							case 'given-names' :
+								$brackets = false;
+								$searchLogicOp = '';
+								break;
+							case 'family-name' :
+								$brackets = false;
+								$searchLogicOp = ' AND ';
+								break;
+							case 'email' :
+								$brackets = true;
+								$searchLogicOp = ' OR ';
+								break;
+						}
+						$querySearch .= ((!empty($querySearch) && $brackets)?')':'') . ((!empty($querySearch))?$searchLogicOp:'(') . $searchKey . ':' . $paramValue;
+					}
+				}
+				if (!$brackets) {
+					// Closing round bracket if it is left open
+					$querySearch .= ')';
+				}
+
+				$queryPage = array(
+					'start' => ($page - 1),
+					'rows'  => $itemsPerPage);
+				$query = http_build_query(array_merge(array('q' => $querySearch), $queryPage));
+
+				// Performing search
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+					CURLOPT_FAILONERROR    => true,
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_HTTPHEADER => array(
+						'Accept: application/json',
+						'Content-Type: application/orcid+xml',
+						'Authorization: Bearer ' . $accessToken),
+					CURLOPT_POST => false,
+					CURLOPT_URL => $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . 'search/' . ORCID_BIO_URL . '/?' . $query,
+				));
+				$result = curl_exec($curl);
+				if ($result) {
+					$returner = json_decode($result, true);
+				}
+			}
+		}
+
+		return $returner;
+	}
+
 	/**
 	 * Output filter adds ORCiD interaction to registration form.
 	 * @param $output string
@@ -308,7 +313,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'targetOp' => 'register',
 				'orcidProfileOauthPath' => $this->getOauthPath(),
 				'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
-                'params' => array('orcidButtonVisible' => true)
+				'params' => array('orcidButtonVisible' => true)
 			));
 
 			$newOutput = substr($output, 0, $offset);
@@ -337,13 +342,13 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'targetOp' => 'profile',
 				'orcidProfileOauthPath' => $this->getOauthPath(),
 				'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
-                'params' => array('orcidButtonVisible' => true)
+				'params' => array('orcidButtonVisible' => true)
 			));
 
 			$newOutput = substr($output, 0, $offset+strlen($match));
 			$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfile.tpl');
 			$newOutput .= '<script type="text/javascript">
-			        $(document).ready(function() {
+					$(document).ready(function() {
 					$(\'#orcid\').attr(\'readonly\', "true");
 				});
 			</script>';
@@ -362,63 +367,64 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 */
 	function submitFilter($output, &$templateMgr) {  
 		if (preg_match_all('/<input type="text" (class="textField" )?name="authors\[(?<indexes>\d+)\]\[orcid\][^>]+>/', $output, $matches_all, PREG_OFFSET_CAPTURE)) {
-            foreach($matches_all[0] as $key => $matches){
-                $index = $matches_all['indexes'][$key][0];
-                $orcidInputId = "authors-{$index}-orcid";
-                $match = $matches[0];
-                if ($index == 0) {                    
-                    $offset = $matches[1];
-                    $orcidButtonId = 'connect-orcid-button';
-                } else {
-                    $newOutput = null;
-                    // Finding new offset after output changes
-                    preg_match('/<input type="text" (class="textField" )?name="authors\[' . $index . '\]\[orcid\][^>]+>/', $output, $new_matches, PREG_OFFSET_CAPTURE);    
-                    $offset = $new_matches[0][1];
-                    $orcidButtonId = 'search-orcid-button-' . $index;
-                }
+			foreach($matches_all[0] as $key => $matches){
+				$index = $matches_all['indexes'][$key][0];
+				$orcidInputId = "authors-{$index}-orcid";
+				$match = $matches[0];
+				if ($index == 0) {
+					$offset = $matches[1];
+					$orcidButtonId = 'connect-orcid-button';
+				} else {
+					$newOutput = null;
+					// Finding new offset after output changes
+					preg_match('/<input type="text" (class="textField" )?name="authors\[' . $index . '\]\[orcid\][^>]+>/', $output, $new_matches, PREG_OFFSET_CAPTURE);    
+					$offset = $new_matches[0][1];
+					$orcidButtonId = 'search-orcid-button-' . $index;
+				}
 
-			    $journal = Request::getJournal();
-                
-                // show/hide buttons
-                if (preg_match('/value=\"(.*?)\"/', $match, $match_value)) {
-                    if (!empty($match_value[1])) {
-                        $orcidButtonVisible = false;
-                        $removeButtonStyle  = '';    
-                    } else {
-                        $orcidButtonVisible = true;
-                        $removeButtonStyle  = 'style="display:none;"'; 
-                    }   
-                }
-    
-			    // Entering the registration without ORCiD; present the button.
-			    $templateMgr->assign(array(
-				    'targetOp' => 'submit',
-				    'orcidProfileOauthPath' => $this->getOauthPath(),
-				    'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
-				    'params' => array('articleId'          => Request::getUserVar('articleId'), 
-                                      'authorIndex'        => $index,
-                                      'orcidButtonId'      => $orcidButtonId,
-                                      'orcidButtonVisible' => $orcidButtonVisible,
-                                      'orcidInputId'       => $orcidInputId)
-			    ));
+				$journal = Request::getJournal();
 
-			    $newOutput = substr($output, 0, $offset + strlen($match) - 1);
-			    $newOutput .= ' readonly=\'readonly\'>';
-                if ($index == 0) {
-			        $newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfile.tpl');
-                } else {                    
-                    $newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfileSearch.tpl');
-                }
-			    $newOutput .= '<button id="remove-orcid-button-' . $index . '" ' . $removeButtonStyle . '>' . __('plugins.generic.orcidProfile.removeOrcidId') . '</button>
-				    <script>$("#remove-orcid-button-' . $index . '").click(function(event) {
-					    event.preventDefault();
-					    $("#authors-' . $index . '-orcid").val("");
-					    $("#' . $orcidButtonId . '").show();
-                        $(this).hide();
-				    });</script>';
-			    $newOutput .= substr($output, $offset + strlen($match));
-			    $output = $newOutput;
-            }
+				// show/hide buttons
+				if (preg_match('/value=\"(.*?)\"/', $match, $match_value)) {
+					if (!empty($match_value[1])) {
+						$orcidButtonVisible = false;
+						$removeButtonStyle  = '';    
+					} else {
+						$orcidButtonVisible = true;
+						$removeButtonStyle  = 'style="display:none;"'; 
+					}   
+				}
+
+				// Entering the registration without ORCiD; present the button.
+				$templateMgr->assign(array(
+					'targetOp' => 'submit',
+					'orcidProfileOauthPath' => $this->getOauthPath(),
+					'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
+					'params' => array(
+						'articleId'			 => Request::getUserVar('articleId'), 
+						'authorIndex'		 => $index,
+						'orcidButtonId'		 => $orcidButtonId,
+						'orcidButtonVisible' => $orcidButtonVisible,
+						'orcidInputId'		 => $orcidInputId)
+				));
+
+				$newOutput = substr($output, 0, $offset + strlen($match) - 1);
+				$newOutput .= ' readonly=\'readonly\'>';
+				if ($index == 0) {
+					$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfile.tpl');
+				} else {
+					$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidProfileSearch.tpl');
+				}
+				$newOutput .= '<button id="remove-orcid-button-' . $index . '" ' . $removeButtonStyle . '>' . __('plugins.generic.orcidProfile.removeOrcidId') . '</button>
+					<script>$("#remove-orcid-button-' . $index . '").click(function(event) {
+						event.preventDefault();
+						$("#authors-' . $index . '-orcid").val("");
+						$("#' . $orcidButtonId . '").show();
+						$(this).hide();
+					});</script>';
+				$newOutput .= substr($output, $offset + strlen($match));
+				$output = $newOutput;
+			}
 		}
 		$templateMgr->unregister_outputfilter('submitFilter');
 		return $output;
@@ -459,8 +465,8 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'articleTitle' => $article->getLocalizedTitle(),
 			));
 
-            // Clear previus author
-            $mail->clearAllRecipients();
+			// Clear previus author
+			$mail->clearAllRecipients();
 			// Send to author
 			$mail->addRecipient($author->getEmail(), $author->getFullName());
 
@@ -600,10 +606,10 @@ class OrcidProfilePlugin extends GenericPlugin {
 					ORCID_API_URL_MEMBER => 'plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member',
 					ORCID_API_URL_MEMBER_SANDBOX => 'plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox'
 				);
-                $itemsPerPageList = array('5' => 5, '10' => 10, '15' => 15, '20' => 20, '25' => 25);
-                                  
-                $templateMgr->assign_by_ref('orcidApiUrls', $apiOptions);                
-                $templateMgr->assign_by_ref('itemsPerPageList', $itemsPerPageList);
+				$itemsPerPageList = array('5' => 5, '10' => 10, '15' => 15, '20' => 20, '25' => 25);
+
+				$templateMgr->assign_by_ref('orcidApiUrls', $apiOptions);
+				$templateMgr->assign_by_ref('itemsPerPageList', $itemsPerPageList);
 
 				$this->import('OrcidProfileSettingsForm');
 				$form = new OrcidProfileSettingsForm($this, $journal->getId());

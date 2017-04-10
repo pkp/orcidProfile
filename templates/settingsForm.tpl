@@ -45,12 +45,12 @@
 <div class="separator"></div>
 
 <table width="100%" class="data">
-    <tr valign="top">
-        <td width="20%" class="label">{fieldLabel name="itemsPerPage" required="true" key="plugins.generic.orcidProfile.manager.settings.pagePerItem"}</td>
-        <td width="80%" class="value">
-            <select id="itemsPerPage" name="itemsPerPage" class="selectMenu">{html_options options=$itemsPerPageList selected=$itemsPerPage}</select>
-        </td>
-    </tr>
+	<tr valign="top">
+		<td width="20%" class="label">{fieldLabel name="itemsPerPage" required="true" key="plugins.generic.orcidProfile.manager.settings.pagePerItem"}</td>
+		<td width="80%" class="value">
+			<select id="itemsPerPage" name="itemsPerPage" class="selectMenu">{html_options options=$itemsPerPageList selected=$itemsPerPage}</select>
+		</td>
+	</tr>
 </table>
 
 <input type="submit" name="save" class="button defaultButton" value="{translate key="common.save"}"/><input type="button" class="button" value="{translate key="common.cancel"}" onclick="history.go(-1)"/>
