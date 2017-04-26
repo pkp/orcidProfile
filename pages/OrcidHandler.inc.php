@@ -56,7 +56,7 @@ class OrcidHandler extends Handler {
 				// Submission process: Pre-fill the first author's ORCiD from the ORCiD data
 				echo '<html><body><script type="text/javascript">
 					opener.document.getElementById("authors-0-orcid").value = ' . json_encode('http://orcid.org/' . $response['orcid']). ';
-                    opener.document.getElementById("connect-orcid-button").style.display = "none";
+					opener.document.getElementById("connect-orcid-button").style.display = "none";
 					opener.document.getElementById("remove-orcid-button-0").style.display = "inline";
 					window.close();
 				</script></body></html>';
@@ -119,7 +119,7 @@ class OrcidHandler extends Handler {
 	 * Search for author information in ORCiD registry.
 	 * @param $args array
 	 * @param $request PKPRequest
-	 */    
+	 */
 	function orcidSearch($args, $request) {
 		$plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
 		$templateMgr =& TemplateManager::getManager($request);

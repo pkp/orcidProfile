@@ -15,7 +15,6 @@
 
 function openORCID() {ldelim}
 	var oauthWindow = window.open("{$orcidProfileOauthPath|escape}authorize?client_id={$orcidClientId|urlencode}&response_type=code&scope=/authenticate&redirect_uri={url|urlencode page="orcidapi" op="orcidAuthorize" targetOp=$targetOp params=$params escape=false}", "_blank", "toolbar=no, scrollbars=yes, width=500, height=600, top=500, left=500");
-	console.log(self);
 	oauthWindow.opener = self;
 	return false;
 {rdelim}
