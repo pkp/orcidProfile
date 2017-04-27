@@ -9,7 +9,7 @@
 	font-weight: bold;
 	font-size: .8em;
 	line-height: 24px;
-    margin: .3em;
+	margin: .3em;
 	vertical-align: middle;
 }
 
@@ -26,5 +26,5 @@
 }
 
 .search-content {
-    padding: 10px !important;
+	padding: 10px !important;
 }
