@@ -242,7 +242,8 @@ class OrcidProfilePlugin extends GenericPlugin {
 				$searchParams = array(
 					'given-names' => $searchName,
 					'family-name' => $searchLastname,
-					'email'       => $searchEmail);
+					'email'       => $searchEmail
+				);
 
 				$querySearch = '';
 				// Building search query
@@ -283,7 +284,8 @@ class OrcidProfilePlugin extends GenericPlugin {
 					CURLOPT_HTTPHEADER => array(
 						'Accept: application/json',
 						'Content-Type: application/orcid+xml',
-						'Authorization: Bearer ' . $accessToken),
+						'Authorization: Bearer ' . $accessToken
+					),
 					CURLOPT_POST => false,
 					CURLOPT_URL => $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . 'search/' . ORCID_BIO_URL . '/?' . $query,
 				));
