@@ -17,7 +17,7 @@ Contributed by 4Science (http://www.4science.it).
 ## Features:
 
  * Hooks into the User Profile, Registration, and Submission (step 3) forms
- * Searchs for co-authors ORCIDs
+ * Searches for co-authors ORCIDs
  * Requests ORCIDs of co-authors via email
 
 ## Install:
