@@ -104,7 +104,7 @@
 			</tr>
 			<tr class="heading" valign="top">
 				<td width="5%">&nbsp;</td>
-				<td width="25%">{translate key="plugins.generic.openAIRE.projectID"}</td>
+				<td width="25%">{translate key="user.name"}</td>
 				<td width="25%">{translate key="user.email"}</td>
 				<td width="25%">{translate key="plugins.generic.orcidProfile.affiliations"}</td>
 				<td width="20%">{translate key="plugins.generic.orcidProfile.researcherUrl"}</td>
