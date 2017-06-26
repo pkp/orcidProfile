@@ -24,7 +24,7 @@ class OrcidHandler extends Handler {
 	 * @param $args array
 	 * @param $request Request
 	 */
-	function orcidAuthorize($args, &$request) { 
+	function orcidAuthorize($args, &$request) {
 		$journal = Request::getJournal();
 		$op = Request::getRequestedOp();
 		$plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
