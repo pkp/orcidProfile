@@ -215,9 +215,9 @@ class OrcidProfilePlugin extends GenericPlugin {
 		curl_close($curl);
 
 		if ($result) {
-		$returner = json_decode($result, true);
+			$returner = json_decode($result, true);
 		} else {
-		$returner = false;
+			$returner = false;
 		}
 		return $returner;
 	}
