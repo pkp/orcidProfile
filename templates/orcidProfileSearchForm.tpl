@@ -1,5 +1,5 @@
 {**
- * plugins/generic/orcidProfile/orcidProfile.tpl
+ * plugins/generic/orcidProfile/orcidProfileSearchForm.tpl
  *
  * Copyright (c) 2015-2017 University of Pittsburgh
  * Copyright (c) 2014-2017 Simon Fraser University Library
