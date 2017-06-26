@@ -467,7 +467,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'articleTitle' => $article->getLocalizedTitle(),
 			));
 
-			// Clear previus author
+			// Clear previous author
 			$mail->clearAllRecipients();
 			// Send to author
 			$mail->addRecipient($author->getEmail(), $author->getFullName());
