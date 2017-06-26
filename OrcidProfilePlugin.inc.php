@@ -165,16 +165,16 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 	/**
 	 * Return the entire ORCID record
-	 * @param $orcidiD string
+	 * @param $orcid string
 	 * @return $array
 	 */
-	function getOrcidProfile($orcidiD) {
+	function getOrcidProfile($orcid) {
 		$journal = Request::getJournal();
 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_URL =>  $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcidiD) . '/' . ORCID_PROFILE_URL,
+			CURLOPT_URL =>  $url = $this->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcid) . '/' . ORCID_PROFILE_URL,
 			CURLOPT_POST => false,
 			CURLOPT_HTTPHEADER => array('Accept: application/json'),
 		));
