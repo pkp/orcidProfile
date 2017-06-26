@@ -401,10 +401,10 @@ class OrcidProfilePlugin extends GenericPlugin {
 					'orcidProfileOauthPath' => $this->getOauthPath(),
 					'orcidClientId' => $this->getSetting($journal->getId(), 'orcidClientId'),
 					'params' => array(
-						'articleId'			 => Request::getUserVar('articleId'), 
+						'articleId'		 => Request::getUserVar('articleId'), 
 						'authorIndex'		 => $index,
 						'orcidButtonId'		 => $orcidButtonId,
-						'orcidButtonVisible' => $orcidButtonVisible,
+						'orcidButtonVisible'	 => $orcidButtonVisible,
 						'orcidInputId'		 => $orcidInputId)
 				));
 
