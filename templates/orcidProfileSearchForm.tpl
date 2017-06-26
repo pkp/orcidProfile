@@ -27,7 +27,6 @@
 	<link rel="stylesheet" href="{$baseUrl}/styles/common.css" type="text/css" />
 	<link rel="stylesheet" href="{$baseUrl}/styles/compiled.css" type="text/css" />
 	<link rel="stylesheet" href="{$baseUrl}/styles/comments.css" type="text/css" />
-	<link rel="stylesheet" href="{$baseUrl}/plugins/generic/orcidProfile/css/orcidProfile.css" type="text/css" />
 
 	{foreach from=$stylesheets item=cssUrl}
 		<link rel="stylesheet" href="{$cssUrl}" type="text/css" />
@@ -72,7 +71,7 @@
 
 <h3>{translate key='plugins.generic.orcidProfile.searchPageTitle'}</h3>
 <div id="content">
-	<form method="post" action="{url|escape page="orcidapi" op="orcidSearch" targetOp="search" orcidInputId=$orcidInputId orcidButtonId=$orcidButtonId authorIndex=$authorIndex profilesPage=1 escape=false}">
+	<form method="post" id="orcidSearchForm" action="{url|escape page="orcidapi" op="orcidSearch" targetOp="search" orcidInputId=$orcidInputId orcidButtonId=$orcidButtonId authorIndex=$authorIndex profilesPage=1 escape=false}">
 		<table width="100%" class="data">
 
 			<tr valign="top">

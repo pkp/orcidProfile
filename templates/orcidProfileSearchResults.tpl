@@ -27,7 +27,6 @@
 	<link rel="stylesheet" href="{$baseUrl}/styles/common.css" type="text/css" />
 	<link rel="stylesheet" href="{$baseUrl}/styles/compiled.css" type="text/css" />
 	<link rel="stylesheet" href="{$baseUrl}/styles/comments.css" type="text/css" />
-	<link rel="stylesheet" href="{$baseUrl}/plugins/generic/orcidProfile/css/orcidProfile.css" type="text/css" />
 
 	{foreach from=$stylesheets item=cssUrl}
 		<link rel="stylesheet" href="{$cssUrl}" type="text/css" />
@@ -71,8 +70,8 @@
 				var profileSelectedIndex = $("input[name=orcidProfile]:checked").val();
 				var profileSelected = profiles.theArray[profileSelectedIndex];
 
-				opener.document.getElementById("{/literal}{$orcidButtonId}{literal}").style.display = "none";;
-				opener.document.getElementById("remove-orcid-button-" + authorIndex).style.display = "inline";;
+				opener.document.getElementById("{/literal}{$orcidButtonId}{literal}").style.display = "none";
+				opener.document.getElementById("remove-orcid-button-" + authorIndex).style.display = "inline";
 				opener.document.getElementById("{/literal}{$orcidInputId}{literal}").value = profileSelected.orcidiD;
 				if (opener.document.getElementById("authors-" + authorIndex + "-firstName").value == '') {
 					opener.document.getElementById("authors-" + authorIndex + "-firstName").value = profileSelected.name;     
@@ -97,7 +96,7 @@
 <h3>{translate key='plugins.generic.orcidProfile.searchPageTitle'}</h3>
 <div id="content" class="search-content">
 	<p>{translate key='plugins.generic.orcidProfile.searchResultsList'}</p>    
-	<form action="{plugin_url path="process"}" method="post" id="issuesForm">
+	<form action="{plugin_url path="process"}" method="post" id="orcidSearchResultsForm">
 		<input type="hidden" name="target" value="issue" />
 		<table width="100%" class="listing">
 			<tr>
@@ -147,7 +146,7 @@
 			{else}
 				<tr>
 					<td colspan="2" align="left">{page_info iterator=$orcidSearchResults}</td>
-					<td colspan="3" align="right">{page_links anchor="profiles" name="profiles" targetOp="search" searchOrcidName=$searchOrcidName searchOrcidLastname=$searchOrcidLastname searchOrcidEmail=$searchOrcidEmail iterator=$orcidSearchResults}</td>
+					<td colspan="3" align="right">{page_links anchor="profiles" name="profiles" targetOp="search" searchOrcidName=$searchOrcidName searchOrcidLastname=$searchOrcidLastname searchOrcidEmail=$searchOrcidEmail orcidInputId=$orcidInputId orcidButtonId=$orcidButtonId authorIndex=$authorIndex iterator=$orcidSearchResults}</td>
 				</tr>
 			{/if}
 		</table>
