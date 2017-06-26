@@ -11,7 +11,7 @@
  * Contributed by 4Science (http://www.4science.it). 
  * 
  * @class OrcidHandler
- * @ingroup plugins_generic_orcidprofile 
+ * @ingroup plugins_generic_orcidprofile
  *
  * @brief Pass off internal ORCID API requests to ORCID
  */
