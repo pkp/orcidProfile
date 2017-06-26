@@ -2,7 +2,7 @@
 <!DOCTYPE email_texts SYSTEM "../../../../../lib/pkp/dtd/emailTemplateData.dtd">
 
 <!--
-  * @file plugins/generic/orcidProfile/locale/en_US/emailTemplates.xml
+  * @file plugins/generic/orcidProfile/locale/it_IT/emailTemplates.xml
   *
   * Copyright (c) 2013-2017 Simon Fraser University Library
   * Copyright (c) 2003-2017 John Willinsky
@@ -13,7 +13,7 @@
   * Localized email templates XML file.
   -->
 
-<email_texts locale="en_US">
+<email_texts locale="it_IT">
 	<email_text key="ORCID_COLLECT_AUTHOR_ID">
 		<subject>Submission ORCID</subject>
 		<body>Caro {$authorName},
