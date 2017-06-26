@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/generic/googleAnalytics/OrcidProfileSettingsForm.inc.php
+ * @file plugins/generic/orcidProfile/OrcidProfileSettingsForm.inc.php
  *
  * Copyright (c) 2015-2017 University of Pittsburgh
  * Copyright (c) 2014-2017 Simon Fraser University Library
