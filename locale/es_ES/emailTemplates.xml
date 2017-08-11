@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE email_texts SYSTEM "../../../../lib/pkp/dtd/emailTemplateData.dtd">
+<!--
+  * emailTemplateData.xml
+  *
+  * Copyright (c) 2003-2017 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * Localized email templates XML file (contrib).
+  -->
+<email_texts locale="es_ES">
+	<email_text key="ORCID_COLLECT_AUTHOR_ID">
+		<subject>Envío de ORCIR</subject>
+		<body>Estimado/a {$authorName},
+
+Ha sido añadido como un coautor del envío del manuscrito "{$articleTitle}" a {$journalName}.
+
+Para confirmar su autoría, añada su identificador de ORCID a este envío visitando el siguiente enlace.
+
+{$authorOrcidUrl}
+
+Si tiene alguna pregunta, por favor, contacte conmigo.
+
+{$editorialContactSignature}</body>
+		<description>Esta plantilla de correo electrónico se usa para recoger el identificador ORCID de los coautores</description>
+	</email_text>
+</email_texts>

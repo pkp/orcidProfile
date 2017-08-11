@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../lib/pkp/dtd/locale.dtd">
+
+<!--
+  * locale/es_ES/locale.xml
+  *
+  * Copyright (c) 2014-2017 Simon Fraser University
+  * Copyright (c) 2003-2017 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * Localization strings (contrib).
+  -->
+
+<locale name="es_ES" full_name="Español (España)">
+	<message key="plugins.generic.orcidProfile.displayName">Perfil del módulo ORCID</message>
+	<message key="plugins.generic.orcidProfile.description">Permite importar la información del perfil del usuario de ORCID</message>
+	<message key="plugins.generic.orcidProfile.instructions">Puede rellenar este formulario con información de un perfil ORCID. Introduzca la dirección de correo electrónico o su identificador ORCID y después haga click en "Enviar".</message>
+	<message key="plugins.generic.orcidProfile.emailOrOrcid">Correo electrónico o iD ORCID</message>
+	<message key="plugins.generic.orcidProfile.manager.orcidProfileSettings">Ajustes de Perfil ORCID</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.description">Configurar la API para obtener la información de ORCID en el perfil del usuario.</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath">API de ORCID</message>
+	<message key="plugins.generic.orcidProfile.author.submission">Envío de ORCID</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public">Público</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox">Caja de Pruebas Pública</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member">Miembro</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox">Caja de Pruebas de Miembro</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidClientId">ID de Cliente</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidClientSecret">Cliente Secreto</message>
+	<message key="plugins.generic.orcidProfile.author.submission.success">Su envío ha sido asociado exitosamente con su iD ORCID.</message>
+	<message key="plugins.generic.orcidProfile.author.submission.failure">Su envío no pudo ser asociado exitosamente con su iD ORCID.</message>
+	<message key="plugins.generic.orcidProfile.authFailure">OJS no se pudo comunicar con el servicio ORCID. Contacte con el gestor de la revista e indique su nombre, ORCID iD y los detalles de tu envío.</message>
+	<message key="plugins.generic.orcidProfile.fieldset">ORCID</message>
+	<message key="plugins.generic.orcidProfile.connect">Crear o Conectar ORCID</message>
+</locale>
