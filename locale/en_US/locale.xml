@@ -13,7 +13,6 @@
   -->
  
 <locale name="en_US" full_name="U.S. English">
-
 	<message key="plugins.generic.orcidProfile.displayName">ORCID Profile Plugin</message>
 	<message key="plugins.generic.orcidProfile.description"><![CDATA[Allows for the import of user profile information from ORCID.]]></message>
 	<message key="plugins.generic.orcidProfile.instructions"><![CDATA[You can pre-populate this form with information from an ORCID profile.  Enter the email address or ORCID iD associated with the ORCID profile, then click "Submit".]]></message>
@@ -33,4 +32,8 @@
 	<message key="plugins.generic.orcidProfile.author.submission.success">Your submission has successfully been associated with your ORCID iD.</message>
 	<message key="plugins.generic.orcidProfile.author.submission.failure">Your submission could not be successfully associated with your ORCID iD. Please contact the journal manager with your name, ORCID, and details of your submission.</message>
 	<message key="plugins.generic.orcidProfile.authFailure">OJS was not able to communicate with the ORCID service. Please contact the journal manager with your name, ORCID iD, and details of your submission.</message>
+	<message key="plugins.generic.orcidProfile.linkMessage">Connect with ORCID</message>
+	<message key="plugins.generic.orcidProfile.oauthLoginError">OJS was not able to communicate with the ORCID service. Please contact the journal manager with your name, ORCID, and details of your submission.</message>
+	<message key="plugins.generic.orcidProfile.oauthTooManyMatches">There is more than one user with these auth data.</message>
+	<message key="plugins.generic.orcidProfile.searchOrcidExists">Check if ORCID exists</message>
 </locale>

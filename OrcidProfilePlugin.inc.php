@@ -24,8 +24,10 @@ define('ORCID_API_URL_MEMBER', 'https://api.orcid.org/');
 define('ORCID_API_URL_MEMBER_SANDBOX', 'https://api.sandbox.orcid.org/');
 
 define('OAUTH_TOKEN_URL', 'oauth/token');
-define('ORCID_API_VERSION_URL', 'v2.0/');
+//define('ORCID_API_VERSION_URL', 'v2.0/');
+define('ORCID_API_VERSION_URL', 'v1.2/');
 define('ORCID_PROFILE_URL', 'orcid-profile');
+define('ORCID_BIO_URL', 'orcid-bio');
 
 class OrcidProfilePlugin extends GenericPlugin {
 	/**
@@ -99,15 +101,158 @@ class OrcidProfilePlugin extends GenericPlugin {
 		);
 
 		switch ($template) {
-			case 'frontend/pages/userRegister.tpl':
+			case 'user/register.tpl':
+				$templateMgr->register_outputfilter(array(&$this, 'registrationFilter'));
+				break;
+			case 'author/submit/step3.tpl':
+				$templateMgr->register_outputfilter(array(&$this, 'submitFilter'));
+				break;
+			case 'frontend/pages/userRegister.tpl': // OMP
 				$templateMgr->register_outputfilter(array($this, 'registrationFilter'));
 				break;
 			case 'user/publicProfileForm.tpl':
 				$templateMgr->register_outputfilter(array($this, 'profileFilter'));
 				break;
+			case 'frontend/pages/userLogin.tpl': // OMP
+				$templateMgr->register_outputfilter(array(&$this, 'loginFilterOMP'));
+				break;
+			case 'controllers/grid/users/author/form/authorForm.tpl': // OMP
+				$templateMgr->register_outputfilter(array(&$this, 'addCheckOrcidButton'));
+				break;
+
 		}
 		return false;
 	}
+
+	/**
+	 * Output filter adds ORCiD interaction to OJS login form.
+	 * @param $output string
+	 * @param $templateMgr TemplateManager
+	 * @return $string
+	 */
+	function addCheckOrcidButton($output, &$templateMgr) {
+        $sessionManager = SessionManager::getManager();
+        $userSession = $sessionManager->getUserSession();
+
+		$templateMgr->register_function('plugin_url', array($this, 'smartyPluginUrl'));
+
+		if (preg_match('/<form.*id="editAuthor"[^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) {
+			$match = $matches[0][0];
+			$offset = $matches[0][1];
+			$context = Request::getContext();
+			$templateMgr->assign(array(
+				'targetOp' => 'login',
+				'orcidProfileOauthPath' => $this->getOauthPath(),
+				'orcidClientId' => $this->getSetting($context->getId(), 'orcidClientId'),
+			));
+			$newOutput = substr($output, 0, $offset);
+			$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidLoginCheck.tpl');
+			$newOutput .= substr($output, $offset);
+			$output = $newOutput;
+		}
+		$templateMgr->unregister_outputfilter('addCheckOrcidButton');
+		return $output;
+	}
+
+	function smartyPluginUrl($params, &$smarty) {
+		$request = PKPApplication::getRequest();
+	    $dispatcher = $request->getDispatcher();
+	    return $dispatcher->url($request, ROUTE_PAGE, null, 'plugins', 'generic', array_merge(array('plugin', $this->getName(), isset($params['path'])?$params['path']:array())));
+	}
+
+	/**
+      * Search for author information in ORCiD registry.
+      * @param $args array
+      * @param $request PKPRequest
+      */
+     function orcidSearch($args, $request) {
+         $plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
+         $templateMgr =& TemplateManager::getManager($request);
+
+         $authorIndex = Request::getUserVar('authorIndex');
+         $orcidButtonId = Request::getUserVar('orcidButtonId');
+         $orcidInputId = Request::getUserVar('orcidInputId');
+         $templateMgr->assign_by_ref('authorIndex', $authorIndex);
+         $templateMgr->assign_by_ref('orcidButtonId', $orcidButtonId);
+         $templateMgr->assign_by_ref('orcidInputId', $orcidInputId);
+
+         switch (Request::getUserVar('targetOp')) {
+             case 'form':
+                 $templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchForm.tpl');
+                 break;
+             case 'search':
+                 $journal = Request::getJournal(); //
+                 $name = $request->getUserVar('search-orcid-name');
+                 $lastname = $request->getUserVar('search-orcid-lastname');
+                 $email = $request->getUserVar('search-orcid-email');
+                 $orcidSearchResults = array();
+                 if (($name && $lastname) || $email) {
+                     // Obtaining a search token
+                     $curl = curl_init();
+                     curl_setopt_array($curl, array(
+                         CURLOPT_FAILONERROR => true,
+                         CURLOPT_URL => $url = $plugin->getSetting($journal->getId(), 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
+                         CURLOPT_RETURNTRANSFER => true,
+                         CURLOPT_HTTPHEADER => array('Accept: application/json'),
+                         CURLOPT_POST => true,
+                         CURLOPT_POSTFIELDS => http_build_query(array(
+                             'scope' => '/read-public',
+                             'grant_type' => 'client_credentials',
+                             'client_id' => $plugin->getSetting($journal->getId(), 'orcidClientId'),
+                             'client_secret' => $plugin->getSetting($journal->getId(), 'orcidClientSecret')
+                         ))
+                     ));
+                     $result = curl_exec($curl);
+                     // Close request to clear up some resources
+                     curl_close($curl);
+                     if ($result) {
+                         $response = json_decode($result, true);
+                         $query = '?q=';
+                         if ($name && $lastname && $email) {
+                             $query .= '(given-names:' . $name . 'ANDfamily-name:' . $lastname . ')ORemail:' . $email;
+                         } elseif ($name && $lastname) {
+                             $query .= 'given-names:' . $name . 'ANDfamily-name:' . $lastname;
+                         } else {
+                             $query .= 'email:' . $email;
+                         }
+
+                         // Performing search
+                         $curl = curl_init();
+                         curl_setopt_array($curl, array(
+                             CURLOPT_FAILONERROR    => true,
+                             CURLOPT_RETURNTRANSFER => true,
+                             CURLOPT_HTTPHEADER => array('Accept: application/json',
+                                                         'Content-Type: application/orcidxml',
+                                                         'Authorization: Bearer ' . $response['access_token']),
+                             CURLOPT_POST => false,
+                             CURLOPT_URL => $url = $plugin->getSetting($journal->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . 'search/' . ORCID_BIO_URL . '/' . $query,
+                         ));
+                         $result = curl_exec($curl);
+                         if ($result) {
+                             // Processing results
+                             $response = json_decode($result, true);
+                             if ($response['orcid-search-results']['num-found'] > 0) {
+                                 foreach($response['orcid-search-results']['orcid-search-result'] as $resultItem) {
+                                     $name = $resultItem['orcid-profile']['orcid-bio']['personal-details']['given-names']['value'];
+                                     $lastname = $resultItem['orcid-profile']['orcid-bio']['personal-details']['family-name']['value'];
+                                     $email = $resultItem['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value'];
+                                     $orcidiD = $resultItem['orcid-profile']['orcid-identifier']['uri'];
+                                     $orcidSearchResults[] = array('name' => $name,
+                                                                   'lastname' => $lastname,
+                                                                   'email' => $email,
+                                                                   'orcidiD' => $orcidiD);
+                                 }
+                             }
+                         }
+                     }
+
+                 }
+                 $templateMgr->assign_by_ref('orcidSearchResults', $orcidSearchResults);
+                 $templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchResults.tpl');
+                 break;
+             default: assert(false);
+         }
+     }
 
 	/**
 	 * Return the OAUTH path (prod or sandbox) based on the current API configuration
@@ -123,6 +268,60 @@ class OrcidProfilePlugin extends GenericPlugin {
 		} else {
 			return ORCID_OAUTH_URL_SANDBOX;
 		}
+	}
+
+	/**
+	 * Output filter adds ORCiD interaction to OJS login form.
+	 * @param $output string
+	 * @param $templateMgr TemplateManager
+	 * @return $string
+	 */
+	function loginFilter($output, &$templateMgr) {
+        $sessionManager = SessionManager::getManager();
+        $userSession = $sessionManager->getUserSession();
+		if (preg_match('/<form.*id="signinForm"[^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) { // OMP: id="login" OJS: id="signinForm"
+			$match = $matches[0][0];
+			$offset = $matches[0][1];
+			$context = Request::getContext();
+			$templateMgr->assign(array(
+				'targetOp' => 'login',
+				'orcidProfileOauthPath' => $this->getOauthPath(),
+				'orcidClientId' => $this->getSetting($context->getId(), 'orcidClientId'),
+			));
+			$newOutput = substr($output, 0, $offset);
+			$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidLogin.tpl');
+			$newOutput .= substr($output, $offset);
+			$output = $newOutput;
+		}
+		$templateMgr->unregister_outputfilter('loginFilter');
+		return $output;
+	}
+
+	/**
+	 * Output filter adds ORCiD interaction to OMP login form.
+	 * @param $output string
+	 * @param $templateMgr TemplateManager
+	 * @return $string
+	 */
+	function loginFilterOMP($output, &$templateMgr) {
+        $sessionManager = SessionManager::getManager();
+        $userSession = $sessionManager->getUserSession();
+		if (preg_match('/<form.*id="login"[^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) { // OMP: id="login" OJS: id="signinForm"
+			$match = $matches[0][0];
+			$offset = $matches[0][1];
+			$context = Request::getContext();
+			$templateMgr->assign(array(
+				'targetOp' => 'login',
+				'orcidProfileOauthPath' => $this->getOauthPath(),
+				'orcidClientId' => $this->getSetting($context->getId(), 'orcidClientId'),
+			));
+			$newOutput = substr($output, 0, $offset);
+			$newOutput .= $templateMgr->fetch($this->getTemplatePath() . 'orcidLogin.tpl');
+			$newOutput .= substr($output, $offset);
+			$output = $newOutput;
+		}
+		$templateMgr->unregister_outputfilter('loginFilterOMP');
+		return $output;
 	}
 
 	/**
@@ -300,22 +499,22 @@ class OrcidProfilePlugin extends GenericPlugin {
 	/**
 	 * Extend the {url ...} smarty to support this plugin.
 	 */
-	function smartyPluginUrl($params, &$smarty) {
-		$path = array($this->getCategory(), $this->getName());
-		if (is_array($params['path'])) {
-			$params['path'] = array_merge($path, $params['path']);
-		} elseif (!empty($params['path'])) {
-			$params['path'] = array_merge($path, array($params['path']));
-		} else {
-			$params['path'] = $path;
-		}
+	//function smartyPluginUrl($params, &$smarty) {
+	//    $path = array($this->getCategory(), $this->getName());
+	//    if (is_array($params['path'])) {
+	//        $params['path'] = array_merge($path, $params['path']);
+	//    } elseif (!empty($params['path'])) {
+	//        $params['path'] = array_merge($path, array($params['path']));
+	//    } else {
+	//        $params['path'] = $path;
+	//    }
 
-		if (!empty($params['id'])) {
-			$params['path'] = array_merge($params['path'], array($params['id']));
-			unset($params['id']);
-		}
-		return $smarty->smartyUrl($params, $smarty);
-	}
+	//    if (!empty($params['id'])) {
+	//        $params['path'] = array_merge($params['path'], array($params['id']));
+	//        unset($params['id']);
+	//    }
+	//    return $smarty->smartyUrl($params, $smarty);
+	//}
 
 	/**
 	 * @see Plugin::getActions()

@@ -15,6 +15,7 @@
  */
 
 import('classes.handler.Handler');
+import('plugins.generic.orcidProfile.classes.OrcidUserSettingsDAO');
 
 class OrcidHandler extends Handler {
 	/**
@@ -84,6 +85,81 @@ class OrcidHandler extends Handler {
 					window.close();
 				</script></body></html>';
 				break;
+			case 'login':
+                if (!is_null($json)) {
+                    // The user that will be logged in
+                    $loggedInUser = null;
+                    // Check if there is any user that has autoassigned orcidauth parameter on the UserSettings.
+					$userSettingsDao = new OrcidUserSettingsDAO();
+                    //$userSettingsDao = DAORegistry::getDAO('UserSettingsDAO');
+                    $userDao = DAORegistry::getDAO('UserDAO');
+                    $users = $userSettingsDao->getUsersBySetting('orcidauth', 'http://orcid.org/' . $response['orcid']);
+                    if (is_null($users) || $users->count == 0) { // If no user exists
+                        // Then we should look for someone that has his orcid field filled.
+                        $users = $userSettingsDao->getUsersBySetting('orcid', 'http://orcid.org/' . $response['orcid']);
+                        if (is_null($users) || $users->count == 0) { // If no user exists
+                            // Then we can look if there is any user with the email assigned to any email from ORCID profile
+                            // get all emails
+                            $emails = $json['orcid-profile']['orcid-bio']['contact-details']['email'];
+                            if (!is_null($emails)) { // No emails retrieved from api. Email field may not be public
+                                foreach($emails as $email) {
+                                    $user = $userDao->getUserByEmail($email[value], false);
+                                    if (!is_null($user)) {
+                                        $loggedInUser = $user;
+                                        break;
+                                    }
+                                }
+                            }
+                        } else { // we have at least one user with his orcid field filled
+                            if (count($users) != 1) { // There are more than one users with that orcidauth. Nothing we can do. Loggin fails
+                                $loggedInUser = false;
+                                Validation::redirectLogin('plugins.generic.oauth.message.oauthTooManyMatches');
+                            } else { // only one user has the current orcidauth. We can log him in.
+                                $loggedInUser = $users->next();
+                            }
+                        }
+                    } else { // There is at least one user with its orcidauth assigned to the current value
+                        if ($users->count != 1) { // There are more than one users with that orcidauth. Nothing we can do. Loggin fails
+                            $loggedInUser = false;
+                            Validation::redirectLogin('plugins.generic.oauth.message.oauthTooManyMatches');
+                        } else { // only one user has the current orcidauth. We can log him in.
+                            $loggedInUser = $users->next();
+                        }
+                    }
+                    if ($loggedInUser) {
+                        $userDao =& DAORegistry::getDAO('UserDAO');
+						$userSettingsDao->updateSetting($loggedInUser->getId(), 'orcidauth', 'http://orcid.org/' . $response['orcid'], 'string');
+
+                        $reason = null;
+                        // The user is valid, mark user as logged in in current session
+                        $sessionManager =& SessionManager::getManager();
+                        // Regenerate session ID first
+                        $sessionManager->regenerateSessionId();
+                        $session =& $sessionManager->getUserSession();
+                        $session->setSessionVar('userId', $loggedInUser->getId());
+                        $session->setUserId($loggedInUser->getId());
+                        $session->setSessionVar('username', $loggedInUser->getUsername());
+                        //$session->setRemember($remember);
+                        $loggedInUser->setDateLastLogin(Core::getCurrentDate());
+                        $userDao->updateObject($loggedInUser);
+                        Validation::redirectLogin();
+                    } else { // OAuth successful, but not linked to a user account (yet)
+                        $sessionManager = SessionManager::getManager();
+                        $userSession = $sessionManager->getUserSession();
+                        $user = $userSession->getUser();
+                        if (isset($user)) {
+                            // If the user is authenticated, link this user account
+                            $userSettingsDao->updateSetting($user->getId(), 'orcidauth', 'http://orcid.org/' . $response['orcid'], 'string');
+                            $userSettingsDao->updateSetting($user->getId(), 'orcid', 'http://orcid.org/' . $response['orcid'], 'string');
+                        } else {
+                            // Otherwise, send the user to the login screen (keep track of the oauthUniqueId to link upon login!)
+                            $userSession->setSessionVar('orcidauth', 'http://orcid.org/' . $response['orcid']);
+                        }
+                    }
+                    Validation::redirectLogin('plugins.generic.orcidProfile.oauthLoginError');
+                }
+                Validation::redirectLogin('plugins.generic.orcidProfile.oauthTooManyMatches');
+				break;
 			default: assert(false);
 		}
 	}
@@ -151,6 +227,92 @@ class OrcidHandler extends Handler {
 			'message' => 'plugins.generic.orcidProfile.author.submission.failure',
 		));
 		$templateMgr->display('common/message.tpl');
+	}
+
+	/**
+	 * Verify an incoming author claim for an ORCiD association.
+	 * @param $args array
+	 * @param $request PKPRequest
+	 */
+	function orcidSearch($args, $request) {
+		import('lib.pkp.classes.core.JSONMessage');
+
+		$context = Request::getContext();
+		$op = Request::getRequestedOp();
+		$plugin = PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
+		$templateMgr = TemplateManager::getManager($request);
+		$contextId = ($context == null) ? 0 : $context->getId();
+		$orcid = $request->getUserVar('orcid');
+
+		$response = "";
+
+		if (isset($orcid) && trim($orcid) != "") {
+			// fetch the access token
+			$curl = curl_init();
+			curl_setopt_array($curl, array(
+				CURLOPT_FAILONERROR => true,
+				CURLOPT_URL => $url = $plugin->getSetting($contextId, 'orcidProfileAPIPath').OAUTH_TOKEN_URL,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_HTTPHEADER => array('Accept: application/json'),
+				CURLOPT_POST => true,
+				CURLOPT_POSTFIELDS => http_build_query(array(
+					'scope' => '/read-public',
+					'grant_type' => 'client_credentials',
+					'client_id' => $plugin->getSetting($contextId, 'orcidClientId'),
+					'client_secret' => $plugin->getSetting($contextId, 'orcidClientSecret')
+				))
+			));
+			$result = curl_exec($curl);
+			// Close request to clear up some resources
+			curl_close($curl);
+			if ($result) {
+				$response = json_decode($result, true);
+				$query = '?q=';
+
+				$query .= 'orcid:' . $orcid;
+
+
+				// Performing search
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+					CURLOPT_FAILONERROR    => true,
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_HTTPHEADER => array('Accept: application/json',
+												'Content-Type: application/orcidxml',
+												'Authorization: Bearer ' . $response['access_token']),
+					CURLOPT_POST => false,
+					CURLOPT_URL => $url = $plugin->getSetting($contextId, 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . 'search/' . ORCID_BIO_URL . '/' . $query,
+				));
+				$result = curl_exec($curl);
+				if ($result) {
+					$response = json_decode($result, true);
+
+					if ($response['orcid-search-results']['num-found'] == 0) {
+						$response = "The ORCID " . $orcid . " does not correspond to a registered researcher";
+						return new JSONMessage(false, $response);
+					} else {
+						$profile = $response['orcid-search-results']['orcid-search-result'][0]['orcid-profile']['orcid-bio']['personal-details'];
+						$givenName = $profile['given-names']['value'];
+						$familyName = $profile['family-name']['value'];
+
+						$response = "The ORCID " . $orcid . " correspond to a registered researcher - Name: " . $givenName . " - Family Name: " . $familyName;
+						return new JSONMessage(true, $response);
+					}
+				} else {
+					$response = "API Connectivity error";
+					return new JSONMessage(false, $response);
+				}
+			} else {
+				$response = "API Connectivity error";
+				return new JSONMessage(false, $response);
+			}
+		} else {
+			$response = "No ORCID defined";
+			return new JSONMessage(false, $response);
+		}
+
+
+
 	}
 }
 
