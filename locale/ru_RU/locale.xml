@@ -33,5 +33,5 @@
 	<message key="plugins.generic.orcidProfile.author.submission.failure">Ваш материал не удалось успешно связать с Вашим ORCID iD. Пожалуйста, свяжитесь с управляющим журнала, сообщив ему Ваше имя, ORCID iD и информацию о Вашем отправленном материале.</message>
 	<message key="plugins.generic.orcidProfile.authFailure">OJS не удалось связаться с сервисом ORCID. Пожалуйста, свяжитесь с управляющим журнала, сообщив ему Ваше имя, ORCID iD и информацию о Вашем отправленном материале.</message>
     <message key="plugins.generic.orcidProfile.fieldset">ORCID</message>
-    <message key="plugins.generic.orcidProfile.connect">Создать или Подключиться к вашему ORCID</message>
+    <message key="plugins.generic.orcidProfile.connect">Создать или Подключиться к вашему ORCID iD</message>
 </locale>
