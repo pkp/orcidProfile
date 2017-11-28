@@ -23,5 +23,5 @@ function openORCID() {ldelim}
 </button>
 
 {if $targetOp eq 'register'}
-	{fbvElement type="hidden" name="orcid" id="orcid" value=$orcid maxlength="36"}
+	{fbvElement type="hidden" name="orcid" id="orcid" value=$orcid maxlength="37"}
 {/if}
