@@ -14,6 +14,6 @@
  
 <locale name="es_ES" full_name="Español (España)">
 
-<message key="plugins.generic.orcidProfile.displayName">Módulo Incluir perfil ORCID</message>
+	<message key="plugins.generic.orcidProfile.displayName">Módulo Incluir perfil ORCID</message>
 	<message key="plugins.generic.orcidProfile.description"><![CDATA[Permite la importación del perfil de usuario de ORCID.]]></message>
 </locale>
