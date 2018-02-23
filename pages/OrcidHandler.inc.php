@@ -32,7 +32,7 @@ class OrcidHandler extends Handler {
 		// fetch the access token
 		$response = $plugin->fetchAccessToken(Request::getUserVar('code'));
 
-        $profile = $plugin->getOrcidProfile($response['orcid']);
+		$profile = $plugin->getOrcidProfile($response['orcid']);
 		switch (Request::getUserVar('targetOp')) {
 			case 'register':
 				echo '<html><body><script type="text/javascript">
@@ -56,7 +56,7 @@ class OrcidHandler extends Handler {
 				// Submission process: Pre-fill the first author's ORCiD from the ORCiD data
 				echo '<html><body><script type="text/javascript">
 					opener.document.getElementById("authors-0-orcid").value = ' . json_encode('http://orcid.org/' . $response['orcid']). ';
-                    opener.document.getElementById("connect-orcid-button").style.display = "none";
+					opener.document.getElementById("connect-orcid-button").style.display = "none";
 					opener.document.getElementById("remove-orcid-button-0").style.display = "inline";
 					window.close();
 				</script></body></html>';
@@ -76,8 +76,8 @@ class OrcidHandler extends Handler {
 		$plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
 		$templateMgr =& TemplateManager::getManager($request);
 
-        // fetch the access token
-        $response = $plugin->fetchAccessToken(Request::getUserVar('code'));
+		// fetch the access token
+		$response = $plugin->fetchAccessToken(Request::getUserVar('code'));
 
 		if (!isset($response['orcid'])) {
 			$templateMgr->assign(array(
@@ -114,98 +114,98 @@ class OrcidHandler extends Handler {
 		));
 		$templateMgr->display('common/message.tpl');
 	}
-    
-    /**
-     * Search for author information in ORCiD registry.
-     * @param $args array
-     * @param $request PKPRequest
-     */    
-    function orcidSearch($args, $request) {
-        $plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
-        $templateMgr =& TemplateManager::getManager($request);
-        
-        $authorIndex = Request::getUserVar('authorIndex');
-        $orcidButtonId = Request::getUserVar('orcidButtonId');
-        $orcidInputId = Request::getUserVar('orcidInputId');
-        $templateMgr->assign_by_ref('authorIndex', $authorIndex);
-        $templateMgr->assign_by_ref('orcidButtonId', $orcidButtonId);
-        $templateMgr->assign_by_ref('orcidInputId', $orcidInputId);
-        
-        switch (Request::getUserVar('targetOp')) {
-            case 'form':                
-                $templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchForm.tpl');
-                break;
-            case 'search': 
-                $journal = Request::getJournal();
-                $totalResults = 0;
-                $orcidSearchResults = array();                 
-                 
-                $searchName = $request->getUserVar('searchOrcidName');
-                $searchLastname = $request->getUserVar('searchOrcidLastname');
-                $searchEmail = $request->getUserVar('searchOrcidEmail');            
-                $profilesPage = (int) $request->getUserVar('profilesPage');
-                $itemsPerPage = $plugin->getSetting($journal->getId(), 'itemsPerPage');
-                
-                $templateMgr->assign_by_ref('itemsPerPage', $itemsPerPage);
 
-                $result = $plugin->searchProfile($searchName, $searchLastname, $searchEmail, $profilesPage, $itemsPerPage);
-                 
-                if ($result) {
-                    // Processing results                             
-                    $totalResults = $result['num-found'];
-                    if ($totalResults > 0) {
-                        foreach ($result['result'] as $resultItem) {
-                            $orcidUri = $resultItem['orcid-identifier']['uri'];
-                            $orcidiD  = $resultItem['orcid-identifier']['path'];
-                            
-                            $profile  = $plugin->getOrcidProfile($orcidiD);
-                            
-                            $name     = $profile['name']['given-names']['value'];
-                            $lastname = $profile['name']['family-name']['value'];
-                            $email    = isset($profile['emails']['email'][0]['email'])?$profile['emails']['email'][0]['email']:null;
-                            
-                            $researcherUrls = array();
-                            if (!is_null($profile['researcher-urls'])) {
-                                foreach ($profile['researcher-urls']['researcher-url'] as $researcherUrl) {
-                                    $researcherUrls[] = $researcherUrl['url-name']['value'] . ' - ' . $researcherUrl['url']['value'];
-                                }
-                            }
-                            
-                            $affiliations = array();
-                            $affiliation  = $plugin->getOrcidProfileAffiliation($orcidiD);
-                            if (isset($affiliation['employment-summary'][0])) {
-                                foreach ($affiliation['employment-summary'] as $singleAffiliation) {
-                                    $affiliations[] = $singleAffiliation['organization']['name'];
-                                }
-                            }
-                            
-                            $orcidSearchResults[] = array('name' => $name,
-                                                          'lastname' => $lastname,
-                                                          'email' => $email,
-                                                          'orcidiD' => $orcidUri,
-                                                          'affiliations' => $affiliations,
-                                                          'researcherUrls' => $researcherUrls
-                                                          );
-                        }
-                    }
-                }
-                    
-                // Paginate results.         
-                // Instantiate article iterator.
-                import('lib.pkp.classes.core.VirtualArrayIterator');
-                $iterator = new VirtualArrayIterator($orcidSearchResults, $totalResults, $profilesPage, $itemsPerPage);
+	/**
+	 * Search for author information in ORCiD registry.
+	 * @param $args array
+	 * @param $request PKPRequest
+	 */
+	function orcidSearch($args, $request) {
+		$plugin =& PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
+		$templateMgr =& TemplateManager::getManager($request);
 
-                // Prepare and display the article template.
-                $templateMgr->assign_by_ref('orcidSearchResults', $iterator);
-                $templateMgr->assign_by_ref('searchOrcidName', $searchName);
-                $templateMgr->assign_by_ref('searchOrcidLastname', $searchLastname);
-                $templateMgr->assign_by_ref('searchOrcidEmail', $searchEmail);                                                                        
-                $templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchResults.tpl');
-             
-                break;
-            default: assert(false);
-        }        
-    }
+		$authorIndex = Request::getUserVar('authorIndex');
+		$orcidButtonId = Request::getUserVar('orcidButtonId');
+		$orcidInputId = Request::getUserVar('orcidInputId');
+		$templateMgr->assign_by_ref('authorIndex', $authorIndex);
+		$templateMgr->assign_by_ref('orcidButtonId', $orcidButtonId);
+		$templateMgr->assign_by_ref('orcidInputId', $orcidInputId);
+
+		switch (Request::getUserVar('targetOp')) {
+			case 'form':
+				$templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchForm.tpl');
+				break;
+			case 'search':
+				$journal = Request::getJournal();
+				$totalResults = 0;
+				$orcidSearchResults = array();
+
+				$searchName = $request->getUserVar('searchOrcidName');
+				$searchLastname = $request->getUserVar('searchOrcidLastname');
+				$searchEmail = $request->getUserVar('searchOrcidEmail');
+				$profilesPage = (int) $request->getUserVar('profilesPage');
+				$itemsPerPage = $plugin->getSetting($journal->getId(), 'itemsPerPage');
+
+				$templateMgr->assign_by_ref('itemsPerPage', $itemsPerPage);
+
+				$result = $plugin->searchProfile($searchName, $searchLastname, $searchEmail, $profilesPage, $itemsPerPage);
+
+				if ($result) {
+					// Processing results
+					$totalResults = $result['num-found'];
+					if ($totalResults > 0) {
+						foreach ($result['result'] as $resultItem) {
+							$orcidUri = $resultItem['orcid-identifier']['uri'];
+							$orcidiD  = $resultItem['orcid-identifier']['path'];
+
+							$profile  = $plugin->getOrcidProfile($orcidiD);
+
+							$name     = $profile['name']['given-names']['value'];
+							$lastname = $profile['name']['family-name']['value'];
+							$email    = isset($profile['emails']['email'][0]['email'])?$profile['emails']['email'][0]['email']:null;
+
+							$researcherUrls = array();
+							if (!is_null($profile['researcher-urls'])) {
+								foreach ($profile['researcher-urls']['researcher-url'] as $researcherUrl) {
+									$researcherUrls[] = $researcherUrl['url-name']['value'] . ' - ' . $researcherUrl['url']['value'];
+								}
+							}
+
+							$affiliations = array();
+							$affiliation  = $plugin->getOrcidProfileAffiliation($orcidiD);
+							if (isset($affiliation['employment-summary'][0])) {
+								foreach ($affiliation['employment-summary'] as $singleAffiliation) {
+									$affiliations[] = $singleAffiliation['organization']['name'];
+								}
+							}
+
+							$orcidSearchResults[] = array('name' => $name,
+														  'lastname' => $lastname,
+														  'email' => $email,
+														  'orcidiD' => $orcidUri,
+														  'affiliations' => $affiliations,
+														  'researcherUrls' => $researcherUrls
+														  );
+						}
+					}
+				}
+
+				// Paginate results.
+				// Instantiate article iterator.
+				import('lib.pkp.classes.core.VirtualArrayIterator');
+				$iterator = new VirtualArrayIterator($orcidSearchResults, $totalResults, $profilesPage, $itemsPerPage);
+
+				// Prepare and display the article template.
+				$templateMgr->assign_by_ref('orcidSearchResults', $iterator);
+				$templateMgr->assign_by_ref('searchOrcidName', $searchName);
+				$templateMgr->assign_by_ref('searchOrcidLastname', $searchLastname);
+				$templateMgr->assign_by_ref('searchOrcidEmail', $searchEmail);
+				$templateMgr->display($plugin->getTemplatePath() . 'orcidProfileSearchResults.tpl');
+
+				break;
+			default: assert(false);
+		}
+	}
 }
 
 ?>
