@@ -39,7 +39,7 @@ class OrcidHandler extends Handler {
 					opener.document.getElementById("firstName").value = ' . json_encode($profile['orcid-profile']['orcid-bio']['personal-details']['given-names']['value']) . ';
 					opener.document.getElementById("lastName").value = ' . json_encode($profile['orcid-profile']['orcid-bio']['personal-details']['family-name']['value']) . ';
 					opener.document.getElementById("email").value = ' . json_encode($profile['orcid-profile']['orcid-bio']['contact-details']['email'][0]['value']) . ';
-					opener.document.getElementById("orcid").value = ' . json_encode('http://orcid.org/' . $response['orcid']). ';
+					opener.document.getElementById("orcid").value = ' . json_encode('https://orcid.org/' . $response['orcid']). ';
 					opener.document.getElementById("connect-orcid-button").style.display = "none";
 					window.close();
 				</script></body></html>';
@@ -47,7 +47,7 @@ class OrcidHandler extends Handler {
 			case 'profile':
 				// Set the ORCiD in the user profile from the response
 				echo '<html><body><script type="text/javascript">
-					opener.document.getElementById("orcid").value = ' . json_encode('http://orcid.org/' . $response['orcid']). ';
+					opener.document.getElementById("orcid").value = ' . json_encode('https://orcid.org/' . $response['orcid']). ';
 					opener.document.getElementById("connect-orcid-button").style.display = "none";
 					window.close();
 				</script></body></html>';
@@ -55,7 +55,7 @@ class OrcidHandler extends Handler {
 			case 'submit':
 				// Submission process: Pre-fill the first author's ORCiD from the ORCiD data
 				echo '<html><body><script type="text/javascript">
-					opener.document.getElementById("authors-0-orcid").value = ' . json_encode('http://orcid.org/' . $response['orcid']). ';
+					opener.document.getElementById("authors-0-orcid").value = ' . json_encode('https://orcid.org/' . $response['orcid']). ';
 					opener.document.getElementById("connect-orcid-button").style.display = "none";
 					opener.document.getElementById("remove-orcid-button-0").style.display = "inline";
 					window.close();
@@ -93,7 +93,7 @@ class OrcidHandler extends Handler {
 		$authors =& $authorDao->getAuthorsBySubmissionId($request->getUserVar('articleId'));
 		foreach ($authors as $author) {
 			if ($author->getData('orcidToken') == $request->getUserVar('orcidToken')) {
-				$author->setData('orcid', 'http://orcid.org/' . $response['orcid']);
+				$author->setData('orcid', 'https://orcid.org/' . $response['orcid']);
 				$author->setData('orcidToken', null);
 				$authorDao->updateAuthor($author);
 
