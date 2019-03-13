@@ -33,5 +33,15 @@
 	<message key="plugins.generic.orcidProfile.author.submission.failure">Su envío no ha podido ser asociado con su identificador ORCID. Contacte con el administrador/a de la revista e indique su nombre, identificador ORCID y los detalles del envío.</message>
 	<message key="plugins.generic.orcidProfile.authFailure">OJS no puede comunicarse con el servicio ORCID. Contacte con el administrador/a de la revista e indique su nombre, identificador ORCID y los detalles del envío.</message>
 	<message key="plugins.generic.orcidProfile.fieldset">ORCID</message>
-	<message key="plugins.generic.orcidProfile.connect">Crear o conectar su identificador ORCID</message>
+	<message key="plugins.generic.orcidProfile.connect">Crear o Conectar tu ORCID</message>
+	<message key="plugins.generic.orcidProfile.authorise">Autorizar y Conectar tu ORCID</message>
+	<message key="plugins.generic.orcidProfile.about.title">¿Que es ORCID?</message>
+	<message key="plugins.generic.orcidProfile.about.orcidExplanation"><![CDATA[ORCID es una organización independiente sin fines de lucro que provee un identificador persistente – ORCID – que te distingue de otros investigadores además de ser un mecanismo que vincula tus investigaciones y actividades a tu identificador. ORCID esta integrado en algunos sistemas usados por editores, financiadores, instituciones y otros servicios dedicados a la investigación. Aprende más en <a href="https://orcid.org">orcid.org</a>.]]></message>
+	<message key="plugins.generic.orcidProfile.about.howAndWhy.title">¿Como y porque recolectamos identificadores ORCID?</message>
+	<message key="plugins.generic.orcidProfile.about.howAndWhy"><![CDATA[Esta revista esta recolectado tu identificador ORCID porque así podremos [añadir propósito y distinguir entre API de Miembros y API Pública].
+	Cuando tu apretas el botón "Autorizar", en la ventana emergente de ORCID, nosotros te preguntaremos si deseas compartir tu identificador usando un proceso autentificado: ya sea <a href="https://support.orcid.org/hc/en-us/articles/360006897454">registrando un identificador ORCID</a> o, si tu ya dispones de uno, <a href="https://support.orcid.org/hc/en-us/categories/360000661673"> invitandote a iniciar sesión en tu cuenta ORCID</a>, después nos otorgaras permiso para obtener tu identificador ORCID. Nosotros hacemos esto para asegurarnos que tu estas correctamente identificado y conectándote de manera segura a ORCID.<br>
+	Aprende más en <a href="https://orcid.org/blog/2017/02/20/whats-so-special-about-signing"> Porque es tan especial registrarse.</a>]]></message>	
+	<message key="plugins.generic.orcidProfile.about.display.title">¿Donde se muestran los identificadores ORCID?</message>
+	<message key="plugins.generic.orcidProfile.about.display"><![CDATA[Para saber si haz usado tu identificador y has sido autentificado, nosotros mostramos el icono ORCID <img src="https://orcid.org/sites/default/files/images/orcid_16x16(1).gif" alt="iD icon" width="16" height="16" border="0"> al lado de tu nombre sobre la página del articulo de tu envío y sobre tu perfil público.<br>
+		Aprende más en <a href="https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed">¿Como un identificador ORCID sera desplegado?</a>]]></message>
 </locale>
