@@ -14,21 +14,43 @@
 
 <email_texts locale="pt_PT">
 	<email_text key="ORCID_COLLECT_AUTHOR_ID">
-		<subject>Submissão ao ORCID</subject>
-		<body>Caro(a) {$authorName},
+		<subject>Submissão ORCID</subject>
+		<body><![CDATA[{$authorName},<br/>
+<br/>
+Foi adicionado como coautor da submissão de um artigo em {$contextName}.<br/>
 
-O seu nome foi indicado como coautor do manuscrito "{$articleTitle}" submetido à revista {$journalName}. 
+Para confirmar a autoria, por favor insira o seu iD ORCID a esta submissão através do link fornecido abaixo.
 
-Para confirmar a sua autoria, por favor adicione o seu identificador ORCID à submissão visitando a página indicada abaixo.
+<br/>
+<a href="{$authorOrcidUrl}"><img id="orcid-id-logo" src="https://orcid.org/sites/default/files/images/orcid_16x16.png" width='16' height='16' alt="ORCID iD icon" style="display: block; margin: 0 .5em 0 0; padding: 0; float: left;"/>Register or connect your ORCID iD</a><br/>
+<br/>
+<br>
 
-{$authorOrcidUrl}
+<a href="{$orcidAboutUrl}">Mais sobre o uso do ORCID em {$contextName}</a><br/>
+<br/>
+Para qualquer dúvida adicional, não hesite em contactar.<br/>
+<br/>
+{$principalContactSignature}]]></body>
+		<description>Este e-mail padrão é usado para recolher os iD's ORCID dos coautores.</description>
+	</email_text>
+	<email_text key="ORCID_REQUEST_AUTHOR_AUTHORIZATION">
+		<subject>Solicitar acesso ao seu perfil ORCID</subject>
+		<body><![CDATA[{$authorName},<br/>
+<br/>
+Foi adicionado como coautor da submissão do artigo "{$articleTitle}" em {$contextName}.<br/>
 
-Se tiver alguma dúvida, por favor contacte-me.
+Permita-nos adicionar o seu ORCID a esta submissão assim como ao seu perfil ORCID.<br/>
+</br>
+Visite o link oficial do ORCID, entre com os seus dados de autenticção e autorize o acesso da revista seguindo estas instruções.<br/>
+<a href="{$authorOrcidUrl}"><img id="orcid-id-logo" src="https://orcid.org/sites/default/files/images/orcid_16x16.png" width='16' height='16' alt="ORCID iD icon" style="display: block; margin: 0 .5em 0 0; padding: 0; float: left;"/>Regitar ou Ligar o seu ORCID iD</a><br/>
+<br>
+<br>
 
-{$editorialContactSignature}
-
-
-</body>
-		<description>Este e-mail é usado para recolher os identificadores ORCID dos co-autores.</description>
+<a href="{$orcidAboutUrl}">Mais sobre o uso do ORCID em {$contextName}</a><br/>
+<br/>
+Para qualquer dúvida adicional, não hesite em contactar.<br/>
+<br/>
+{$principalContactSignature}]]></body>
+		<description>Este modelo de email é usado para soliciar o acesso ao perfil ORCID dos autores.</description>
 	</email_text>
 </email_texts>
