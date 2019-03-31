@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+
+<!--
+  * plugins/generic/orcidPlugin/locale/sl_SI/locale.xml
+  *
+  * Copyright (c) 2015-2018 University of Pittsburgh
+  * Copyright (c) 2014-2018 Simon Fraser University
+  * Copyright (c) 2003-2018 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * ORCID Profile plugin localization strings
+  -->
+
+<locale name="sl_SI" full_name="Slovenščina">
+
+	<message key="plugins.generic.orcidProfile.displayName">Vtičnik za ORCID profil</message>
+	<message key="plugins.generic.orcidProfile.description"><![CDATA[Omogoča uvoz uporabniških podatkov iz ORCID.]]></message>
+	<message key="plugins.generic.orcidProfile.instructions"><![CDATA[Obrazec lahko pednapolnite s podatki iz ORCID profila. Vnesite email naslvo ali ORCID iD, ki pripada ORCID profilu, in kliknite "Pošlji".]]></message>
+	<message key="plugins.generic.orcidProfile.noData">Iz ORCID ni bilo mogoče najti nobenih podatkov.</message>
+	<message key="plugins.generic.orcidProfile.emailOrOrcid">Email naslov ali ORCID iD:</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.description">Nastavite ORCID API za uporabo pri zajemanju podatkov iz ORCID profilov za uporabniške profile.</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath">ORCID API</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public">Javno</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox">Javni peskovnik</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member">Član</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox">Članski peskovnik</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidClientId">ID klienta</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidClientSecret">Secret klienta</message>
+	<message key="plugins.generic.orcidProfile.authFailure">OJS ni mogel komunicirati z ORCID servisom. Za pomoč kontaktirajte vašeka upravljalca revije skupaj z vašim imenom, ORCID iD-jem in podatki o vašem prispevku.</message>
+	<message key="plugins.generic.orcidProfile.fieldset">ORCID</message>
+	<message key="plugins.generic.orcidProfile.connect">Ustvari ali poveži vaš ORCID iD</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.title">Nastavitve za ORCID API</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.hidden">skrito</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.description.globallyconfigured">ORCID API je bil nastavljen globalno na strežniku. Nastavljene so bile naslednje nastavitve.</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.orcidScope">Področje dostopnosti profila</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.mailSectionTitle">Email nastavitve</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication">Pošlji email z zahtevo za ORCID avtorizacijo avtorjev članka ob izdaji nove številke.</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.logSectionTitle">ORCID dnevnik zahtevkov</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.help">Določite količino zapisov v dnevnik vtičnika</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.error">Napake</message>
+	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.all">Vse</message>
+	<message key="plugins.generic.orcidProfile.author.accessDenied">ORCID dostop je bil zavrnjen</message>
+	<message key="plugins.generic.orcidProfile.author.accessTokenStored">Dostop do ORCID zapisa z dostopnostjo  {$orcidAccessScope} je bil odobren z veljavnostjo do</message>
+	<message key="plugins.generic.orcidProfile.author.requestAuthorization">Pošlji email s prošnjo za ORCID avtorizacijo s strani sodelujočega</message>
+	<message key="plugins.generic.orcidProfile.author.deleteORCID">Zbirši ORCID iD in žeton za dostop</message>
+	<message key="plugins.generic.orcidProfile.author.orcidEmptyNotice">Glej spodaj za zahtevo po avtenticiranem ORCID iD</message>
+	<message key="plugins.generic.orcidProfile.author.unauthenticated">ORCID iD ni avtenticiran! Prosimo zahtevajte avtentikacijo od sodelavca.</message>
+	<message key="plugins.generic.orcidProfile.verify.title">ORCID avtorizacija</message>
+	<message key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success">Prispevek še ni bil dodan k vašemu ORCID zapisu.</message>
+	<message key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure">Prispevka ni bilo mogoče dodati k vašemu ORCID zapisu.</message>
+	<message key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished">Prispevek bo dodan k vašemu ORCID zapisu ob izdaji številke revije.</message>
+	<message key="plugins.generic.orcidProfile.verify.success">Vaš ORCID iD je bil preverjen in uspešno povezan s prispevkom.</message>
+	<message key="plugins.generic.orcidProfile.verify.failure">Vašega ORCID iDja ni bilo mogoče preveriti. Povezava ni več veljavna.</message>
+	<message key="plugins.generic.orcidProfile.verify.duplicateOrcid">ORCID iD je bil že shranjen za ta prispevek.</message>
+	<message key="plugins.generic.orcidProfile.verify.denied">Zavrnili ste dostop do vašega ORCID zapisa.</message>
+	<message key="plugins.generic.orcidProfile.failure.contact">Prosimo kontaktirajte vašega upravljalca revije skupaj z vašim imenom, ORCID iD-jem in podatki o vašem prispevku.</message>
+	<message key="plugins.generic.orcidProfile.authorise">Avtoriziraj in poveži vaš ORCID iD</message>
+	<message key="plugins.generic.orcidProfile.about.title">Kaj je ORCID?</message>
+	<message key="plugins.generic.orcidProfile.about.howAndWhy"><![CDATA[Revija zbira vaš ORCID iD, da lahko povežemo prispevke in članke z vašimi ORCID podatki.
+
+Ko kliknete gumb "Avtoriziraj" v ORCID pojavnem oknu, vas bom prosili, da delite z nami vaš iD z uporabo avtoriziranega procesa: ali s <a href="https://support.orcid.org/hc/en-us/articles/360006897454">kreiranjem novega ORCID računa</a> ali, če ORCID račun že imate, <a href="https://support.orcid.org/hc/en-us/categories/360000661673">z vpisom v vaš ORCID račun</a> in dovoljenjem dostopa do vašega ORCID iD. To je potrebno zaradi zagotavljanja vaše avtentičnosti in varne povezave z vašim ORCID id.<br>
+    Več na <a href="https://orcid.org/blog/2017/02/20/whats-so-special-about-signing">What’s so special about signing in.</a>]]></message>
+	<message key="plugins.generic.orcidProfile.about.orcidExplanation"><![CDATA[ORCID je neodvisna in nepridobitna organizacija, ki zagotavlja trajni identifikator, ORCID iD, za vašo enolično identifikacijo in mehanizem za povezavo med vašimi raziskovalnimi aktivnostmi in rezultati ter vašim ORCID iDjem. ORCID je integriran v veliko sistemov, ki jih uporabljajo založniki, sponzorji, institucije in ostalimi sistemi povezanimi z raziskovanjem. Več na <a href="https://orcid.org">orcid.org</a>.]]></message>
+	<message key="plugins.generic.orcidProfile.about.howAndWhy.title">Kako in zakaj shranjujemo ORCID iDje?</message>
+	<message key="plugins.generic.orcidProfile.about.display.title">Kje so ORCID iDji prikazani?</message>
+	<message key="plugins.generic.orcidProfile.about.display"><![CDATA[Kot potrditev vaše uporabe vašega ORCID iDja in njegtovo avtorizacijo se prkazuje ORCID id ikona <img src="https://orcid.org/sites/default/files/images/orcid_16x16(1).gif" alt="iD icon" width="16" height="16" border="0"> poleg vašega imena na strani članka in na vašem javnem profilu.<br>
+        Več na <a href="https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed">How should an ORCID iD be displayed.</a>]]></message>
+</locale>
