@@ -21,7 +21,7 @@
 	<h3>{translate key="plugins.generic.orcidProfile.about.howAndWhy.title"}</h3>
 	<div class="description">
 		{$contextName}
-		{if $memberApi}
+		{if $memberApiEnabled}
 			{translate key="plugins.generic.orcidProfile.about.purpose.memberapi"}
 		{else}
 			{translate key="plugins.generic.orcidProfile.about.purpose.publicapi"}
@@ -32,11 +32,7 @@
 	<div class="description">
 		{translate key="plugins.generic.orcidProfile.about.display"}
 	</div>
-	<h3>{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
-	<div class="description">
-		{translate key="plugins.generic.orcidProfile.about.display"}
-	</div>
-	{if $memberApi}
+	{if $memberApiEnabled}
 	<h3>{translate key="plugins.generic.orcidProfile.about.connect.title"}</h3>
 	<div class="description">
 		{translate key="plugins.generic.orcidProfile.about.connect"}
