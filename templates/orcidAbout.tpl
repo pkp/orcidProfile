@@ -20,12 +20,28 @@
 	</div>
 	<h3>{translate key="plugins.generic.orcidProfile.about.howAndWhy.title"}</h3>
 	<div class="description">
-		{translate key="plugins.generic.orcidProfile.about.howAndWhy"}
+		{$contextName}
+		{if $memberApi}
+			{translate key="plugins.generic.orcidProfile.about.purpose.memberapi"}
+		{else}
+			{translate key="plugins.generic.orcidProfile.about.purpose.publicapi"}
+		{/if}
+		{translate key="plugins.generic.orcidProfile.about.authorize"}
 	</div>
 	<h3>{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
 	<div class="description">
 		{translate key="plugins.generic.orcidProfile.about.display"}
 	</div>
+	<h3>{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
+	<div class="description">
+		{translate key="plugins.generic.orcidProfile.about.display"}
+	</div>
+	{if $memberApi}
+	<h3>{translate key="plugins.generic.orcidProfile.about.connect.title"}</h3>
+	<div class="description">
+		{translate key="plugins.generic.orcidProfile.about.connect"}
+	</div>
+	{/if}
 </div>
 
 {include file="frontend/components/footer.tpl"}

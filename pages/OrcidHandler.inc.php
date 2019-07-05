@@ -151,7 +151,7 @@ class OrcidHandler extends Handler {
 				$this->_setOrcidData($user, $orcidUri, $response);
 				$userDao = DAORegistry::getDAO('UserDAO');
 				$userDao->updateLocaleFields($user);
-				
+
 				// Reload the public profile tab (incl. form)
 				echo '
 					<html><body><script type="text/javascript">
@@ -206,7 +206,7 @@ class OrcidHandler extends Handler {
 			$templateMgr->assign('verifySuccess', false);
 			$templateMgr->display($templatePath);
 			return;
-		}		
+		}
 		if ($request->getUserVar('error') === 'access_denied') {
 			// User denied access
 			// Store the date time the author denied ORCID access to remember this
@@ -263,7 +263,7 @@ class OrcidHandler extends Handler {
 		$plugin->logInfo('Response body: ' . $result);
 		$response = json_decode($result, true);
 		if ($response['error'] === 'invalid_grant') {
-			$plugin->logError("Response status: $httpstatus . Authroization code invalid, maybe already used");			
+			$plugin->logError("Response status: $httpstatus . Authroization code invalid, maybe already used");
 			$templateMgr->assign('authFailure', true);
 			$templateMgr->display($templatePath);
 			return;
@@ -278,7 +278,7 @@ class OrcidHandler extends Handler {
 			// another ORCID id is stored for the author
 			$templateMgr->assign('duplicateOrcid', true);
 			$templateMgr->display($templatePath);
-			return;	
+			return;
 		}
 		$authorToVerify->setOrcid($orcidUri);
 		if ($plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
@@ -333,7 +333,10 @@ class OrcidHandler extends Handler {
 
 	function about($args, $request) {
 		$templateMgr = TemplateManager::getManager($request);
+		$context = $request->getContext();
 		$plugin = PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
+		$templateMgr->assign('contextName', $context->getLocalizedName());
+		$templateMgr->assign('memberApiEnabled', $plugin->isMemberApiEnabled($context->getId()));
 		$templateMgr->assign('orcidIcon', $plugin->getIcon());
 		$templateMgr->display($plugin->getTemplateResource('orcidAbout.tpl'));
 	}
