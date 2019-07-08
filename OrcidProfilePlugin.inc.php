@@ -949,33 +949,35 @@ class OrcidProfilePlugin extends GenericPlugin {
 		$articleLocale = $article->getLocale();
 		$titles = $article->getTitle($articleLocale);
 		$citationPlugin = PluginRegistry::getPlugin('generic', 'citationstylelanguageplugin');
-		$bibtexCitation = trim(strip_tags($citationPlugin->getCitation($request, $article, 'bibtex')));
 		$articleUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'article', 'view', $article->getBestArticleId());
 		$orcidWork = [
 			'title' => [
 				'title' => [
 					'value' => $article->getLocalizedTitle($articleLocale)
 				],
-				'subtitle' => [
-					'value' => $article->getSubtitle($articleLocale)
-				]
 			],
 			'journal-title' => [
-				'value' => $journal->getName('en_US')
+				'value' => $journal->getLocalizedName($articleLocale)
 			],
-			'short-description' => trim(strip_tags($article->getAbstract('en_US'))),
+			'short-description' => trim(strip_tags($article->getLocalizedData('abstract', $articleLocale))),
 			'type' => 'JOURNAL_ARTICLE',
 			'external-ids' => [ 'external-id' => $this->buildOrcidExternalIds($article, $journal, $issue, $articleUrl)],
 			'publication-date' => $this->buildOrcidPublicationDate($issue),
 			'url' => $articleUrl,
-			'citation' => [
-				'citation-type' => 'BIBTEX',
-				'citation-value' => $bibtexCitation
-			],
 			'language-code' => substr($articleLocale, 0, 2),
 			'contributors' => [ 'contributor' => $this->buildOrcidContributors($authors, $journal->getId()) ]
 		];
-		if ($articleLocale !== 'en_US') {
+		if ($citationPlugin) {
+			$bibtexCitation = trim(strip_tags($citationPlugin->getCitation($request, $article, 'bibtex')));
+			$orcidWork['citation'] = [
+				'citation-type' => 'BIBTEX',
+				'citation-value' => $bibtexCitation
+			];
+		}
+		if ($article->getSubtitle($articleLocale)) {
+			$orcidWork['title']['subtitle'] = [ 'value' => $article->getSubtitle($articleLocale)];
+		}
+		if ($articleLocale !== 'en_US' && $article->getTitle('en_US')) {
 			$orcidWork['title']['translated-title'] = [
 				'value' => $article->getTitle('en_US'),
 				'language-code' => 'en'
