@@ -231,14 +231,27 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 * @return string
 	 */
 	function getOrcidUrl() {
+		if ($this->usingSandbox()) {
+			return ORCID_URL_SANDBOX;
+		} else {
+			return ORCID_URL;
+		}
+	}
+
+	/**
+	 * Check if the plugin is configured to use the ORCID Sandbox API
+	 *
+	 * @return boolean true if using the ORCID Sandbox API, false otherwise
+	 */
+	function usingSandbox() {
 		$context = Request::getContext();
 		$contextId = ($context == null) ? 0 : $context->getId();
 
 		$apiPath =	$this->getSetting($contextId, 'orcidProfileAPIPath');
-		if ($apiPath == ORCID_API_URL_PUBLIC || $apiPath == ORCID_API_URL_MEMBER) {
-			return ORCID_URL;
+		if ($apiPath == ORCID_API_URL_PUBLIC_SANDBOX || $apiPath == ORCID_API_URL_MEMBER_SANDBOX) {
+			return true;
 		} else {
-			return ORCID_URL_SANDBOX;
+			return false;
 		}
 	}
 
@@ -318,6 +331,9 @@ class OrcidProfilePlugin extends GenericPlugin {
 		$user = Request::getUser();
 		$contextId = ($context == null) ? 0 : $context->getId();
 		$targetOp = 'profile';
+		if ($user->getOrcid() && $user->getData('orcidSandbox')) {
+			$templateMgr->assign('orcid', rtrim(ORCID_URL_SANDBOX, '/') . parse_url($user->getOrcid(), PHP_URL_PATH));
+		}
 		$templateMgr->assign(array(
 			'targetOp' => $targetOp,
 			'orcidUrl' => $this->getOrcidUrl(),
@@ -442,6 +458,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 */
 	function handleAdditionalFieldNames($hookName, $params) {
 		$fields =& $params[1];
+		// the ORCID id was retrieved from the ORCID sandbox API
 		$fields[] = 'orcidSandbox';
 		$fields[] = 'orcidAccessToken';
 		$fields[] = 'orcidAccessScope';
