@@ -202,7 +202,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				break;
 			case 'frontend/pages/article.tpl':
 				//$templateMgr->assign('orcidIcon', $this->getIcon());
-				$script = 'var orcidIconSvg = $('. json_encode($this->getIcon()) .');';
+				$script = 'var orcidIconSvg = '. json_encode($this->getIcon()) .';';
 				$article = $templateMgr->getTemplateVars('article');
 				$authors = $article->getAuthors();
 				foreach ($authors as $author) {
