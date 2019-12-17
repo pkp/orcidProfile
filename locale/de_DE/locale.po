@@ -65,9 +65,6 @@ msgstr "Umfang des ORCID-API Zugriffs"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "E-Mail Einstellungen"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Sende E-Mails um ORCID Authorisierung von jedem/jeder Beiträger/in eines Artikels bei Veröffentlichung einer Ausgabe anzufragen"
-
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "ORCID Anfragen protokollieren"
 

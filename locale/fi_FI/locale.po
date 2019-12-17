@@ -18,7 +18,7 @@ msgid "plugins.generic.orcidProfile.description"
 msgstr "Helpottaa ORCID-tunnisteiden käyttöä OJS-järjestelmässä."
 
 msgid "plugins.generic.orcidProfile.instructions"
-msgstr "Voit esitäyttää lomakkeen ORCID-tilisi tiedoilla."
+msgstr "Voit esitäyttää lomakkeen ORCID-tilisi tiedoilla. Anna ORCID-tunniste tai siihen liitetty sähköpostiosoite ja paina "Lähetä"."
 
 msgid "plugins.generic.orcidProfile.noData"
 msgstr "Tietoja ei löytynyt."
@@ -33,7 +33,7 @@ msgid "plugins.generic.orcidProfile.manager.orcidProfileSettings"
 msgstr "ORCID-profiilin asetukset"
 
 msgid "plugins.generic.orcidProfile.manager.settings.description"
-msgstr "Määritä ORCID-rajapinta, jotta voit hakea tietoja ORCID-tileistä OJS-järjestelmän käyttäjäprofiiliin."
+msgstr "Määritä ORCID-rajapinta, jotta voit hakea tietoja ORCID-tileistä OJS-järjestelmän käyttäjäprofiiliin. Tietojen päivitys OJS-järjestelmästä ORCID-tilille vaatii maksullisen rajapinnan."
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
 msgstr "ORCID-rajapinta (ORCID API)"
@@ -66,4 +66,109 @@ msgid "plugins.generic.orcidProfile.author.submission.failure"
 msgstr "Käsikirjoitusta ei onnistuttu liittämään ORCID-tunnisteen kanssa. Ota yhteyttä lehden toimituskuntaan ja ilmoita nimesi, ORCID-tunnisteesi sekä käsikirjoituksesi otsikko."
 
 msgid "plugins.generic.orcidProfile.authFailure"
+msgstr "ORCID-tunnisteen vahvistuslinkkiä on jo käytetty tai se ei ole voimassa."
+
+msgid "plugins.generic.orcidProfile.manager.settings.title"
+msgstr "ORCID-rajapinnan asetukset"
+
+msgid "plugins.generic.orcidProfile.manager.settings.hidden"
+msgstr "piilotettu"
+
+msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
+msgstr "ORCID-rajapinta on määritetty ylläpitäjän toimesta alla olevien tietojen mukaisesti."
+
+msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
+msgstr "Sähköpostin asetukset"
+
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnAccept"
+msgstr "Lähetä kirjoittajille sähköposti, jossa pyydetään ORCID-tunnisteiden liittämistä julkaistuihin artikkeleihin, kun artikkeli hyväksytään julkaistavaksi."
+
+msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
+msgstr "ORCID-pyyntöjen loki"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
+msgstr "Valitse millä tarkkuudella lisäosan tekemät pyynnöt tallennetaan."
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
+msgstr "Virheet"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
+msgstr "Kaikki"
+
+msgid "plugins.generic.orcidProfile.author.accessDenied"
+msgstr "ORCID-pyyntö kiellettiin"
+
+msgid "plugins.generic.orcidProfile.author.accessTokenStored"
+msgstr "Pääsy ORCID-tietoihin laajuudella {$orcidAccessScope}, voimassa"
+
+msgid "plugins.generic.orcidProfile.author.requestAuthorization"
+msgstr "Lähetä sähköposti, jolla pyydät tekijää vahvistamaan ORCID-tunnisteensa"
+
+msgid "plugins.generic.orcidProfile.author.deleteORCID"
+msgstr "Poista ORCID ja käyttöoikeustunniste"
+
+msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
+msgstr "Alla lisätietoja autentikoitujen ORCID-tunnisteiden keräämiseen"
+
+msgid "plugins.generic.orcidProfile.author.unauthenticated"
+msgstr "ORCID-tunnistetta ei ole vahvistettu. Ole hyvä ja pyydä vahvistus tekijältä."
+
+msgid "plugins.generic.orcidProfile.verify.title"
+msgstr "ORCID-vahvistus"
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"
+msgstr "Käsikirjoitus on lisätty ORCID-tilillesi"
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"
+msgstr "Käsikirjoitusta ei voitu lisätä ORCID-tilillesi"
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"
+msgstr "Käsikirjoitus lisätään ORCID-tilillesi sen julkaisun yhteydessä."
+
+msgid "plugins.generic.orcidProfile.verify.success"
+msgstr "ORCID-tunnisteesi on vahvistettu ja liitetty käsikirjoitukseen."
+
+msgid "plugins.generic.orcidProfile.verify.failure"
+msgstr "ORCID-tunnistetta ei voitu vahvistaa. Linkki ei ole enää voimassa."
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
+msgstr "ORCID-tunniste on jo tallennettu tälle käsikirjoitukselle"
+
+msgid "plugins.generic.orcidProfile.verify.denied"
+msgstr "Olet kieltänyt pääsyn ORCDI-tilillesi"
+
+msgid "plugins.generic.orcidProfile.failure.contact"
 msgstr "OJS-järjestelmä ei saanut yhteyttä ORCID-palveluun. Ota yhteyttä lehden toimituskuntaan ja ilmoita nimesi, ORCID-tunnisteesi sekä käsikirjoituksesi otsikko."
+
+msgid "plugins.generic.orcidProfile.fieldset"
+msgstr "ORCID"
+
+msgid "plugins.generic.orcidProfile.connect"
+msgstr "Luo tai yhdistä ORCID-tunniste"
+
+msgid "plugins.generic.orcidProfile.authorise"
+msgstr "Vahvista ja yhdistä ORCID-tunnisteesi"
+
+msgid "plugins.generic.orcidProfile.about.title"
+msgstr "Mikä on ORCID?"
+
+msgid "plugins.generic.orcidProfile.about.orcidExplanation"
+msgstr "ORCID on itsenäinen ja voittoa tavoittelematon organisaatio, joka ylläpitää tutkijoiden tunnistamiseen tarkoitettuja ORCID-tunnisteita. Tunnisteen avulla voit ilmoittaa ja linkittää tekijyytesi esimerkiksi artikkeleihin ja aineistoihin. ORCID on integroitu moniin erilaisiin järjestelmiin, kuten rahoittajien hakujärjestelmiin ja julkaisujärjestelmiin. Lue lisää <a href=\"https://orcid.org\">orcid.org</a>."
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
+msgstr "Miten ja miksi keräämme ORCID-tunnisteita?"
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy"
+msgstr ""
+"Kun painat Vahvista-nappia ORCID-ikkunassa, pyydämme sinua antamaan ORCID-tunnisteesi joko <a href=\"https://support.orcid.org/hc/en-us/articles/360006897454\">rekisteröimällä uuden ORCID-tunnisteen</a> tai, mikäli sinulla jo tunniste, <a href=\"https://support.orcid.org/hc/en-us/categories/360000661673\">kirjautumalla ORCID-tilillesi</a> ja antamalla meille luvan hakea ORCID-tunnisteesi. Teemme tämän varmistaaksemme, että tallennettu ORCID-tunniste on vahvistettu ja oikean henkilön tunniste. Lue lisää <a href=\"https://orcid.org/blog/2017/02/20/whats-so-special-about-signing\">miksi tämä on niin tärkeää.</a>"
+
+msgid "plugins.generic.orcidProfile.about.display.title"
+msgstr "Missä ORCID-tunnisteet näkyvät?"
+
+msgid "plugins.generic.orcidProfile.about.display"
+msgstr ""
+"Vahvistettujen ORCID-tunnisteiden yhteydessä näkyy ORCID-logo <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\">tekijän nimen vieressä ja julkisessa käyttäjäprofiilissa.
+Lue lisää siitä <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">miten ORCID-tunniste tulisi esittää.</a>"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
+msgstr "Profiilin pääsyoikeuden laajuus"

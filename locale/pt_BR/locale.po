@@ -65,9 +65,6 @@ msgstr "Escopo de Acesso ao Perfil"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "Configurações de E-mail"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Enviar e-mail para solicitar autorização do ORCID dos autores do artigo na publicação de um novo fascículo"
-
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "Log de pedidos ORCID"
 

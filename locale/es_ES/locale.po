@@ -86,9 +86,6 @@ msgstr "Alcance de acceso del perfil"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "Opciones de e-mail"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Enviar e-mail para solicitar a ORCID autorización por parte de los autores de artículos al publicarse un nuevo número"
-
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "Registro de solicitudes de ORCID"
 

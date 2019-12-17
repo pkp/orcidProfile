@@ -31,7 +31,6 @@
 	<message key="plugins.generic.orcidProfile.manager.settings.orcidClientSecret">Clé secrète du client</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.orcidScope">Portée d'accès du profil</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.mailSectionTitle">Paramètres des courriels</message>
-	<message key="plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication">Envoyer un courriel pour demander l'autorisation des auteurs-es d'articles à ORCID lors de la publication d'un nouveau numéro</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.logSectionTitle">Journal des enregistrements ORCID</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.help">Choisir le niveau d'enregistrement au journal (log) faite par le plugiciel</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.error">Erreurs</message>

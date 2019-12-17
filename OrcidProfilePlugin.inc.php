@@ -69,9 +69,9 @@ class OrcidProfilePlugin extends GenericPlugin {
 			// Send submission meta data upload to ORCID profiles on publication of an issue
 			HookRegistry::register('IssueGridHandler::publishIssue', array($this, 'handlePublishIssue'));
 			HookRegistry::register('issueentrypublicationmetadataform::execute', array($this, 'handleScheduleForPublication'));
-			// Send emails to authors without authorised ORCID access on promoting a submission to production
+			// Send emails to authors without authorised ORCID access on promoting a submission to copy editing
 			$contextId = ($mainContextId === null) ? $this->getCurrentContextId() : $mainContextId;
-			if ($this->getSetting($contextId, 'sendMailToAuthorsOnPublication')) {
+			if ($this->getSetting($contextId, 'sendMailToAuthorsOnAccept')) {
 				HookRegistry::register('EditorAction::recordDecision', array($this, 'handleEditorAction'));
 			}
 		}
@@ -706,7 +706,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 	}
 
 	/**
-	* handleEditorAction handles promoting a submission to production.
+	* handleEditorAction handles promoting a submission to copyediting.
 	*
 	* @param $hookName string Name the hook was registered with
 	* @param $args array Hook arguments, &$submission, &$editorDecision, &$result, &$recommendation.
@@ -714,13 +714,16 @@ class OrcidProfilePlugin extends GenericPlugin {
 	* @see EditorAction::recordDecision() The function calling the hook.
 	*/
 	public function handleEditorAction($hookName, $args) {
-		$submission =& $args[0];
-		$authorDao = DAORegistry::getDAO('AuthorDAO');
-		$authors = $authorDao->getBySubmissionId($submission->getId());
-		foreach ($authors as $author) {
-			$orcidAccessExpiresOn = Carbon\Carbon::parse($author->getData('orcidAccessExpiresOn'));
-			if ( $author->getData('orcidAccessToken') == null || $orcidAccessExpiresOn->isPast()) {
-				$this->sendAuthorMail($author, true);
+		$decision = $args[1];
+		if ($decision['decision'] == SUBMISSION_EDITOR_DECISION_ACCEPT) {
+			$submission =& $args[0];
+			$authorDao = DAORegistry::getDAO('AuthorDAO');
+			$authors = $authorDao->getBySubmissionId($submission->getId());
+			foreach ($authors as $author) {
+				$orcidAccessExpiresOn = Carbon\Carbon::parse($author->getData('orcidAccessExpiresOn'));
+				if ( $author->getData('orcidAccessToken') == null || $orcidAccessExpiresOn->isPast()) {
+					$this->sendAuthorMail($author, true);
+				}
 			}
 		}
 	}

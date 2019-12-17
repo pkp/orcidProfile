@@ -65,9 +65,6 @@ msgstr "Σκοπός πρόσβασης στο προφίλ"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "Ρυθμίσεις ηλεκτρονικού ταχυδρομείου"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Αποστολή αιτήματος πρόσβασης στο ORCID των συγγραφέων, κατά τη δημοσίευση νέου τεύχους"
-
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "Αρχείο αιτημάτων ORCID"
 

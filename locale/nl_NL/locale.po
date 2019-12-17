@@ -65,9 +65,6 @@ msgstr "Bereik van de toegang tot uw profiel"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "E-mail instellingen"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Verstuur een e-mail aan de auteurs om ORCID-authorisatie aan te vragen bij de publicatie van een nieuw nummer."
-
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "Logboek van ORCID aanvragen"
 

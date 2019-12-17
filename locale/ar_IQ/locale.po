@@ -65,9 +65,6 @@ msgstr "مدى صلاحيات الحساب"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "إعدادات البريد الالكتروني"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "إبعث رسالة للمطالبة بتفويض من مؤلفي العمل في ORCID من أجل نشر عدد جديد"
-
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "سجل وقوعات مطالبات ORCID"
 

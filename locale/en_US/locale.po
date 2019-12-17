@@ -65,8 +65,8 @@ msgstr "Profile Access Scope"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "E-Mail Settings"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Send e-mail to request ORCID authorization from article authors on publication of a new issue"
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnAccept"
+msgstr "Send e-mail to request ORCID authorization from authors when an article is accepted ie. sent to copy editing"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "ORCID request log"

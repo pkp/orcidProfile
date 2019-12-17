@@ -74,9 +74,6 @@ msgstr "Področje dostopnosti profila"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "Email nastavitve"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Pošlji email z zahtevo za ORCID avtorizacijo avtorjev članka ob izdaji nove številke."
-
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "ORCID dnevnik zahtevkov"
 
