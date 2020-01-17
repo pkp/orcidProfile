@@ -23,7 +23,7 @@ class OrcidProfileSettingsForm extends Form {
 		'orcidProfileAPIPath' => 'string',
 		'orcidClientId' => 'string',
 		'orcidClientSecret' => 'string',		
-		'sendMailToAuthorsOnAccept' => 'bool',
+		'sendMailToAuthorsOnPublication' => 'bool',
 		'logLevel' => 'string');
 	/** @var $contextId int */
 	var $contextId;

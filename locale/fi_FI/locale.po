@@ -80,7 +80,7 @@ msgstr "ORCID-rajapinta on määritetty ylläpitäjän toimesta alla olevien tie
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "Sähköpostin asetukset"
 
-msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnAccept"
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
 msgstr "Lähetä kirjoittajille sähköposti, jossa pyydetään ORCID-tunnisteiden liittämistä julkaistuihin artikkeleihin, kun artikkeli hyväksytään julkaistavaksi."
 
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
