@@ -1,10 +1,12 @@
 {**
- * plugins/generic/orcidProfile/settingsForm.tpl
+ * plugins/generic/orcidProfile/templates/settingsForm.tpl
  *
- * Copyright (c) 2015-2016 University of Pittsburgh
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2015-2017 University of Pittsburgh
+ * Copyright (c) 2014-2017 Simon Fraser University Library
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * Contributed by 4Science (http://www.4science.it).
  *
  * ORCID Profile plugin settings
  *
@@ -33,6 +35,21 @@
 	<tr valign="top">
 		<td class="label">{fieldLabel name="orcidClientSecret" required="true" key="plugins.generic.orcidProfile.manager.settings.orcidClientSecret"}</td>
 		<td class="label"><input type="text" name="orcidClientSecret" id="orcidClientSecret" value="{$orcidClientSecret|escape}" size="40" class="textField" /></td>
+	</tr>
+</table>
+
+<br>
+
+<div id="description">{translate key="plugins.generic.orcidProfile.manager.settings.pagePerItemDescription"}</div>
+
+<div class="separator"></div>
+
+<table width="100%" class="data">
+	<tr valign="top">
+		<td width="20%" class="label">{fieldLabel name="itemsPerPage" required="true" key="plugins.generic.orcidProfile.manager.settings.pagePerItem"}</td>
+		<td width="80%" class="value">
+			<select id="itemsPerPage" name="itemsPerPage" class="selectMenu">{html_options options=$itemsPerPageList selected=$itemsPerPage}</select>
+		</td>
 	</tr>
 </table>
 

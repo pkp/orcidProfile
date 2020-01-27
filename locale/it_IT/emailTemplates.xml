@@ -2,27 +2,29 @@
 <!DOCTYPE email_texts SYSTEM "../../../../../lib/pkp/dtd/emailTemplateData.dtd">
 
 <!--
-  * @file plugins/generic/orcidProfile/locale/en_US/emailTemplates.xml
+  * @file plugins/generic/orcidProfile/locale/it_IT/emailTemplates.xml
   *
   * Copyright (c) 2013-2017 Simon Fraser University Library
   * Copyright (c) 2003-2017 John Willinsky
   * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
   *
+  * Contributed by 4Science (http://www.4science.it).
+  *
   * Localized email templates XML file.
   -->
 
-<email_texts locale="en_US">
+<email_texts locale="it_IT">
 	<email_text key="ORCID_COLLECT_AUTHOR_ID">
 		<subject>Submission ORCID</subject>
-		<body>Dear {$authorName},
+		<body>Caro {$authorName},
 
-You have been listed as a co-author on the manuscript submission "{$articleTitle}" to {$journalName}. 
+Sei stato elencato come co-autore nella submission della lavorazione "{$articleTitle}" a {$journalName}. 
 
-To confirm you authorship please add your ORCID id to this submission by visiting the link provided below.
+Per confermare tale attribuzione per favore aggiungi il tuo ORCID id alla submission visitando il link seguente.
 
 {$authorOrcidUrl}
 
-If you have any questions, please contact me.
+Per qualsiasi domanda o dubbio, ti prego di contattarmi.
 
 {$editorialContactSignature}
 

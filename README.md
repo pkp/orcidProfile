@@ -7,15 +7,18 @@
 Plugin for PKP user profiles (tested with OJS 2.x)
 
 Copyright © 2015-2016 University of Pittsburgh
-<br />Copyright © 2014-2016 Simon Fraser University Library
-<br />Copyright © 2003-2016 John Willinsky
+<br />Copyright © 2014-2017 Simon Fraser University Library
+<br />Copyright © 2003-2017 John Willinsky
 
 Licensed under GPL 2 or better.
+
+Contributed by 4Science (http://www.4science.it).
 
 ## Features:
 
  * Hooks into the User Profile, Registration, and Submission (step 3) forms
- * Requests ORCIDs of authors via email
+ * Searches for co-authors ORCIDs
+ * Requests ORCIDs of co-authors via email
 
 ## Install:
 
@@ -23,8 +26,8 @@ Licensed under GPL 2 or better.
  * Run `tools/upgrade.php upgrade` to allow the system to recognize the new plugin.
  * Enable this plugin within the administration interface.
  * Set up [an application with ORCID](https://orcid.org/developer-tools).
-  * The URI and description are to reassure users.
-  * The redirect URI can be anything within your OJS/OMP installation.
-  * ORCID will give you a client ID and secret.
+ * The URI and description are to reassure users.
+ * The redirect URI can be anything within your OJS/OMP installation.
+ * ORCID will give you a client ID and secret.
  * Consider the settings within the administation interface.
-  * Enter the client and secret from the ORCID application setup.
+ * Enter the client and secret from the ORCID application setup.

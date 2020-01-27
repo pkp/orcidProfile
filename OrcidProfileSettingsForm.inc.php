@@ -1,12 +1,14 @@
 <?php
 
 /**
- * @file plugins/generic/googleAnalytics/OrcidProfileSettingsForm.inc.php
+ * @file plugins/generic/orcidProfile/OrcidProfileSettingsForm.inc.php
  *
- * Copyright (c) 2015-2016 University of Pittsburgh
- * Copyright (c) 2014-2016 Simon Fraser University Library
- * Copyright (c) 2003-2016 John Willinsky
+ * Copyright (c) 2015-2017 University of Pittsburgh
+ * Copyright (c) 2014-2017 Simon Fraser University Library
+ * Copyright (c) 2003-2017 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * Contributed by 4Science.
  *
  * @class OrcidProfileSettingsForm
  * @ingroup plugins_generic_orcidProfile
@@ -50,6 +52,7 @@ class OrcidProfileSettingsForm extends Form {
 			'orcidProfileAPIPath' => $plugin->getSetting($journalId, 'orcidProfileAPIPath'),
 			'orcidClientId' => $plugin->getSetting($journalId, 'orcidClientId'),
 			'orcidClientSecret' => $plugin->getSetting($journalId, 'orcidClientSecret'),
+			'itemsPerPage' => $plugin->getSetting($journalId, 'itemsPerPage'),
 		);
 	}
 
@@ -60,6 +63,7 @@ class OrcidProfileSettingsForm extends Form {
 		$this->readUserVars(array('orcidProfileAPIPath'));
 		$this->readUserVars(array('orcidClientId'));
 		$this->readUserVars(array('orcidClientSecret'));
+		$this->readUserVars(array('itemsPerPage'));
 	}
 
 	/**
@@ -72,6 +76,7 @@ class OrcidProfileSettingsForm extends Form {
 		$plugin->updateSetting($journalId, 'orcidProfileAPIPath', trim($this->getData('orcidProfileAPIPath'), "\"\';"), 'string');
 		$plugin->updateSetting($journalId, 'orcidClientId', $this->getData('orcidClientId'), 'string');
 		$plugin->updateSetting($journalId, 'orcidClientSecret', $this->getData('orcidClientSecret'), 'string');
+		$plugin->updateSetting($journalId, 'itemsPerPage', $this->getData('itemsPerPage'), 'string');
 	}
 }
 
