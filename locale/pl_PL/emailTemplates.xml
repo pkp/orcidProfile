@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE email_texts SYSTEM "../../../../../lib/pkp/dtd/emailTemplateData.dtd">
+
+<!--
+  * @file plugins/generic/orcidProfile/locale/pl_PL/emailTemplates.xml
+  *
+  * Copyright (c) 2015-2019 University of Pittsburgh
+  * Copyright (c) 2013-2019 Simon Fraser University
+  * Copyright (c) 2003-2019 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * Localized email templates XML file.
+  -->
+
+<email_texts locale="pl_PL">
+	<email_text key="ORCID_COLLECT_AUTHOR_ID">
+		<subject>Autoryzacja ORCID w tekście naukowym</subject>
+		<body><![CDATA[Drogi/a {$authorName},<br/>
+<br/>
+W czasopiśmie {$contextName} zostałeś/aś oznaczona jako autor/współautor. Aby potwierdzić ten fakt i połączyć tekst z Twoim kontem ORCID, proszę odwiedzić link zamieszczony poniżej.
+<br/>
+<a href="{$authorOrcidUrl}"><img id="orcid-id-logo" src="https://orcid.org/sites/default/files/images/orcid_16x16.png" width='16' height='16' alt="ORCID iD icon" style="display: block; margin: 0 .5em 0 0; padding: 0; float: left;"/>Zarejestruj się lub połącz tekst ze swoim kontem ORCID</a><br/>
+<br/>
+<br>
+<a href="{$orcidAboutUrl}">Więcej o ORCID w {$contextName}</a><br/>
+<br/>
+W razie dodatkowych pytań proszę o kontakt:<br/>
+<br/>
+{$principalContactSignature}<br/>
+]]></body>
+		<description>Mail jest używany do poinformowania autorów o konieczności autoryzacji ORCID.</description>
+	</email_text>
+	<email_text key="ORCID_REQUEST_AUTHOR_AUTHORIZATION">
+		<subject>Prośba do autora o dostęp do profilu ORCID</subject>
+		<body><![CDATA[Dear {$authorName},<br>
+<br>
+Zostałeś/aś oznaczona/y jako autor/współautor tekstu naukowego "{$articleTitle}" w {$contextName}.
+<br>
+<br>
+Jako redakcja czasopsima zwracamy się w związku z tym prośbą o dopisanie Twojego ORCID ID do tego artykułu i jednocześnie chcemy dodać go do Twojej listy opublikowanych prac w ORCID.<br>
+Zaloguj się proszę w czasopiśmie używając swoich danych ORCID co sprawi, że autoryzacja pracy bedzie możliwa. Odwiedź strone projektu ORCID aby zapoznać się ze szczegółową instrukcją na ten temat.<br>
+<a href="{$authorOrcidUrl}"><img id="orcid-id-logo" src="https://orcid.org/sites/default/files/images/orcid_16x16.png" width='16' height='16' alt="ORCID iD icon" style="display: block; margin: 0 .5em 0 0; padding: 0; float: left;"/>Zarejestruj sie w ORCID lub autoryzuj swój tekst</a><br/>
+<br>
+<br>
+<a href="{$orcidAboutUrl}">Więcej o ORCID w {$contextName}</a><br/>
+<br>
+W razie dalszych pytań prosimy o kontakt.<br>
+<br>
+{$principalContactSignature}<br>
+]]></body>
+		<description>Mail jest wykorzystywany w przypadku prośby o dostęp czasopisma do profilu ORCID autora.</description>
+	</email_text>
+</email_texts>

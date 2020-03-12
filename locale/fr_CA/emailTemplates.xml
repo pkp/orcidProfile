@@ -13,17 +13,42 @@
 <email_texts locale="fr_CA">
 	<email_text key="ORCID_COLLECT_AUTHOR_ID">
 		<subject>Soumission ORCID</subject>
-		<body><![CDATA[{$authorName},
+		<body><![CDATA[{$authorName},<br/>
+<br/>
+Vous avez été inscrit ou inscrite en tant qu'auteur ou auteure pour un manuscrit soumis à {$contextName}.<br/>
+Pour confirmer votre statut d'auteur ou d'auteure, veuillez ajouter votre identifiant ORCID à cette soumission en cliquant sur le lien ci-dessous.<br/>
+<br/>
+<a href="{$authorOrcidUrl}"><img id="orcid-id-logo" src="https://orcid.org/sites/default/files/images/orcid_16x16.png" width='16' height='16' alt="icône identifiant ORCID" style="display: block; margin: 0 .5em 0 0; padding: 0; float: left;"/>Se connecter avec votre identifiant ORCID ou s'inscrire</a><br/>
+<br/>
+<br/>
+<a href="{$orcidAboutUrl}">Plus de renseignements sur votre identifiant ORCID dans {$contextName}</a><br/>
+<br/>
+Si vous avez des questions, veuillez communiquer avec nous.<br/>
+<br/>
+{$principalContactSignature}<br/>
+]]></body>
+<description>Ce modèle de courriel est utilisé pour récupérer les identifiants ORCID des auteurs-es.</description>
+	</email_text>
 
-Vous avez été inscrit(e) en tant que co-auteur pour la soumission du manuscrit &quot;{$articleTitle}&quot; à {$journalName}.
-
-Pour confirmer votre identité, veuillez ajouter votre identifiant ORCID à cette soumission en cliquant sur le lien ci-dessous.
-
-{$authorOrcidUrl}
-
-Si vous avez des questions, s'il vous plaît communiquez avec nous.
-
-{$editorialContactSignature}]]></body>
-		<description>Ce modèle de courriel est utilisé pour récupérer les identifiants ORCID des co-auteurs.</description>
+	<email_text key="ORCID_REQUEST_AUTHOR_AUTHORIZATION">
+		<subject>Demande d'accès au dossier ORCID</subject>
+		<body><![CDATA[{$authorName},<br/>
+<br/>
+Vous avez été inscrit ou inscrite en tant qu'auteur ou auteure pour le manuscrit « {$articleTitle} » soumis à {$contextName}.
+<br/>
+<br/>
+Veuillez nous autoriser à ajouter votre identifiant ORCID à cette soumission et à ajouter également la soumission à votre dossier ORCID suite à sa publication.
+<br/>
+Suivre le lien vers le site officiel ORCID, vous connecter avec votre profil et autoriser l'accès en suivant les instructions.<br/>
+<a href="{$authorOrcidUrl}"><img id="orcid-id-logo" src="https://orcid.org/sites/default/files/images/orcid_16x16.png" width='16' height='16' alt="icône identifiant ORCID" style="display: block; margin: 0 .5em 0 0; padding: 0; float: left;"/>Se connecter avec votre identifiant ORCID ou s'inscrire</a><br/>
+<br/>
+<br/>
+<a href="{$orcidAboutUrl}">Plus de renseignements sur votre identifiant ORCID dans {$contextName}</a><br/>
+<br/>
+Si vous avez des questions, veuillez communiquer avec nous.<br/>
+<br/>
+{$principalContactSignature}<br/>
+]]></body>
+		<description>Ce modèle de courriel est utilisé pour demander aux auteurs-es l'accès à leur dossier ORCID.</description>
 	</email_text>
 </email_texts>
