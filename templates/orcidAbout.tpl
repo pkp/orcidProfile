@@ -12,20 +12,29 @@
 
 <div class="page page_message">
 	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="plugins.generic.orcidProfile.about.title"}
-	<h2>
-		{translate key="plugins.generic.orcidProfile.about.title"}
-	</h2>
 	<div class="description">
 		{translate key="plugins.generic.orcidProfile.about.orcidExplanation"}
 	</div>
 	<h3>{translate key="plugins.generic.orcidProfile.about.howAndWhy.title"}</h3>
 	<div class="description">
-		{translate key="plugins.generic.orcidProfile.about.howAndWhy"}
+		{$contextName}
+		{if $memberApiEnabled}
+			{translate key="plugins.generic.orcidProfile.about.purpose.memberapi"}
+		{else}
+			{translate key="plugins.generic.orcidProfile.about.purpose.publicapi"}
+		{/if}
+		{translate key="plugins.generic.orcidProfile.about.authorize"}
 	</div>
 	<h3>{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
 	<div class="description">
 		{translate key="plugins.generic.orcidProfile.about.display"}
 	</div>
+	{if $memberApiEnabled}
+	<h3>{translate key="plugins.generic.orcidProfile.about.connect.title"}</h3>
+	<div class="description">
+		{translate key="plugins.generic.orcidProfile.about.connect"}
+	</div>
+	{/if}
 </div>
 
 {include file="frontend/components/footer.tpl"}

@@ -33,7 +33,7 @@
 	<message key="plugins.generic.orcidProfile.manager.settings.orcidScope">Umfang des ORCID-API Zugriffs</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.mailSectionTitle">E-Mail Einstellungen</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication">Sende E-Mails um ORCID Authorisierung von jedem/jeder Beiträger/in eines Artikels bei Veröffentlichung einer Ausgabe anzufragen</message>
-	<message key="plugins.generic.orcidProfile.manager.settings.logSectionTitle">ORCID Anfragen protokollieren</message>	
+	<message key="plugins.generic.orcidProfile.manager.settings.logSectionTitle">ORCID Anfragen protokollieren</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.help">Wählen Sie die Art der Nachrichten die protokolliert werden sollen</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.error">Fehler</message>
 	<message key="plugins.generic.orcidProfile.manager.settings.logLevel.all">Alle</message>
@@ -44,25 +44,33 @@
 	<message key="plugins.generic.orcidProfile.author.orcidEmptyNotice">Siehe unten zur Authentifizierung der ORCID iD</message>
 	<message key="plugins.generic.orcidProfile.author.unauthenticated">ORCID iD nicht authentifiziert! Bitte Authorisierung anfragen.</message>
 	<message key="plugins.generic.orcidProfile.verify.title">ORCID Authorisierung</message>
-	<message key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success">Die Einreichung wurde zu Ihrem ORCID-Datensatz hinzugefügt.</message>	
+	<message key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success">Die Einreichung wurde zu Ihrem ORCID-Datensatz hinzugefügt.</message>
 	<message key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure">Die Einreichung konnte nicht zu ihrem ORCID-Datensatz hinzugefügt werden.</message>
 	<message key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished">Die Einreichung wird bei Veröffentlichung zu ihrem ORCID-Datensatz hinzugefügt werden.</message>
 	<message key="plugins.generic.orcidProfile.verify.success">Ihre ORCID-ID wurde verifiziert und die Einreichung erfolgreich mit Ihrer ORCID-ID verknüpft.</message>
-	<message key="plugins.generic.orcidProfile.verify.failure">Ihre ORCID-ID konnte nicht verifiziert werden oder der Link ist nicht mehr gültig.</message>	
-	<message key="plugins.generic.orcidProfile.verify.denied">Sie haben den Zugriff auf Ihren ORCID-Datensatz abgelehnt.</message>	
+	<message key="plugins.generic.orcidProfile.verify.failure">Ihre ORCID-ID konnte nicht verifiziert werden oder der Link ist nicht mehr gültig.</message>
+	<message key="plugins.generic.orcidProfile.verify.denied">Sie haben den Zugriff auf Ihren ORCID-Datensatz abgelehnt.</message>
 	<message key="plugins.generic.orcidProfile.authFailure">OJS konnte nicht mit ORCID kommunizieren.</message>
 
-	<message key="plugins.generic.orcidProfile.failure.contact">Bitte kontaktieren Sie den/die Zeitschriftenverwalter/in und geben Sie Ihren Namen, ORCID-iD und Details zu der Einreichung an.</message>	
+	<message key="plugins.generic.orcidProfile.failure.contact">Bitte kontaktieren Sie den/die Zeitschriftenverwalter/in und geben Sie Ihren Namen, ORCID-iD und Details zu der Einreichung an.</message>
 	<message key="plugins.generic.orcidProfile.fieldset">ORCID</message>
 	<message key="plugins.generic.orcidProfile.connect">ORCID iD anlegen und verknüpfen</message>
 	<message key="plugins.generic.orcidProfile.authorise">ORCID iD authorisieren und verknüpfen</message>
-	<message key="plugins.generic.orcidProfile.about.title">Was ist ORCID?</message>
-	<message key="plugins.generic.orcidProfile.about.orcidExplanation">Dies ist eine kurze orcid beschreibung</message>
+	<message key="plugins.generic.orcidProfile.about.title">Über ORCID</message>
+	<message key="plugins.generic.orcidProfile.about.orcidExplanation"><![CDATA[ORCID ist eine unabhängige gemeinnützige Organisation, die eine dauerhafte ID bereitstellt – die ORCID-iD –, mit der Sie von anderen Forschenden unterschieden werden können, und einen Mechanismus, um um Forschungsergebnisse und -aktivitäten mit Ihrer iD zu verknüpfen.<br>
+ORCID ist in viele Systeme integriert, die von Verlagen, Forschungsförderern, Institutionen und anderen  forschungsbezogenen Diensten genutzt werden.<br>
+Erfahren Sie mehr unter <a href="https://www.orcid-de.org">www.orcid-de.org</a>.]]></message>
 	<message key="plugins.generic.orcidProfile.about.howAndWhy.title">Wie und warum werden ORCID iDs gesammelt?</message>
-	<message key="plugins.generic.orcidProfile.about.howAndWhy"><![CDATA[This journal is collecting your ORCID iD so we can [add purpose and distinguish between Member API and Public API].
-	When you click the “Authorize” button in the ORCID popup, we will ask you to share your iD using an authenticated process: either by <a href="https://support.orcid.org/hc/en-us/articles/360006897454">registering for an ORCID iD</a> or, if you already have one, <a href="https://support.orcid.org/hc/en-us/categories/360000661673">to sign into your ORCID account</a>, then granting us permission to get your ORCID iD. We do this to ensure that you are correctly identified and securely connecting your ORCID iD.<br>
-	Learn more in <a href="https://orcid.org/blog/2017/02/20/whats-so-special-about-signing">What’s so special about signing in.</a>]]></message>
+	<message key="plugins.generic.orcidProfile.about.purpose.publicapi">sammelt Ihre ORCID iD um Ihr Benutzerkonto und Ihre Veröffentlichungen eindeutig zu identfizieren.</message>
+	<message key="plugins.generic.orcidProfile.about.purpose.memberapi">sammelt Ihre ORCID iD um Ihr Benutzerkonto und Ihre Veröffentlichungen eindeutig zu identfizieren, sowie Ihren ORCID-Datensatz mit Informationen über Veröffentlichungen bei unserer Zeitschrift zu aktualisieren.</message>
+	<message key="plugins.generic.orcidProfile.about.authorize"><![CDATA[Wenn Sie die Schaltfläche „Autorisieren“ klicken, werden wir Sie bitten, Ihre iD nach einem Anmeldevorgang mit uns zu teilen: entweder durch die <a href="https://support.orcid.org/hc/en-us/articles/360006897454">Registrierung für eine ORCID-iD (Inhalt in Englisch)</a> oder, falls Sie bereits eine haben, durch die <a href="https://support.orcid.org/hc/en-us/categories/360000661673">Anmeldung in Ihrem ORCID-Konto (Inhalt in Englisch)</a>, und uns dann die Erlaubnis zu erteilen, Ihre ORCID-iD zu erhalten.
+Wir tun dies, um sicherzustellen, dass Sie korrekt identifiziert und sicher mit Ihrer ORCID-iD verknüpft werden.<br>
+Erfahren Sie mehr darüber, in <a href="https://www.orcid-de.org/was-ist-das-besondere-bei-der-authentifizierung/">„Was das Besondere an der Anmeldung ist“</a>.]]></message>
 	<message key="plugins.generic.orcidProfile.about.display.title">Wo werden ORCID iDs angezeigt?</message>
-	<message key="plugins.generic.orcidProfile.about.display"><![CDATA[To acknowledge that you have used your iD and that it has been authenticated, we display the ORCID iD icon <img src="https://orcid.org/sites/default/files/images/orcid_16x16(1).gif" alt="iD icon" width="16" height="16" border="0"> alongside your name on the article page of your submission and on your public user profile.<br>
-	Learn more in <a href="https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed">How should an ORCID iD be displayed.</a>]]></message>
+	<message key="plugins.generic.orcidProfile.about.display"><![CDATA[Um zu bestätigen, dass Sie Ihre iD benutzt haben und sie authentifiziert wurde, zeigen wir das ORCID-iD-Icon <img src="https://orcid.org/sites/default/files/images/orcid_16x16(1).gif" alt="iD icon" width="16" height="16" border="0"> neben Ihrem Namen in den Ihnen zugeordneten Veröffentlichungen und auf der Webseite an.<br>
+	Mehr dazu erfahren Sie unter <a href="https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed">„Wie sollte eine ORCID-iD angezeigt werden“ (Inhalt nur in Englisch)</a>.]]></message>
+	<message key="plugins.generic.orcidProfile.about.connect.title">Wie hilft es mir die ORCID iD zu teilen?</message>
+	<message key="plugins.generic.orcidProfile.about.connect"><![CDATA[Indem Sie Ihre iD mit unserer Zeitschrift teilen und uns die Erlaubnis erteilen, Ihren ORCID-Datensatz zu lesen und zu aktualisieren, ermöglichen Sie es uns, Ihnen zu helfen, Ihren Datensatz mit vertrauenswürdigen Informationen zu Ihren Veröffentlich bei unserer Zeitschrift auf dem neuesten Stand zu halten.<br>
+Erfahren Sie mehr unter <a href="https://orcid.org/blog/2018/07/27/six-ways-make-your-orcid-id-work-you">„Sechs Möglichkeiten, Ihre ORCID-iD einzusetzen!“ (Inhalt nur in Englisch)</a>.
+]]></message>
 </locale>

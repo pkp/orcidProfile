@@ -12,9 +12,6 @@
 
 <div class="page page_message">
 	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="plugins.generic.orcidProfile.verify.title"}
-	<h2>
-		{translate key="plugins.generic.orcidProfile.verify.title"}
-	</h2>
 	<div class="description">
 	{if $verifySuccess}
 		<p>

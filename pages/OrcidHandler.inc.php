@@ -85,8 +85,17 @@ class OrcidHandler extends Handler {
 			error_log('ORCID CURL error: ' . curl_error($curl) . ' (' . __FILE__ . ' line ' . __LINE__ . ', URL ' . $url . ')');
 			$orcidUri = $orcid = $accessToken = null;
 		} else {
+			// TODO check for ORCID errors
 			$response = json_decode($result, true);
 			$orcid = $response['orcid'];
+			if (!$orcid) {
+				// error during authorization
+				echo ('<html><head><title>ORCID Error</title><body>
+					<h1>ORCID Authorization Error</h1>
+					<p>Unable to retrieve ORCID</p></body></html>');
+				curl_close($curl);
+				return;
+			}
 			$accessToken = $response['access_token'];
 			$orcidUri = ($plugin->getSetting($contextId, "isSandBox") == true ? ORCID_URL_SANDBOX : ORCID_URL) . $orcid;
 		}
@@ -148,7 +157,8 @@ class OrcidHandler extends Handler {
 			case 'profile':
 				$user = $request->getUser();
 				// Store the access token and other data for the user
-				$this->_setOrcidData($user, $orcidUri, $response);
+				$orcidSandbox = $plugin->usingSandbox();
+				$this->_setOrcidData($user, $orcidUri, $response, $orcidSandbox);
 				$userDao = DAORegistry::getDAO('UserDAO');
 				$userDao->updateLocaleFields($user);
 
@@ -271,6 +281,7 @@ class OrcidHandler extends Handler {
 			$plugin->logError("Response status: $httpstatus . Invalid ORCID response: $result");
 			$templateMgr->assign('authFailure', true);
 			$templateMgr->display($templatePath);
+			return;
 		}
 		// Set the orcid id using the full https uri
 		$orcidUri = ($plugin->getSetting($contextId, "isSandBox") == true ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
@@ -280,18 +291,15 @@ class OrcidHandler extends Handler {
 			$templateMgr->display($templatePath);
 			return;
 		}
-		$authorToVerify->setOrcid($orcidUri);
-		if ($plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
-			$plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX) {
-			// Set a flag to mark that the stored orcid id and access token came form the sandbox api
-			$authorToVerify->setData('orcidSandbox', true);
+		// remove the email token
+		$authorToVerify->setData('orcidEmailToken', null);
+		$orcidSandbox = $plugin->usingSandbox();
+		if ($orcidSandbox) {
 			$templateMgr->assign('orcid', 'https://sandbox.orcid.org/' . $response['orcid']);
 		} else {
 			$templateMgr->assign('orcid', $orcidUri);
 		}
-		// remove the email token
-		$authorToVerify->setData('orcidEmailToken', null);
-		$this->_setOrcidData($authorToVerify, $orcidUri, $response);
+		$this->_setOrcidData($authorToVerify, $orcidUri, $response, $orcidSandbox);
 		$authorDao->updateObject($authorToVerify);
 		if( $plugin->isMemberApiEnabled($contextId) ) {
 			if ( $plugin->isSubmissionPublished($submissionId) ) {
@@ -312,7 +320,7 @@ class OrcidHandler extends Handler {
 		$templateMgr->display($templatePath);
 	}
 
-	function _setOrcidData($userOrAuthor, $orcidUri, $orcidResponse) {
+	function _setOrcidData($userOrAuthor, $orcidUri, $orcidResponse, $orcidSandbox) {
 		// Save the access token
 		$orcidAccessExpiresOn = Carbon\Carbon::now();
 		// expires_in field from the response contains the lifetime in seconds of the token
@@ -321,6 +329,7 @@ class OrcidHandler extends Handler {
 		$userOrAuthor->setOrcid($orcidUri);
 		// remove the access denied marker, because now the access was granted
 		$userOrAuthor->setData('orcidAccessDenied', null);
+		$userOrAuthor->setData('orcidSandbox', $orcidSandbox);
 		$userOrAuthor->setData('orcidAccessToken', $orcidResponse['access_token']);
 		$userOrAuthor->setData('orcidAccessScope', $orcidResponse['scope']);
 		$userOrAuthor->setData('orcidRefreshToken', $orcidResponse['refresh_token']);
@@ -333,7 +342,10 @@ class OrcidHandler extends Handler {
 
 	function about($args, $request) {
 		$templateMgr = TemplateManager::getManager($request);
+		$context = $request->getContext();
 		$plugin = PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
+		$templateMgr->assign('contextName', $context->getLocalizedName());
+		$templateMgr->assign('memberApiEnabled', $plugin->isMemberApiEnabled($context->getId()));
 		$templateMgr->assign('orcidIcon', $plugin->getIcon());
 		$templateMgr->display($plugin->getTemplateResource('orcidAbout.tpl'));
 	}
