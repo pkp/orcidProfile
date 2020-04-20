@@ -2,14 +2,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
+"PO-Revision-Date: 2020-04-21 14:37+0000\n"
+"Last-Translator: Fylypovych Georgii <red.ukr@gmail.com>\n"
+"Language-Team: Ukrainian <http://translate.pkp.sfu.ca/projects/"
+"orcid-profile-plugin/orcid-profile-plugin/uk/>\n"
+"Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2019-11-19T11:05:17+00:00\n"
-"Language: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.9.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "Модуль \"Профіль ORCID\""
@@ -70,3 +74,36 @@ msgstr "ORCID"
 
 msgid "plugins.generic.orcidProfile.connect"
 msgstr "Створити або Підключитися до вашого ORCID iD"
+
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
+msgstr ""
+"Надіслати електронний лист, для запиту ORCID авторізації від авторів, коли "
+"стаття прийнята, наприклад, відправлена на літературне редагування"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
+msgstr "Помилки"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
+msgstr "Журнал запитів ORCID"
+
+msgid "plugins.generic.orcidProfile.author.accessDenied"
+msgstr "Доступ за ORCID було відхилено о"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
+msgstr "Всі"
+
+msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
+msgstr "Налаштування електронної пошти"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
+msgstr "Доступ до профілю"
+
+msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
+msgstr ""
+"ORCID API був налаштований глобально хостом. Облікові дані було збережено."
+
+msgid "plugins.generic.orcidProfile.manager.settings.hidden"
+msgstr "приховано"
+
+msgid "plugins.generic.orcidProfile.manager.settings.title"
+msgstr "Налаштування ORCID API"
