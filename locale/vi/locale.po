@@ -1,2 +1,196 @@
 msgid ""
-msgstr "X-Generator: Weblate\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit"
+msgstr ""
+"PO-Revision-Date: 2020-04-27 23:07+0000\n"
+"Last-Translator: Tran Ngoc Trung <khuchatthienduong@gmail.com>\n"
+"Language-Team: Vietnamese <http://translate.pkp.sfu.ca/projects/"
+"orcid-profile-plugin/orcid-profile-plugin/vi/>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.9.1\n"
+
+msgid "plugins.generic.orcidProfile.about.display"
+msgstr ""
+"Để xác nhận rằng bạn đã sử dụng iD của mình và nó đã được xác thực, chúng "
+"tôi hiển thị biểu tượng ORCID iD <img src=\"https://orcid.org/sites/default/"
+"files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" "
+"border=\"0\"> cùng với tên của bạn trên trang bài viết của bạn và trên hồ sơ "
+"người dùng công khai của bạn.<br>\n"
+"\t\tTìm hiểu thêm trong <a href=\"https://orcid.org/blog/2013/02/22/how-"
+"should-orcid-id-be-displayed\">Làm thế nào một ORCID iD sẽ được hiển thị.</a>"
+
+msgid "plugins.generic.orcidProfile.about.display.title"
+msgstr "Các ORCID iD được hiển thị ở đâu?"
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy"
+msgstr ""
+"Tạp chí này đang thu thập ORCID iD của bạn để chúng tôi có thể [thêm mục "
+"đích và phân biệt giữa API thành viên và API công khai].\n"
+"\tKhi bạn nhấp vào nút “Authorize” trong ORCID popup, chúng tôi sẽ yêu cầu "
+"bạn chia sẻ iD của bạn sử dụng một quá trình chứng thực: hoặc bằng cách <a "
+"href=\"https://support.orcid.org/hc/en-us/articles/360006897454\">đăng ký "
+"ORCID iD</a> hoặc, nếu bạn đã có một, <a href=\"https://support.orcid.org/hc/"
+"en-us/categories/360000661673\">để đăng nhập vào tài khoản ORCID của bạn</a>"
+", sau đó cấp cho chúng tôi quyền để nhận ORCID iD của bạn. Chúng tôi làm "
+"điều này để đảm bảo rằng bạn được xác định chính xác và kết nối an toàn "
+"ORCID iD của bạn.<br>\n"
+"\tTìm hiểu thêm trong <a href=\"https://orcid.org/blog/2017/02/20/whats-so-"
+"special-about-signing\">Điều gì đặc biệt về việc đăng nhập.</a>"
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
+msgstr "Làm thế nào và tại sao chúng tôi thu thập ORCID iDs?"
+
+msgid "plugins.generic.orcidProfile.about.orcidExplanation"
+msgstr ""
+"ORCID là một tổ chức phi lợi nhuận độc lập cung cấp số nhận dạng liên tục - "
+"ORCID iD - giúp phân biệt bạn với các nhà nghiên cứu khác và cơ chế liên kết "
+"các kết quả và hoạt động nghiên cứu của bạn với iD. ORCID được tích hợp vào "
+"nhiều hệ thống được sử dụng bởi các nhà xuất bản, nhà tài trợ, tổ chức và "
+"các dịch vụ liên quan đến nghiên cứu khác. Tìm hiểu thêm tại <a href=\""
+"https://orcid.org\">orcid.org</a>."
+
+msgid "plugins.generic.orcidProfile.about.title"
+msgstr "ORCID là gì?"
+
+msgid "plugins.generic.orcidProfile.authorise"
+msgstr "Cho phép và kết nối ORCID iD của bạn"
+
+msgid "plugins.generic.orcidProfile.connect"
+msgstr "Tạo hoặc kết nối ORCID iD của bạn"
+
+msgid "plugins.generic.orcidProfile.fieldset"
+msgstr "ORCID"
+
+msgid "plugins.generic.orcidProfile.failure.contact"
+msgstr ""
+"Vui lòng liên hệ với người quản lý tạp chí với tên của bạn, ORCID iD và "
+"thông tin chi tiết về bài đăng của bạn."
+
+msgid "plugins.generic.orcidProfile.authFailure"
+msgstr "Liên kết ủy quyền ORCID đã được sử dụng hoặc không hợp lệ."
+
+msgid "plugins.generic.orcidProfile.verify.denied"
+msgstr "Bạn đã từ chối quyền truy cập vào hồ sơ ORCID của bạn."
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
+msgstr "Một ORCID iD đã được lưu trữ cho bài nộp này."
+
+msgid "plugins.generic.orcidProfile.verify.failure"
+msgstr "ORCID iD của bạn không thể được xác minh. Liên kết không còn hiệu lực."
+
+msgid "plugins.generic.orcidProfile.verify.success"
+msgstr "ORCID iD của bạn đã được xác minh và liên kết thành công với bài gửi."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"
+msgstr "Bài gửi sẽ được thêm vào hồ sơ ORCID của bạn trong khi xuất bản."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"
+msgstr "Bài gửi không thể được thêm vào hồ sơ ORCID của bạn."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"
+msgstr "Bài gửi đã được thêm vào hồ sơ ORCID của bạn."
+
+msgid "plugins.generic.orcidProfile.verify.title"
+msgstr "Ủy quyền ORCID"
+
+msgid "plugins.generic.orcidProfile.author.unauthenticated"
+msgstr ""
+"ORCID iD không được xác thực! Vui lòng yêu cầu xác thực từ người đóng góp."
+
+msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
+msgstr "Xem bên dưới để yêu cầu ORCID iD xác thực"
+
+msgid "plugins.generic.orcidProfile.author.deleteORCID"
+msgstr "Xóa ORCID iD và mã thông báo truy cập!"
+
+msgid "plugins.generic.orcidProfile.author.requestAuthorization"
+msgstr "Gửi e-mail để yêu cầu ủy quyền ORCID từ cộng tác viên"
+
+msgid "plugins.generic.orcidProfile.author.accessTokenStored"
+msgstr ""
+"Quyền truy cập bản ghi ORCID được cấp với phạm vi {$orcidAccessScope}, hợp "
+"lệ cho đến khi"
+
+msgid "plugins.generic.orcidProfile.author.accessDenied"
+msgstr "Truy cập ORCID đã bị từ chối tại"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
+msgstr "Tất cả"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
+msgstr "Lỗi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
+msgstr "Chọn số lượng đầu ra đăng nhập được viết bởi plugin"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
+msgstr "Nhật ký yêu cầu ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
+msgstr ""
+"Gửi e-mail để yêu cầu ủy quyền ORCID từ các tác giả khi một bài viết được "
+"chấp nhận, tức là gửi để chỉnh sửa sao chép"
+
+msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
+msgstr "Cài đặt thư điện tử"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
+msgstr "Phạm vi truy cập hồ sơ"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret"
+msgstr "Bí mật khách hàng"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId"
+msgstr "ID khách hàng"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox"
+msgstr "Sandbox thành viên"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member"
+msgstr "Thành viên"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox"
+msgstr "Sandbox công khai"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public"
+msgstr "Công khai"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
+msgstr "API ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
+msgstr ""
+"API ORCID được cấu hình trên toàn cầu bởi máy chủ lưu trữ. Các thông tin sau "
+"đây đã được lưu."
+
+msgid "plugins.generic.orcidProfile.manager.settings.description"
+msgstr ""
+"Vui lòng định cấu hình quyền truy cập API ORCID để sử dụng trong việc kéo "
+"thông tin hồ sơ ORCID vào hồ sơ người dùng và tác giả và cập nhật các bản "
+"ghi ORCID được kết nối với các ấn phẩm mới (chỉ dành cho Thành viên ORCID)."
+
+msgid "plugins.generic.orcidProfile.manager.settings.hidden"
+msgstr "ẩn"
+
+msgid "plugins.generic.orcidProfile.manager.settings.title"
+msgstr "Cài đặt API ORCID"
+
+msgid "plugins.generic.orcidProfile.emailOrOrcid"
+msgstr "Địa chỉ email hoặc ORCID iD:"
+
+msgid "plugins.generic.orcidProfile.noData"
+msgstr "Không thể tìm thấy bất kỳ dữ liệu nào từ ORCID."
+
+msgid "plugins.generic.orcidProfile.instructions"
+msgstr ""
+"Bạn có thể điền trước biểu mẫu này với thông tin từ hồ sơ ORCID. Nhập địa "
+"chỉ email hoặc ORCID iD được liên kết với hồ sơ ORCID, sau đó nhấp vào \""
+"Gửi\"."
+
+msgid "plugins.generic.orcidProfile.description"
+msgstr "Cho phép nhập thông tin hồ sơ người dùng từ ORCID."
+
+msgid "plugins.generic.orcidProfile.displayName"
+msgstr "Plugin hồ sơ ORCID"
