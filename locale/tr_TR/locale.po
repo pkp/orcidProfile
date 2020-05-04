@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2020-04-30 18:38+0000\n"
-"Last-Translator: Hüseyin Körpeoğlu <yoruyenturk@hotmail.com>\n"
+"PO-Revision-Date: 2020-05-05 00:02+0000\n"
+"Last-Translator: Sönmez Çelik <snmzclk@gmail.com>\n"
 "Language-Team: Turkish <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/tr/>\n"
 "Language: tr_TR\n"
@@ -97,3 +97,111 @@ msgstr "gizli"
 
 msgid "plugins.generic.orcidProfile.manager.settings.title"
 msgstr "ORCID API Ayarları"
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy"
+msgstr ""
+"Bu dergi ORCID iD'nizi toplar. Böylece [Üye API'sı ve Herkese Açık API "
+"arasında amaç ekleyebilir ve ayırt edebiliriz].\n"
+"     ORCID açılır penceresindeki \"Yetkilendir\" düğmesini tıkladığınızda, "
+"kimliği doğrulanmış bir işlem kullanarak iD'nizi paylaşmanızı isteyeceğiz: <"
+"a href=\"https://support.orcid.org/hc/en-us/articles/360006897454\">ORCID "
+"iD'ye kaydolma</a> veya zaten varsa <a href=\"https://support.orcid.org/hc/"
+"en-us/categories/360000661673\">ORCID hesabınızda oturum açmanız</a>, "
+"ardından ORCID iD'nizi almamız için bize izin verin. Bunu, doğru bir şekilde "
+"tanımlandığınızdan ve ORCID iD'nizi güvenli bir şekilde bağladığınızdan emin "
+"olmak için yapıyoruz.\n"
+"\"Oturum açma hakkında <a href=\"https://orcid.org/blog/2017/02/20/whats-so-"
+"special-about-signing\">bu kadar özel olan konu\"</a> bölümünde daha fazla "
+"bilgi edinebilirsiniz"
+
+msgid "plugins.generic.orcidProfile.about.display"
+msgstr ""
+"ID'nizi kullandığınızı ve doğrulandığını kabul etmek için, gönderinizin "
+"makale sayfasında ve genel kullanıcı profilinizde adınızın yanında ORCID iD "
+"simgesini <img src=\"https://orcid.org/sites/default/files/images/"
+"orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\">"
+" gösteririz. <br />\n"
+"       <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-"
+"displayed\">Bir ORCID iD nasıl görüntülenmelidir</a> bölümünde daha fazla "
+"bilgi edinebilirsiniz"
+
+msgid "plugins.generic.orcidProfile.about.display.title"
+msgstr "ORCID iD'leri nerede görüntülenir?"
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
+msgstr "ORCID iD'lerini nasıl ve neden topluyoruz?"
+
+msgid "plugins.generic.orcidProfile.about.orcidExplanation"
+msgstr ""
+"ORCID, sizi diğer araştırmacılardan ayıran kalıcı bir tanımlayıcı ve "
+"araştırma çıktılarınızı ve faaliyetlerinizi iD'nize bağlamak için bir "
+"mekanizma sağlayan, kar amacı gütmeyen bağımsız bir kuruluştur. ORCID, "
+"yayıncılar, fon sağlayıcılar, kurumlar ve araştırmayla ilgili diğer "
+"hizmetler tarafından kullanılan birçok sisteme entegre edilmiştir.  Daha "
+"fazla bilgi için <a href=\"https://orcid.org\">orcid.org</a> adresini "
+"ziyaret edin."
+
+msgid "plugins.generic.orcidProfile.about.title"
+msgstr "ORCID nedir?"
+
+msgid "plugins.generic.orcidProfile.authorise"
+msgstr "ORCID iD'nizi yetkilendirin ve bağlayın"
+
+msgid "plugins.generic.orcidProfile.failure.contact"
+msgstr ""
+"Lütfen adınız, ORCID iD'niz ve gönderi bilgilerinizle birlikte dergi "
+"yöneticisine başvurun."
+
+msgid "plugins.generic.orcidProfile.verify.denied"
+msgstr "ORCID kaydınıza erişimi engellediniz."
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
+msgstr "Bu gönderi için bir ORCID iD zaten mevcut."
+
+msgid "plugins.generic.orcidProfile.verify.failure"
+msgstr "ORCID iD'niz doğrulanamadı. Bağlantı geçerli değil."
+
+msgid "plugins.generic.orcidProfile.verify.success"
+msgstr "ORCID iD'niz doğrulandı ve gönderi ile başarıyla ilişkilendirildi."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"
+msgstr "Gönderi, yayınlama sırasında ORCID kaydınıza eklenecektir."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"
+msgstr "Gönderi, ORCID kaydınıza eklenemedi."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"
+msgstr "Gönderi, ORCID kaydınıza eklendi."
+
+msgid "plugins.generic.orcidProfile.author.unauthenticated"
+msgstr ""
+"ORCID iD kimliği doğrulanmadı! Lütfen katkıda bulunandan kimlik doğrulaması "
+"isteyin."
+
+msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
+msgstr "Kimliği doğrulanmış ORCID iD istemek için aşağıya bakın"
+
+msgid "plugins.generic.orcidProfile.author.requestAuthorization"
+msgstr "Katkıda bulunandan ORCID yetkilendirmesi istemek için e-posta gönderin"
+
+msgid "plugins.generic.orcidProfile.author.accessTokenStored"
+msgstr ""
+"{$orcidAccessScope} kapsamıyla verilen ORCID kayıt erişimi, şu tarihe kadar "
+"geçerlidir"
+
+msgid "plugins.generic.orcidProfile.author.accessDenied"
+msgstr "ORCID erişimi reddedildi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
+msgstr "Eklenti tarafından yazılan günlük çıktısının miktarını seçin"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
+msgstr "ORCID istek günlüğü"
+
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
+msgstr ""
+"Bir makale kabul edildiğinde yazarlardan ORCID yetkisi istemek için e-posta "
+"gönderin. Ör: kopya düzenlemeye gönderildi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
+msgstr "Profil Erişim Kapsamı"
