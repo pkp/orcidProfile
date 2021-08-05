@@ -167,8 +167,11 @@ class OrcidHandler extends Handler {
 
 
 		$publicationId = $request->getUserVar('publicationId');
-		$authorDao = DAORegistry::getDAO('AuthorDAO');
-		$authors = $authorDao->getByPublicationId($publicationId);
+		$authors = Repo::author()->getMany(
+			Repo::author()
+				->getCollector()
+				->filterByPublicationIds([$publicationId])
+		);
 
 		$publication = Repo::publication()->get($publicationId);
 
@@ -211,7 +214,7 @@ class OrcidHandler extends Handler {
 			$authorToVerify->setData('orcidRefreshToken', null);
 			$authorToVerify->setData('orcidAccessExpiresOn', null);
 			$authorToVerify->setData('orcidEmailToken', null);
-			$authorDao->updateLocaleFields($authorToVerify);
+			Repo::author()->dao->update($authorToVerify);
 			$plugin->logError('OrcidHandler::orcidverify - ORCID access denied. Error description: ' . $request->getUserVar('error_description'));
 			$templateMgr->assign('denied', true);
 			$templateMgr->display($templatePath);
@@ -282,7 +285,7 @@ class OrcidHandler extends Handler {
 		// remove the email token
 		$authorToVerify->setData('orcidEmailToken', null);
 		$this->_setOrcidData($authorToVerify, $orcidUri, $response);
-		$authorDao->updateObject($authorToVerify);
+		Repo::author()->dao->update($authorToVerify);
 		if($plugin->isMemberApiEnabled($contextId) ) {
 			if ($publication->getData('status') == PKPSubmission::STATUS_PUBLISHED) {
 				$templateMgr->assign('sendSubmission', true);
