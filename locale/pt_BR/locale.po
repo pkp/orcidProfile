@@ -1,9 +1,10 @@
+# Diego José Macêdo <diegojmacedo@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2021-06-12 20:02+0000\n"
+"PO-Revision-Date: 2022-02-09 01:30+0000\n"
 "Last-Translator: Diego José Macêdo <diegojmacedo@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/pt_BR/>\n"
@@ -30,7 +31,7 @@ msgid "plugins.generic.orcidProfile.noData"
 msgstr "Não foram encontrados dados no ORCID."
 
 msgid "plugins.generic.orcidProfile.emailOrOrcid"
-msgstr "Endereço de E-Mail ou ORCID iD:"
+msgstr "Endereço de e-Mail ou ORCID ID:"
 
 msgid "plugins.generic.orcidProfile.manager.settings.title"
 msgstr "Configurações da API ORCID"
@@ -39,7 +40,11 @@ msgid "plugins.generic.orcidProfile.manager.settings.hidden"
 msgstr "escondido"
 
 msgid "plugins.generic.orcidProfile.manager.settings.description"
-msgstr "Configure a API ORCID para transferir informação do perfil ORCID para o perfil de utilizador."
+msgstr ""
+"Por favor, configure o acesso à API ORCID para uso na transferência de "
+"informações de perfil ORCID para perfis de usuário e autor e atualização de "
+"registros ORCID conectados com novas publicações (somente para membros "
+"ORCID)."
 
 msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
 msgstr "A API ORCID foi configurada de maneira global pelo servidor de hospedagem. As credenciais a seguir foram salvas."
@@ -69,10 +74,10 @@ msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
 msgstr "Escopo de Acesso ao Perfil"
 
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
-msgstr "Configurações de E-mail"
+msgstr "Configurações de e-mail"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
-msgstr "Log de pedidos ORCID"
+msgstr "Log de requisições ORCID"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
 msgstr "Selecione a quantidade de saída de log escrita pelo plugin"
@@ -221,7 +226,7 @@ msgstr ""
 "you! </a>\n"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
-msgstr "Segredo de cliente inválido"
+msgstr "Chave secreta do cliente inválida"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "ID de cliente inválido"
