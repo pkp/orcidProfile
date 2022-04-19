@@ -532,13 +532,13 @@ class OrcidProfilePlugin extends GenericPlugin {
 			$mail->setRecipients(array(array('name' => $author->getFullName(), 'email' => $author->getEmail())));
 
 			// Send the mail with parameters
-			$mail->sendWithParams(array(
+			$mail->sendWithParams([
 				'orcidAboutUrl' => $aboutUrl,
 				'authorOrcidUrl' => $oauthUrl,
-				'authorName' => $author->getFullName(),
-				'articleTitle' => $publication->getLocalizedTitle(), // Backwards compatibility only
-				'submissionTitle' => $publication->getLocalizedTitle(),
-			));
+				'authorName' => htmlspecialchars($author->getFullName()),
+				'articleTitle' => htmlspecialchars($publication->getLocalizedTitle()), // Backwards compatibility only
+				'submissionTitle' => htmlspecialchars($publication->getLocalizedTitle()),
+			]);
 
 			if ($updateAuthor) {
 				$authorDao = DAORegistry::getDAO('AuthorDAO');
