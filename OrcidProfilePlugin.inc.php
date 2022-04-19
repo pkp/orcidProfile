@@ -778,9 +778,9 @@ class OrcidProfilePlugin extends GenericPlugin
             $mail->sendWithParams([
                 'orcidAboutUrl' => $aboutUrl,
                 'authorOrcidUrl' => $oauthUrl,
-                'authorName' => $author->getFullName(),
-                'articleTitle' => $publication->getLocalizedTitle(), // Backwards compatibility only
-                'submissionTitle' => $publication->getLocalizedTitle(),
+                'authorName' => htmlspecialchars($author->getFullName()),
+                'articleTitle' => htmlspecialchars($publication->getLocalizedTitle()), // Backwards compatibility only
+                'submissionTitle' => htmlspecialchars($publication->getLocalizedTitle()),
             ]);
 
             if ($updateAuthor) {
