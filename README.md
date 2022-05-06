@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pkp/orcidProfile.svg?branch=main)](https://travis-ci.org/pkp/orcidProfile)
+
 Table of Contents
 =================
 
