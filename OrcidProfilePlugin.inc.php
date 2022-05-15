@@ -1432,5 +1432,39 @@ class OrcidProfilePlugin extends GenericPlugin {
 	public function setCurrentContextId($contextId) {
 		$this->currentContextId = $contextId;
 	}
+
+	/**
+	 * handleEditorAction handles promoting a submission to copyediting.
+	 *
+	 * @param $hookName string Name the hook was registered with
+	 * @param $args array Hook arguments, &$submission, &$editorDecision, &$result, &$recommendation.
+	 *
+	 * @see EditorAction::recordDecision() The function calling the hook.
+	 */
+	public function handleEditorAction($hookName, $args)
+	{
+		$submission = $args[0];
+		/** @var Submission $submission */
+		$decision = $args[1];
+
+		if ($decision['decision'] == SUBMISSION_EDITOR_DECISION_ACCEPT) {
+			$publication = $submission->getCurrentPublication();
+
+			if (isset($publication)) {
+				$authorDao = DAORegistry::getDAO('AuthorDAO');
+				/** @var AuthorDAO $authorDao */
+
+				$authors = $authorDao->getByPublicationId($submission->getCurrentPublication()->getId());
+
+				foreach ($authors as $author) {
+					$orcidAccessExpiresOn = Carbon\Carbon::parse($author->getData('orcidAccessExpiresOn'));
+					if ($author->getData('orcidAccessToken') == null || $orcidAccessExpiresOn->isPast()) {
+						$this->sendAuthorMail($author, true);
+					}
+				}
+			}
+
+		}
+	}
 }
 
