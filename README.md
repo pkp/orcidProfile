@@ -41,7 +41,7 @@ Licensed under GPLv3. See LICENSE.txt for details.
   * Extra e-mail template `ORCID_REQUEST_AUTHOR_AUTHORIZATION`  for requesting API access tokens.
   * Updated template text, e-mail templates for English and German locales.
   * Member API Email-Template activated upon selection of ORCID member API
-  * Support for synchronizing submission meta data to authorized records  in follwing stage changes:
+  * Support for synchronizing submission meta data to authorized records  in following stage changes:
     * Assign a submission to an already published issue
     * Publish a new issue
     * Author grants permission after the publication of the issue
@@ -78,7 +78,7 @@ Use the Plugin Gallery from within your PKP application to install the plugin. F
   },
 ```
 
-### Run  all tests
+### Run all tests
 
  Navigate to `OJS folder`
 * ` npx cypress run --config integrationFolder=plugins/generic/orcidProfile/cypress/tests/functional`
