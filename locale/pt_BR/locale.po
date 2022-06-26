@@ -111,7 +111,7 @@ msgid "plugins.generic.orcidProfile.author.deleteORCID"
 msgstr "Apagar o ORCID iD e o token de acesso!"
 
 msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
-msgstr "Veja abaixo para solicitar o ORDID iD autenticado"
+msgstr "Veja abaixo para solicitar o ORCID iD autenticado"
 
 msgid "plugins.generic.orcidProfile.author.unauthenticated"
 msgstr "ORCID iD não autenticado! Por favor, solicite a autenticação do colaborador."
@@ -135,7 +135,7 @@ msgid "plugins.generic.orcidProfile.verify.failure"
 msgstr "Seu ORCID iD não pôde ser verificado. O link não é mais válido."
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
-msgstr "Um ORDID iD já estava armazenado para esta submissão."
+msgstr "Um ORCID iD já estava armazenado para esta submissão."
 
 msgid "plugins.generic.orcidProfile.verify.denied"
 msgstr "Você negou acesso ao seu registro ORCID."
