@@ -188,7 +188,7 @@ msgstr ""
 "displayed</a>"
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
-msgstr "Für diese Eireichung wurde bereits eine ORCID iD gespeichert."
+msgstr "Für diese Einreichung wurde bereits eine ORCID iD gespeichert."
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
 msgstr ""
