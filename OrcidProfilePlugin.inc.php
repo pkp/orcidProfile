@@ -48,7 +48,6 @@ use PKP\submission\PKPSubmission;
 class OrcidProfilePlugin extends GenericPlugin
 {
     public const PUBID_TO_ORCID_EXT_ID = ['doi' => 'doi', 'other::urn' => 'urn'];
-    public const USER_GROUP_TO_ORCID_ROLE = ['Author' => 'AUTHOR', 'Translator' => 'CHAIR_OR_TRANSLATOR','Journal manager' => 'AUTHOR'];
 
     private $submissionIdToBePublished;
     private $currentContextId;
@@ -812,8 +811,6 @@ class OrcidProfilePlugin extends GenericPlugin
 
         switch ($newPublication->getData('status')) {
             case PKPSubmission::STATUS_PUBLISHED:
-                $this->sendSubmissionToOrcid($newPublication, $request);
-                break;
             case PKPSubmission::STATUS_SCHEDULED:
                 $this->sendSubmissionToOrcid($newPublication, $request);
                 break;
@@ -1256,11 +1253,20 @@ class OrcidProfilePlugin extends GenericPlugin
                 ]
             ];
 
-            $userGroup = $author->getUserGroup();
-            $role = self::USER_GROUP_TO_ORCID_ROLE[$userGroup->getName('en_US')];
+            // If using the CRediT plugin, credit roles may be available.
+            $roleFound = false;
+            $creditPlugin = PluginRegistry::getPlugin('generic', 'creditplugin');
+            if ($creditPlugin && $creditPlugin->getEnabled()) {
+                $contributorRoles = $author->getData('creditRoles') ?? [];
+                foreach ($contributorRoles as $role) {
+                    $contributor['contributor-attributes']['contributor-role'][] = $role;
+                    $roleFound = true;
+                }
+            }
 
-            if ($role) {
-                $contributor['contributor-attributes']['contributor-role'] = $role;
+            // If no CRediT role was found, fall back on CRediT author role.
+            if (!$roleFound) {
+                $contributor['contributor-attributes']['contributor-role'] = 'http://credit.niso.org/contributor-roles/writing-original-draft/';
             }
 
             if ($author->getOrcid()) {
