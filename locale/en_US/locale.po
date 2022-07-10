@@ -131,6 +131,9 @@ msgstr "You denied access to your ORCID record."
 msgid "plugins.generic.orcidProfile.authFailure"
 msgstr "The ORCID authorization link has already been used or is invalid."
 
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Invalid client Data"
+
 msgid "plugins.generic.orcidProfile.failure.contact"
 msgstr "Please contact the journal manager with your name, ORCID iD, and details of your submission."
 
