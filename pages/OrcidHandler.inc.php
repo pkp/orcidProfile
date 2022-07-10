@@ -277,15 +277,21 @@ class OrcidHandler extends Handler {
 
 		$plugin->logInfo('Response body: ' . $result);
 		$response = json_decode($result, true);
-		if (isset($response['error']) && $response['error'] === 'invalid_grant') {
-			$plugin->logError("Response status: $httpstatus . Authroization code invalid, maybe already used");
+		if (isset($response['error'])) {
+			if ($response['error'] === 'invalid_grant') {
+				$templateMgr->assign('denied', true);
+				$plugin->logError("Response status: $httpstatus . Authroization code invalid, maybe already used");
+
+			} elseif ($response['error'] === 'invalid_client') {
+				$templateMgr->assign('invalidClient', true);
+				$plugin->logError("Response status: $httpstatus . Invalid Client: $result");
+
+			} else {
+				$plugin->logError("Response status: $httpstatus . Invalid ORCID response: $result");
+			}
 			$templateMgr->assign('authFailure', true);
 			$templateMgr->display($templatePath);
 			return;
-		} elseif (isset($response['error'])) {
-			$plugin->logError("Response status: $httpstatus . Invalid ORCID response: $result");
-			$templateMgr->assign('authFailure', true);
-			$templateMgr->display($templatePath);
 		}
 		// Set the orcid id using the full https uri
 		$orcidUri = ($plugin->isSandBox() ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
