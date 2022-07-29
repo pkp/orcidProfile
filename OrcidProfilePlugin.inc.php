@@ -302,25 +302,26 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 * @return string
 	 */
 	function registrationFilter($output, $templateMgr) {
-		if (preg_match('/<form[^>]+id="register"[^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) {
-			$match = $matches[0][0];
-			$offset = $matches[0][1];
-			# $request = Application::get()->getRequest();
-			# $context = $request->getContext();
-			# $contextId = ($context == null) ? 0 : $context->getId();
-			$targetOp = 'register';
-			$templateMgr->assign(array(
-				'targetOp' => $targetOp,
-				'orcidUrl' => $this->getOrcidUrl(),
-				'orcidOAuthUrl' => $this->buildOAuthUrl('orcidAuthorize', array('targetOp' => $targetOp)),
-				'orcidIcon' => $this->getIcon(),
-			));
+		$request = Application::get()->getRequest();
+		$context = $request->getContext();
+		if ($context != null) {
+			if (preg_match('/<form[^>]+id="register"[^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) {
+				$match = $matches[0][0];
+				$offset = $matches[0][1];
+				$targetOp = 'register';
+				$templateMgr->assign(array(
+					'targetOp' => $targetOp,
+					'orcidUrl' => $this->getOrcidUrl(),
+					'orcidOAuthUrl' => $this->buildOAuthUrl('orcidAuthorize', array('targetOp' => $targetOp)),
+					'orcidIcon' => $this->getIcon(),
+				));
 
-			$newOutput = substr($output, 0, $offset + strlen($match));
-			$newOutput .= $templateMgr->fetch($this->getTemplateResource('orcidProfile.tpl'));
-			$newOutput .= substr($output, $offset + strlen($match));
-			$output = $newOutput;
-			$templateMgr->unregisterFilter('output', array($this, 'registrationFilter'));
+				$newOutput = substr($output, 0, $offset + strlen($match));
+				$newOutput .= $templateMgr->fetch($this->getTemplateResource('orcidProfile.tpl'));
+				$newOutput .= substr($output, $offset + strlen($match));
+				$output = $newOutput;
+				$templateMgr->unregisterFilter('output', array($this, 'registrationFilter'));
+			}
 		}
 		return $output;
 	}
