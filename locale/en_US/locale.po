@@ -38,6 +38,9 @@ msgstr "Please configure the ORCID API access for use in pulling ORCID profile i
 msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
 msgstr "The ORCID API was configured globally by the host. The following credentials have been saved."
 
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Due to validation errors, plugin was disabled."
+
 msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
 msgstr "ORCID API"
 
@@ -64,6 +67,9 @@ msgstr "Profile Access Scope"
 
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "E-Mail Settings"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Settings saved"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
 msgstr "Send e-mail to request ORCID authorization from authors when an article is accepted ie. sent to copy editing"
@@ -136,6 +142,9 @@ msgstr "You denied access to your ORCID record."
 
 msgid "plugins.generic.orcidProfile.authFailure"
 msgstr "The ORCID authorization link has already been used or is invalid."
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Invalid client credentials"
 
 msgid "plugins.generic.orcidProfile.failure.contact"
 msgstr "Please contact the journal manager with your name, ORCID iD, and details of your submission."
