@@ -1467,5 +1467,6 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 		}
 	}
+
 }
 

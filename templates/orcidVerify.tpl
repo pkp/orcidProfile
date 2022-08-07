@@ -38,15 +38,20 @@
 		{/if}
 	{else}
 		<div class="orcid-failure">
-		{if $denied}
-			{translate key="plugins.generic.orcidProfile.authDenied"}
-		{elseif $authFailure}
-			{translate key="plugins.generic.orcidProfile.authFailure"}
-		{elseif $duplicateOrcid}
-			{translate key="plugins.generic.orcidProfile.verify.duplicateOrcid"}
-		{else}
-			{translate key="plugins.generic.orcidProfile.verify.failure"}
-		{/if}
+            {if $orcidAPIError}
+				{$orcidAPIError}
+			{/if}
+            {if $invalidClient}
+                {translate key="plugins.generic.orcidProfile.invalidClient"}
+            {elseif $duplicateOrcid}
+                {translate key="plugins.generic.orcidProfile.verify.duplicateOrcid"}
+            {elseif $denied}
+                {translate key="plugins.generic.orcidProfile.authDenied"}
+            {elseif $authFailure}
+                {translate key="plugins.generic.orcidProfile.authFailure"}
+            {else}
+                {translate key="plugins.generic.orcidProfile.verify.failure"}
+            {/if}
 		</div>
 		{translate key="plugins.generic.orcidProfile.failure.contact"}
 	{/if}
