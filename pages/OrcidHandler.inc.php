@@ -280,7 +280,7 @@ class OrcidHandler extends Handler
 		// Set the orcid id using the full https uri
 		$orcidUri = ($isSandBox ? ORCID_URL_SANDBOX : ORCID_URL) . $responseJson['orcid'];
 
-		if ($response->getStatusCode() == 200 && strlen($responseJson['orcid'] > 0)) {
+		if ($response->getStatusCode() == 200 && strlen($responseJson['orcid']) > 0) {
 			$authorToVerify->setOrcid($orcidUri);
 			if ($isSandBox) $authorToVerify->setData('orcidSandbox', true);
 			$templateMgr->assign('orcid', $orcidUri);
