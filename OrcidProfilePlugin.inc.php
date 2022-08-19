@@ -838,11 +838,9 @@ class OrcidProfilePlugin extends GenericPlugin
             $publication = $submission->getCurrentPublication();
 
             if (isset($publication)) {
-                $authors = Repo::author()->getMany(
-                    Repo::author()
-                        ->getCollector()
-                        ->filterByPublicationIds([$submission->getCurrentPublication()->getId()])
-                );
+                $authors = Repo::author()->getCollector()
+                    ->filterByPublicationIds([$submission->getCurrentPublication()->getId()])
+                    ->getMany();
 
                 foreach ($authors as $author) {
                     $orcidAccessExpiresOn = Carbon\Carbon::parse($author->getData('orcidAccessExpiresOn'));
@@ -883,11 +881,10 @@ class OrcidProfilePlugin extends GenericPlugin
             $issue = Repo::issue()->get($issueId);
         }
 
-        $authors = Repo::author()->getMany(
-            Repo::author()
-                ->getCollector()
-                ->filterByPublicationIds([$publicationId])
-        );
+        $authors = Repo::author()
+            ->getCollector()
+            ->filterByPublicationIds([$publicationId])
+            ->getMany();
 
         // Collect valid ORCID ids and access tokens from submission contributors
         $authorsWithOrcid = [];

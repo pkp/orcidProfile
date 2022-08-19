@@ -183,11 +183,10 @@ class OrcidHandler extends Handler
 
 
         $publicationId = $request->getUserVar('publicationId');
-        $authors = Repo::author()->getMany(
-            Repo::author()
-                ->getCollector()
-                ->filterByPublicationIds([$publicationId])
-        );
+        $authors = Repo::author()
+            ->getCollector()
+            ->filterByPublicationIds([$publicationId])
+            ->getMany();
 
         $publication = Repo::publication()->get($publicationId);
 
