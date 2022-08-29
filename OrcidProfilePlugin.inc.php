@@ -31,13 +31,12 @@ define('ORCID_EMAIL_URL', 'email');
 define('ORCID_WORK_URL', 'work');
 
 use APP\core\Application;
-use APP\decision\Decision;
 use APP\facades\Repo;
 use APP\template\TemplateManager;
+use PKP\decision\Decision;
 use PKP\config\Config;
 use PKP\core\JSONMessage;
 use PKP\linkAction\LinkAction;
-
 use PKP\linkAction\request\AjaxModal;
 use PKP\mail\MailTemplate;
 use PKP\plugins\GenericPlugin;
