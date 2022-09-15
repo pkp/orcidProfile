@@ -823,6 +823,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		switch ($newPublication->getData('status')) {
 			case STATUS_PUBLISHED:
 			case STATUS_SCHEDULED:
+				$this->logInfo("Expected publication status (5 or 3):  ".$newPublication->getData('status'));
 				$this->publishAuthorWorkToOrcid($newPublication, $request);
 				break;
 		}
@@ -919,6 +920,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 *
 	 **/
 	public function publishAuthorWorkToOrcid($publication, $request) {
+		$this::logInfo("Publishing  publication with id ".$publication->getData('id')  );
 		$context = $request->getContext();
 		$contextId = $context->getId();
 		$publicationId = $publication->getId();
@@ -926,6 +928,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 		if (!$this->isMemberApiEnabled($contextId)) {
 			// Sending to ORCID only works with the member API
+			$this->logInfo("Member API disabled");
 			return false;
 		}
 
@@ -964,6 +967,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 		$requestsSuccess = [];
 		foreach ($authorsWithOrcid as $orcid => $author) {
+			$this->logInfo("Publishing author work ". $author->getData('orcid'));
 			$uri = $this->getSetting($contextId, 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . $orcid . '/' . ORCID_WORK_URL;
 			$method = "POST";
 
@@ -997,6 +1001,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 						'json' => $orcidWork,
 					]
 				);
+
 			} catch (ClientException $exception) {
 				$reason = $exception->getResponse()->getBody(false);
 				$this->logInfo("Publication fail: $reason");
