@@ -18,7 +18,7 @@ msgstr ""
 
 msgid "emails.orcidRequestAuthorAuthorization.body"
 msgstr ""
-"Tisztelt {$authorName}!<br>\n"
+"Tisztelt {$recipientName}!<br>\n"
 "<br>\n"
 "Önt a(z) {$contextName} folyóirathoz beküldött \"{$submissionTitle}\" című "
 "kézirat szerzőjeként jelölték meg.\n"
@@ -52,7 +52,7 @@ msgstr "Ezzel az email sablonnal az ORCID azonosítókat kérjük be a Szerzőkt
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"Tisztelt {$authorName}!<br/>\n"
+"Tisztelt {$recipientName}!<br/>\n"
 "<br/>\n"
 "Ön a(z) {$contextName} folyóirathoz beküldött kézirat szerzőjeként lett "
 "megjelölve.<br/>\n"

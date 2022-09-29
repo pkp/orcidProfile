@@ -18,7 +18,7 @@ msgstr ""
 
 msgid "emails.orcidRequestAuthorAuthorization.body"
 msgstr ""
-"Kính gửi {$authorName},<br>\n"
+"Kính gửi {$recipientName},<br>\n"
 "<br>\n"
 "Bạn đã được liệt kê như là một tác giả của bản thảo \"{$submissionTitle}\" "
 "to {$contextName}.\n"
@@ -49,7 +49,7 @@ msgstr "Mẫu email này được sử dụng để thu thập id ORCID từ cá
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"Kính gửi {$authorName},<br/>\n"
+"Kính gửi {$recipientName},<br/>\n"
 "<br/>\n"
 "Bạn đã được liệt kê như là một tác giả trên một bản thảo để {$contextName}.<"
 "br/>\n"

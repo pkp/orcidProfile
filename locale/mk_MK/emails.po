@@ -51,7 +51,7 @@ msgstr ""
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"Почитуван {$authorName},<br/>\n"
+"Почитуван {$recipientName},<br/>\n"
 "<br/>\n"
 "Вие сте наведени како автор на поднесен ракопис до {$contextName}.<br/>\n"
 "За да го потврдите вашето авторство, додадете го вашиот ID на ORCID на овој "

@@ -14,7 +14,7 @@ msgstr ""
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"{$authorName} yang dihormati,<br/>\n"
+"{$recipientName} yang dihormati,<br/>\n"
 "<br/>\n"
 "Anda telah disenaraikan sebagai pengarang pada penyerahan manuskrip kepada "
 "{$contextName}.<br/>\n"

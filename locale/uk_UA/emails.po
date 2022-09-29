@@ -21,7 +21,7 @@ msgstr "ORCID подання"
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"Шановний(на) {$authorName},\n"
+"Шановний(на) {$recipientName},\n"
 "<br/>\n"
 "Ви були зазначені як автор рукопису, надісланого в {$contextName}. <br/>\n"
 "Щоб підтвердити своє авторство, додайте свій ORCID iD до цього подання, "
@@ -46,7 +46,7 @@ msgstr "Цей шаблон електронного листа використ
 
 msgid "emails.orcidRequestAuthorAuthorization.body"
 msgstr ""
-"Шановний|Шановна {$authorName},<br>\n"
+"Шановний|Шановна {$recipientName},<br>\n"
 "<br>\n"
 "Ви були зазначені як автор подання \"{$submissionTitle}\" до журналу "
 "{$contextName}.\n"
