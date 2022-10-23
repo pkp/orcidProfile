@@ -538,19 +538,20 @@ class OrcidProfilePlugin extends GenericPlugin
 
         $request = Application::get()->getRequest();
         $user = $request->getUser();
+        $author = $authors->first();
         //error_log("OrcidProfilePlugin: authors[0] = " . var_export($authors[0], true));
         //error_log("OrcidProfilePlugin: user = " . var_export($user, true));
-        if ($authors[0]->getOrcid() === $user->getOrcid()) {
+        if ($author?->getOrcid() === $user->getOrcid()) {
             // if the author and user share the same ORCID id
             // copy the access token from the user
             //error_log("OrcidProfilePlugin: user->orcidAccessToken = " . $user->getData('orcidAccessToken'));
-            $authors[0]->setData('orcidAccessToken', $user->getData('orcidAccessToken'));
-            $authors[0]->setData('orcidAccessScope', $user->getData('orcidAccessScope'));
-            $authors[0]->setData('orcidRefreshToken', $user->getData('orcidRefreshToken'));
-            $authors[0]->setData('orcidAccessExpiresOn', $user->getData('orcidAccessExpiresOn'));
-            $authors[0]->setData('orcidSandbox', $user->getData('orcidSandbox'));
+            $author->setData('orcidAccessToken', $user->getData('orcidAccessToken'));
+            $author->setData('orcidAccessScope', $user->getData('orcidAccessScope'));
+            $author->setData('orcidRefreshToken', $user->getData('orcidRefreshToken'));
+            $author->setData('orcidAccessExpiresOn', $user->getData('orcidAccessExpiresOn'));
+            $author->setData('orcidSandbox', $user->getData('orcidSandbox'));
 
-            Repo::author()->dao->update($authors[0]);
+            Repo::author()->dao->update($author);
 
             //error_log("OrcidProfilePlugin: author = " . var_export($authors[0], true));
         }
