@@ -16,7 +16,7 @@ msgstr "ORCID för bidrag"
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"Hej {$authorName}!\n"
+"Hej {$recipientName}!\n"
 "\n"
 "Du är listad som medförfattare till bidraget \"{$submissionTitle}\" till {$contextName}. \n"
 "\n"

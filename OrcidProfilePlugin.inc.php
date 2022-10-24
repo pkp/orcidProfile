@@ -3,9 +3,9 @@
 /**
  * @file OrcidProfilePlugin.inc.php
  *
- * Copyright (c) 2015-2019 University of Pittsburgh
- * Copyright (c) 2014-2020 Simon Fraser University
- * Copyright (c) 2003-2020 John Willinsky
+ * Copyright (c) 2015-2022 University of Pittsburgh
+ * Copyright (c) 2014-2022 Simon Fraser University
+ * Copyright (c) 2003-2022 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfilePlugin
@@ -33,17 +33,18 @@ define('ORCID_WORK_URL', 'work');
 use APP\core\Application;
 use APP\decision\Decision;
 use APP\facades\Repo;
+use APP\plugins\generic\orcidProfile\mailables\OrcidRequestAuthorAuthorization;
 use APP\template\TemplateManager;
+use Illuminate\Support\Facades\Mail;
 use PKP\config\Config;
 use PKP\core\JSONMessage;
 use PKP\linkAction\LinkAction;
-
+use PKP\plugins\Hook;
 use PKP\linkAction\request\AjaxModal;
-use PKP\mail\MailTemplate;
 use PKP\plugins\GenericPlugin;
-use PKP\plugins\HookRegistry;
 use PKP\plugins\PluginRegistry;
 use PKP\submission\PKPSubmission;
+use APP\plugins\generic\orcidProfile\mailables\OrcidCollectAuthorId;
 
 class OrcidProfilePlugin extends GenericPlugin
 {
@@ -67,32 +68,32 @@ class OrcidProfilePlugin extends GenericPlugin
         if ($success && $this->getEnabled($mainContextId)) {
             $contextId = ($mainContextId === null) ? $this->getCurrentContextId() : $mainContextId;
 
-            HookRegistry::register('ArticleHandler::view', [&$this, 'submissionView']);
-            HookRegistry::register('PreprintHandler::view', [&$this, 'submissionView']);
+            Hook::add('ArticleHandler::view', [&$this, 'submissionView']);
+            Hook::add('PreprintHandler::view', [&$this, 'submissionView']);
 
             // Insert the OrcidHandler to handle ORCID redirects
-            HookRegistry::register('LoadHandler', [$this, 'setupCallbackHandler']);
+            Hook::add('LoadHandler', [$this, 'setupCallbackHandler']);
 
             // Register callback for Smarty filters; add CSS
-            HookRegistry::register('TemplateManager::display', [$this, 'handleTemplateDisplay']);
+            Hook::add('TemplateManager::display', [$this, 'handleTemplateDisplay']);
 
             // Add "Connect ORCID" button to PublicProfileForm
-            HookRegistry::register('User::PublicProfile::AdditionalItems', [$this, 'handleUserPublicProfileDisplay']);
+            Hook::add('User::PublicProfile::AdditionalItems', [$this, 'handleUserPublicProfileDisplay']);
 
             // Display additional ORCID access information and checkbox to send e-mail to authors in the AuthorForm
-            HookRegistry::register('authorform::display', [$this, 'handleFormDisplay']);
+            Hook::add('authorform::display', [$this, 'handleFormDisplay']);
 
             // Send email to author, if the added checkbox was ticked
-            HookRegistry::register('authorform::execute', [$this, 'handleAuthorFormExecute']);
+            Hook::add('authorform::execute', [$this, 'handleAuthorFormExecute']);
 
             // Handle ORCID on user registration
-            HookRegistry::register('registrationform::execute', [$this, 'collectUserOrcidId']);
+            Hook::add('registrationform::execute', [$this, 'collectUserOrcidId']);
 
             // Send emails to authors without ORCID id upon submission
-            HookRegistry::register('submissionsubmitstep3form::execute', [$this, 'handleSubmissionSubmitStep3FormExecute']);
+            Hook::add('submissionsubmitstep3form::execute', [$this, 'handleSubmissionSubmitStep3FormExecute']);
 
             // Add more ORCiD fields to user Schema
-            HookRegistry::register('Schema::get::user', function ($hookName, $args) {
+            Hook::add('Schema::get::user', function ($hookName, $args) {
                 $schema = $args[0];
 
                 $schema->properties->orcidAccessToken = (object)[
@@ -124,13 +125,13 @@ class OrcidProfilePlugin extends GenericPlugin
 
             // Send emails to authors without authorised ORCID access on promoting a submission to copy editing. Not included in OPS.
             if ($this->getSetting($contextId, 'sendMailToAuthorsOnPublication')) {
-                HookRegistry::register('EditorAction::recordDecision', [$this, 'handleEditorAction']);
+                Hook::add('EditorAction::recordDecision', [$this, 'handleEditorAction']);
             }
 
-            HookRegistry::register('Publication::publish', [$this, 'handlePublicationStatusChange']);
+            Hook::add('Publication::publish', [$this, 'handlePublicationStatusChange']);
 
             // Add more ORCiD fields to author Schema
-            HookRegistry::register('Schema::get::author', function ($hookName, $args) {
+            Hook::add('Schema::get::author', function ($hookName, $args) {
                 $schema = $args[0];
 
                 $schema->properties->orcidSandbox = (object)[
@@ -174,6 +175,8 @@ class OrcidProfilePlugin extends GenericPlugin
                     'validation' => ['nullable']
                 ];
             });
+
+            Hook::add('Mailer::Mailables', [$this, 'addMailable']);
         }
 
         return $success;
@@ -724,19 +727,6 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
-     * Instantiate a MailTemplate
-     *
-     * @param string $emailKey
-     * @param Context $context
-     *
-     * @return MailTemplate
-     */
-    public function getMailTemplate($emailKey, $context = null)
-    {
-        return new MailTemplate($emailKey, null, $context, false);
-    }
-
-    /**
      * Send mail with ORCID authorization link to the e-mail address of the supplied Author object.
      *
      * @param Author $author
@@ -751,37 +741,26 @@ class OrcidProfilePlugin extends GenericPlugin
         // This should only ever happen within a context, never site-wide.
         if ($context != null) {
             $contextId = $context->getId();
+            $publicationId = $author->getData('publicationId');
+            $publication = Repo::publication()->get($publicationId);
+            $submission = Repo::submission()->get($publication->getData('submissionId'));
+
+            $emailToken = md5(microtime() . $author->getEmail());
+            $author->setData('orcidEmailToken', $emailToken);
+            $oauthUrl = $this->buildOAuthUrl('orcidVerify', ['token' => $emailToken, 'publicationId' => $publicationId]);
 
             if ($this->isMemberApiEnabled($contextId)) {
-                $mailTemplate = 'ORCID_REQUEST_AUTHOR_AUTHORIZATION';
+                $mailable = new OrcidRequestAuthorAuthorization($context, $submission, $oauthUrl);
             } else {
-                $mailTemplate = 'ORCID_COLLECT_AUTHOR_ID';
+                $mailable = new OrcidCollectAuthorId($context, $submission, $oauthUrl);
             }
 
-            $mail = $this->getMailTemplate($mailTemplate, $context);
-            $emailToken = md5(microtime() . $author->getEmail());
-
-            $author->setData('orcidEmailToken', $emailToken);
-
-            $publication = Repo::publication()->get($author->getData('publicationId'));
-
-            $oauthUrl = $this->buildOAuthUrl('orcidVerify', ['token' => $emailToken, 'publicationId' => $publication->getId()]);
-            $aboutUrl = $request->getDispatcher()->url($request, Application::ROUTE_PAGE, null, 'orcidapi', 'about', null);
-
             // Set From to primary journal contact
-            $mail->setFrom($context->getData('contactEmail'), $context->getData('contactName'));
+            $mailable->from($context->getData('contactEmail'), $context->getData('contactName'));
 
             // Send to author
-            $mail->setRecipients([['name' => $author->getFullName(), 'email' => $author->getEmail()]]);
-
-            // Send the mail with parameters
-            $mail->sendWithParams([
-                'orcidAboutUrl' => $aboutUrl,
-                'authorOrcidUrl' => $oauthUrl,
-                'authorName' => htmlspecialchars($author->getFullName()),
-                'articleTitle' => htmlspecialchars($publication->getLocalizedTitle()), // Backwards compatibility only
-                'submissionTitle' => htmlspecialchars($publication->getLocalizedTitle()),
-            ]);
+            $mailable->recipients([$author]);
+            Mail::send($mailable);
 
             if ($updateAuthor) {
                 Repo::author()->dao->update($author);
@@ -1365,5 +1344,13 @@ class OrcidProfilePlugin extends GenericPlugin
     {
         $apiUrl = $this->getSetting($contextId, 'orcidProfileAPIPath');
         return in_array($apiUrl, [ORCID_API_URL_MEMBER, ORCID_API_URL_MEMBER_SANDBOX]);
+    }
+
+    /**
+     * Add mailable to the list of mailables in the application
+     */
+    public function addMailable(string $hookName, array $args): void
+    {
+        $args[0] = array_merge($args[0], [OrcidCollectAuthorId::class, OrcidRequestAuthorAuthorization::class]);
     }
 }

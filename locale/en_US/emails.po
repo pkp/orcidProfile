@@ -20,7 +20,7 @@ msgstr "Submission ORCID"
 #, fuzzy
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"Dear {$authorName},<br/>\n"
+"Dear {$recipientName},<br/>\n"
 "<br/>\n"
 "You have been listed as an author on a manuscript submission to "
 "{$contextName}.<br/>\n"
@@ -42,7 +42,7 @@ msgstr ""
 "{$principalContactSignature}<br/>\n"
 
 msgid "emails.orcidCollectAuthorId.description"
-msgstr "This email template is used to collect the ORCID id's from authors."
+msgstr "This email is sent to collect the ORCID id's from authors."
 
 msgid "emails.orcidRequestAuthorAuthorization.subject"
 msgstr "Requesting ORCID record access"
@@ -50,7 +50,7 @@ msgstr "Requesting ORCID record access"
 #, fuzzy
 msgid "emails.orcidRequestAuthorAuthorization.body"
 msgstr ""
-"Dear {$authorName},<br>\n"
+"Dear {$recipientName},<br>\n"
 "<br>\n"
 "You have been listed as an author on the manuscript submission \""
 "{$submissionTitle}\" to {$contextName}.\n"
@@ -74,4 +74,10 @@ msgstr ""
 "{$principalContactSignature}<br>\n"
 
 msgid "emails.orcidRequestAuthorAuthorization.description"
-msgstr "This email template is used to request ORCID record access from authors."
+msgstr "This email is sent to request ORCID record access from authors."
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "ORCID OAuth authorization link"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "URL to the page about ORCID"

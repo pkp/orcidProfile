@@ -16,7 +16,7 @@ msgstr "Denne e-postmalen brukes til å spørre om ORCID-tilgang fra forfattere.
 
 msgid "emails.orcidRequestAuthorAuthorization.body"
 msgstr ""
-"Kjære {$authorName}, <br />\n"
+"Kjære {$recipientName}, <br />\n"
 "<br />\n"
 "Du er oppført som forfatter på manusinnleveringen \"{$submissionTitle}\" til "
 "{$contextName}. <br />\n"
@@ -45,7 +45,7 @@ msgstr "Denne e-posten brukes til å samle inn ORCID fra forfattere."
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
-"Kjære {$authorName}, <br />\n"
+"Kjære {$recipientName}, <br />\n"
 "<br />\n"
 "Du er oppført som forfatter på en manusinnlevering til {$contextName}. <br />"
 "\n"
