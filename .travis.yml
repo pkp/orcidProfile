@@ -6,9 +6,13 @@ os: linux
 language: php
 
 addons:
+  chrome: beta
   postgresql: "9.5"
   apt:
     update: true
+    packages:
+      - libvulkan1
+      - libu2f-udev
 
 sudo: required
 
@@ -40,9 +44,8 @@ install:
 - ln -s ${TRAVIS_BUILD_DIR} ~/${APPLICATION}/plugins/generic/orcidProfile
 
 script:
-- $(npm bin)/cypress run --spec "cypress/tests/data/10-Installation.spec.js,cypress/tests/data/20-CreateContext.spec.js"
-- "$(npm bin)/cypress run  --env orcid_url=$ORCID_URL orcid_apiPath=$ORCID_APIPATH,orcid_apiType=$ORCID_APITYPE,orcid_clientId=$ORCID_CLIENTID,orcid_clientSecret=$ORCID_SECRET,orcid_email=$ORCID_EMAIL,orcid_emailPassword=$ORCID_EMAILPASSWORD
-  --config integrationFolder=plugins/generic/orcidProfile/cypress/tests/"
+- $(npm bin)/cypress run --spec "cypress/tests/data/10-ApplicationSetup/10-Installation.cy.js,cypress/tests/data/10-ApplicationSetup/20-CreateContext.cy.js"
+- $(npm bin)/cypress run --env orcid_url=$ORCID_URL,orcid_apiPath=$ORCID_APIPATH,orcid_apiType=$ORCID_APITYPE,orcid_clientId=$ORCID_CLIENTID,orcid_clientSecret=$ORCID_SECRET,orcid_email=$ORCID_EMAIL,orcid_emailPassword=$ORCID_EMAILPASSWORD --config '{"specPattern":["plugins/generic/orcidProfile/cypress/tests/functional/*.cy.js"]}'
 
 after_failure:
   - cat error.log
