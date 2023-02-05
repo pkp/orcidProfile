@@ -1014,7 +1014,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $orcidWork = [
             'title' => [
                 'title' => [
-                    'value' => $publication->getLocalizedData('title', $publicationLocale) ?? ''
+                    'value' => strip_tags($publication->getLocalizedData('title', $publicationLocale)) ?? ''
                 ],
                 'subtitle' => [
                     'value' => $publication->getLocalizedData('subtitle', $publicationLocale) ?? ''
