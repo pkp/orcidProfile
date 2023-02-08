@@ -3,14 +3,14 @@
 <!--
   * emailTemplates.xml
   *
-  * Copyright (c) 2015-2022 University of Pittsburgh
-  * Copyright (c) 2013-2022 Simon Fraser University
-  * Copyright (c) 2003-2022 John Willinsky
+  * Copyright (c) 2015-2019 University of Pittsburgh
+  * Copyright (c) 2013-2020 Simon Fraser University
+  * Copyright (c) 2003-2020 John Willinsky
   * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
   *
   * Email templates XML file.
   -->
 <emails>
-	<email key="ORCID_COLLECT_AUTHOR_ID" subject="emails.orcidCollectAuthorId.subject" body="emails.orcidCollectAuthorId.body"/>
-	<email key="ORCID_REQUEST_AUTHOR_AUTHORIZATION" subject="emails.orcidRequestAuthorAuthorization.subject" body="emails.orcidRequestAuthorAuthorization.body"/>
+	<email key="ORCID_COLLECT_AUTHOR_ID" name="plugins.generic.orcidProfile.orcidCollectAuthorId.name" subject="emails.orcidCollectAuthorId.subject" body="emails.orcidCollectAuthorId.body"/>
+	<email key="ORCID_REQUEST_AUTHOR_AUTHORIZATION" name="plugins.generic.orcidProfile.orcidRequestAuthorAuthorization.name"  subject="emails.orcidRequestAuthorAuthorization.subject" body="emails.orcidRequestAuthorAuthorization.body"/>
 </emails>

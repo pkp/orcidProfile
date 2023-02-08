@@ -6,7 +6,7 @@
  * Copyright (c) 2018-2019 University Library Heidelberg
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
- * Page template to display from the OrcidHandler to show ORCID verification success or failure.
+ * Page template to display from the OrcidProfileHandler to show ORCID verification success or failure.
  *}
 {include file="frontend/components/header.tpl"}
 
