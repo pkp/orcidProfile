@@ -24,6 +24,7 @@ use APP\handler\Handler;
 use APP\template\TemplateManager;
 use Carbon\Carbon;
 use PKP\core\Core;
+use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
 use PKP\security\authorization\PKPSiteAccessPolicy;
 use PKP\security\authorization\UserRequiredPolicy;
@@ -34,10 +35,19 @@ class OrcidProfileHandler extends Handler
 {
     public const TEMPLATE = 'orcidVerify.tpl';
     const ORCIDPROFILEPLUGIN = 'orcidprofileplugin';
+    private bool $isSandBox;
+    private ?\PKP\plugins\Plugin $plugin;
+
 
 
     public function __construct()
     {
+        $request = Application::get()->getRequest();
+        $context = $request->getContext();
+        $contextId = $context == null ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
+        $this->plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
+        $this->isSandBox = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
+            $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX;
     }
 
     /**
@@ -78,20 +88,19 @@ class OrcidProfileHandler extends Handler
     {
         $context = $request->getContext();
         $op = $request->getRequestedOp();
-        $plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
         $contextId = ($context == null) ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
         $httpClient = Application::get()->getHttpClient();
 
         // API request: Get an OAuth token and ORCID.
         $response = $httpClient->request(
             'POST',
-            $url = $plugin->getSetting($contextId, 'orcidProfileAPIPath') . OAUTH_TOKEN_URL,
+            $url = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') . OAUTH_TOKEN_URL,
             [
                 'form_params' => [
                     'code' => $request->getUserVar('code'),
                     'grant_type' => 'authorization_code',
-                    'client_id' => $plugin->getSetting($contextId, 'orcidClientId'),
-                    'client_secret' => $plugin->getSetting($contextId, 'orcidClientSecret')
+                    'client_id' => $this->plugin->getSetting($contextId, 'orcidClientId'),
+                    'client_secret' => $this->plugin->getSetting($contextId, 'orcidClientSecret')
                 ],
                 'headers' => ['Accept' => 'application/json'],
             ]
@@ -103,7 +112,7 @@ class OrcidProfileHandler extends Handler
             $response = json_decode($response->getBody(), true);
             $orcid = $response['orcid'];
             $accessToken = $response['access_token'];
-            $orcidUri = ($plugin->getSetting($contextId, 'isSandBox') == true ? ORCID_URL_SANDBOX : ORCID_URL) . $orcid;
+            $orcidUri = ($this->isSandBox == true ? ORCID_URL_SANDBOX : ORCID_URL) . $orcid;
         }
 
         switch ($request->getUserVar('targetOp')) {
@@ -111,7 +120,7 @@ class OrcidProfileHandler extends Handler
                 // API request: get user profile (for names; email; etc)
                 $response = $httpClient->request(
                     'GET',
-                    $url = $plugin->getSetting($contextId, 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcid) . '/' . ORCID_PROFILE_URL,
+                    $url = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcid) . '/' . ORCID_PROFILE_URL,
                     [
                         'headers' => [
                             'Accept' => 'application/json',
@@ -129,7 +138,7 @@ class OrcidProfileHandler extends Handler
                 // API request: get employments (for affiliation field)
                 $httpClient->request(
                     'GET',
-                    $url = $plugin->getSetting($contextId, 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcid) . '/' . ORCID_EMPLOYMENTS_URL,
+                    $url = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . urlencode($orcid) . '/' . ORCID_EMPLOYMENTS_URL,
                     [
                         'headers' => [
                             'Accept' => 'application/json',
@@ -159,6 +168,36 @@ class OrcidProfileHandler extends Handler
 				';
                 break;
             case 'profile':
+
+                Hook::add('Schema::get::user', function ($hookName, $args) {
+                    $schema = &$args[0];
+
+                    $schema->properties->orcidAccessToken = (object)[
+                        'type' => 'string',
+                        'apiSummary' => true,
+                        'validation' => ['nullable']
+                    ];
+                    $schema->properties->orcidAccessScope = (object)[
+                        'type' => 'string',
+                        'apiSummary' => true,
+                        'validation' => ['nullable']
+                    ];
+                    $schema->properties->orcidRefreshToken = (object)[
+                        'type' => 'string',
+                        'apiSummary' => true,
+                        'validation' => ['nullable']
+                    ];
+                    $schema->properties->orcidAccessExpiresOn = (object)[
+                        'type' => 'string',
+                        'apiSummary' => true,
+                        'validation' => ['nullable']
+                    ];
+                    $schema->properties->orcidAccessDenied = (object)[
+                        'type' => 'string',
+                        'apiSummary' => true,
+                        'validation' => ['nullable']
+                    ];
+                });
                 $user = $request->getUser();
                 // Store the access token and other data for the user
                 $this->_setOrcidData($user, $orcidUri, $response);
@@ -188,9 +227,8 @@ class OrcidProfileHandler extends Handler
         $templateMgr = TemplateManager::getManager($request);
         $context = $request->getContext();
         $contextId = $context == null ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
-        $plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
 
-        $templatePath = $plugin->getTemplateResource(self::TEMPLATE);
+        $templatePath = $this->plugin->getTemplateResource(self::TEMPLATE);
 
 
         $publicationId = $request->getUserVar('state');
@@ -199,8 +237,6 @@ class OrcidProfileHandler extends Handler
             ->filterByPublicationIds([$publicationId])
             ->getMany();
 
-        $isSandBox = $plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
-            $plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX;
         $publication = Repo::publication()->get($publicationId);
 
         $authorToVerify = null;
@@ -226,7 +262,7 @@ class OrcidProfileHandler extends Handler
 
         if ($authorToVerify == null) {
             // no Author exists in the database with the supplied orcidEmailToken
-            $plugin->logError('OrcidProfileHandler::orcidverify - No author found with supplied token');
+            $this->plugin->logError('OrcidProfileHandler::orcidverify - No author found with supplied token');
             $templateMgr->assign('verifySuccess', false);
             $templateMgr->display($templatePath);
             return;
@@ -243,27 +279,27 @@ class OrcidProfileHandler extends Handler
             $authorToVerify->setData('orcidAccessExpiresOn', null);
             $authorToVerify->setData('orcidEmailToken', null);
             Repo::author()->dao->update($authorToVerify);
-            $plugin->logError('OrcidProfileHandler::orcidverify - ORCID access denied. Error description: ' . $request->getUserVar('error_description'));
+            $this->plugin->logError('OrcidProfileHandler::orcidverify - ORCID access denied. Error description: ' . $request->getUserVar('error_description'));
             $templateMgr->assign('denied', true);
             $templateMgr->display($templatePath);
             return;
         }
 
         // fetch the access token
-        $url = $plugin->getSetting($contextId, 'orcidProfileAPIPath') . OAUTH_TOKEN_URL;
+        $url = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') . OAUTH_TOKEN_URL;
 
         $httpClient = Application::get()->getHttpClient();
         $header = ['Accept' => 'application/json'];
         $postData = [
             'code' => $request->getUserVar('code'),
             'grant_type' => 'authorization_code',
-            'client_id' => $plugin->getSetting($contextId, 'orcidClientId'),
-            'client_secret' => $plugin->getSetting($contextId, 'orcidClientSecret')
+            'client_id' => $this->plugin->getSetting($contextId, 'orcidClientId'),
+            'client_secret' => $this->plugin->getSetting($contextId, 'orcidClientSecret')
         ];
 
-        $plugin->logInfo('POST ' . $url);
-        $plugin->logInfo('Request header: ' . var_export($header, true));
-        $plugin->logInfo('Request body: ' . http_build_query($postData));
+        $this->plugin->logInfo('POST ' . $url);
+        $this->plugin->logInfo('Request header: ' . var_export($header, true));
+        $this->plugin->logInfo('Request body: ' . http_build_query($postData));
         try {
             $response = $httpClient->request(
                 'POST',
@@ -274,30 +310,30 @@ class OrcidProfileHandler extends Handler
                 ]
             );
             if ($response->getStatusCode() != 200) {
-                $plugin->logError('OrcidProfileHandler::orcidverify - unexpected response: ' . $response->getStatusCode());
+                $this->plugin->logError('OrcidProfileHandler::orcidverify - unexpected response: ' . $response->getStatusCode());
                 $templateMgr->assign('authFailure', true);
 
             }
             $response = json_decode($response->getBody(), true);
 
-            $plugin->logInfo('Response body: ' . print_r($response, true));
+            $this->plugin->logInfo('Response body: ' . print_r($response, true));
             if (($response['error'] ?? null) === 'invalid_grant') {
-                $plugin->logError('Authorization code invalid, maybe already used');
+                $this->plugin->logError('Authorization code invalid, maybe already used');
                 $templateMgr->assign('authFailure', true);
 
             }
             if (isset($response['error'])) {
-                $plugin->logError("Invalid ORCID response: " . $response['error']);
+                $this->plugin->logError("Invalid ORCID response: " . $response['error']);
                 $templateMgr->assign('authFailure', true);
                 }
             // Set the orcid id using the full https uri
-            $orcidUri = ($plugin->getSetting($contextId, 'isSandBox') == true ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
+            $orcidUri = ($this->plugin->getSetting($contextId, 'isSandBox') == true ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
             if (!empty($authorToVerify->getOrcid()) && $orcidUri != $authorToVerify->getOrcid()) {
                 // another ORCID id is stored for the author
                 $templateMgr->assign('duplicateOrcid', true);
                             }
             $authorToVerify->setOrcid($orcidUri);
-            if (in_array($plugin->getSetting($contextId, 'orcidProfileAPIPath'), [ORCID_API_URL_MEMBER_SANDBOX, ORCID_API_URL_PUBLIC_SANDBOX])) {
+            if (in_array($this->plugin->getSetting($contextId, 'orcidProfileAPIPath'), [ORCID_API_URL_MEMBER_SANDBOX, ORCID_API_URL_PUBLIC_SANDBOX])) {
                 // Set a flag to mark that the stored orcid id and access token came form the sandbox api
                 $authorToVerify->setData('orcidSandbox', true);
                 $templateMgr->assign('orcid', ORCID_URL_SANDBOX . $response['orcid']);
@@ -309,10 +345,10 @@ class OrcidProfileHandler extends Handler
             $authorToVerify->setData('orcidEmailToken', null);
             $this->_setOrcidData($authorToVerify, $orcidUri, $response);
             Repo::author()->dao->update($authorToVerify);
-            if ($plugin->isMemberApiEnabled($contextId)) {
+            if ($this->plugin->isMemberApiEnabled($contextId)) {
                 if ($publication->getData('status') == PKPSubmission::STATUS_PUBLISHED) {
                     $templateMgr->assign('sendSubmission', true);
-                    $sendResult = $plugin->sendSubmissionToOrcid($publication, $request);
+                    $sendResult = $this->plugin->sendSubmissionToOrcid($publication, $request);
                     if ($sendResult === true || (is_array($sendResult) && $sendResult[$response['orcid']])) {
                         $templateMgr->assign('sendSubmissionSuccess', true);
                     }
@@ -323,13 +359,13 @@ class OrcidProfileHandler extends Handler
 
             $templateMgr->assign([
                 'verifySuccess' => true,
-                'orcidIcon' => $plugin->getIcon()
+                'orcidIcon' => $this->plugin->getIcon()
             ]);
 
 
         } catch (\GuzzleHttp\Exception\ClientException $exception) {
             $reason = $exception->getResponse()->getBody(false);
-            $plugin->logInfo("Publication fail: ${reason}");
+            $this->plugin->logInfo("Publication fail: ${reason}");
 
         }
         $templateMgr->assign('authFailure', true);
@@ -350,6 +386,7 @@ class OrcidProfileHandler extends Handler
         $userOrAuthor->setData('orcidAccessScope', $orcidResponse['scope']);
         $userOrAuthor->setData('orcidRefreshToken', $orcidResponse['refresh_token']);
         $userOrAuthor->setData('orcidAccessExpiresOn', $orcidAccessExpiresOn->toDateTimeString());
+        return $userOrAuthor;
     }
 
     /**
@@ -363,10 +400,9 @@ class OrcidProfileHandler extends Handler
         $context = $request->getContext();
         $contextId = $context == null ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
         $templateMgr = TemplateManager::getManager($request);
-        $plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
-        $templateMgr->assign('orcidIcon', $plugin->getIcon());
-        $templateMgr->assign('isMemberApi', $plugin->isMemberApiEnabled($contextId));
-        $templateMgr->display($plugin->getTemplateResource('orcidAbout.tpl'));
+        $templateMgr->assign('orcidIcon', $this->plugin->getIcon());
+        $templateMgr->assign('isMemberApi', $this->plugin->isMemberApiEnabled($contextId));
+        $templateMgr->display($this->plugin->getTemplateResource('orcidAbout.tpl'));
     }
 
 

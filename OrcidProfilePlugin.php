@@ -45,6 +45,7 @@ use APP\plugins\generic\orcidProfile\mailables\OrcidCollectAuthorId;
 use APP\plugins\generic\orcidProfile\mailables\OrcidRequestAuthorAuthorization;
 use APP\plugins\generic\orcidProfile\OrcidProfileHanlder;
 use APP\template\TemplateManager;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use PKP\components\forms\FieldOptions;
 use PKP\components\forms\publication\ContributorForm;
@@ -108,7 +109,7 @@ class OrcidProfilePlugin extends GenericPlugin
 
             // Add more ORCiD fields to user Schema
             Hook::add('Schema::get::user', function ($hookName, $args) {
-                $schema = $args[0];
+                $schema = &$args[0];
 
                 $schema->properties->orcidAccessToken = (object)[
                     'type' => 'string',
@@ -148,7 +149,7 @@ class OrcidProfilePlugin extends GenericPlugin
 
             // Add more ORCiD fields to author Schema
             Hook::add('Schema::get::author', function ($hookName, $args) {
-                $schema = $args[0];
+                $schema = &$args[0];
 
                 $schema->properties->orcidSandbox = (object)[
                     'type' => 'string',
@@ -194,7 +195,6 @@ class OrcidProfilePlugin extends GenericPlugin
 
             Hook::add('Mailer::Mailables', [$this, 'addMailable']);
 
-            #Hook::add('Form::config::before', [$this, 'addOrcidFormFields']);
             Hook::add('Author::edit', [$this, 'handleAuthorFormExecute']);
 
             Hook::add('Form::config::before', [$this, 'addOrcidFormFields']);
@@ -215,6 +215,7 @@ class OrcidProfilePlugin extends GenericPlugin
     {
 
         if (!$form instanceof ContributorForm) return Hook::CONTINUE;
+        $publication = $form->submission->getCurrentPublication();
         $form->addField(new FieldOptions('requestOrcidAuthorization', [
             'label' => __('plugins.generic.orcidProfile.verify.title'),
             'options' => [
@@ -549,6 +550,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $request = Application::get()->getRequest();
         $context = $request->getContext();
         $user = $request->getUser();
+
         $contextId = ($context == null) ? 0 : $context->getId();
         $targetOp = 'profile';
         $templateMgr->assign(
@@ -955,7 +957,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     ->getMany();
 
                 foreach ($authors as $author) {
-                    $orcidAccessExpiresOn = Carbon\Carbon::parse($author->getData('orcidAccessExpiresOn'));
+                    $orcidAccessExpiresOn = Carbon::parse($author->getData('orcidAccessExpiresOn'));
                     if ($author->getData('orcidAccessToken') == null || $orcidAccessExpiresOn->isPast()) {
                         $this->sendAuthorMail($author, true);
                     }
@@ -1002,7 +1004,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $authorsWithOrcid = [];
         foreach ($authors as $author) {
             if ($author->getOrcid() && $author->getData('orcidAccessToken')) {
-                $orcidAccessExpiresOn = Carbon\Carbon::parse($author->getData('orcidAccessExpiresOn'));
+                $orcidAccessExpiresOn = Carbon::parse($author->getData('orcidAccessExpiresOn'));
                 if ($orcidAccessExpiresOn->isFuture()) {
                     # Extract only the ORCID from the stored ORCID uri
                     $orcid = basename(parse_url($author->getOrcid(), PHP_URL_PATH));
@@ -1209,7 +1211,7 @@ class OrcidProfilePlugin extends GenericPlugin
      */
     private function buildOrcidPublicationDate($publication, $issue = null)
     {
-        $publicationPublishDate = Carbon\Carbon::parse($publication->getData('datePublished'));
+        $publicationPublishDate = Carbon::parse($publication->getData('datePublished'));
 
         return [
             'year' => ['value' => $publicationPublishDate->format('Y')],
