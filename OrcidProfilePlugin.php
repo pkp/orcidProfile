@@ -46,10 +46,9 @@ use APP\plugins\generic\orcidProfile\mailables\OrcidRequestAuthorAuthorization;
 use APP\plugins\generic\orcidProfile\OrcidProfileHanlder;
 use APP\template\TemplateManager;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Mail;
-use PKP\components\forms\FieldHTML;
 use PKP\components\forms\FieldOptions;
-use PKP\components\forms\FieldShowEnsuringLink;
 use PKP\components\forms\FieldText;
 use PKP\components\forms\publication\ContributorForm;
 use PKP\config\Config;
@@ -62,6 +61,7 @@ use PKP\plugins\GenericPlugin;
 use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
 use PKP\submission\PKPSubmission;
+use Sokil\IsoCodes\IsoCodesFactory;
 
 
 class OrcidProfilePlugin extends GenericPlugin
@@ -221,17 +221,14 @@ class OrcidProfilePlugin extends GenericPlugin
 
         $form->removeField('orcid');
 
-        // add Orcid Field to position 6
         $form->addField(new FieldText('orcid', [
             'label' => __('user.orcid'),
             'optIntoEdit' => true,
             'optIntoEditLabel' => __('common.override'),
             'isLabelInline' => true,
             'size' => 'normal',
-            'showWhen' => 'orcid'
 
-        ]),[FIELD_POSITION_AFTER, 'url']);
-
+        ]), [FIELD_POSITION_AFTER, 'url']);
 
 
         $form->addField(new FieldOptions('requestOrcidAuthorization', [
@@ -251,11 +248,10 @@ class OrcidProfilePlugin extends GenericPlugin
                 [
                     'value' => true,
                     'label' => __('plugins.generic.orcidProfile.author.deleteORCID'),
-
+                    'showWhen' => 'orcid'
                 ]
             ]
         ]));
-
 
 
         return Hook::CONTINUE;
@@ -895,7 +891,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     ORCID_API_URL_MEMBER_SANDBOX => 'plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox'
                 ]);
 
-                $isoCodes = new \Sokil\IsoCodes\IsoCodesFactory();
+                $isoCodes = new IsoCodesFactory();
                 $countries = array();
                 foreach ($isoCodes->getCountries() as $country) {
                     $countries[$country->getAlpha2()] = $country->getLocalName();
@@ -1083,7 +1079,7 @@ class OrcidProfilePlugin extends GenericPlugin
                         'json' => $orcidWork,
                     ]
                 );
-            } catch (\GuzzleHttp\Exception\ClientException $exception) {
+            } catch (ClientException $exception) {
                 $reason = $exception->getResponse()->getBody(false);
                 $this->logInfo("Publication fail: ${reason}");
                 return new JSONMessage(false);
