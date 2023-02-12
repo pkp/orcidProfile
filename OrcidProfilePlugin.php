@@ -1319,17 +1319,18 @@ class OrcidProfilePlugin extends GenericPlugin
                 }
 
                 # Add issue ids if they exist
-                $pubId = $issue->getStoredPubId('doi');
-                $doiObject = $issue->getData('doiObject');
-                if ($doiObject) {
-                    $externalIds[] = [
-                        'external-id-type' => self::PUBID_TO_ORCID_EXT_ID['doi'],
-                        'external-id-value' => $doiObject->getData('doi'),
-                        'external-id-url' => [
-                            'value' => $doiObject->getResolvingUrl()
-                        ],
-                        'external-id-relationship' => 'part-of'
-                    ];
+                if($issue) {
+                    $doiObject = $issue->getData('doiObject');
+                    if ($doiObject) {
+                        $externalIds[] = [
+                            'external-id-type' => self::PUBID_TO_ORCID_EXT_ID['doi'],
+                            'external-id-value' => $doiObject->getData('doi'),
+                            'external-id-url' => [
+                                'value' => $doiObject->getResolvingUrl()
+                            ],
+                            'external-id-relationship' => 'part-of'
+                        ];
+                    }
                 }
             }
         } else {
