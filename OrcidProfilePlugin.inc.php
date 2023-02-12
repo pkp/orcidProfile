@@ -1114,7 +1114,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     $pubIdType = $plugin->getPubIdType();
 
                     # Add article ids
-                    $pubId = $publication->getData($pubIdType);
+                    $pubId = $publication->getStoredPubId($pubIdType);
 
                     if ($pubId) {
                         $externalIds[] = [
@@ -1164,7 +1164,6 @@ class OrcidProfilePlugin extends GenericPlugin
                 }
 
                 # Add issue ids if they exist
-                $pubId = $issue->getStoredPubId('doi');
                 $doiObject = $issue->getData('doiObject');
                 if ($doiObject) {
                     $externalIds[] = [
