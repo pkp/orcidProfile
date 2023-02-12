@@ -1014,10 +1014,10 @@ class OrcidProfilePlugin extends GenericPlugin
         $orcidWork = [
             'title' => [
                 'title' => [
-                    'value' => $publication->getLocalizedData('title', $publicationLocale) ?? ''
+                    'value' => $publication->getLocalizedTitle($publicationLocale) ?? ''
                 ],
                 'subtitle' => [
-                    'value' => $publication->getLocalizedData('subtitle', $publicationLocale) ?? ''
+                    'value' => $publication->getLocalizedSubTitle($publicationLocale) ?? ''
                 ]
             ],
             'journal-title' => [
