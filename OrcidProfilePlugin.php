@@ -110,36 +110,6 @@ class OrcidProfilePlugin extends GenericPlugin
             // Send emails to authors without ORCID id upon submission
             Hook::add('submissionsubmitstep3form::execute', [$this, 'handleSubmissionSubmitStep3FormExecute']);
 
-            // Add more ORCiD fields to user Schema
-            Hook::add('Schema::get::user', function ($hookName, $args) {
-                $schema = &$args[0];
-
-                $schema->properties->orcidAccessToken = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessScope = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidRefreshToken = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessExpiresOn = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessDenied = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-            });
 
             // Send emails to authors without authorised ORCID access on promoting a submission to copy editing. Not included in OPS.
             if ($this->getSetting($contextId, 'sendMailToAuthorsOnPublication')) {
@@ -196,6 +166,37 @@ class OrcidProfilePlugin extends GenericPlugin
                 ];
             });
 
+            // Add more ORCiD fields to user Schema
+            Hook::add('Schema::get::user', function ($hookName, $args) {
+                $schema = &$args[0];
+
+                $schema->properties->orcidAccessToken = (object)[
+                    'type' => 'string',
+                    'apiSummary' => true,
+                    'validation' => ['nullable']
+                ];
+                $schema->properties->orcidAccessScope = (object)[
+                    'type' => 'string',
+                    'apiSummary' => true,
+                    'validation' => ['nullable']
+                ];
+                $schema->properties->orcidRefreshToken = (object)[
+                    'type' => 'string',
+                    'apiSummary' => true,
+                    'validation' => ['nullable']
+                ];
+                $schema->properties->orcidAccessExpiresOn = (object)[
+                    'type' => 'string',
+                    'apiSummary' => true,
+                    'validation' => ['nullable']
+                ];
+                $schema->properties->orcidAccessDenied = (object)[
+                    'type' => 'string',
+                    'apiSummary' => true,
+                    'validation' => ['nullable']
+                ];
+            });
+
             Hook::add('Mailer::Mailables', [$this, 'addMailable']);
 
             Hook::add('Author::edit', [$this, 'handleAuthorFormExecute']);
@@ -225,8 +226,7 @@ class OrcidProfilePlugin extends GenericPlugin
             'label' => __('user.orcid'),
             'optIntoEdit' => true,
             'optIntoEditLabel' => __('common.override'),
-            'isLabelInline' => true,
-            'size' => 'normal',
+            'tooltip' => __('plugins.generic.orcidProfile.about.orcidExplanation'),
 
         ]), [FIELD_POSITION_AFTER, 'url']);
 
@@ -235,7 +235,6 @@ class OrcidProfilePlugin extends GenericPlugin
             'label' => __('plugins.generic.orcidProfile.verify.title'),
             'options' => [
                 [
-                    'value' => true,
                     'label' => __('plugins.generic.orcidProfile.author.requestAuthorization'),
 
                 ]
@@ -246,9 +245,8 @@ class OrcidProfilePlugin extends GenericPlugin
             'label' => __('plugins.generic.orcidProfile.displayName'),
             'options' => [
                 [
-                    'value' => true,
                     'label' => __('plugins.generic.orcidProfile.author.deleteORCID'),
-                    'showWhen' => 'orcid'
+                    'showWhen'  => 'orcid'
                 ]
             ]
         ]));
@@ -350,7 +348,7 @@ class OrcidProfilePlugin extends GenericPlugin
      */
     public function handleFormDisplay($hookName, $args)
     {
-        //TODO orcid
+        //TODO
         $request = Application::get()->getRequest();
         $templateMgr = TemplateManager::getManager($request);
         switch ($hookName) {
