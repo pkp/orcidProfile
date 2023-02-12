@@ -169,35 +169,6 @@ class OrcidProfileHandler extends Handler
                 break;
             case 'profile':
 
-                Hook::add('Schema::get::user', function ($hookName, $args) {
-                    $schema = &$args[0];
-
-                    $schema->properties->orcidAccessToken = (object)[
-                        'type' => 'string',
-                        'apiSummary' => true,
-                        'validation' => ['nullable']
-                    ];
-                    $schema->properties->orcidAccessScope = (object)[
-                        'type' => 'string',
-                        'apiSummary' => true,
-                        'validation' => ['nullable']
-                    ];
-                    $schema->properties->orcidRefreshToken = (object)[
-                        'type' => 'string',
-                        'apiSummary' => true,
-                        'validation' => ['nullable']
-                    ];
-                    $schema->properties->orcidAccessExpiresOn = (object)[
-                        'type' => 'string',
-                        'apiSummary' => true,
-                        'validation' => ['nullable']
-                    ];
-                    $schema->properties->orcidAccessDenied = (object)[
-                        'type' => 'string',
-                        'apiSummary' => true,
-                        'validation' => ['nullable']
-                    ];
-                });
                 $user = $request->getUser();
                 // Store the access token and other data for the user
                 $this->_setOrcidData($user, $orcidUri, $response);
@@ -327,7 +298,7 @@ class OrcidProfileHandler extends Handler
                 $templateMgr->assign('authFailure', true);
                 }
             // Set the orcid id using the full https uri
-            $orcidUri = ($this->plugin->getSetting($contextId, 'isSandBox') == true ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
+            $orcidUri = ($this->isSandBox ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
             if (!empty($authorToVerify->getOrcid()) && $orcidUri != $authorToVerify->getOrcid()) {
                 // another ORCID id is stored for the author
                 $templateMgr->assign('duplicateOrcid', true);

@@ -47,7 +47,10 @@ use APP\plugins\generic\orcidProfile\OrcidProfileHanlder;
 use APP\template\TemplateManager;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use PKP\components\forms\FieldHTML;
 use PKP\components\forms\FieldOptions;
+use PKP\components\forms\FieldShowEnsuringLink;
+use PKP\components\forms\FieldText;
 use PKP\components\forms\publication\ContributorForm;
 use PKP\config\Config;
 use PKP\core\Core;
@@ -215,25 +218,46 @@ class OrcidProfilePlugin extends GenericPlugin
     {
 
         if (!$form instanceof ContributorForm) return Hook::CONTINUE;
-        $publication = $form->submission->getCurrentPublication();
+
+        $form->removeField('orcid');
+
+        // add Orcid Field to position 6
+        $form->addField(new FieldText('orcid', [
+            'label' => __('user.orcid'),
+            'optIntoEdit' => true,
+            'optIntoEditLabel' => __('common.override'),
+            'isLabelInline' => true,
+            'size' => 'normal',
+            'showWhen' => 'orcid'
+
+        ]),[FIELD_POSITION_AFTER, 'url']);
+
+
+
         $form->addField(new FieldOptions('requestOrcidAuthorization', [
             'label' => __('plugins.generic.orcidProfile.verify.title'),
             'options' => [
                 [
                     'value' => true,
-                    'label' => __('plugins.generic.orcidProfile.author.requestAuthorization')
+                    'label' => __('plugins.generic.orcidProfile.author.requestAuthorization'),
+
                 ]
             ]
         ]));
+
         $form->addField(new FieldOptions('deleteORCID', [
             'label' => __('plugins.generic.orcidProfile.displayName'),
             'options' => [
                 [
                     'value' => true,
-                    'label' => __('plugins.generic.orcidProfile.author.deleteORCID')
+                    'label' => __('plugins.generic.orcidProfile.author.deleteORCID'),
+
                 ]
             ]
         ]));
+
+
+
         return Hook::CONTINUE;
     }
 
