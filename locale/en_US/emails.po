@@ -81,3 +81,9 @@ msgstr "ORCID OAuth authorization link"
 
 msgid "emailTemplate.variable.orcidAboutUrl"
 msgstr "URL to the page about ORCID"
+
+msgid "plugins.generic.orcidProfile.orcidRequestAuthorAuthorization.name"
+msgstr "orcidRequestAuthorAuthorization"
+
+msgid "plugins.generic.orcidProfile.orcidCollectAuthorId.name"
+msgstr "orcidCollectAuthorId"

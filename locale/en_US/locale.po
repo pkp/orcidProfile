@@ -41,6 +41,9 @@ msgstr "Please configure the ORCID API access for use in pulling ORCID profile i
 msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
 msgstr "The ORCID API was configured globally by the host. The following credentials have been saved."
 
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Due to validation errors, plugin was disabled."
+
 msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
 msgstr "ORCID API"
 
@@ -68,6 +71,9 @@ msgstr "Profile Access Scope"
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "E-Mail Settings"
 
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Settings saved"
+
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
 msgstr "Send e-mail to request ORCID authorization from authors when an article is accepted ie. sent to copy editing"
 
@@ -82,6 +88,18 @@ msgstr "Errors"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
 msgstr "All"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "City"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Country"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Review Location settings"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr "Select City, Country for enabling sending reviewer information to ORCID"
 
 msgid "plugins.generic.orcidProfile.author.accessDenied"
 msgstr "ORCID access was denied at"
@@ -127,6 +145,9 @@ msgstr "You denied access to your ORCID record."
 
 msgid "plugins.generic.orcidProfile.authFailure"
 msgstr "The ORCID authorization link has already been used or is invalid."
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Invalid client credentials"
 
 msgid "plugins.generic.orcidProfile.failure.contact"
 msgstr "Please contact the journal manager with your name, ORCID iD, and details of your submission."
@@ -209,3 +230,31 @@ msgstr "Invalid client ID"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
 msgstr "Invalid client secret"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "OrcidProfile Plugin Status"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "OrcidProfile Plugin enabled"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "OrcidProfile Plugin disabled"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Globally configured in config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Journal-wise configured"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "Client Id is valid"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "Client Id is invalid valid, please check your input"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Client Secret is valid"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Client Secret is invalid valid, please check your credentials"
+

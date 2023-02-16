@@ -45,6 +45,14 @@
 				{/if}
 			{/fbvFormSection}
 		{/fbvFormArea}
+        {if $applicationName == 'ojs2'}
+        {fbvFormSection for="coutries" title="plugins.generic.orcidProfile.manager.settings.review"}
+			<p class="pkp_help">{translate key="plugins.generic.orcidProfile.manager.settings.review.help"}</p>
+        {fbvElement id="country"  label="plugins.generic.orcidProfile.manager.settings.country" name="country" type="select" from=$countries translate=false selected=$country}
+        {/fbvFormSection}
+        {fbvElement type="text" id="city" value=$city  label="plugins.generic.orcidProfile.manager.settings.city" maxlength="40" size=$fbvStyles.size.MEDIUM }
+        {/if}
+
 		{fbvFormSection for="sendMailToAuthorsOnPublication" title="plugins.generic.orcidProfile.manager.settings.mailSectionTitle" list="true"}
 			{fbvElement type="checkbox" name="sendMailToAuthorsOnPublication" label="plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication" id="sendMailToAuthorsOnPublication" checked=$sendMailToAuthorsOnPublication}
 		{/fbvFormSection}
