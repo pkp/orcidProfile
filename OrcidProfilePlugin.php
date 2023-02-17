@@ -409,7 +409,7 @@ class OrcidProfilePlugin extends GenericPlugin
     {
         $publicationUrl = $request->getDispatcher()->url($request, PKPApplication::ROUTE_PAGE, null, 'article', 'view', $submission->getId());
         $context = $request->getContext();
-        $publicationLocale = ($submission->getData('locale')) ? $submission->getData('locale') : 'en_US';
+        $publicationLocale = ($submission->getData('locale')) ? $submission->getData('locale') : 'en';
         $pubIdPlugins = PluginRegistry::loadCategory('pubIds', true, $context->getId()); // DO not remove
         $supportedSubmissionLocales = $context->getSupportedSubmissionLocales();
 
@@ -1326,7 +1326,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $applicationName = Application::get()->getName();
         $bibtexCitation = '';
 
-        $publicationLocale = ($publication->getData('locale')) ? $publication->getData('locale') : 'en_US';
+        $publicationLocale = ($publication->getData('locale')) ? $publication->getData('locale') : 'en';
         $supportedSubmissionLocales = $context->getSupportedSubmissionLocales();
 
         $publicationUrl = $request->getDispatcher()->url($request, Application::ROUTE_PAGE, null, 'article', 'view', $submission->getId());
@@ -1555,7 +1555,7 @@ class OrcidProfilePlugin extends GenericPlugin
             ];
 
             $userGroup = $author->getUserGroup();
-            $role = self::USER_GROUP_TO_ORCID_ROLE[$userGroup->getName('en_US')];
+            $role = self::USER_GROUP_TO_ORCID_ROLE[$userGroup->getName('en')];
 
             if ($role) {
                 $contributor['contributor-attributes']['contributor-role'] = $role;
