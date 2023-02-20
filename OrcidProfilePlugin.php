@@ -213,6 +213,8 @@ class OrcidProfilePlugin extends GenericPlugin
 
             Hook::add('Form::config::before', [$this, 'addOrcidFormFields']);
 
+            Hook::add('Installer::postInstall', [$this, 'updateSchema']);
+
         }
 
         return $success;
@@ -1637,5 +1639,23 @@ class OrcidProfilePlugin extends GenericPlugin
         foreach ([OrcidCollectAuthorId::class, OrcidRequestAuthorAuthorization::class] as $mailable) {
             $args[0]->push($mailable);
         }
+    }
+
+    /**
+     * @copydoc Plugin::updateSchema()
+     */
+    public function updateSchema($hookName, $args)
+    {
+        $installer = $args[0];
+        $result = &$args[1];
+        $migration = new OrcidProfileEmailDataMigration($installer, $this);
+        try {
+            $migration->up();
+        } catch (Exception $e) {
+            $installer->setError(Installer::INSTALLER_ERROR_DB, __('installer.installMigrationError', ['class' => get_class($migration), 'message' => $e->getMessage()]));
+            $result = false;
+        }
+
+        return false;
     }
 }
