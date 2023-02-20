@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @file ManualPaymentEmailDataMigration.php
+ * @file OrcidProfileDataMigration.php
  *
  * Copyright (c) 2014-2023 Simon Fraser University
  * Copyright (c) 2000-2023 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
- * @class ManualPaymentEmailDataMigration
+ * @class OrcidProfileDataMigration
  * @brief Migrations for the plugin's email templates
  */
 
@@ -48,7 +48,7 @@ class OrcidProfileEmailDataMigration extends Migration
     }
 
     /**
-     * Adds name to the MANUAL_PAYMENT_NOTIFICATION email template
+     * Adds name to the email template
      * Execute only during upgrade to 3.4
      */
     public function migrateEmailTemplatesName(): void
