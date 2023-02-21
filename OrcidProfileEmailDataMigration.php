@@ -37,12 +37,12 @@ class OrcidProfileEmailDataMigration extends Migration
      */
     public function up(): void
     {
-        $currentVersion = $this->installer->getCurrentVersion();
-        $newVersion = $this->installer->getNewVersion();
-        if (
-            $currentVersion->compare('3.4.0.0') < 0 &&
-            $newVersion->compare('3.4.0.0') >= 0
-        ) {
+        $pluginValid = $this->plugin ? $this->plugin->getCurrentVersion()->compare('1.3.4.1') > 0 : false;
+        $productValid = $this->installer ? $this->installer->getCurrentVersion()->compare('3.4.0.0') < 0
+            && $this->installer->getNewVersion()->compare('3.4.0.0') >= 0 : false;
+
+        if ($productValid or $pluginValid) {
+
             $this->migrateEmailTemplatesName();
         }
     }
