@@ -39,7 +39,7 @@ class OrcidProfileEmailDataMigration extends Migration
     {
         if ($this->installer) {
             $version = $this->installer->getCurrentVersion();
-            if ($version->getProduct() == 'ojs2') {
+            if (in_array($version->getProduct(), ['ojs2', 'ops'])) {
                 if ($version->compare('3.4.0.0') < 0
                     && $this->installer->getNewVersion()->compare('3.4.0.0') >= 0) {
                     $this->migrateEmailTemplatesName();
