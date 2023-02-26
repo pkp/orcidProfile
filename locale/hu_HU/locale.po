@@ -43,7 +43,7 @@ msgstr "Hol kerülnek az ORCID azonosítók megjelenítésre? "
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"Megerősítve, hogy a személyi azonosítója hitelesítésre került, az ORCID azonosító ikonját <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> megjelenítjük neve mellett a beküldött cikk oldalán, valamint a nyilvános felhasználói profilon.   .<br>\r\n"
+"Megerősítve, hogy a személyi azonosítója hitelesítésre került, az ORCID azonosító ikonját <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> megjelenítjük neve mellett a beküldött cikk oldalán, valamint a nyilvános felhasználói profilon.   .<br>\r\n"
 "\t\tTovábbi információk az alábbi hivatkozás alatt érhetők el: <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">How should an ORCID iD be displayed.</a>\r\n"
 ""
 

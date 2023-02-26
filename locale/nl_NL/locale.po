@@ -174,7 +174,7 @@ msgstr "Waar worden ORCID ID's getoond?"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"Om aan te geven dat u uw ID heeft gebruikt en dat dit geauthenticeerd is, wordt het ORCID ID icoon <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"/> getoond naast uw naam bij de weergave van uw inzending en op uw publieke gebruikersprofiel.<br/>\n"
+"Om aan te geven dat u uw ID heeft gebruikt en dat dit geauthenticeerd is, wordt het ORCID ID icoon <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"/> getoond naast uw naam bij de weergave van uw inzending en op uw publieke gebruikersprofiel.<br/>\n"
 "\t\tMeer informatie op <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">How should an ORCID iD be displayed.</a>"
 
 msgid "plugins.generic.orcidProfile.about.howAndWhyMemberAPI"

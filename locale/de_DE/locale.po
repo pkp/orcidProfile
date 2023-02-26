@@ -170,7 +170,7 @@ msgstr "Wo werden ORCID iDs angezeigt?"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"To acknowledge that you have used your iD and that it has been authenticated, we display the ORCID iD icon <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> alongside your name on the article page of your submission and on your public user profile.<br>\n"
+"To acknowledge that you have used your iD and that it has been authenticated, we display the ORCID iD icon <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> alongside your name on the article page of your submission and on your public user profile.<br>\n"
 "\tLearn more in <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">How should an ORCID iD be displayed.</a>"
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"

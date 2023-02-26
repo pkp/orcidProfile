@@ -168,7 +168,7 @@ msgstr "Kje so ORCID iDji prikazani?"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"Kot potrditev vaše uporabe vašega ORCID iDja in njegtovo avtorizacijo se prkazuje ORCID id ikona <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> poleg vašega imena na strani članka in na vašem javnem profilu.<br>\n"
+"Kot potrditev vaše uporabe vašega ORCID iDja in njegtovo avtorizacijo se prkazuje ORCID id ikona <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> poleg vašega imena na strani članka in na vašem javnem profilu.<br>\n"
 "        Več na <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">How should an ORCID iD be displayed.</a>"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
