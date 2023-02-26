@@ -291,7 +291,7 @@ class OrcidHandler extends Handler
 			if ($plugin->isMemberApiEnabled($contextId)) {
 				if ($publication->getData('status') == STATUS_PUBLISHED) {
 					$templateMgr->assign('sendSubmission', true);
-					$sendResult = $plugin->sendSubmissionToOrcid($publication, $request);
+					$sendResult = $plugin->publishAuthorWorkToOrcid($publication, $request);
 					if ($sendResult === true || (is_array($sendResult) && $sendResult[$responseJson['orcid']])) {
 						$templateMgr->assign('sendSubmissionSuccess', true);
 					}

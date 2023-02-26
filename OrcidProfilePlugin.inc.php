@@ -921,6 +921,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 **/
 	public function publishAuthorWorkToOrcid($publication, $request) {
 		$this::logInfo("Publishing  publication with id ".$publication->getData('id')  );
+		$templateMgr = TemplateManager::getManager($request);
 		$context = $request->getContext();
 		$contextId = $context->getId();
 		$publicationId = $publication->getId();
@@ -1005,6 +1006,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 			} catch (ClientException $exception) {
 				$reason = $exception->getResponse()->getBody(false);
 				$this->logInfo("Publication fail: $reason");
+				$templateMgr->assign('orcidAPIError', $reason);
 				return new JSONMessage(false);
 			}
 			$httpstatus = $response->getStatusCode();
