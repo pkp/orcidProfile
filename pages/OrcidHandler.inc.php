@@ -280,7 +280,7 @@ class OrcidHandler extends Handler {
 		if (isset($response['error'])) {
 			if ($response['error'] === 'invalid_grant') {
 				$templateMgr->assign('denied', true);
-				$plugin->logError("Response status: $httpstatus . Authroization code invalid, maybe already used");
+				$plugin->logError("Response status: $httpstatus . Authorization code invalid, maybe already used");
 
 			} elseif ($response['error'] === 'invalid_client') {
 				$templateMgr->assign('invalidClient', true);
