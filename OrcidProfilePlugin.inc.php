@@ -823,6 +823,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		switch ($newPublication->getData('status')) {
 			case STATUS_PUBLISHED:
 			case STATUS_SCHEDULED:
+				$this->logInfo("Expected publication status (5 or 3):  ".$newPublication->getData('status'));
 				$this->publishAuthorWorkToOrcid($newPublication, $request);
 				break;
 		}
@@ -919,6 +920,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 *
 	 **/
 	public function publishAuthorWorkToOrcid($publication, $request) {
+		$this::logInfo("Publishing  publication with id ".$publication->getData('id')  );
 		$context = $request->getContext();
 		$contextId = $context->getId();
 		$publicationId = $publication->getId();
@@ -926,6 +928,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 		if (!$this->isMemberApiEnabled($contextId)) {
 			// Sending to ORCID only works with the member API
+			$this->logInfo("Member API disabled");
 			return false;
 		}
 
@@ -964,6 +967,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 		$requestsSuccess = [];
 		foreach ($authorsWithOrcid as $orcid => $author) {
+			$this->logInfo("Publishing author work ". $author->getData('orcid'));
 			$uri = $this->getSetting($contextId, 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . $orcid . '/' . ORCID_WORK_URL;
 			$method = "POST";
 
@@ -997,6 +1001,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 						'json' => $orcidWork,
 					]
 				);
+
 			} catch (ClientException $exception) {
 				$reason = $exception->getResponse()->getBody(false);
 				$this->logInfo("Publication fail: $reason");
@@ -1110,7 +1115,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				$orcidReview['review-url'] = ['value' => $publicationUrl];
 				$orcidReview['subject-type'] = 'journal-article';
 				$orcidReview['subject-name']= [
-					'title' => ['value' => $submission->getCurrentPublication()->getLocalizedData('title') ?? '']
+					'title' => ['value' => $submission->getCurrentPublication()->getLocalizedTitle() ?? '']
 				];
 
 
@@ -1134,7 +1139,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 			foreach ($supportedSubmissionLocales as $defaultLanguage) {
 				if ($defaultLanguage !== $publicationLocale) {
 					$iso2LanguageCode = substr($defaultLanguage, 0, 2);
-					$defaultTitle = $submission->getLocalizedData($iso2LanguageCode);
+					$defaultTitle = $submission->getLocalizedTitle($iso2LanguageCode);
 					if (strlen($defaultTitle) > 0 && !$translatedTitleAvailable) {
 						$orcidReview['subject-name']['translated-title'] = ['value' => $defaultTitle, 'language-code' => $iso2LanguageCode];
 						$translatedTitleAvailable = true;
@@ -1197,7 +1202,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		$orcidWork = [
 			'title' => [
 				'title' => [
-					'value' => $publication->getLocalizedData('title', $publicationLocale) ?? ''
+					'value' => $publication->getLocalizedTitle() ?? ''
 				],
 				'subtitle' => [
 					'value' => $publication->getLocalizedData('subtitle', $publicationLocale) ?? ''
