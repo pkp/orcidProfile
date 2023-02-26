@@ -1115,7 +1115,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				$orcidReview['review-url'] = ['value' => $publicationUrl];
 				$orcidReview['subject-type'] = 'journal-article';
 				$orcidReview['subject-name']= [
-					'title' => ['value' => $submission->getCurrentPublication()->getLocalizedData('title') ?? '']
+					'title' => ['value' => $submission->getCurrentPublication()->getLocalizedTitle() ?? '']
 				];
 
 
@@ -1139,7 +1139,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 			foreach ($supportedSubmissionLocales as $defaultLanguage) {
 				if ($defaultLanguage !== $publicationLocale) {
 					$iso2LanguageCode = substr($defaultLanguage, 0, 2);
-					$defaultTitle = $submission->getLocalizedData($iso2LanguageCode);
+					$defaultTitle = $submission->getLocalizedTitle($iso2LanguageCode);
 					if (strlen($defaultTitle) > 0 && !$translatedTitleAvailable) {
 						$orcidReview['subject-name']['translated-title'] = ['value' => $defaultTitle, 'language-code' => $iso2LanguageCode];
 						$translatedTitleAvailable = true;
@@ -1202,7 +1202,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		$orcidWork = [
 			'title' => [
 				'title' => [
-					'value' => $publication->getLocalizedData('title', $publicationLocale) ?? ''
+					'value' => $publication->getLocalizedTitle() ?? ''
 				],
 				'subtitle' => [
 					'value' => $publication->getLocalizedData('subtitle', $publicationLocale) ?? ''
