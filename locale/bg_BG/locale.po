@@ -157,5 +157,5 @@ msgstr "Къде се показват ORCID идентификатори?"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"За да се потвърди, че Вие използвате свой идентификатор и че той е удостоверен, ние показваме икона ORCID iD <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> срещу Вашето име на страницата на предложена от Вас статия и във Вашия обществено достъпен профил.<br>\n"
+"За да се потвърди, че Вие използвате свой идентификатор и че той е удостоверен, ние показваме икона ORCID iD <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> срещу Вашето име на страницата на предложена от Вас статия и във Вашия обществено достъпен профил.<br>\n"
 "\t\tНаучете повече на <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">How should an ORCID iD be displayed.</a>"

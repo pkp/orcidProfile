@@ -192,7 +192,7 @@ msgstr "Onde ficam disponíveis os ORCID iDs?"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"Para confirmar que tem usado o seu iD e que se encontra autenticado, disponibilizamos o ícon do ORCID iD <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> ao lado do seu nome na página do artigo da sua submissão e no seu perfil de utilizador público.<br>\n"
+"Para confirmar que tem usado o seu iD e que se encontra autenticado, disponibilizamos o ícon do ORCID iD <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> ao lado do seu nome na página do artigo da sua submissão e no seu perfil de utilizador público.<br>\n"
 "\t\tSaiba mais em <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">Como deve ser disponibilizado o ORCID iD.</a>"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"

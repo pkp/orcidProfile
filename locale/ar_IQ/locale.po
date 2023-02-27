@@ -158,7 +158,7 @@ msgstr "أين يتم عرض رموز ORCID ؟"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"للتعرف على أنك قمت مسبقاً باستعمال رمزك وأنه مفوض من قبلك، نقوم بعرض إيقونة رمز ORCID <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"إيقونة الرمز\" width=\"16\" height=\"16\" border=\"0\"> بجوار اسمك على صفحة المقالة الخاصة بطلب تقديمك وعلى صفحة حسابك الشخصي.<br>\n"
+"للتعرف على أنك قمت مسبقاً باستعمال رمزك وأنه مفوض من قبلك، نقوم بعرض إيقونة رمز ORCID <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"إيقونة الرمز\" width=\"16\" height=\"16\" border=\"0\"> بجوار اسمك على صفحة المقالة الخاصة بطلب تقديمك وعلى صفحة حسابك الشخصي.<br>\n"
 "\tتعرف على المزيد في <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">كيف يجب عرض رمز ORCID.</a>"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"

@@ -178,7 +178,7 @@ msgstr "Missä ORCID-tunnisteet näkyvät?"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
-"Vahvistettujen ORCID-tunnisteiden yhteydessä näkyy ORCID-logo <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\">tekijän nimen vieressä ja julkisessa käyttäjäprofiilissa."
+"Vahvistettujen ORCID-tunnisteiden yhteydessä näkyy ORCID-logo <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\">tekijän nimen vieressä ja julkisessa käyttäjäprofiilissa."
 "Lue lisää siitä <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">miten ORCID-tunniste tulisi esittää.</a>"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
