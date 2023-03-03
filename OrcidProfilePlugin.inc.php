@@ -3,9 +3,9 @@
 /**
  * @file OrcidProfilePlugin.inc.php
  *
- * Copyright (c) 2015-2019 University of Pittsburgh
- * Copyright (c) 2014-2021 Simon Fraser University
- * Copyright (c) 2003-2021 John Willinsky
+ * Copyright (c) 2015-2022 University of Pittsburgh
+ * Copyright (c) 2014-2022 Simon Fraser University
+ * Copyright (c) 2003-2022 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfilePlugin
@@ -152,8 +152,10 @@ class OrcidProfilePlugin extends GenericPlugin {
 		$request = PKPApplication::get()->getRequest();
 		$context = $request->getContext();
 		$newPublication =& $args[0];
-		if ($this->getSetting($context->getId(), 'country') && $this->getSetting($context->getId(), 'city')) {
-			$this->publishReviewerWorkToOrcid($newPublication, $request);
+		if ($this->isMemberApiEnabled($this->currentContextId)) {
+			if ($this->getSetting($context->getId(), 'country') && $this->getSetting($context->getId(), 'city')) {
+				$this->publishReviewerWorkToOrcid($newPublication, $request);
+			}
 		}
 	}
 
@@ -189,21 +191,22 @@ class OrcidProfilePlugin extends GenericPlugin {
 		return $config_value ?: parent::getSetting($contextId, $name);
 	}
 
-
-	/**
-	 * Hook callback: register pages for each sushi-lite method
-	 * This URL is of the form: orcidapi/{$orcidrequest}
-	 * @see PKPPageRouter::route()
-	 */
-	function setupCallbackHandler($hookName, $params) {
-		$page = $params[0];
-		if ($this->getEnabled() && $page == 'orcidapi') {
-			$this->import('pages/OrcidHandler');
-			define('HANDLER_CLASS', 'OrcidHandler');
-			return true;
-		}
-		return false;
-	}
+    /**
+     * Hook callback: register pages for each sushi-lite method
+     * This URL is of the form: orcidapi/{$orcidrequest}
+     *
+     * @see PKPPageRouter::route()
+     */
+    public function setupCallbackHandler($hookName, $params)
+    {
+        $page = $params[0];
+        if ($this->getEnabled() && $page == 'orcidapi') {
+            $this->import('pages/OrcidHandler');
+            define('HANDLER_CLASS', 'OrcidHandler');
+            return true;
+        }
+        return false;
+    }
 
 	/**
 	 * Check if there exist a valid orcid configuration section in the global config.inc.php of OJS.
@@ -386,6 +389,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		return file_exists($path) ? file_get_contents($path) : '';
 	}
 
+
 	/**
 	 * @return bool True if the ORCID Member API has been selected in this context.
 	 */
@@ -397,6 +401,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 			return false;
 		}
 	}
+
 
 	/**
 	 * Return the OAUTH path (prod or sandbox) based on the current API configuration
@@ -726,6 +731,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 	function getDisplayName() {
 		return __('plugins.generic.orcidProfile.displayName');
 	}
+
 
 	function setEnabled($enabled) {
 		$contextId = $this->getCurrentContextId();
