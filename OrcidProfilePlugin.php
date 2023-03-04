@@ -112,7 +112,7 @@ class OrcidProfilePlugin extends GenericPlugin
             Hook::add('registrationform::execute', [$this, 'collectUserOrcidId']);
 
             // Send emails to authors without ORCID id upon submission
-            Hook::add('submissionsubmitstep3form::execute', [$this, 'handleSubmissionSubmitStep3FormExecute']);
+            //TODO Hook::add('submissionsubmitstep3form::execute', [$this, 'handleSubmissionSubmitStep3FormExecute']);
 
             // Send emails to authors without authorised ORCID access on promoting a submission to copy editing. Not included in OPS.
             if ($this->getSetting($contextId, 'sendMailToAuthorsOnPublication')) {
