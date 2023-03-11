@@ -213,6 +213,8 @@ class OrcidProfilePlugin extends GenericPlugin
 
             Hook::add('Form::config::before', [$this, 'addOrcidFormFields']);
 
+            Hook::add('Publication::validatePublish', [$this, 'validate']);
+
         }
 
         return $success;
@@ -1639,4 +1641,28 @@ class OrcidProfilePlugin extends GenericPlugin
             $args[0]->push($mailable);
         }
     }
+
+    /**
+     * Pre-publication checks
+     * @param $hookName
+     * @param $args
+     * @return false
+     */
+    function validate($hookName, $args)
+    {
+        $errors =& $args[0];
+        $publication = $args[1];
+        $orcidIds = [];
+        foreach ($publication->getData('authors') as $author) {
+            $authorOrcid = $author->getData('orcid');
+            if ($authorOrcid and in_array($authorOrcid, $orcidIds)) {
+                $errors['hasDuplicateOrcids'] = __('plugins.generic.orcidProfile.verify.duplicateOrcidAuthor');
+            } else {
+                $orcidIds [] = $authorOrcid;
+            }
+        }
+        return false;
+    }
+
+
 }
