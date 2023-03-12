@@ -1498,6 +1498,8 @@ class OrcidProfilePlugin extends GenericPlugin {
 			$authorOrcid = $author->getData('orcid');
 			if ($authorOrcid and in_array($authorOrcid, $orcidIds)) {
 				$errors['hasDuplicateOrcids'] = __('plugins.generic.orcidProfile.verify.duplicateOrcidAuthor');
+			} elseif ($authorOrcid && !$author->getData('orcidAccessToken')) {
+				$errors['hasUnauthenticatedOrcid'] = __('plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid');
 			} else {
 				$orcidIds [] = $authorOrcid;
 			}

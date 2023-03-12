@@ -225,3 +225,6 @@ msgstr "Client Secret is invalid valid, please check your credentials"
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
 msgstr "Duplicate ORCiDs for contributors detected."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Unauthenticated ORCiDs for contributors detected."
