@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2023-02-27 15:57+0000\n"
+"PO-Revision-Date: 2023-03-15 09:48+0000\n"
 "Last-Translator: José Carvalho <jcarvalho@keep.pt>\n"
 "Language-Team: Portuguese (Portugal) <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/pt_PT/>\n"
@@ -285,3 +285,9 @@ msgstr "Client Secret válido"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
 msgstr "Client Secret inválido, verifique os dados introduzidos"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Foram identificados ORCIDs duplicados nos contribuidores."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Foram detetados ORCIDs não autenticados de autores."
