@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2023-02-26 23:14+0000\n"
+"PO-Revision-Date: 2023-03-15 09:48+0000\n"
 "Last-Translator: Primož Svetek <primoz.svetek@gmail.com>\n"
 "Language-Team: Slovenian <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/sl/>\n"
@@ -258,3 +258,9 @@ msgstr "Secret odjemalca je veljaven"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
 msgstr "Secret odjemalca je neveljaven, prosimo preverite vnešene podatke"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Zaznani so bili podvojeni ORCiD identifikatorji za avtorje."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Zaznani so bili neavtenticirani ORCiD identifikatorji za avtorje."
