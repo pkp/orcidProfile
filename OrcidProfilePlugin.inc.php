@@ -1076,6 +1076,17 @@ class OrcidProfilePlugin extends GenericPlugin {
 			return $requestsSuccess;
 		}
 	}
+	/**
+	 * Encode DOI according to ANSI/NISO Z39.84-2005, Appendix E.
+	 * @param $pubId string
+	 * @return string
+	 */
+	function _doiURLEncode($pubId) {
+		$search = array ('%', '"', '#', ' ', '<', '>', '{');
+		$replace = array ('%25', '%22', '%23', '%20', '%3c', '%3e', '%7b');
+		$pubId = str_replace($search, $replace, $pubId);
+		return $pubId;
+	}
 
 	public function buildOrcidReview($submission, $review, $request, $issue = null) {
 		$publicationUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'article', 'view', $submission->getId());
@@ -1135,7 +1146,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 						'external-id-type' => 'doi',
 						'external-id-value' => $submission->getData('pub-id::doi'),
 						'external-id-url' => [
-							'value' => 'https://doi.org/' . $submission->getData('pub-id::doi')
+							'value' =>  $this->getResolvingURL($submission->getData('pub-id::doi')),
 						],
 						'external-id-relationship' => 'self'
 
@@ -1186,6 +1197,15 @@ class OrcidProfilePlugin extends GenericPlugin {
 	}
 
 	/**
+	 * creates the DOI URL
+	 * @param $pubId
+	 * @return string
+	 */
+	function getResolvingURL($pubId) {
+		return 'https://doi.org/'.$this->_doiURLEncode($pubId);
+	}
+
+	/**
 	 * Build an associative array with submission meta data, which can be encoded to a valid ORCID work JSON structure.
 	 *
 	 * @see https://github.com/ORCID/ORCID-Source/blob/master/orcid-model/src/main/resources/record_2.1/samples/write_sample/bulk-work-2.1.json
@@ -1207,7 +1227,10 @@ class OrcidProfilePlugin extends GenericPlugin {
 		$publicationLocale = ($publication->getData('locale')) ? $publication->getData('locale') : 'en_US';
 		$supportedSubmissionLocales = $context->getSupportedSubmissionLocales();
 
-		$publicationUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'article', 'view', $submission->getId());
+		$articleUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'article', 'view', $submission->getId());
+
+		$pubId = $publication->getStoredPubId($this->getPubIdType());
+		$publicationUrl = $pubId ? $this->getResolvingURL($pubId) : $articleUrl;
 
 		$orcidWork = [
 			'title' => [
@@ -1276,6 +1299,14 @@ class OrcidProfilePlugin extends GenericPlugin {
 	}
 
 	/**
+	 * return main pubid type
+	 * @return string
+	 */
+	private  function getPubIdType (){
+		return 'doi';
+	}
+
+	/**
 	 * Build the external identifiers ORCID JSON structure from article, journal and issue meta data.
 	 *
 	 * @see  https://pub.orcid.org/v2.0/identifiers Table of valid ORCID identifier types.
@@ -1302,7 +1333,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				$pubIdType = $plugin->getPubIdType();
 
 				# Add article ids
-				$pubId = $publication->getData($pubIdType);
+				$pubId = $publication->getStoredPubId($pubIdType);
 
 				if ($pubId) {
 					$externalIds[] = [
