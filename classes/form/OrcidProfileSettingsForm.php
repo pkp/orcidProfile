@@ -19,8 +19,9 @@ namespace APP\plugins\generic\orcidProfile\classes\form;
 use APP\core\Application;
 use PKP\form\Form;
 use APP\plugins\generic\orcidProfile\classes\OrcidValidator;
+use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
 use APP\template\TemplateManager;
-
+use PKP\plugins\Plugin;
 
 class OrcidProfileSettingsForm extends Form {
 
@@ -45,8 +46,8 @@ class OrcidProfileSettingsForm extends Form {
 
 	/**
 	 * Constructor
-	 * @param $plugin object
-	 * @param $contextId int
+	 * @param OrcidProfilePlugin $plugin
+	 * @param int $contextId
 	 */
 	function __construct($plugin, $contextId) {
 		$this->contextId = $contextId;

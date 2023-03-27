@@ -16,9 +16,10 @@
 
 namespace APP\plugins\generic\orcidProfile\classes\form;
 
-
+use APP\core\Application;
 use PKP\form\Form;
 use APP\plugins\generic\orcidProfile\classes\OrcidValidator;
+use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
 use APP\template\TemplateManager;
 
 
@@ -44,8 +45,8 @@ class OrcidProfileStatusForm extends Form {
 
 	/**
 	 * Constructor
-	 * @param $plugin object
-	 * @param $contextId int
+	 * @param OrcidProfilePlugin $plugin
+	 * @param int $contextId
 	 */
 	function __construct($plugin, $contextId) {
 		$this->contextId = $contextId;
@@ -83,7 +84,7 @@ class OrcidProfileStatusForm extends Form {
 		$clientSecret = $this->plugin->getSetting($contextId, 'orcidClientSecret');
 
 		$templateMgr = TemplateManager::getManager($request);
-		$aboutUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'orcidapi', 'about', null);
+		$aboutUrl = $request->getDispatcher()->url($request, Application::ROUTE_PAGE, null, 'orcidapi', 'about', null);
 		$templateMgr->assign(array(
 			'globallyConfigured' => $this->plugin->isGloballyConfigured(),
 			'orcidAboutUrl' => $aboutUrl,

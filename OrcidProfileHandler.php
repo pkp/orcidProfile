@@ -23,6 +23,7 @@ use APP\facades\Repo;
 use APP\handler\Handler;
 use APP\template\TemplateManager;
 use Carbon\Carbon;
+use Exception;
 use PKP\core\Core;
 use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
@@ -36,7 +37,7 @@ class OrcidProfileHandler extends Handler
     public const TEMPLATE = 'orcidVerify.tpl';
     const ORCIDPROFILEPLUGIN = 'orcidprofileplugin';
     private bool $isSandBox;
-    private ?\PKP\plugins\Plugin $plugin;
+    private OrcidProfilePlugin $plugin;
 
 
 
@@ -183,7 +184,7 @@ class OrcidProfileHandler extends Handler
 				';
                 break;
             default:
-                assert(false);
+                throw new Exception('Invalid target');
         }
     }
 

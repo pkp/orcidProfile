@@ -33,6 +33,8 @@ define('ORCID_EMAIL_URL', 'email');
 define('ORCID_WORK_URL', 'work');
 define('ORCID_REVIEW_URL', 'peer-review');
 
+use APP\author\Author;
+use APP\controllers\grid\users\author\form\AuthorForm;
 use APP\core\Application;
 use APP\core\Request;
 use APP\core\Services;
@@ -57,6 +59,7 @@ use PKP\core\Core;
 use PKP\core\JSONMessage;
 use PKP\core\PKPApplication;
 use PKP\db\DAORegistry;
+use PKP\form\Form;
 use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\AjaxModal;
 use PKP\plugins\GenericPlugin;
@@ -64,8 +67,8 @@ use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
 use PKP\services\PKPSchemaService;
 use PKP\submission\PKPSubmission;
+use PKP\submission\reviewAssignment\ReviewAssignment;
 use PKP\submission\reviewAssignment\ReviewAssignmentDAO;
-use ReviewAssignment;
 use Sokil\IsoCodes\IsoCodesFactory;
 
 class OrcidProfilePlugin extends GenericPlugin
@@ -259,8 +262,8 @@ class OrcidProfilePlugin extends GenericPlugin
 
     /**
      * adds orcid  form fields.
-     * @param $hookName
-     * @param $form
+     * @param string $hookName
+     * @param Form $form
      * @return bool
      */
     function addOrcidFormFields($hookName, $form): bool
@@ -305,8 +308,8 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
-     * @param $hookName
-     * @param $args
+     * @param string $hookName
+     * @param array $args
      */
     function handleThankReviewer($hookName, $args)
     {
@@ -342,9 +345,8 @@ class OrcidProfilePlugin extends GenericPlugin
     {
         $context = $request->getContext();
         $requestVars = $request->getUserVars();
-
+        /** @var ReviewAssignmentDAO */
         $reviewAssignmentDao = DAORegistry::getDAO('ReviewAssignmentDAO');
-        /* @var $reviewAssignmentDao ReviewAssignmentDAO */
         $reviewAssignmentId = $requestVars['reviewAssignmentId'];
         if (isset($reviewAssignmentId)) {
             $review = $reviewAssignmentDao->getById($reviewAssignmentId);
@@ -590,6 +592,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $templateMgr = TemplateManager::getManager($request);
         switch ($hookName) {
             case 'authorform::display':
+                /** @var AuthorForm */
                 $authorForm = &$args[0];
                 $author = $authorForm->getAuthor();
                 if ($author) {
@@ -822,6 +825,7 @@ class OrcidProfilePlugin extends GenericPlugin
     public function handleAuthorFormExecute($hookname, $args)
     {
         if (count($args) == 3) {
+            /** @var Author */
             $author = &$args[0];
             $values = $args[2];
 

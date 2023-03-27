@@ -2,18 +2,20 @@
 
 namespace APP\plugins\generic\orcidProfile\classes;
 
-class OrcidValidator {
+use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
 
+class OrcidValidator {
+    public $plugin;
 	/**
 	 * OrcidValidator constructor.
-	 * @param $plugin
+	 * @param OrcidProfilePlugin $plugin
 	 */
 	function __construct(&$plugin) {
 		$this->plugin =& $plugin;
 	}
 
 	/**
-	 * @param $str
+	 * @param string $str
 	 * @return bool
 	 */
 	public function validateClientId($str) {
@@ -25,7 +27,7 @@ class OrcidValidator {
 	}
 
 	/**
-	 * @param $str
+	 * @param string $str
 	 * @return bool
 	 */
 	public function validateClientSecret($str) {
