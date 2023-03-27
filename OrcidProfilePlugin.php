@@ -510,6 +510,19 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
+     * Write error message to log.
+     *
+     * @param string $message Message to write
+     */
+    public function logError($message)
+    {
+        if ($this->getSetting($this->currentContextId, 'logLevel') === 'ERROR') {
+            return;
+        }
+        self::writeLog($message, 'ERROR');
+    }
+
+    /**
      * Write a message with specified level to log
      *
      * @param string $message Message to write
