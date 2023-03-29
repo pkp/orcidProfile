@@ -1,20 +1,20 @@
-# M. Ali <vorteem@gmail.com>, 2021.
+# M. Ali <vorteem@gmail.com>, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-05T22:33:47+00:00\n"
-"PO-Revision-Date: 2021-06-29 05:03+0000\n"
+"PO-Revision-Date: 2023-03-30 15:48+0000\n"
 "Last-Translator: M. Ali <vorteem@gmail.com>\n"
 "Language-Team: Arabic <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/emails/ar_IQ/>\n"
-"Language: ar_IQ\n"
+"orcid-profile-plugin/emails/ar/>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "emails.orcidCollectAuthorId.subject"
 msgstr "تقديم ORCID"
@@ -75,3 +75,15 @@ msgstr ""
 
 msgid "emails.orcidRequestAuthorAuthorization.description"
 msgstr "قالب الرسالة هذا يستعمل لمطالبة المؤلفين المشاركين بالسماح لنا في الوصول إلى رموزهم التعريفية في ORCID."
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "رابط مصادقة ORCID OAuth"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "عنوان رابط الصفحة المؤدي إلى ORCID"
+
+msgid "plugins.generic.orcidProfile.orcidRequestAuthorAuthorization.name"
+msgstr "إلتماس تفويض المؤلف من orcid"
+
+msgid "plugins.generic.orcidProfile.orcidCollectAuthorId.name"
+msgstr "تجميع معرف المؤلف من orcid"
