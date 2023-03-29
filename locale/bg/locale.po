@@ -1,19 +1,19 @@
-# Cyril Kamburov <cc@intermedia.bg>, 2021.
+# Cyril Kamburov <cc@intermedia.bg>, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2021-09-15 01:27+0000\n"
+"PO-Revision-Date: 2023-03-15 09:48+0000\n"
 "Last-Translator: Cyril Kamburov <cc@intermedia.bg>\n"
 "Language-Team: Bulgarian <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/bg_BG/>\n"
-"Language: bg_BG\n"
+"orcid-profile-plugin/orcid-profile-plugin/bg/>\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "Добавка за ORCID профил"
@@ -211,3 +211,62 @@ msgstr "Невалиден ID на клиента"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
 msgstr "Невалиден секретен ключ на клиента"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Поради грешки при проверката плъгинът беше деактивиран."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Настройките са запазени"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Преглед на настройките за местоположение"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Състояние на приставката/плъгин OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Плъгинът OrcidProfile е деактивиран"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr ""
+"Идентификационният номер на клиента е невалиден, моля, проверете въведеното"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Град"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Държава"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Изберете град, държава, за да разрешите изпращането на информация за "
+"рецензент до ORCID"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Невалидни идентификационни данни на клиента"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "Плъгинът OrcidProfile е активиран"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Глобално конфигуриран в config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Конфигуриран като списание"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "ID на клиента е валиден"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Тайният ключ на клиента е валиден"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr ""
+"Клиентският таен ключ е невалиден, моля, проверете идентификационните си "
+"данни"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Открити са дублиращи се ORCiD за сътрудници."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Открити са неавтентифицирани ORCiD за сътрудници."

@@ -1,16 +1,17 @@
 # Teodora Fildishevska <t.fildishevska@gmail.com>, 2021.
+# Mirko Spiroski <mspiroski@id-press.eu>, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-06-30 09:03+0000\n"
-"Last-Translator: Teodora Fildishevska <t.fildishevska@gmail.com>\n"
+"PO-Revision-Date: 2023-03-15 09:48+0000\n"
+"Last-Translator: Mirko Spiroski <mspiroski@id-press.eu>\n"
 "Language-Team: Macedonian <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/mk_MK/>\n"
-"Language: mk_MK\n"
+"orcid-profile-plugin/orcid-profile-plugin/mk/>\n"
+"Language: mk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==1 || n%10==1 ? 0 : 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.instructions"
 msgstr ""
@@ -79,11 +80,11 @@ msgstr ""
 "iDs во OJS профилот и страницата на трудот."
 
 msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
-msgstr "Како и зошто ние собираме  ORCID iD?"
+msgstr "Како и зошто ние собираме ORCID iD?"
 
 msgid "plugins.generic.orcidProfile.about.orcidExplanation"
 msgstr ""
-"ORCID е независна невладина организација  која овозможува постојана "
+"ORCID е независна невладина организација која овозможува постојана "
 "идентификација – ORCID iD – која ве разликува од другите истражувачи и "
 "механизмот за повржување на вашиот научен придонес и активности со вашиот "
 "иД. ORCID е интегриран во многу системи кои ги користат издавачи, "
@@ -229,3 +230,59 @@ msgstr "Невалидна тајна на клиентот"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "Погрешен ИД на клиент"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Избери град, Земја за да се овозможи прашање на рецензентските информации до "
+"ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Поради валидациски грешки, плагинот е онеспособен."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Подесувањат а се снимени"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Неточни податоци за клиентот"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Подесување локација на рецензентот"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Состојба на плагинот OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Оневозможен плагин за OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Конфигуриран Journal-wise"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "Клинетовиот иД е точен"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "Клиентовиот иД не е точен, молам проверете го внесениот"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Клиентовата тајна не е точна, ве молам проверете ги податоците"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Град"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Земја"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "Овозможен плагин за OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Глобална конфигурација во config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Клиентовата тајна е точна"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Откриени се дупликати од ORCiD членовите."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Откриени се неавториѕирани ORCiD учесници."

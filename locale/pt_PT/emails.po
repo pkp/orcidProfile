@@ -1,10 +1,11 @@
+# José Carvalho <jcarvalho@keep.pt>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-05T22:33:49+00:00\n"
-"PO-Revision-Date: 2021-06-15 09:02+0000\n"
-"Last-Translator: Carla Marques <carla.marques@usdb.uminho.pt>\n"
+"PO-Revision-Date: 2023-02-27 15:57+0000\n"
+"Last-Translator: José Carvalho <jcarvalho@keep.pt>\n"
 "Language-Team: Portuguese (Portugal) <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/emails/pt_PT/>\n"
 "Language: pt_PT\n"
@@ -12,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "emails.orcidCollectAuthorId.subject"
 msgstr "Submissão ao ORCID"
@@ -78,3 +79,15 @@ msgstr ""
 "Se tiver alguma questão adicional, entre em contacto connosco.<br>\n"
 "<br>\n"
 "{$principalContactSignature}<br>\n"
+
+msgid "plugins.generic.orcidProfile.orcidRequestAuthorAuthorization.name"
+msgstr "orcidRequestAuthorAuthorization"
+
+msgid "plugins.generic.orcidProfile.orcidCollectAuthorId.name"
+msgstr "orcidCollectAuthorId"
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "Link de autorização ORCID OAuth"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "URL para a página sobre ORCID"

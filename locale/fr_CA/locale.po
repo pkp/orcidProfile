@@ -1,12 +1,12 @@
-# Marie-Hélène Vézina [UdeMontréal] <marie-helene.vezina@umontreal.ca>, 2022.
+# Marie-Hélène Vézina [UdeMontréal] <marie-helene.vezina@umontreal.ca>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2022-06-02 20:38+0000\n"
-"Last-Translator: Marie-Hélène Vézina [UdeMontréal] <marie-"
-"helene.vezina@umontreal.ca>\n"
+"PO-Revision-Date: 2023-03-28 14:48+0000\n"
+"Last-Translator: Marie-Hélène Vézina [UdeMontréal] <marie-helene."
+"vezina@umontreal.ca>\n"
 "Language-Team: French (Canada) <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/fr_CA/>\n"
 "Language: fr_CA\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "Plugiciel de profil ORCID"
@@ -113,7 +113,7 @@ msgstr "Journal des enregistrements ORCID"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
 msgstr ""
-"Envoyer un courriel pour demander l'autorisation ORCID aux auteurs-es "
+"Envoyer un courriel pour demander l'autorisation ORCID aux auteur.e.s "
 "lorsqu'un article est accepté, c'est-à-dire envoyé à la révision linguistique"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
@@ -129,7 +129,7 @@ msgstr "Voir ci-dessous pour demander une authentification d'identifiant ORCID"
 
 msgid "plugins.generic.orcidProfile.author.requestAuthorization"
 msgstr ""
-"Envoyer un courriel pour demander l'autorisation ORCID du,de la contributeur-"
+"Envoyer un courriel pour demander l'autorisation ORCID du,de la contributeur."
 "trice"
 
 msgid "plugins.generic.orcidProfile.about.display"
@@ -190,7 +190,7 @@ msgid "plugins.generic.orcidProfile.verify.denied"
 msgstr "Vous n'avez pas permis l'accès à votre dossier ORCID."
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
-msgstr "Un identifiant ORCID était déjà stocké pour cette soumission."
+msgstr "Un identifiant ORCID était déjà enregistré pour cette soumission."
 
 msgid "plugins.generic.orcidProfile.verify.failure"
 msgstr "Votre identifiant ORCID n'a pu être vérifié. Le lien n'est plus valide."
@@ -214,10 +214,10 @@ msgstr "Autorisation ORCID"
 msgid "plugins.generic.orcidProfile.author.unauthenticated"
 msgstr ""
 "Identifiant ORCID non authentifié ! Veuillez demander une authentification "
-"au,à la contributeur-trice."
+"au,à la contributeur.trice."
 
 msgid "plugins.generic.orcidProfile.author.deleteORCID"
-msgstr "Supprimer l'identifiant ORCID ainsi que le  jeton d'accès !"
+msgstr "Supprimer l'identifiant ORCID ainsi que le jeton d'accès !"
 
 msgid "plugins.generic.orcidProfile.author.accessTokenStored"
 msgstr ""
@@ -252,7 +252,70 @@ msgstr ""
 "fructifier votre identifiant ORCID !</a> (en anglais).\n"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
-msgstr "Clé secrète du client invalide"
+msgstr "Clé secrète ORCID du client invalide"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
-msgstr "ID du client invalide"
+msgstr "Identifiant ORCID du client invalide"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Statut du plugiciel OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr ""
+"L'identifiant du client n'est pas valide, veuillez vérifier votre saisie"
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr ""
+"Des identifiants ORCID non authentifiés pour les contributeur.trice.s ont "
+"été détectés."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Paramètres sauvegardés"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Ville"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Pays"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "En raison d'erreurs de validation, le plugiciel a été désactivé."
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Révision des paramètres de localisation"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Sélectionner la ville et le pays pour permettre l'envoi des informations sur "
+"les évaluateur.trice.s à ORCID"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Informations d'identification du client invalides"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "Plugiciel OrcidProfile activé"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Plugiciel OrcidProfile désactivé"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Configuré globalement dans config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Configuré par revue"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "L'identifiant du client est valide"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "La clé secrète du client est valide"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr ""
+"La clé secrète du client n'est pas valide, veuillez vérifier vos "
+"informations d'identification"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr ""
+"Des doublons d'identifiants ORCID pour des contributeur.trice.s ont été "
+"détectés."

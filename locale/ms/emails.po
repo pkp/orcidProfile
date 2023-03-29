@@ -1,8 +1,9 @@
 # Studiorimau <studiorimau@gmail.com>, 2021.
+# Mohamad Shabilullah <shabilhamid91@gmail.com>, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-10-29 02:16+0000\n"
-"Last-Translator: Studiorimau <studiorimau@gmail.com>\n"
+"PO-Revision-Date: 2023-03-25 22:48+0000\n"
+"Last-Translator: Mohamad Shabilullah <shabilhamid91@gmail.com>\n"
 "Language-Team: Malay <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/emails/ms/>\n"
 "Language: ms\n"
@@ -10,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
@@ -37,3 +38,24 @@ msgstr ""
 
 msgid "emails.orcidCollectAuthorId.subject"
 msgstr "Penyerahan ORCID"
+
+msgid "emails.orcidCollectAuthorId.description"
+msgstr "E-mel ini dihantar untuk mengumpul id ORCID daripada pengarang."
+
+msgid "emails.orcidRequestAuthorAuthorization.subject"
+msgstr "Meminta akses rekod ORCID"
+
+msgid "emails.orcidRequestAuthorAuthorization.description"
+msgstr "E-mel ini dihantar untuk meminta akses rekod ORCID daripada pengarang."
+
+msgid "plugins.generic.orcidProfile.orcidRequestAuthorAuthorization.name"
+msgstr "orcidRequestAuthorAuthorization"
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "Pautan kebenaran ORCID OAuth"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "URL ke halaman tentang ORCID"
+
+msgid "plugins.generic.orcidProfile.orcidCollectAuthorId.name"
+msgstr "orcidCollectAuthorId"

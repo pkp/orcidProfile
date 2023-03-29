@@ -1,19 +1,19 @@
-# Cyril Kamburov <cc@intermedia.bg>, 2021.
+# Cyril Kamburov <cc@intermedia.bg>, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-05T22:33:47+00:00\n"
-"PO-Revision-Date: 2021-09-15 01:27+0000\n"
+"PO-Revision-Date: 2023-02-26 23:14+0000\n"
 "Last-Translator: Cyril Kamburov <cc@intermedia.bg>\n"
 "Language-Team: Bulgarian <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/emails/bg_BG/>\n"
-"Language: bg_BG\n"
+"orcid-profile-plugin/emails/bg/>\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "emails.orcidCollectAuthorId.subject"
 msgstr "Предоставяне на ORCID"
@@ -75,3 +75,15 @@ msgstr ""
 
 msgid "emails.orcidRequestAuthorAuthorization.description"
 msgstr "Този шалон за имейл се използва за искане от авторите на достъп до ORCID записи."
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "ORCID OAuth връзка за оторизация"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "URL към страницата за ORCID"
+
+msgid "plugins.generic.orcidProfile.orcidRequestAuthorAuthorization.name"
+msgstr "ORCiD искане на разрешение за автор"
+
+msgid "plugins.generic.orcidProfile.orcidCollectAuthorId.name"
+msgstr "ORCiD Събиране на авторски идентификатор"

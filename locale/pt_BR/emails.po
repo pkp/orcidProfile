@@ -1,10 +1,10 @@
-# Diego José Macêdo <diegojmacedo@gmail.com>, 2022.
+# Diego José Macêdo <diegojmacedo@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-05T22:33:49+00:00\n"
-"PO-Revision-Date: 2022-02-09 01:30+0000\n"
+"PO-Revision-Date: 2023-02-24 14:48+0000\n"
 "Last-Translator: Diego José Macêdo <diegojmacedo@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/emails/pt_BR/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "emails.orcidCollectAuthorId.subject"
 msgstr "ORCID da submissão"
@@ -78,3 +78,15 @@ msgstr ""
 
 msgid "emails.orcidRequestAuthorAuthorization.subject"
 msgstr "Solicitando acesso ao registro ORCID"
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "Link de autorização ORCID OAuth"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "URL para a página sobre ORCID"
+
+msgid "plugins.generic.orcidProfile.orcidRequestAuthorAuthorization.name"
+msgstr "orcidRequestAuthorAuthorization"
+
+msgid "plugins.generic.orcidProfile.orcidCollectAuthorId.name"
+msgstr "orcidCollectAuthorId"

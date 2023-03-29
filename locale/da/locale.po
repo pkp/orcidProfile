@@ -1,19 +1,20 @@
 # Niels Erik Frederiksen <nef@kb.dk>, 2021.
+# Alexandra Fogtmann-Schulz <alfo@kb.dk>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2021-09-14 10:05+0000\n"
-"Last-Translator: Niels Erik Frederiksen <nef@kb.dk>\n"
+"PO-Revision-Date: 2023-02-27 15:57+0000\n"
+"Last-Translator: Alexandra Fogtmann-Schulz <alfo@kb.dk>\n"
 "Language-Team: Danish <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/da_DK/>\n"
-"Language: da_DK\n"
+"orcid-profile-plugin/orcid-profile-plugin/da/>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "ORCID profil-plugin"
@@ -236,3 +237,37 @@ msgstr "Ugyldigt klient-kode (client secret)"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "Ugyldigt klient-id"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Gennemse lokalitetsinstillinger"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "OrcidProfile Plugin Status"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Globalt konfigureret i config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Pga. fejl ved validering blev plugin'et deaktiveret."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Indstillinger gemt"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "By"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Land"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Vælg by og land for at aktivere, at information om bedømmere sendes til ORCID"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Ugyldige legitimationsoplysninger"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "OrcidProfile Plugin aktiveret"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "OrcidProfile Plugin deaktiveret"
