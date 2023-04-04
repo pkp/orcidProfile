@@ -11,12 +11,13 @@
  * @brief Migrations for the plugin's email templates
  */
 
-namespace APP\plugins\paymethod\manual;
+namespace APP\plugins\generic\orcidProfile;
 
-use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
+
 use Exception;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use PKP\db\DAORegistry;
 use PKP\db\XMLDAO;
 use PKP\facades\Locale;
 use PKP\install\Installer;
@@ -24,7 +25,7 @@ use PKP\install\Installer;
 class OrcidProfileEmailDataMigration extends Migration
 {
     protected Installer $installer;
-    private ManualPaymentPlugin $plugin;
+    private OrcidProfilePlugin $plugin;
 
     public function __construct(Installer $installer, OrcidProfilePlugin $plugin)
     {
@@ -39,14 +40,22 @@ class OrcidProfileEmailDataMigration extends Migration
     {
         if ($this->installer) {
             $version = $this->installer->getCurrentVersion();
+
             if (in_array($version->getProduct(), ['ojs2', 'ops'])) {
                 if ($version->compare('3.4.0.0') < 0
                     && $this->installer->getNewVersion()->compare('3.4.0.0') >= 0) {
                     $this->migrateEmailTemplatesName();
                 }
             } elseif ($version->getProduct() == 'orcidProfile') {
-                if ($version->compare('1.3.4.1') > 0) {
-                    $this->migrateEmailTemplatesName();
+
+                $thresholdVersion = '1.3.4.1';
+                $versionDao = DAORegistry::getDAO('VersionDAO');
+                $installedPluginVersion = $versionDao->getCurrentVersion();
+                if ($version->compare($thresholdVersion) > 0) {
+                    //  initial installation of the plugin or an upgrade from a plugin below threshold level.
+                    if (!$installedPluginVersion or $installedPluginVersion < $thresholdVersion) {
+                        $this->migrateEmailTemplatesName();
+                    }
                 }
             }
         }
