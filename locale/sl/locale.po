@@ -1,14 +1,14 @@
-# Primož Svetek <primoz.svetek@gmail.com>, 2022.
+# Primož Svetek <primoz.svetek@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2022-08-14 08:25+0000\n"
+"PO-Revision-Date: 2023-03-15 09:48+0000\n"
 "Last-Translator: Primož Svetek <primoz.svetek@gmail.com>\n"
 "Language-Team: Slovenian <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/sl_SI/>\n"
-"Language: sl_SI\n"
+"orcid-profile-plugin/orcid-profile-plugin/sl/>\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -208,3 +208,59 @@ msgstr "Npaačen 'secret' klienta"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "Napačen ID klienta"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Zaradi napak pri validaciji je bil vtičnik onemogočen."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Nastavitve so shranjene"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Mesto"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Preglej lokacijske nastavitve"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Izberite mesto in državo, da omogočite pošiljanje recenzentskih informacij "
+"na ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "OrcidProfile vtičnik je onemogočen"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "ID odjemalca je veljaven"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Država"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Neveljavne poverilnice odjemalca"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Status OrcidProfile vtičnika"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "OrcidProfile vtičnik je omogočen"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Nastavljeno globalno v config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Nastavljeno na nivoju revije"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "ID odjemalca je neveljaven, prosimo preverite vnešene podatke"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Secret odjemalca je veljaven"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Secret odjemalca je neveljaven, prosimo preverite vnešene podatke"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Zaznani so bili podvojeni ORCiD identifikatorji za avtorje."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Zaznani so bili neavtenticirani ORCiD identifikatorji za avtorje."

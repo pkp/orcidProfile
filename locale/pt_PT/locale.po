@@ -1,10 +1,11 @@
+# José Carvalho <jcarvalho@keep.pt>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2021-06-12 20:02+0000\n"
-"Last-Translator: Carla Marques <carla.marques@usdb.uminho.pt>\n"
+"PO-Revision-Date: 2023-03-15 09:48+0000\n"
+"Last-Translator: José Carvalho <jcarvalho@keep.pt>\n"
 "Language-Team: Portuguese (Portugal) <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/pt_PT/>\n"
 "Language: pt_PT\n"
@@ -12,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "Plugin Perfil ORCID"
@@ -234,3 +235,59 @@ msgstr "Segredo de cliente inválido"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "ID de cliente inválido"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Devido a erros de validação, o plugin foi desativado."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Configurações guardadas"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Cidade"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "País"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Rever configurações da localidade"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Selecione a Cidade, País para ativar o envio de informação de revisão para o "
+"ORCID"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Credenciais de cliente inválidas"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Estado do Plugin OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "Plugin OrcidProfile ativado"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Plugin OrcidProfile desativado"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Configurado globalmente no config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Configurado em todoa a revista"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "ID do cliente é válido"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "ID do cliente inválido, verifique os dados introduzidos"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Client Secret válido"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Client Secret inválido, verifique os dados introduzidos"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Foram identificados ORCIDs duplicados nos contribuidores."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Foram detetados ORCIDs não autenticados de autores."

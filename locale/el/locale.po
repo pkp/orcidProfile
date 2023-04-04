@@ -150,7 +150,7 @@ msgid "plugins.generic.orcidProfile.about.display.title"
 msgstr "Πού προβάλλονται τα ORCID id;"
 
 msgid "plugins.generic.orcidProfile.about.display"
-msgstr "Όταν χρησιμοποιείται και έχει πιστοποιηθεί το ORCID id, προβάλλουμε το εικονίδιο ORCID <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16(1).gif\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> μαζί με το όνομά σας στη σελίδα του άρθρου και στο δημόσιο προφίλ σας ως Χρήστης.<br>\n\t\t Μάθετε περισσότερα <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">εδώ.</a>"
+msgstr "Όταν χρησιμοποιείται και έχει πιστοποιηθεί το ORCID id, προβάλλουμε το εικονίδιο ORCID <img src=\"https://orcid.org/sites/default/files/images/orcid_16x16.png\" alt=\"iD icon\" width=\"16\" height=\"16\" border=\"0\"> μαζί με το όνομά σας στη σελίδα του άρθρου και στο δημόσιο προφίλ σας ως Χρήστης.<br>\n\t\t Μάθετε περισσότερα <a href=\"https://orcid.org/blog/2013/02/22/how-should-orcid-id-be-displayed\">εδώ.</a>"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
 msgstr "Στείλτε e-mail για να ζητήσετε εξουσιοδότηση ORCID από τους συγγραφείς όταν ένα άρθρο γίνει αποδεκτό, π.χ. αποστέλλεται για copy editing"

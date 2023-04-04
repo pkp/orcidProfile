@@ -112,7 +112,7 @@ class OrcidProfilePlugin extends GenericPlugin
             Hook::add('registrationform::execute', [$this, 'collectUserOrcidId']);
 
             // Send emails to authors without ORCID id upon submission
-            Hook::add('submissionsubmitstep3form::execute', [$this, 'handleSubmissionSubmitStep3FormExecute']);
+            //TODO Hook::add('submissionsubmitstep3form::execute', [$this, 'handleSubmissionSubmitStep3FormExecute']);
 
             // Send emails to authors without authorised ORCID access on promoting a submission to copy editing. Not included in OPS.
             if ($this->getSetting($contextId, 'sendMailToAuthorsOnPublication')) {
@@ -213,7 +213,10 @@ class OrcidProfilePlugin extends GenericPlugin
 
             Hook::add('Form::config::before', [$this, 'addOrcidFormFields']);
 
+
             Hook::add('Installer::postInstall', [$this, 'updateSchema']);
+
+            Hook::add('Publication::validatePublish', [$this, 'validate']);
 
         }
 
@@ -918,19 +921,20 @@ class OrcidProfilePlugin extends GenericPlugin
 
         $request = Application::get()->getRequest();
         $user = $request->getUser();
+        $author = $authors->first();
         //error_log("OrcidProfilePlugin: authors[0] = " . var_export($authors[0], true));
         //error_log("OrcidProfilePlugin: user = " . var_export($user, true));
-        if ($authors[0]->getOrcid() === $user->getOrcid()) {
+        if ($author?->getOrcid() === $user->getOrcid()) {
             // if the author and user share the same ORCID id
             // copy the access token from the user
             //error_log("OrcidProfilePlugin: user->orcidAccessToken = " . $user->getData('orcidAccessToken'));
-            $authors[0]->setData('orcidAccessToken', $user->getData('orcidAccessToken'));
-            $authors[0]->setData('orcidAccessScope', $user->getData('orcidAccessScope'));
-            $authors[0]->setData('orcidRefreshToken', $user->getData('orcidRefreshToken'));
-            $authors[0]->setData('orcidAccessExpiresOn', $user->getData('orcidAccessExpiresOn'));
-            $authors[0]->setData('orcidSandbox', $user->getData('orcidSandbox'));
+            $author->setData('orcidAccessToken', $user->getData('orcidAccessToken'));
+            $author->setData('orcidAccessScope', $user->getData('orcidAccessScope'));
+            $author->setData('orcidRefreshToken', $user->getData('orcidRefreshToken'));
+            $author->setData('orcidAccessExpiresOn', $user->getData('orcidAccessExpiresOn'));
+            $author->setData('orcidSandbox', $user->getData('orcidSandbox'));
 
-            Repo::author()->dao->update($authors[0]);
+            Repo::author()->dao->update($author);
 
             //error_log("OrcidProfilePlugin: author = " . var_export($authors[0], true));
         }
@@ -1655,7 +1659,31 @@ class OrcidProfilePlugin extends GenericPlugin
             $installer->setError(Installer::INSTALLER_ERROR_DB, __('installer.installMigrationError', ['class' => get_class($migration), 'message' => $e->getMessage()]));
             $result = false;
         }
+    }
+     /**
+     * Pre-publication checks
+     * @param $hookName
+     * @param $args
+     * @return false
+     */
+    function validate($hookName, $args)
+    {
+        $errors =& $args[0];
+        $publication = $args[1];
+        $orcidIds = [];
+        foreach ($publication->getData('authors') as $author) {
+            $authorOrcid = $author->getData('orcid');
+            if ($authorOrcid and in_array($authorOrcid, $orcidIds)) {
+                $errors['hasDuplicateOrcids'] = __('plugins.generic.orcidProfile.verify.duplicateOrcidAuthor');
+            } elseif ($authorOrcid && !$author->getData('orcidAccessToken')) {
+                $errors['hasUnauthenticatedOrcid'] = __('plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid');
+            } else {
+                $orcidIds [] = $authorOrcid;
+            }
+
+        }
 
         return false;
     }
+
 }

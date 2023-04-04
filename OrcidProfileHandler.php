@@ -335,8 +335,8 @@ class OrcidProfileHandler extends Handler
 
 
         } catch (\GuzzleHttp\Exception\ClientException $exception) {
-            $reason = $exception->getResponse()->getBody(false);
-            $this->plugin->logInfo("Publication fail: ${reason}");
+            $this->plugin->logInfo("Publication fail:".$exception->getMessage());
+            $templateMgr->assign('orcidAPIError',$exception->getMessage());
 
         }
         $templateMgr->assign('authFailure', true);
