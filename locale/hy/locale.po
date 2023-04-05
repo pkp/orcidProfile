@@ -1,17 +1,17 @@
 # Artashes Mirzoyan <amirzoyan@sci.am>, 2022.
-# Tigran Zargaryan <tigran@flib.sci.am>, 2022.
+# Tigran Zargaryan <tigran@flib.sci.am>, 2022, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-07-01 05:31+0000\n"
+"PO-Revision-Date: 2023-04-06 09:48+0000\n"
 "Last-Translator: Tigran Zargaryan <tigran@flib.sci.am>\n"
 "Language-Team: Armenian <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/hy_AM/>\n"
-"Language: hy_AM\n"
+"orcid-profile-plugin/orcid-profile-plugin/hy/>\n"
+"Language: hy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
 msgstr "Հաճախորդի անվավեր գաղտնիք"
@@ -228,3 +228,59 @@ msgstr "Թույլ է տալիս ներմուծել օգտվողի պրոֆիլ�
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "ORCID պրոֆիլի հավելված"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Վավերացման սխալների պատճառով plugin-ն անջատվել է:"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Հաճախորդի անվավեր հավատարմագրերը"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "OrcidProfile Plugin կարգավիճակը"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "OrcidProfile Plugin-ն անջատված է"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "Հաճախորդի ID-ն անվավեր է, խնդրում ենք ստուգել ձեր մուտքագրումը"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Կարգավորումները պահված են"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Քաղաք"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Երկիր"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Դիտեք Տեղադրության կարգավորումները"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Ընտրեք Քաղաք, Երկիր՝ ORCID-ին գրախոսողի մասին տեղեկությունները ուղարկելու "
+"համար"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "OrcidProfile Plugin-ը միացված է"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Համընդգրկուն կազմաձևված է config.inc.php -ում"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Կազմաձևված է ըստ ամսագրի"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "Հաճախորդի ID-ն վավեր է"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Հաճախորդի գաղտնիքը վավեր է"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Հաճախորդի գաղտնիքը անվավեր է, խնդրում ենք ստուգել ձեր հավատարմագրերը"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Հայտնաբերվել են կրկնօրինակ ORCID-ներ աջակիցների համար:"
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Հայտնաբերվել են չվավերացված ORCiD-ներ աջակիցների համար:"
