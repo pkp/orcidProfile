@@ -59,6 +59,7 @@ use PKP\core\Core;
 use PKP\core\JSONMessage;
 use PKP\core\PKPApplication;
 use PKP\db\DAORegistry;
+use PKP\facades\Locale;
 use PKP\form\Form;
 use PKP\install\Installer;
 use PKP\linkAction\LinkAction;
@@ -70,7 +71,7 @@ use PKP\services\PKPSchemaService;
 use PKP\submission\PKPSubmission;
 use PKP\submission\reviewAssignment\ReviewAssignment;
 use PKP\submission\reviewAssignment\ReviewAssignmentDAO;
-use Sokil\IsoCodes\IsoCodesFactory;
+use Sokil\IsoCodes\Database\Countries\Country;
 
 class OrcidProfilePlugin extends GenericPlugin
 {
@@ -1099,12 +1100,11 @@ class OrcidProfilePlugin extends GenericPlugin
                     ORCID_API_URL_MEMBER_SANDBOX => 'plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox'
                 ]);
 
-                $isoCodes = new IsoCodesFactory();
-                $countries = [];
-                foreach ($isoCodes->getCountries() as $country) {
-                    $countries[$country->getAlpha2()] = $country->getLocalName();
-                }
-                asort($countries);
+                $countries = collect(Locale::getCountries())
+                    ->mapWithKeys(fn (Country $country) => [$country->getAlpha2() => $country->getLocalName()])
+                    ->sort(fn (string $a, string $b) => strcoll($a, $b))
+                    ->toArray();
+
                 $templateMgr->assign('countries', $countries);
                 $templateMgr->assign('logLevelOptions', [
                     'ERROR' => 'plugins.generic.orcidProfile.manager.settings.logLevel.error',
