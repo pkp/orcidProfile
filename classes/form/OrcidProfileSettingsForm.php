@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file OrcidProfileSettingsForm.inc.php
+ * @file OrcidProfileSettingsForm.php
  *
  * Copyright (c) 2015-2019 University of Pittsburgh
  * Copyright (c) 2014-2021 Simon Fraser University
