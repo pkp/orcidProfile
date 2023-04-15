@@ -16,7 +16,6 @@
 
 namespace APP\plugins\generic\orcidProfile;
 
-
 use APP\core\Application;
 use APP\core\Request;
 use APP\facades\Repo;
@@ -25,7 +24,6 @@ use APP\template\TemplateManager;
 use Carbon\Carbon;
 use Exception;
 use PKP\core\Core;
-use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
 use PKP\security\authorization\PKPSiteAccessPolicy;
 use PKP\security\authorization\UserRequiredPolicy;
@@ -38,8 +36,6 @@ class OrcidProfileHandler extends Handler
     const ORCIDPROFILEPLUGIN = 'orcidprofileplugin';
     private bool $isSandBox;
     private OrcidProfilePlugin $plugin;
-
-
 
     public function __construct()
     {
@@ -88,7 +84,6 @@ class OrcidProfileHandler extends Handler
     public function orcidAuthorize($args, $request)
     {
         $context = $request->getContext();
-        $op = $request->getRequestedOp();
         $contextId = ($context == null) ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
         $httpClient = Application::get()->getHttpClient();
 
@@ -156,17 +151,17 @@ class OrcidProfileHandler extends Handler
 
                 // Suppress errors for nonexistent array indexes
                 echo '
-					<html><body><script type="text/javascript">
-					opener.document.getElementById("givenName").value = ' . json_encode(@$profileJson['name']['given-names']['value']) . ';
-					opener.document.getElementById("familyName").value = ' . json_encode(@$profileJson['name']['family-name']['value']) . ';
-					opener.document.getElementById("email").value = ' . json_encode(@$profileJson['emails']['email'][0]['email']) . ';
-					opener.document.getElementById("country").value = ' . json_encode(@$profileJson['addresses']['address'][0]['country']['value']) . ';
-					opener.document.getElementById("affiliation").value = ' . json_encode(@$employmentJson['employment-summary'][0]['organization']['name']) . ';
-					opener.document.getElementById("orcid").value = ' . json_encode($orcidUri) . ';
-					opener.document.getElementById("connect-orcid-button").style.display = "none";
-					window.close();
-					</script></body></html>
-				';
+                    <html><body><script type="text/javascript">
+                    opener.document.getElementById("givenName").value = ' . json_encode(@$profileJson['name']['given-names']['value']) . ';
+                    opener.document.getElementById("familyName").value = ' . json_encode(@$profileJson['name']['family-name']['value']) . ';
+                    opener.document.getElementById("email").value = ' . json_encode(@$profileJson['emails']['email'][0]['email']) . ';
+                    opener.document.getElementById("country").value = ' . json_encode(@$profileJson['addresses']['address'][0]['country']['value']) . ';
+                    opener.document.getElementById("affiliation").value = ' . json_encode(@$employmentJson['employment-summary'][0]['organization']['name']) . ';
+                    opener.document.getElementById("orcid").value = ' . json_encode($orcidUri) . ';
+                    opener.document.getElementById("connect-orcid-button").style.display = "none";
+                    window.close();
+                    </script></body></html>
+                ';
                 break;
             case 'profile':
 
@@ -177,11 +172,11 @@ class OrcidProfileHandler extends Handler
 
                 // Reload the public profile tab (incl. form)
                 echo '
-					<html><body><script type="text/javascript">
-						opener.$("#profileTabs").tabs("load", 3);
-						window.close();
-					</script></body></html>
-				';
+                    <html><body><script type="text/javascript">
+                        opener.$("#profileTabs").tabs("load", 3);
+                        window.close();
+                    </script></body></html>
+                ';
                 break;
             default:
                 throw new Exception('Invalid target');
@@ -333,12 +328,9 @@ class OrcidProfileHandler extends Handler
                 'verifySuccess' => true,
                 'orcidIcon' => $this->plugin->getIcon()
             ]);
-
-
         } catch (\GuzzleHttp\Exception\ClientException $exception) {
             $this->plugin->logInfo("Publication fail:".$exception->getMessage());
             $templateMgr->assign('orcidAPIError',$exception->getMessage());
-
         }
         $templateMgr->assign('authFailure', true);
         $templateMgr->display($templatePath);
@@ -376,6 +368,4 @@ class OrcidProfileHandler extends Handler
         $templateMgr->assign('isMemberApi', $this->plugin->isMemberApiEnabled($contextId));
         $templateMgr->display($this->plugin->getTemplateResource('orcidAbout.tpl'));
     }
-
-
 }
