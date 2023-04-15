@@ -9,6 +9,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfilePlugin
+ *
  * @ingroup plugins_generic_orcidProfile
  *
  * @brief ORCID Profile plugin class
@@ -171,7 +172,6 @@ class OrcidProfilePlugin extends GenericPlugin
                     'apiSummary' => true,
                     'validation' => ['nullable']
                 ];
-
             });
 
             // Add more ORCiD fields to user Schema
@@ -221,7 +221,6 @@ class OrcidProfilePlugin extends GenericPlugin
             Hook::add('Installer::postInstall', [$this, 'updateSchema']);
 
             Hook::add('Publication::validatePublish', [$this, 'validate']);
-
         }
 
         return $success;
@@ -263,13 +262,15 @@ class OrcidProfilePlugin extends GenericPlugin
 
     /**
      * adds orcid  form fields.
+     *
      * @param string $hookName
      * @param Form $form
-     * @return bool
      */
     public function addOrcidFormFields($hookName, $form): bool
     {
-        if (!$form instanceof ContributorForm) return Hook::CONTINUE;
+        if (!$form instanceof ContributorForm) {
+            return Hook::CONTINUE;
+        }
 
         $form->removeField('orcid');
         $form->addField(new FieldText('orcid', [
@@ -290,7 +291,8 @@ class OrcidProfilePlugin extends GenericPlugin
             ]
         ]), [FIELD_POSITION_AFTER, 'orcid']);
 
-        $form->addField(new FieldOptions('deleteORCID', [
+        $form->addField(
+            new FieldOptions('deleteORCID', [
                 'label' => __('plugins.generic.orcidProfile.displayName'),
                 'options' => [
                     [
@@ -299,8 +301,8 @@ class OrcidProfilePlugin extends GenericPlugin
                     ]
                 ],
                 'showWhen' => 'orcid',
-            ])
-            , [FIELD_POSITION_AFTER, 'orcid']
+            ]),
+            [FIELD_POSITION_AFTER, 'orcid']
         );
 
         return Hook::CONTINUE;
@@ -314,7 +316,7 @@ class OrcidProfilePlugin extends GenericPlugin
     {
         $request = PKPApplication::get()->getRequest();
         $context = $request->getContext();
-        $newPublication =& $args[0];
+        $newPublication = & $args[0];
         if ($this->isMemberApiEnabled($this->currentContextId)) {
             if ($this->getSetting($context->getId(), 'country') && $this->getSetting($context->getId(), 'city')) {
                 $this->publishReviewerWorkToOrcid($newPublication, $request);
@@ -336,8 +338,6 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
-     * @param Submission $submission
-     * @param Request $request
      * @return false|void
      */
     public function publishReviewerWorkToOrcid(Submission $submission, Request $request)
@@ -358,16 +358,16 @@ class OrcidProfilePlugin extends GenericPlugin
                     $orcid = basename(parse_url($reviewer->getOrcid(), PHP_URL_PATH));
                     $orcidReview = $this->buildOrcidReview($submission, $review, $request);
                     $uri = $this->getSetting($context->getId(), 'orcidProfileAPIPath') . ORCID_API_VERSION_URL . $orcid . '/' . ORCID_REVIEW_URL;
-                    $method = "POST";
+                    $method = 'POST';
                     if ($putCode = $reviewer->getData('orcidReviewPutCode')) {
                         $uri .= '/' . $putCode;
-                        $method = "PUT";
+                        $method = 'PUT';
                         $orcidReview['put-code'] = $putCode;
                     }
                     $headers = [
                         'Content-Type' => ' application/vnd.orcid+json; qs=4',
                         'Accept' => 'application/json',
-                        'Authorization' => 'Bearer ' . $reviewer->getData("orcidAccessToken")
+                        'Authorization' => 'Bearer ' . $reviewer->getData('orcidAccessToken')
                     ];
                     $httpClient = Application::get()->getHttpClient();
 
@@ -382,15 +382,15 @@ class OrcidProfilePlugin extends GenericPlugin
                         );
                     } catch (ClientException $exception) {
                         $reason = $exception->getResponse()->getBody(false);
-                        $this->logInfo("Publication fail: $reason");
+                        $this->logInfo("Publication fail: {$reason}");
                         return new JSONMessage(false);
                     }
                     $httpStatus = $response->getStatusCode();
-                    $this->logInfo("Response status: $httpStatus");
+                    $this->logInfo("Response status: {$httpStatus}");
                     $responseHeaders = $response->getHeaders();
                     switch ($httpStatus) {
                         case 200:
-                            $this->logInfo("Review updated in profile, putCode: $putCode");
+                            $this->logInfo("Review updated in profile, putCode: {$putCode}");
                             break;
                         case 201:
                             $location = $responseHeaders['Location'][0];
@@ -398,15 +398,13 @@ class OrcidProfilePlugin extends GenericPlugin
                             $putCode = basename(parse_url($location, PHP_URL_PATH));
                             $reviewer->setData('orcidReviewPutCode', $putCode);
                             Repo::user()->edit($reviewer, ['orcidReviewPutCode']);
-                            $this->logInfo("Review added to profile, putCode: $putCode");
+                            $this->logInfo("Review added to profile, putCode: {$putCode}");
                             break;
                         default:
-                            $this->logError("Unexpected status $httpStatus response, body: $responseHeaders");
+                            $this->logError("Unexpected status {$httpStatus} response, body: {$responseHeaders}");
                     }
                 }
-
             }
-
         }
     }
 
@@ -424,18 +422,18 @@ class OrcidProfilePlugin extends GenericPlugin
             $orcidReview = [
                 'reviewer-role' => 'reviewer',
                 'review-type' => 'review',
-                "review-completion-date" => [
-                    "year" => [
-                        "value" => $reviewCompletionDate->format("Y")
+                'review-completion-date' => [
+                    'year' => [
+                        'value' => $reviewCompletionDate->format('Y')
                     ],
                     'month' => [
-                        'value' => $reviewCompletionDate->format("m")
+                        'value' => $reviewCompletionDate->format('m')
                     ],
                     'day' => [
-                        'value' => $reviewCompletionDate->format("d")
+                        'value' => $reviewCompletionDate->format('d')
                     ]
                 ],
-                'review-group-id' => "issn:" . $context->getData('onlineIssn'),
+                'review-group-id' => 'issn:' . $context->getData('onlineIssn'),
 
                 'convening-organization' => [
                     'name' => $context->getData('publisherInstitution'),
@@ -555,6 +553,7 @@ class OrcidProfilePlugin extends GenericPlugin
 
     /**
      * Check if there exist a valid orcid configuration section in the global config.inc.php of OJS.
+     *
      * @return boolean True, if the config file has api_url, client_id and client_secret set in an [orcid] section
      */
     public function isGloballyConfigured()
@@ -735,12 +734,12 @@ class OrcidProfilePlugin extends GenericPlugin
         );
 
         return $this->getOauthPath() . 'authorize?' . http_build_query(
-                [
-                    'client_id' => $this->getSetting($contextId, 'orcidClientId'),
-                    'response_type' => 'code',
-                    'scope' => $scope,
-                    'redirect_uri' => $redirectUrl]
-            );
+            [
+                'client_id' => $this->getSetting($contextId, 'orcidClientId'),
+                'response_type' => 'code',
+                'scope' => $scope,
+                'redirect_uri' => $redirectUrl]
+        );
     }
 
     /**
@@ -1072,12 +1071,10 @@ class OrcidProfilePlugin extends GenericPlugin
         } else {
             $clientId = $this->getSetting($contextId, 'orcidClientId');
             $clientSecret = $this->getSetting($contextId, 'orcidClientSecret');
-
         }
 
         if (!$validator->validateClientSecret($clientSecret) or !$validator->validateClientId($clientId)) {
             $enabled = false;
-
         }
         $this->updateSetting($contextId, 'enabled', $enabled, 'bool');
     }
@@ -1342,7 +1339,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     'value' => trim(strip_tags($publication->getLocalizedTitle($publicationLocale))) ?? ''
                 ],
                 'subtitle' => [
-                    'value' =>  trim(strip_tags($publication->getLocalizedData('subtitle', $publicationLocale))) ?? ''
+                    'value' => trim(strip_tags($publication->getLocalizedData('subtitle', $publicationLocale))) ?? ''
                 ]
             ],
             'journal-title' => [
@@ -1467,7 +1464,6 @@ class OrcidProfilePlugin extends GenericPlugin
 
                         $articleHasStoredPubId = true;
                     }
-
                 }
 
                 # Add issue ids if they exist
@@ -1662,13 +1658,12 @@ class OrcidProfilePlugin extends GenericPlugin
 
     /**
      * Pre-publication checks
-     * @param $hookName
-     * @param $args
+     *
      * @return false
      */
     public function validate($hookName, $args)
     {
-        $errors =& $args[0];
+        $errors = & $args[0];
         $publication = $args[1];
         $orcidIds = [];
         foreach ($publication->getData('authors') as $author) {
@@ -1678,9 +1673,8 @@ class OrcidProfilePlugin extends GenericPlugin
             } elseif ($authorOrcid && !$author->getData('orcidAccessToken')) {
                 $errors['hasUnauthenticatedOrcid'] = __('plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid');
             } else {
-                $orcidIds [] = $authorOrcid;
+                $orcidIds[] = $authorOrcid;
             }
-
         }
 
         return false;

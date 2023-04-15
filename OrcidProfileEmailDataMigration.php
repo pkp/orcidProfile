@@ -8,11 +8,11 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfileEmailDataMigration
+ *
  * @brief Migrations for the plugin's email templates
  */
 
 namespace APP\plugins\generic\orcidProfile;
-
 
 use Exception;
 use Illuminate\Database\Migrations\Migration;
@@ -47,7 +47,6 @@ class OrcidProfileEmailDataMigration extends Migration
                     $this->migrateEmailTemplatesName();
                 }
             } elseif ($version->getProduct() == 'orcidProfile') {
-
                 $thresholdVersion = '1.3.4.1';
                 $versionDao = DAORegistry::getDAO('VersionDAO');
                 $installedPluginVersion = $versionDao->getCurrentVersion();
@@ -87,7 +86,7 @@ class OrcidProfileEmailDataMigration extends Migration
             }
 
             $previous = Locale::getMissingKeyHandler();
-            Locale::setMissingKeyHandler(fn(string $key): string => '');
+            Locale::setMissingKeyHandler(fn (string $key): string => '');
 
             foreach ($locales as $locale) {
                 $translatedName = $name ? __($name, [], $locale) : $attrs['key'];

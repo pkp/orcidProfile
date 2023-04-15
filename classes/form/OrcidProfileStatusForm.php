@@ -9,6 +9,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfileStatusForm
+ *
  * @ingroup plugins_generic_orcidProfile
  *
  * @brief Form for site admins to modify ORCID Profile plugin settings
@@ -17,13 +18,13 @@
 namespace APP\plugins\generic\orcidProfile\classes\form;
 
 use APP\core\Application;
-use PKP\form\Form;
 use APP\plugins\generic\orcidProfile\classes\OrcidValidator;
 use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
 use APP\template\TemplateManager;
+use PKP\form\Form;
 
-class OrcidProfileStatusForm extends Form {
-
+class OrcidProfileStatusForm extends Form
+{
     public const CONFIG_VARS = [
         'orcidProfileAPIPath' => 'string',
         'orcidClientId' => 'string',
@@ -33,10 +34,10 @@ class OrcidProfileStatusForm extends Form {
         'isSandBox' => 'bool'
     ];
 
-    /** @var $contextId int */
+    /** @var int $contextId */
     public $contextId;
 
-    /** @var $plugin object */
+    /** @var object $plugin */
     public $plugin;
 
     /** @var OrcidValidator */
@@ -44,10 +45,12 @@ class OrcidProfileStatusForm extends Form {
 
     /**
      * Constructor
+     *
      * @param OrcidProfilePlugin $plugin
      * @param int $contextId
      */
-    public function __construct($plugin, $contextId) {
+    public function __construct($plugin, $contextId)
+    {
         $this->contextId = $contextId;
         $this->plugin = $plugin;
         $orcidValidator = new OrcidValidator($plugin);
@@ -58,9 +61,10 @@ class OrcidProfileStatusForm extends Form {
     /**
      * Initialize form data.
      */
-    public function initData() {
+    public function initData()
+    {
         $contextId = $this->contextId;
-        $plugin =& $this->plugin;
+        $plugin = & $this->plugin;
         $this->_data = [];
         foreach (self::CONFIG_VARS as $configVar => $type) {
             $this->_data[$configVar] = $plugin->getSetting($contextId, $configVar);
@@ -69,9 +73,13 @@ class OrcidProfileStatusForm extends Form {
 
     /**
      * Fetch the form.
+     *
      * @copydoc Form::fetch()
+     *
+     * @param null|mixed $template
      */
-    public function fetch($request, $template = null, $display = false) {
+    public function fetch($request, $template = null, $display = false)
+    {
         $contextId = $request->getContext()->getId();
         $clientId = $this->plugin->getSetting($contextId, 'orcidClientId');
         $clientSecret = $this->plugin->getSetting($contextId, 'orcidClientSecret');

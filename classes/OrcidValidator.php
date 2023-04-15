@@ -8,6 +8,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidValidator
+ *
  * @brief General Orcid validations
  */
 
@@ -15,16 +16,17 @@ namespace APP\plugins\generic\orcidProfile\classes;
 
 use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
 
-class OrcidValidator {
+class OrcidValidator
+{
     /**
      * OrcidValidator constructor.
      */
-    public function __construct(public OrcidProfilePlugin $plugin) {
+    public function __construct(public OrcidProfilePlugin $plugin)
+    {
     }
 
     /**
      * @param string $str
-     * @return bool
      */
     public function validateClientId(?string $str): bool
     {
@@ -33,7 +35,6 @@ class OrcidValidator {
 
     /**
      * @param string $str
-     * @return bool
      */
     public function validateClientSecret(?string $str): bool
     {

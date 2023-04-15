@@ -9,6 +9,7 @@
  * Distributed under the GNU GPL v2 or later. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfileHandler
+ *
  * @ingroup plugins_generic_orcidprofile
  *
  * @brief Pass off internal ORCID API requests to ORCID
@@ -33,7 +34,7 @@ use PKP\submission\PKPSubmission;
 class OrcidProfileHandler extends Handler
 {
     public const TEMPLATE = 'orcidVerify.tpl';
-    const ORCIDPROFILEPLUGIN = 'orcidprofileplugin';
+    public const ORCIDPROFILEPLUGIN = 'orcidprofileplugin';
     private bool $isSandBox;
     private OrcidProfilePlugin $plugin;
 
@@ -279,7 +280,6 @@ class OrcidProfileHandler extends Handler
             if ($response->getStatusCode() != 200) {
                 $this->plugin->logError('OrcidProfileHandler::orcidverify - unexpected response: ' . $response->getStatusCode());
                 $templateMgr->assign('authFailure', true);
-
             }
             $response = json_decode($response->getBody(), true);
 
@@ -287,18 +287,17 @@ class OrcidProfileHandler extends Handler
             if (($response['error'] ?? null) === 'invalid_grant') {
                 $this->plugin->logError('Authorization code invalid, maybe already used');
                 $templateMgr->assign('authFailure', true);
-
             }
             if (isset($response['error'])) {
-                $this->plugin->logError("Invalid ORCID response: " . $response['error']);
+                $this->plugin->logError('Invalid ORCID response: ' . $response['error']);
                 $templateMgr->assign('authFailure', true);
-                }
+            }
             // Set the orcid id using the full https uri
             $orcidUri = ($this->isSandBox ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
             if (!empty($authorToVerify->getOrcid()) && $orcidUri != $authorToVerify->getOrcid()) {
                 // another ORCID id is stored for the author
                 $templateMgr->assign('duplicateOrcid', true);
-                            }
+            }
             $authorToVerify->setOrcid($orcidUri);
             if (in_array($this->plugin->getSetting($contextId, 'orcidProfileAPIPath'), [ORCID_API_URL_MEMBER_SANDBOX, ORCID_API_URL_PUBLIC_SANDBOX])) {
                 // Set a flag to mark that the stored orcid id and access token came form the sandbox api
@@ -329,8 +328,8 @@ class OrcidProfileHandler extends Handler
                 'orcidIcon' => $this->plugin->getIcon()
             ]);
         } catch (\GuzzleHttp\Exception\ClientException $exception) {
-            $this->plugin->logInfo("Publication fail:".$exception->getMessage());
-            $templateMgr->assign('orcidAPIError',$exception->getMessage());
+            $this->plugin->logInfo('Publication fail:' . $exception->getMessage());
+            $templateMgr->assign('orcidAPIError', $exception->getMessage());
         }
         $templateMgr->assign('authFailure', true);
         $templateMgr->display($templatePath);

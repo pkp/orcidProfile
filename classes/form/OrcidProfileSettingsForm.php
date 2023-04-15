@@ -9,6 +9,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfileSettingsForm
+ *
  * @ingroup plugins_generic_orcidProfile
  *
  * @brief Form for site admins to modify ORCID Profile plugin settings
@@ -17,13 +18,13 @@
 namespace APP\plugins\generic\orcidProfile\classes\form;
 
 use APP\core\Application;
-use PKP\form\Form;
 use APP\plugins\generic\orcidProfile\classes\OrcidValidator;
 use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
 use APP\template\TemplateManager;
+use PKP\form\Form;
 
-class OrcidProfileSettingsForm extends Form {
-
+class OrcidProfileSettingsForm extends Form
+{
     public const CONFIG_VARS = [
         'orcidProfileAPIPath' => 'string',
         'orcidClientId' => 'string',
@@ -35,20 +36,22 @@ class OrcidProfileSettingsForm extends Form {
         'city' => 'string'
     ];
 
-    /** @var $contextId int */
-    public  $contextId;
+    /** @var int $contextId */
+    public $contextId;
 
-    /** @var $plugin object */
-    public  $plugin;
+    /** @var object $plugin */
+    public $plugin;
 
-    public  $validator;
+    public $validator;
 
     /**
      * Constructor
+     *
      * @param OrcidProfilePlugin $plugin
      * @param int $contextId
      */
-    public function __construct($plugin, $contextId) {
+    public function __construct($plugin, $contextId)
+    {
         $this->contextId = $contextId;
         $this->plugin = $plugin;
         $orcidValidator = new OrcidValidator($plugin);
@@ -71,9 +74,10 @@ class OrcidProfileSettingsForm extends Form {
     /**
      * Initialize form data.
      */
-    public function initData() {
+    public function initData()
+    {
         $contextId = $this->contextId;
-        $plugin =& $this->plugin;
+        $plugin = & $this->plugin;
         $this->_data = [];
         foreach (self::CONFIG_VARS as $configVar => $type) {
             $this->_data[$configVar] = $plugin->getSetting($contextId, $configVar);
@@ -83,15 +87,20 @@ class OrcidProfileSettingsForm extends Form {
     /**
      * Assign form data to user-submitted data.
      */
-    public function readInputData() {
+    public function readInputData()
+    {
         $this->readUserVars(array_keys(self::CONFIG_VARS));
     }
 
     /**
      * Fetch the form.
+     *
      * @copydoc Form::fetch()
+     *
+     * @param null|mixed $template
      */
-    public function fetch($request, $template = null, $display = false) {
+    public function fetch($request, $template = null, $display = false)
+    {
         $templateMgr = TemplateManager::getManager($request);
         $templateMgr->assign('globallyConfigured', $this->plugin->isGloballyConfigured());
         $templateMgr->assign('pluginName', $this->plugin->getName());
@@ -102,8 +111,9 @@ class OrcidProfileSettingsForm extends Form {
     /**
      * @copydoc Form::execute()
      */
-    public function execute(...$functionArgs) {
-        $plugin =& $this->plugin;
+    public function execute(...$functionArgs)
+    {
+        $plugin = & $this->plugin;
         $contextId = $this->contextId;
         foreach (self::CONFIG_VARS as $configVar => $type) {
             if ($configVar === 'orcidProfileAPIPath') {
@@ -112,14 +122,15 @@ class OrcidProfileSettingsForm extends Form {
                 $plugin->updateSetting($contextId, $configVar, $this->getData($configVar), $type);
             }
         }
-        if (strpos($this->getData("orcidProfileAPIPath"), "sandbox.orcid.org") == true) {
-            $plugin->updateSetting($contextId, "isSandBox", true, "bool");
+        if (strpos($this->getData('orcidProfileAPIPath'), 'sandbox.orcid.org') == true) {
+            $plugin->updateSetting($contextId, 'isSandBox', true, 'bool');
         }
 
         parent::execute(...$functionArgs);
     }
 
-    public function _checkPrerequisites() {
+    public function _checkPrerequisites()
+    {
         $messages = [];
 
         $clientId = $this->getData('orcidClientId');
