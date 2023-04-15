@@ -1529,7 +1529,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 			$authorOrcid = $author->getData('orcid');
 			if ($authorOrcid and in_array($authorOrcid, $orcidIds)) {
 				$errors['hasDuplicateOrcids'] = __('plugins.generic.orcidProfile.verify.duplicateOrcidAuthor');
-			} elseif ($authorOrcid && !$author->getData('orcidAccessToken')) {
+			} elseif ($authorOrcid && $this->isMemberApiEnabled($this->getCurrentContextId()) && !$author->getData('orcidAccessToken')) {
 				$errors['hasUnauthenticatedOrcid'] = __('plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid');
 			} else {
 				$orcidIds [] = $authorOrcid;
@@ -1537,6 +1537,11 @@ class OrcidProfilePlugin extends GenericPlugin {
 		}
 
 		return false;
+	}
+
+	function getCurrentContextId() {
+		$context = Application::get()->getRequest()->getContext();
+		return is_null($context) ? 0 : $context->getId();
 	}
 
 }
