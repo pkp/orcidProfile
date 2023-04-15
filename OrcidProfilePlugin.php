@@ -45,10 +45,10 @@ use APP\plugins\generic\orcidProfile\classes\form\OrcidProfileStatusForm;
 use APP\plugins\generic\orcidProfile\classes\OrcidValidator;
 use APP\plugins\generic\orcidProfile\mailables\OrcidCollectAuthorId;
 use APP\plugins\generic\orcidProfile\mailables\OrcidRequestAuthorAuthorization;
-use APP\plugins\generic\orcidProfile\OrcidProfileHanlder;
 use APP\submission\Submission;
 use APP\template\TemplateManager;
 use Carbon\Carbon;
+use Exception;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Mail;
 use PKP\components\forms\FieldOptions;
@@ -60,6 +60,7 @@ use PKP\core\JSONMessage;
 use PKP\core\PKPApplication;
 use PKP\db\DAORegistry;
 use PKP\form\Form;
+use PKP\install\Installer;
 use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\AjaxModal;
 use PKP\plugins\GenericPlugin;
@@ -76,7 +77,6 @@ class OrcidProfilePlugin extends GenericPlugin
     public const PUBID_TO_ORCID_EXT_ID = ['doi' => 'doi', 'other::urn' => 'urn'];
     public const USER_GROUP_TO_ORCID_ROLE = ['Author' => 'AUTHOR', 'Translator' => 'CHAIR_OR_TRANSLATOR', 'Journal manager' => 'AUTHOR'];
 
-    private $submissionIdToBePublished;
     private $currentContextId;
 
     /**
@@ -266,10 +266,8 @@ class OrcidProfilePlugin extends GenericPlugin
      * @param Form $form
      * @return bool
      */
-    function addOrcidFormFields($hookName, $form): bool
-
+    public function addOrcidFormFields($hookName, $form): bool
     {
-
         if (!$form instanceof ContributorForm) return Hook::CONTINUE;
 
         $form->removeField('orcid');
@@ -311,7 +309,7 @@ class OrcidProfilePlugin extends GenericPlugin
      * @param string $hookName
      * @param array $args
      */
-    function handleThankReviewer($hookName, $args)
+    public function handleThankReviewer($hookName, $args)
     {
         $request = PKPApplication::get()->getRequest();
         $context = $request->getContext();
@@ -371,7 +369,6 @@ class OrcidProfilePlugin extends GenericPlugin
                         'Authorization' => 'Bearer ' . $reviewer->getData("orcidAccessToken")
                     ];
                     $httpClient = Application::get()->getHttpClient();
-                    $requestsSuccess = [];
 
                     try {
                         $response = $httpClient->request(
@@ -421,9 +418,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $supportedSubmissionLocales = $context->getSupportedSubmissionLocales();
 
         if (!empty($review->getData('dateCompleted')) && $context->getData('onlineIssn')) {
-            $publicationPublishDate = Carbon::parse($submission->getData('datePublished'));
             $reviewCompletionDate = Carbon::parse($review->getData('dateCompleted'));
-
 
             $orcidReview = [
                 'reviewer-role' => 'reviewer',
@@ -478,7 +473,6 @@ class OrcidProfilePlugin extends GenericPlugin
                     ];
                     $orcidReview['subject-external-identifier'] = $externalIds;
                 }
-
             }
 
             $translatedTitleAvailable = false;
@@ -491,8 +485,6 @@ class OrcidProfilePlugin extends GenericPlugin
                         $translatedTitleAvailable = true;
                     }
                 }
-
-
             }
             return $orcidReview;
         }
@@ -554,7 +546,7 @@ class OrcidProfilePlugin extends GenericPlugin
     {
         $page = $params[0];
         if ($this->getEnabled() && $page == 'orcidapi') {
-            define('HANDLER_CLASS', 'APP\plugins\generic\orcidProfile\OrcidProfileHandler');
+            define('HANDLER_CLASS', OrcidProfileHandler::class);
             return true;
         }
         return false;
@@ -564,7 +556,7 @@ class OrcidProfilePlugin extends GenericPlugin
      * Check if there exist a valid orcid configuration section in the global config.inc.php of OJS.
      * @return boolean True, if the config file has api_url, client_id and client_secret set in an [orcid] section
      */
-    function isGloballyConfigured()
+    public function isGloballyConfigured()
     {
         $apiUrl = Config::getVar('orcid', 'api_url');
         $clientId = Config::getVar('orcid', 'client_id');
@@ -654,17 +646,15 @@ class OrcidProfilePlugin extends GenericPlugin
      *
      * @return string
      */
-    function getStyleSheet()
+    public function getStyleSheet()
     {
         return $this->getPluginPath() . '/css/orcidProfile.css';
     }
 
     public function isSandbox()
     {
-
         $apiUrl = $this->getSetting($this->getCurrentContextId(), 'orcidProfileAPIPath');
         return ($apiUrl == ORCID_API_URL_MEMBER_SANDBOX);
-
     }
 
     /**
@@ -680,9 +670,6 @@ class OrcidProfilePlugin extends GenericPlugin
         if (preg_match('/<form[^>]+id="register"[^>]+>/', $output, $matches, PREG_OFFSET_CAPTURE)) {
             $match = $matches[0][0];
             $offset = $matches[0][1];
-            $request = Application::get()->getRequest();
-            $context = $request->getContext();
-            $contextId = ($context == null) ? 0 : $context->getId();
             $targetOp = 'register';
             $templateMgr->assign([
                 'targetOp' => $targetOp,
@@ -770,7 +757,7 @@ class OrcidProfilePlugin extends GenericPlugin
      *
      * @return string
      */
-    function getIcon()
+    public function getIcon()
     {
         $path = Core::getBaseDir() . '/' . $this->getPluginPath() . '/templates/images/orcid.svg';
         return file_exists($path) ? file_get_contents($path) : '';
@@ -789,7 +776,6 @@ class OrcidProfilePlugin extends GenericPlugin
      */
     public function handleUserPublicProfileDisplay($hookName, $params)
     {
-
         $templateMgr = &$params[1];
         $output = &$params[2];
         $request = Application::get()->getRequest();
@@ -814,7 +800,7 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
-     * handleAuthorFormexecute sends an e-mail to the author if a specific checkbox was ticked in the author form.
+     * handleAuthorFormExecute sends an e-mail to the author if a specific checkbox was ticked in the author form.
      *
      * @param string $hookname
      * @param AuthorForm[] $args
@@ -1053,7 +1039,7 @@ class OrcidProfilePlugin extends GenericPlugin
                 ),
                 new LinkAction(
                     'status',
-                    new AjaxModal($router->url($request, null, null, 'manage', null, array('verb' => 'status', 'plugin' => $this->getName(), 'category' => 'generic')), $this->getDisplayName()),
+                    new AjaxModal($router->url($request, null, null, 'manage', null, ['verb' => 'status', 'plugin' => $this->getName(), 'category' => 'generic']), $this->getDisplayName()),
                     __('common.status'),
                     null
                 )
@@ -1065,12 +1051,12 @@ class OrcidProfilePlugin extends GenericPlugin
     /**
      * @see Plugin::manage()
      */
-    function getDisplayName()
+    public function getDisplayName()
     {
         return __('plugins.generic.orcidProfile.displayName');
     }
 
-    function setEnabled($enabled)
+    public function setEnabled($enabled)
     {
         $contextId = $this->getCurrentContextId();
         $request = Application::get()->getRequest();
@@ -1114,7 +1100,7 @@ class OrcidProfilePlugin extends GenericPlugin
                 ]);
 
                 $isoCodes = new IsoCodesFactory();
-                $countries = array();
+                $countries = [];
                 foreach ($isoCodes->getCountries() as $country) {
                     $countries[$country->getAlpha2()] = $country->getLocalName();
                 }
@@ -1156,12 +1142,8 @@ class OrcidProfilePlugin extends GenericPlugin
      */
     public function handlePublicationStatusChange($hookName, $args)
     {
-        $newPublication = &$args[0];
         /** @var Publication $newPublication */
-        $publication = &$args[1];
-        /** @var Publication $publication */
-        $submission = &$args[2];
-        /** @var Submission $submission */
+        $newPublication = &$args[0];
 
         $request = Application::get()->getRequest();
 
@@ -1231,7 +1213,7 @@ class OrcidProfilePlugin extends GenericPlugin
         }
 
         $orcidWork = $this->buildOrcidWork($publication, $context, $authors, $request, $issue);
-        $this::logInfo('Request body (without put-code): ' . json_encode($orcidWork));
+        $this->logInfo('Request body (without put-code): ' . json_encode($orcidWork));
 
         $requestsSuccess = [];
         foreach ($authorsWithOrcid as $orcid => $author) {
@@ -1677,13 +1659,14 @@ class OrcidProfilePlugin extends GenericPlugin
             $result = false;
         }
     }
-     /**
+
+    /**
      * Pre-publication checks
      * @param $hookName
      * @param $args
      * @return false
      */
-    function validate($hookName, $args)
+    public function validate($hookName, $args)
     {
         $errors =& $args[0];
         $publication = $args[1];
@@ -1702,5 +1685,4 @@ class OrcidProfilePlugin extends GenericPlugin
 
         return false;
     }
-
 }
