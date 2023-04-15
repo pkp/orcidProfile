@@ -533,7 +533,7 @@ class OrcidProfilePlugin extends GenericPlugin
     private static function writeLog($message, $level)
     {
         $fineStamp = date('Y-m-d H:i:s') . substr(microtime(), 1, 4);
-        error_log("${fineStamp} ${level} ${message}\n", 3, self::logFilePath());
+        error_log("{$fineStamp} {$level} {$message}\n", 3, self::logFilePath());
     }
 
     /**
@@ -1219,7 +1219,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     $orcid = basename(parse_url($author->getOrcid(), PHP_URL_PATH));
                     $authorsWithOrcid[$orcid] = $author;
                 } else {
-                    $this->logError("Token expired on ${orcidAccessExpiresOn} for author " . $author->getId() . ', deleting orcidAccessToken!');
+                    $this->logError("Token expired on {$orcidAccessExpiresOn} for author " . $author->getId() . ', deleting orcidAccessToken!');
                     $this->removeOrcidAccessToken($author);
                 }
             }
@@ -1254,7 +1254,7 @@ class OrcidProfilePlugin extends GenericPlugin
                 'Authorization' => 'Bearer ' . $author->getData('orcidAccessToken')
             ];
 
-            $this->logInfo("${method} ${uri}");
+            $this->logInfo("{$method} {$uri}");
             $this->logInfo('Header: ' . var_export($headers, true));
 
             $httpClient = Application::get()->getHttpClient();
@@ -1269,24 +1269,24 @@ class OrcidProfilePlugin extends GenericPlugin
                 );
             } catch (ClientException $exception) {
                 $reason = $exception->getResponse()->getBody(false);
-                $this->logInfo("Publication fail: ${reason}");
+                $this->logInfo("Publication fail: {$reason}");
                 return new JSONMessage(false);
             }
             $httpstatus = $response->getStatusCode();
-            $this->logInfo("Response status: ${httpstatus}");
+            $this->logInfo("Response status: {$httpstatus}");
             $responseHeaders = $response->getHeaders();
 
             switch ($httpstatus) {
                 case 200:
                     // Work updated
-                    $this->logInfo("Work updated in profile, putCode: ${putCode}");
+                    $this->logInfo("Work updated in profile, putCode: {$putCode}");
                     $requestsSuccess[$orcid] = true;
                     break;
                 case 201:
                     $location = $responseHeaders['Location'][0];
                     // Extract the ORCID work put code for updates/deletion.
                     $putCode = intval(basename(parse_url($location, PHP_URL_PATH)));
-                    $this->logInfo("Work added to profile, putCode: ${putCode}");
+                    $this->logInfo("Work added to profile, putCode: {$putCode}");
                     $author->setData('orcidWorkPutCode', $putCode);
                     Repo::author()->dao->update($author);
                     $requestsSuccess[$orcid] = true;
@@ -1312,7 +1312,7 @@ class OrcidProfilePlugin extends GenericPlugin
                         Repo::author()->dao->update($author);
                         $requestsSuccess[$orcid] = false;
                     } else {
-                        $this->logError("Unexpected status ${httpstatus} response, body: " . $response->getBody());
+                        $this->logError("Unexpected status {$httpstatus} response, body: " . $response->getBody());
                         $requestsSuccess[$orcid] = false;
                     }
                     break;
@@ -1321,7 +1321,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     $requestsSuccess[$orcid] = false;
                     break;
                 default:
-                    $this->logError("Unexpected status ${httpstatus} response, body: " . $response->getBody());
+                    $this->logError("Unexpected status {$httpstatus} response, body: " . $response->getBody());
                     $requestsSuccess[$orcid] = false;
             }
         }
