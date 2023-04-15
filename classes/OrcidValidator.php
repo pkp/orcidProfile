@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * @file classes/OrcidValidator.php
+ *
+ * Copyright (c) 2014-2023 Simon Fraser University
+ * Copyright (c) 2000-2023 John Willinsky
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
+ *
+ * @class OrcidValidator
+ * @brief General Orcid validations
+ */
+
 namespace APP\plugins\generic\orcidProfile\classes;
 
 use APP\plugins\generic\orcidProfile\OrcidProfilePlugin;
