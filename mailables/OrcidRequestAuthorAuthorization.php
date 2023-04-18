@@ -8,6 +8,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidRequestAuthorAuthorization
+ *
  * @ingroup mailables
  *
  * @brief This email is sent to request ORCID record access from authors

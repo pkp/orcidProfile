@@ -8,6 +8,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidCollectAuthorId
+ *
  * @ingroup mailables
  *
  * @brief This email is sent to collect the ORCID id's from authors

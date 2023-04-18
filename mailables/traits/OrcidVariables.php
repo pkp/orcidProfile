@@ -8,6 +8,7 @@
  * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @class OrcidVariables
+ *
  * @ingroup mailables_traits
  *
  * @brief Mailable trait to set additional template variables for ORCID-related emails
@@ -23,7 +24,7 @@ trait OrcidVariables
     protected static string $authorOrcidUrl = 'authorOrcidUrl';
     protected static string $orcidAboutUrl = 'orcidAboutUrl';
 
-    abstract function addData(array $data): Mailable;
+    abstract public function addData(array $data): Mailable;
 
     /**
      * Description of additional template variables

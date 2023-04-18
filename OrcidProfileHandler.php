@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file OrcidProfileHandler.inc.php
+ * @file OrcidProfileHandler.php
  *
  * Copyright (c) 2015-2019 University of Pittsburgh
  * Copyright (c) 2014-2020 Simon Fraser University
@@ -9,6 +9,7 @@
  * Distributed under the GNU GPL v2 or later. For full terms see the file docs/COPYING.
  *
  * @class OrcidProfileHandler
+ *
  * @ingroup plugins_generic_orcidprofile
  *
  * @brief Pass off internal ORCID API requests to ORCID
@@ -16,15 +17,14 @@
 
 namespace APP\plugins\generic\orcidProfile;
 
-
 use APP\core\Application;
 use APP\core\Request;
 use APP\facades\Repo;
 use APP\handler\Handler;
 use APP\template\TemplateManager;
 use Carbon\Carbon;
+use Exception;
 use PKP\core\Core;
-use PKP\plugins\Hook;
 use PKP\plugins\PluginRegistry;
 use PKP\security\authorization\PKPSiteAccessPolicy;
 use PKP\security\authorization\UserRequiredPolicy;
@@ -34,11 +34,9 @@ use PKP\submission\PKPSubmission;
 class OrcidProfileHandler extends Handler
 {
     public const TEMPLATE = 'orcidVerify.tpl';
-    const ORCIDPROFILEPLUGIN = 'orcidprofileplugin';
+    public const ORCIDPROFILEPLUGIN = 'orcidprofileplugin';
     private bool $isSandBox;
-    private ?\PKP\plugins\Plugin $plugin;
-
-
+    private OrcidProfilePlugin $plugin;
 
     public function __construct()
     {
@@ -87,7 +85,6 @@ class OrcidProfileHandler extends Handler
     public function orcidAuthorize($args, $request)
     {
         $context = $request->getContext();
-        $op = $request->getRequestedOp();
         $contextId = ($context == null) ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
         $httpClient = Application::get()->getHttpClient();
 
@@ -155,17 +152,17 @@ class OrcidProfileHandler extends Handler
 
                 // Suppress errors for nonexistent array indexes
                 echo '
-					<html><body><script type="text/javascript">
-					opener.document.getElementById("givenName").value = ' . json_encode(@$profileJson['name']['given-names']['value']) . ';
-					opener.document.getElementById("familyName").value = ' . json_encode(@$profileJson['name']['family-name']['value']) . ';
-					opener.document.getElementById("email").value = ' . json_encode(@$profileJson['emails']['email'][0]['email']) . ';
-					opener.document.getElementById("country").value = ' . json_encode(@$profileJson['addresses']['address'][0]['country']['value']) . ';
-					opener.document.getElementById("affiliation").value = ' . json_encode(@$employmentJson['employment-summary'][0]['organization']['name']) . ';
-					opener.document.getElementById("orcid").value = ' . json_encode($orcidUri) . ';
-					opener.document.getElementById("connect-orcid-button").style.display = "none";
-					window.close();
-					</script></body></html>
-				';
+                    <html><body><script type="text/javascript">
+                    opener.document.getElementById("givenName").value = ' . json_encode(@$profileJson['name']['given-names']['value']) . ';
+                    opener.document.getElementById("familyName").value = ' . json_encode(@$profileJson['name']['family-name']['value']) . ';
+                    opener.document.getElementById("email").value = ' . json_encode(@$profileJson['emails']['email'][0]['email']) . ';
+                    opener.document.getElementById("country").value = ' . json_encode(@$profileJson['addresses']['address'][0]['country']['value']) . ';
+                    opener.document.getElementById("affiliation").value = ' . json_encode(@$employmentJson['employment-summary'][0]['organization']['name']) . ';
+                    opener.document.getElementById("orcid").value = ' . json_encode($orcidUri) . ';
+                    opener.document.getElementById("connect-orcid-button").style.display = "none";
+                    window.close();
+                    </script></body></html>
+                ';
                 break;
             case 'profile':
 
@@ -176,14 +173,14 @@ class OrcidProfileHandler extends Handler
 
                 // Reload the public profile tab (incl. form)
                 echo '
-					<html><body><script type="text/javascript">
-						opener.$("#profileTabs").tabs("load", 3);
-						window.close();
-					</script></body></html>
-				';
+                    <html><body><script type="text/javascript">
+                        opener.$("#profileTabs").tabs("load", 3);
+                        window.close();
+                    </script></body></html>
+                ';
                 break;
             default:
-                assert(false);
+                throw new Exception('Invalid target');
         }
     }
 
@@ -283,7 +280,6 @@ class OrcidProfileHandler extends Handler
             if ($response->getStatusCode() != 200) {
                 $this->plugin->logError('OrcidProfileHandler::orcidverify - unexpected response: ' . $response->getStatusCode());
                 $templateMgr->assign('authFailure', true);
-
             }
             $response = json_decode($response->getBody(), true);
 
@@ -291,18 +287,17 @@ class OrcidProfileHandler extends Handler
             if (($response['error'] ?? null) === 'invalid_grant') {
                 $this->plugin->logError('Authorization code invalid, maybe already used');
                 $templateMgr->assign('authFailure', true);
-
             }
             if (isset($response['error'])) {
-                $this->plugin->logError("Invalid ORCID response: " . $response['error']);
+                $this->plugin->logError('Invalid ORCID response: ' . $response['error']);
                 $templateMgr->assign('authFailure', true);
-                }
+            }
             // Set the orcid id using the full https uri
             $orcidUri = ($this->isSandBox ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
             if (!empty($authorToVerify->getOrcid()) && $orcidUri != $authorToVerify->getOrcid()) {
                 // another ORCID id is stored for the author
                 $templateMgr->assign('duplicateOrcid', true);
-                            }
+            }
             $authorToVerify->setOrcid($orcidUri);
             if (in_array($this->plugin->getSetting($contextId, 'orcidProfileAPIPath'), [ORCID_API_URL_MEMBER_SANDBOX, ORCID_API_URL_PUBLIC_SANDBOX])) {
                 // Set a flag to mark that the stored orcid id and access token came form the sandbox api
@@ -332,12 +327,9 @@ class OrcidProfileHandler extends Handler
                 'verifySuccess' => true,
                 'orcidIcon' => $this->plugin->getIcon()
             ]);
-
-
         } catch (\GuzzleHttp\Exception\ClientException $exception) {
-            $this->plugin->logInfo("Publication fail:".$exception->getMessage());
-            $templateMgr->assign('orcidAPIError',$exception->getMessage());
-
+            $this->plugin->logInfo('Publication fail:' . $exception->getMessage());
+            $templateMgr->assign('orcidAPIError', $exception->getMessage());
         }
         $templateMgr->assign('authFailure', true);
         $templateMgr->display($templatePath);
@@ -375,6 +367,4 @@ class OrcidProfileHandler extends Handler
         $templateMgr->assign('isMemberApi', $this->plugin->isMemberApiEnabled($contextId));
         $templateMgr->display($this->plugin->getTemplateResource('orcidAbout.tpl'));
     }
-
-
 }
