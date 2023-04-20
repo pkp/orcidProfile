@@ -1,11 +1,12 @@
 # José Carvalho <jcarvalho@keep.pt>, 2023.
+# Carla Marques <carla.marques@usdb.uminho.pt>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2023-03-15 09:48+0000\n"
-"Last-Translator: José Carvalho <jcarvalho@keep.pt>\n"
+"PO-Revision-Date: 2023-04-21 18:31+0000\n"
+"Last-Translator: Carla Marques <carla.marques@usdb.uminho.pt>\n"
 "Language-Team: Portuguese (Portugal) <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/pt_PT/>\n"
 "Language: pt_PT\n"
@@ -284,7 +285,7 @@ msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretVal
 msgstr "Client Secret válido"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
-msgstr "Client Secret inválido, verifique os dados introduzidos"
+msgstr "Client Secret inválido, verifique as credenciais"
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
 msgstr "Foram identificados ORCIDs duplicados nos contribuidores."
