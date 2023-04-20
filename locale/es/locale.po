@@ -1,19 +1,20 @@
 # Jordi LC <jordi.lacruz@uab.cat>, 2021.
+# Marc Bria <marc.bria@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2021-08-04 13:04+0000\n"
-"Last-Translator: Jordi LC <jordi.lacruz@uab.cat>\n"
+"PO-Revision-Date: 2023-04-21 08:44+0000\n"
+"Last-Translator: Marc Bria <marc.bria@gmail.com>\n"
 "Language-Team: Spanish <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/es_ES/>\n"
-"Language: es_ES\n"
+"orcid-profile-plugin/orcid-profile-plugin/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "Módulo de perfil ORCID"
@@ -249,3 +250,66 @@ msgstr "Contraseña de cliente inválida"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "ID de cliente inválida"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Configuración guardada"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Ciudad"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "País"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "Módulo OrcidProfile activado"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "El identificador del cliente es inválido. Comprueba los datos."
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "El secreto del cliente es válido"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "El identificador de cliente es válido"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Revisar la configuración de la ubicación"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Selecciona Ciudad y País para permitir el envío de información del revisor a "
+"ORCID"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Credenciales de cliente inválidas"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Estado del módulo OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Módulo OrcidProfile desactivado"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "El plugin ha sido desactivado por errores de validación."
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Configurado globalmente en config.inc.php"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Configurado para la revista"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr ""
+"El secreto del cliente es inválido. Por favor comprueba las credenciales."
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Se han detectado duplicados en los ORCID de los contribuidores."
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Se han detectado ORCID no autentificados en los contribuidores."
