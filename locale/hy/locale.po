@@ -2,7 +2,7 @@
 # Tigran Zargaryan <tigran@flib.sci.am>, 2022, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-04-06 09:48+0000\n"
+"PO-Revision-Date: 2023-04-21 18:31+0000\n"
 "Last-Translator: Tigran Zargaryan <tigran@flib.sci.am>\n"
 "Language-Team: Armenian <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/hy/>\n"
@@ -242,7 +242,7 @@ msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
 msgstr "OrcidProfile Plugin-ն անջատված է"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
-msgstr "Հաճախորդի ID-ն անվավեր է, խնդրում ենք ստուգել ձեր մուտքագրումը"
+msgstr "Հաճախորդն անվավեր է, խնդրում ենք ստուգել ձեր մուտքագրումը"
 
 msgid "plugins.generic.orcidProfile.manager.settings.saved"
 msgstr "Կարգավորումները պահված են"
@@ -277,7 +277,7 @@ msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretVal
 msgstr "Հաճախորդի գաղտնիքը վավեր է"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
-msgstr "Հաճախորդի գաղտնիքը անվավեր է, խնդրում ենք ստուգել ձեր հավատարմագրերը"
+msgstr "Հաճախորդի Գաղտնիքն անվավեր է, խնդրում ենք ստուգել ձեր հավատարմագրերը"
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
 msgstr "Հայտնաբերվել են կրկնօրինակ ORCID-ներ աջակիցների համար:"
