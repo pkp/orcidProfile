@@ -1,12 +1,12 @@
-# Jordi LC <jordi.lacruz@uab.cat>, 2021.
+# Jordi LC <jordi.lacruz@uab.cat>, 2021, 2023.
 # Marc Bria <marc.bria@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2023-04-21 08:44+0000\n"
-"Last-Translator: Marc Bria <marc.bria@gmail.com>\n"
+"PO-Revision-Date: 2023-04-21 18:31+0000\n"
+"Last-Translator: Jordi LC <jordi.lacruz@uab.cat>\n"
 "Language-Team: Spanish <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/es/>\n"
 "Language: es\n"
@@ -179,8 +179,8 @@ msgstr ""
 "otros investigadores y también es un mecanismo para conectar los resultados "
 "y actividades de su investigación con su iD. ORCID se integra en muchos "
 "sistemas utilizados por editoriales, inversores/as, instituciones y otros "
-"servicios relacionados con la investigación. Puede ver más acerca de ORCID "
-"en  <a href=\"https://orcid.org\">orcid.org</a>."
+"servicios relacionados con la investigación. Para obtener más información "
+"visite <a href=\"https://orcid.org\">orcid.org</a>."
 
 msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
 msgstr "¿Cómo y por qué recolectamos iD ORCID?"
@@ -264,18 +264,17 @@ msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
 msgstr "Módulo OrcidProfile activado"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
-msgstr "El identificador del cliente es inválido. Comprueba los datos."
+msgstr ""
+"El identificador del cliente es inválido, compruebe los datos introducidos"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
 msgstr "El secreto del cliente es válido"
 
-#, fuzzy
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
 msgstr "El identificador de cliente es válido"
 
-#, fuzzy
 msgid "plugins.generic.orcidProfile.manager.settings.review"
-msgstr "Revisar la configuración de la ubicación"
+msgstr "Revisar los ajustes de ubicación"
 
 msgid "plugins.generic.orcidProfile.manager.settings.review.help"
 msgstr ""
@@ -294,22 +293,17 @@ msgstr "Módulo OrcidProfile desactivado"
 msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
 msgstr "El plugin ha sido desactivado por errores de validación."
 
-#, fuzzy
 msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
 msgstr "Configurado globalmente en config.inc.php"
 
-#, fuzzy
 msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
-msgstr "Configurado para la revista"
+msgstr "Configurado en cuanto a la revista"
 
-#, fuzzy
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
-msgstr ""
-"El secreto del cliente es inválido. Por favor comprueba las credenciales."
+msgstr "El secreto del cliente es inválido, compruebe sus credenciales"
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
 msgstr "Se han detectado duplicados en los ORCID de los contribuidores."
 
-#, fuzzy
 msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
-msgstr "Se han detectado ORCID no autentificados en los contribuidores."
+msgstr "Se han detectado ORCID no autentificados en los colaboradores/as."
