@@ -1,19 +1,19 @@
-# Pia Piontkowitz <pia.piontkowitz@rub.de>, 2021.
+# Pia Piontkowitz <pia.piontkowitz@rub.de>, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2021-10-21 10:06+0000\n"
+"PO-Revision-Date: 2023-04-26 13:49+0000\n"
 "Last-Translator: Pia Piontkowitz <pia.piontkowitz@rub.de>\n"
 "Language-Team: German <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/de_DE/>\n"
-"Language: de_DE\n"
+"orcid-profile-plugin/orcid-profile-plugin/de/>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "ORCID-Plugin"
@@ -224,3 +224,59 @@ msgstr "Ungültige Client-ID"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
 msgstr "Ungültiges Client Secret"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Einstellungen gespeichert"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Land"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Standort-Einstellungen überprüfen"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "ORCIDProfil Plugin aktiviert"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "ORCIDProfil Plugin deaktiviert"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Global konfiguriert in config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "Client ID ist valide"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Client Secret ist valide"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Client ID ist invalid, bitte überprüfen Sie Ihre Credentials"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "Client ID ist invalid, bitte überprüfen Sie Ihre Eingabe"
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Nicht authentifizierte ORCIDs von Beitragenden entdeckt."
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Das Plugin wurde aufgrund von Validierungsfehlern deaktiviert."
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Ort"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Ort und Land auswählen, um das Senden von Reviewer-Informationen an ORCID zu "
+"aktivieren"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Invalide Client Credentials"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "ORCIDProfil Plugin Status"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Auf Zeitschriftenebene konfiguriert"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Doppelte ORCIDs von Beitragenden entdeckt."
