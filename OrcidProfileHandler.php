@@ -25,6 +25,7 @@ use APP\template\TemplateManager;
 use Carbon\Carbon;
 use Exception;
 use PKP\core\Core;
+use PKP\core\PKPRequest;
 use PKP\plugins\PluginRegistry;
 use PKP\security\authorization\PKPSiteAccessPolicy;
 use PKP\security\authorization\UserRequiredPolicy;
@@ -43,7 +44,9 @@ class OrcidProfileHandler extends Handler
         $request = Application::get()->getRequest();
         $context = $request->getContext();
         $contextId = $context == null ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
-        $this->plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
+        /** @var OrcidProfilePlugin */
+        $plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
+        $this->plugin = $plugin;
         $this->isSandBox = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
             $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX;
     }

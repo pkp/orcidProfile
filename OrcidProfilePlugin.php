@@ -16,6 +16,10 @@
  */
 
 namespace APP\plugins\generic\orcidProfile;
+use APP\issue\Issue;
+use APP\journal\Journal;
+use APP\plugins\generic\citationStyleLanguage\CitationStyleLanguagePlugin;
+use APP\publication\Publication;
 
 define('ORCID_URL', 'https://orcid.org/');
 define('ORCID_URL_SANDBOX', 'https://sandbox.orcid.org/');
@@ -338,7 +342,7 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
-     * @return false|void
+     * @return JSONMessage|null
      */
     public function publishReviewerWorkToOrcid(Submission $submission, Request $request)
     {
@@ -1163,7 +1167,7 @@ class OrcidProfilePlugin extends GenericPlugin
      *
      * @param Publication $publication Publication for which the data will be sent to ORCID
      *
-     * @return bool|bool[]
+     * @return bool|bool[]|JSONMessage
      *
      **/
     public function sendSubmissionToOrcid($publication, $request)
