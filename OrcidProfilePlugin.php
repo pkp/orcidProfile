@@ -385,7 +385,7 @@ class OrcidProfilePlugin extends GenericPlugin
                             ]
                         );
                     } catch (ClientException $exception) {
-                        $reason = $exception->getResponse()->getBody(false);
+                        $reason = $exception->getResponse()->getBody();
                         $this->logInfo("Publication fail: {$reason}");
                         return new JSONMessage(false);
                     }
@@ -1213,7 +1213,7 @@ class OrcidProfilePlugin extends GenericPlugin
             return false;
         }
 
-        $orcidWork = $this->buildOrcidWork($publication, $context, $authors, $request, $issue);
+        $orcidWork = $this->buildOrcidWork($publication, $context, $authors->toArray(), $request, $issue);
         $this->logInfo('Request body (without put-code): ' . json_encode($orcidWork));
 
         $requestsSuccess = [];
@@ -1251,7 +1251,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     ]
                 );
             } catch (ClientException $exception) {
-                $reason = $exception->getResponse()->getBody(false);
+                $reason = $exception->getResponse()->getBody();
                 $this->logInfo("Publication fail: {$reason}");
                 return new JSONMessage(false);
             }
