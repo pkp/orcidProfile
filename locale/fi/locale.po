@@ -1,18 +1,19 @@
+# Antti-Jussi Nygård <ajnyga@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2021-04-08 19:55+0000\n"
+"PO-Revision-Date: 2023-05-23 14:54+0000\n"
 "Last-Translator: Antti-Jussi Nygård <ajnyga@gmail.com>\n"
 "Language-Team: Finnish <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/fi_FI/>\n"
-"Language: fi_FI\n"
+"orcid-profile-plugin/orcid-profile-plugin/fi/>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "ORCID-lisäosa"
@@ -57,7 +58,7 @@ msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId"
 msgstr "Asiakas ID (Client ID)"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret"
-msgstr "Asiakas avain (Client Secret)"
+msgstr "Asiakasavain (Client Secret)"
 
 msgid "plugins.generic.orcidProfile.author.submission"
 msgstr "Käsikirjoituksen ORCID-tunniste"
@@ -84,13 +85,16 @@ msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
 msgstr "Sähköpostin asetukset"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
-msgstr "Lähetä kirjoittajille sähköposti, jossa pyydetään ORCID-tunnisteiden liittämistä julkaistuihin artikkeleihin, kun artikkeli hyväksytään julkaistavaksi."
+msgstr ""
+"Lähetä kirjoittajille sähköposti, jossa pyydetään ORCID-tunnisteiden "
+"liittämistä julkaistuihin artikkeleihin, kun artikkeli lähetetään teknisen "
+"toimittamisen työvaiheeseen"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "ORCID-pyyntöjen loki"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
-msgstr "Valitse millä tarkkuudella lisäosan tekemät pyynnöt tallennetaan."
+msgstr "Valitse millä tarkkuudella lisäosan tekemät pyynnöt tallennetaan"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
 msgstr "Virheet"
@@ -108,7 +112,7 @@ msgid "plugins.generic.orcidProfile.author.requestAuthorization"
 msgstr "Lähetä sähköposti, jolla pyydät tekijää vahvistamaan ORCID-tunnisteensa"
 
 msgid "plugins.generic.orcidProfile.author.deleteORCID"
-msgstr "Poista ORCID ja käyttöoikeustunniste"
+msgstr "Poista ORCID ja käyttöoikeustunniste!"
 
 msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
 msgstr "Alla lisätietoja autentikoitujen ORCID-tunnisteiden keräämiseen"
@@ -120,10 +124,10 @@ msgid "plugins.generic.orcidProfile.verify.title"
 msgstr "ORCID-vahvistus"
 
 msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"
-msgstr "Käsikirjoitus on lisätty ORCID-tilillesi"
+msgstr "Käsikirjoitus on lisätty ORCID-tilillesi."
 
 msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"
-msgstr "Käsikirjoitusta ei voitu lisätä ORCID-tilillesi"
+msgstr "Käsikirjoitusta ei voitu lisätä ORCID-tilillesi."
 
 msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"
 msgstr "Käsikirjoitus lisätään ORCID-tilillesi sen julkaisun yhteydessä."
@@ -135,7 +139,7 @@ msgid "plugins.generic.orcidProfile.verify.failure"
 msgstr "ORCID-tunnistetta ei voitu vahvistaa. Linkki ei ole enää voimassa."
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
-msgstr "ORCID-tunniste on jo tallennettu tälle käsikirjoitukselle"
+msgstr "ORCID-tunniste on jo tallennettu tälle käsikirjoitukselle."
 
 msgid "plugins.generic.orcidProfile.verify.denied"
 msgstr "Olet kieltänyt pääsyn ORCID-tilillesi."
@@ -206,7 +210,63 @@ msgstr ""
 "työskentelemään puolestasi!</a>\n"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
-msgstr "Virheellinen asiakas avain (Client Secret)"
+msgstr "Virheellinen asiakasavain (Client Secret)"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "Virheellinen asiakas ID (Client ID)"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Validointivirheiden vuoksi lisäosa poistettiin käytöstä."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Asetukset tallennettu"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Kaupunki"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Maa"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Tarkista sijaintiasetukset"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Valitse kaupunki ja maa ottaaksesi käyttöön arviointitietojen lähetyksen "
+"ORCID-tietokantaan"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "ORCID-lisäosan tila"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "ORCID-lisäosa otettu käyttöön"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Asetukset määritetty config.inc.php-tiedostossa koko sivustolle"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Asetukset määritetty julkaisukohtaisesti"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "Asiakas ID on kelvollinen"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Asiakasavain (Client Secret) on kelvollinen"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Asiakasavain (Client Secret) on virheellinen, tarkista antamasi avain"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "Asiakas ID on virheellinen, tarkista antamasi ID"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Tekijätiedot sisältävät identtisiä ORCID-tunnuksia."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Tekijätiedot sisältävät vahvistamattomia ORCID-tunnuksia."
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Virheelliset asiakkaan käyttäjätiedot (client)"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "ORCID-lisäosa poistettu käytöstä"
