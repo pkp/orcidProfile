@@ -21,23 +21,6 @@ use APP\journal\Journal;
 use APP\plugins\generic\citationStyleLanguage\CitationStyleLanguagePlugin;
 use APP\publication\Publication;
 
-define('ORCID_URL', 'https://orcid.org/');
-define('ORCID_URL_SANDBOX', 'https://sandbox.orcid.org/');
-define('ORCID_API_URL_PUBLIC', 'https://pub.orcid.org/');
-define('ORCID_API_URL_PUBLIC_SANDBOX', 'https://pub.sandbox.orcid.org/');
-define('ORCID_API_URL_MEMBER', 'https://api.orcid.org/');
-define('ORCID_API_URL_MEMBER_SANDBOX', 'https://api.sandbox.orcid.org/');
-define('ORCID_API_VERSION_URL', 'v3.0/');
-define('ORCID_API_SCOPE_PUBLIC', '/authenticate');
-define('ORCID_API_SCOPE_MEMBER', '/activities/update');
-
-define('OAUTH_TOKEN_URL', 'oauth/token');
-define('ORCID_EMPLOYMENTS_URL', 'employments');
-define('ORCID_PROFILE_URL', 'person');
-define('ORCID_EMAIL_URL', 'email');
-define('ORCID_WORK_URL', 'work');
-define('ORCID_REVIEW_URL', 'peer-review');
-
 use APP\author\Author;
 use APP\controllers\grid\users\author\form\AuthorForm;
 use APP\core\Application;
@@ -77,6 +60,22 @@ use PKP\submission\PKPSubmission;
 use PKP\submission\reviewAssignment\ReviewAssignment;
 use PKP\submission\reviewAssignment\ReviewAssignmentDAO;
 use Sokil\IsoCodes\Database\Countries\Country;
+
+define('ORCID_URL', 'https://orcid.org/');
+define('ORCID_URL_SANDBOX', 'https://sandbox.orcid.org/');
+define('ORCID_API_URL_PUBLIC', 'https://pub.orcid.org/');
+define('ORCID_API_URL_PUBLIC_SANDBOX', 'https://pub.sandbox.orcid.org/');
+define('ORCID_API_URL_MEMBER', 'https://api.orcid.org/');
+define('ORCID_API_URL_MEMBER_SANDBOX', 'https://api.sandbox.orcid.org/');
+define('ORCID_API_VERSION_URL', 'v3.0/');
+define('ORCID_API_SCOPE_PUBLIC', '/authenticate');
+define('ORCID_API_SCOPE_MEMBER', '/activities/update');
+define('OAUTH_TOKEN_URL', 'oauth/token');
+define('ORCID_EMPLOYMENTS_URL', 'employments');
+define('ORCID_PROFILE_URL', 'person');
+define('ORCID_EMAIL_URL', 'email');
+define('ORCID_WORK_URL', 'work');
+define('ORCID_REVIEW_URL', 'peer-review');
 
 class OrcidProfilePlugin extends GenericPlugin
 {
