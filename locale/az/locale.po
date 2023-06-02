@@ -1,8 +1,256 @@
 # Osman Durmaz <osmandurmaz@hotmail.de>, 2023.
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2023-06-03 04:18+0000\n"
+"Last-Translator: Osman Durmaz <osmandurmaz@hotmail.de>\n"
+"Language-Team: Azerbaijani <http://translate.pkp.sfu.ca/projects/"
+"orcid-profile-plugin/orcid-profile-plugin/az/>\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Weblate\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.13.1\n"
+
+msgid "plugins.generic.orcidProfile.displayName"
+msgstr "Orcid Profil …ôlav…ôsi"
+
+msgid "plugins.generic.orcidProfile.emailOrOrcid"
+msgstr "Email adresi v…ô ya ORCID:"
+
+msgid "plugins.generic.orcidProfile.manager.settings.title"
+msgstr "Orcid API t…ônziml…ôri"
+
+msgid "plugins.generic.orcidProfile.description"
+msgstr ""
+"ORCID-dən istifadəçi məlumatlarının içəriyə transfer edilməsinə icazə verir"
+
+msgid "plugins.generic.orcidProfile.instructions"
+msgstr ""
+"ODCID profilinizdəki məlumatları bu forma avtomatik olaraq transfer edə "
+"bilərsiniz. ORCID profili ilə əlaqəli email adresi və ya ORCID ID-ni daxil "
+"edin, sonra isə \"Göndər\" seçimini klikləyin."
+
+msgid "plugins.generic.orcidProfile.noData"
+msgstr "ORCID-də heç bir data tapılmadı"
+
+msgid "plugins.generic.orcidProfile.manager.settings.description"
+msgstr ""
+"Orcid profili məlumatlarının istifadəçi profilinə çəkilməsi üçün ODCID API-"
+"sini konfiqurasiya edin"
+
+msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
+msgstr ""
+"Orcid API ümumi olaraq konfiqurasiya edilir. Aşağıdakı məlumatlar yadda "
+"saxlandı"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Doğrulama səhvləri səbəbindən plugin deaktiv edildi."
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Parametrlər qurtarıldı"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Şəhər"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Ölkə"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Yer parametrlərini nəzərdən keçirin"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr "Rəyçi məlumatlarını orcid üçün göndərməyə imkan verən şəhəri seçin"
+
+msgid "plugins.generic.orcidProfile.author.unauthenticated"
+msgstr ""
+"Orcid iD kimliyi təsdiqlənmədi! Zəhmət olmasa iştirakçıdan kimlik "
+"təsdiqləməsi tələb edin."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"
+msgstr "Məqalə ORCID qeydiyyatınıza əlavə edildi"
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"
+msgstr "Məqalə ORCID qeydiyyatınıza əlavə edilə bilmədi"
+
+msgid "plugins.generic.orcidProfile.verify.denied"
+msgstr "Orcid qeydiyyatınıza girişi ləğv etdiniz."
+
+msgid "plugins.generic.orcidProfile.authorise"
+msgstr "Orcid ID-nizi s…ôlahiyy…ôtl…ôndirin v…ô qoŇüun"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Orcidprofil plugin statusu"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Töhfəçilər üçün təsdiqlənməmiş orcidlər aşkarlandı."
+
+msgid "plugins.generic.orcidProfile.manager.settings.hidden"
+msgstr "gizli"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
+msgstr "Orcid API"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public"
+msgstr "√úmumi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox"
+msgstr "√úmumi Sandbox"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member"
+msgstr "√úzv"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox"
+msgstr "√úzv Sandbox"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId"
+msgstr "M√ľŇüt…ôri ID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret"
+msgstr "M√ľŇüt…ôri m…ôxfiliyi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
+msgstr "Profil GiriŇü …ôhat…ôsi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
+msgstr "Email t…ônziml…ôri"
+
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
+msgstr ""
+"Bir m…ôqal…ô q…ôbul edildiyi zaman ORCID s…ôlahiyy…ôti ist…ôm…ôk √ľ√ß√ľn "
+"email g√∂nd…ôr. M…ôs: n√ľsx…ô redakt…ô √ľ√ß√ľn g√∂nd…ôrildi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
+msgstr "Orcid ist…ôk g√ľnd…ôliyi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
+msgstr "∆Źlav…ô t…ôr…ôfind…ôn yazńĪlan g√ľnd…ôlik hasilatńĪn miqdarńĪnńĪ se√ßin"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
+msgstr "X…ôtalar"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
+msgstr "HamńĪsńĪ"
+
+msgid "plugins.generic.orcidProfile.author.accessDenied"
+msgstr "Orcid giriŇüi r…ôdd edildi"
+
+msgid "plugins.generic.orcidProfile.author.accessTokenStored"
+msgstr ""
+"{$orcidAccessScope} …ôhat…ôsil…ô veril…ôn ORCID qeydiyyat giriŇüi, bu tarix…"
+"ô q…ôd…ôr etibarlńĪdńĪr"
+
+msgid "plugins.generic.orcidProfile.author.requestAuthorization"
+msgstr ""
+"ńįŇütirak√ßńĪdan ORCID s…ôlahiyy…ôtl…ôndirm…ô ist…ôm…ôk √ľ√ß√ľn email "
+"g√∂nd…ôr"
+
+msgid "plugins.generic.orcidProfile.author.deleteORCID"
+msgstr "Orcid iD v…ô giriŇü a√ßarńĪnńĪ silin!"
+
+msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
+msgstr "Kimliyi t…ôsdiql…ônmiŇü ORCID ID ist…ôm…ôk √ľ√ß√ľn aŇüańüńĪya baxńĪn"
+
+msgid "plugins.generic.orcidProfile.verify.title"
+msgstr "Orcid s…ôlahiyy…ôtl…ôndirm…ôsi"
+
+msgid "plugins.generic.orcidProfile.fieldset"
+msgstr "Orcid"
+
+msgid "plugins.generic.orcidProfile.connect"
+msgstr "Orc ID-nizi yaradńĪn v…ô ya qoŇüun"
+
+msgid "plugins.generic.orcidProfile.about.title"
+msgstr "Orcid n…ôdir?"
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
+msgstr "ORCID ID-l…ôrinizi nec…ô v…ô niy…ô toplayńĪrńĪq?"
+
+msgid "plugins.generic.orcidProfile.about.display.title"
+msgstr "Orcid ID-l…ôri harada g√∂st…ôrilir?"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
+msgstr "EtibarsńĪz m√ľŇüt…ôri Ňü…ôxsiyy…ôti"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
+msgstr "EtibarsńĪz m√ľŇüt…ôri sirri"
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"
+msgstr "Məqalə nəşr əsnasında ORCID qeydiyyatınıza əlavə ediləcəkdir."
+
+msgid "plugins.generic.orcidProfile.verify.success"
+msgstr "Orcid iD-niz təsdiqləndi və Məqalə ilə uğurla əlaqələndirildi"
+
+msgid "plugins.generic.orcidProfile.verify.failure"
+msgstr "Orcid iD-niz təsdiqlənə bilmədi. Link etibarlı deyil."
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
+msgstr "Bu məqalə üçün bir ORCID iD artıq mövcuddur."
+
+msgid "plugins.generic.orcidProfile.authFailure"
+msgstr ""
+"OJS, ORCID xidməti ilə əlaqə saxlaya bilmədi. Zəhmət olmasa jurnaldan məsul "
+"şəxs ilə adınızı, ORCID və tələbinizin təfərrüatları üçün əlaqə saxlayın."
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Yanlış müştəri etimadnaməsi"
+
+msgid "plugins.generic.orcidProfile.failure.contact"
+msgstr ""
+"Zəhmət olmasa adınız, ODCID ID-niz və məqalə məlumatlarınızla birlikdə "
+"jurnal idarəçisinə müraciət edin."
+
+msgid "plugins.generic.orcidProfile.about.orcidExplanation"
+msgstr ""
+"ORCID, sizi digər tədqiqatçılardan fərqləndirən daimi bir təsviredici və "
+"araşdırma buraxılışlarınızı və fəaliyyətlərinizi ID-nizə qoşmaq üçün bir "
+"mexanizm təmin edən, qazanc məqsədi güdməyən müstəqil bir quruluşdur. ORCID, "
+"naşirlər, fond təmin edənlər, qurumlar və araşdırma ilə bağlı digər "
+"xidmətlər tərəfindən istifadə edilən bir neçə sistemə inteqrasiya edilir. "
+"Daha ətraflı məlumat almaq üçün <a href=\"https://orcid.org\">orcid.org</"
+"a>adresini ziyarət edin."
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "OrcidProfil plugin effektivdir"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Orcidprofil plugin əlil"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Config.inc.php-də qlobal miqyasda konfiqurasiya edilmişdir"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Jurnal-müdrik konfiqurasiya edildi"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "Müştəri ID etibarlıdır"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "Müştəri ID etibarsızdır, lütfən girişinizi yoxlayın"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Müştəri sirri etibarlıdır"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Müştəri sirri etibarsızdır, zəhmət olmasa etimadnamənizi yoxlayın"
+
+#, fuzzy
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Töhfə verənlər üçün dublikat orcids aşkar edildi."
