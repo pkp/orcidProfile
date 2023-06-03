@@ -25,6 +25,7 @@ use APP\template\TemplateManager;
 use Carbon\Carbon;
 use Exception;
 use PKP\core\Core;
+use PKP\core\PKPRequest;
 use PKP\plugins\PluginRegistry;
 use PKP\security\authorization\PKPSiteAccessPolicy;
 use PKP\security\authorization\UserRequiredPolicy;
@@ -42,8 +43,10 @@ class OrcidProfileHandler extends Handler
     {
         $request = Application::get()->getRequest();
         $context = $request->getContext();
-        $contextId = $context == null ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
-        $this->plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
+        $contextId = $context?->getId() ?? \PKP\core\PKPApplication::CONTEXT_ID_NONE;
+        /** @var OrcidProfilePlugin */
+        $plugin = PluginRegistry::getPlugin('generic', self::ORCIDPROFILEPLUGIN);
+        $this->plugin = $plugin;
         $this->isSandBox = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
             $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX;
     }
@@ -68,7 +71,7 @@ class OrcidProfileHandler extends Handler
         }
 
         if (!Application::isInstalled()) {
-            SessionManager::isDisabled(true);
+            SessionManager::disable();
         }
 
         $this->setEnforceRestrictedSite(false);
@@ -85,7 +88,7 @@ class OrcidProfileHandler extends Handler
     public function orcidAuthorize($args, $request)
     {
         $context = $request->getContext();
-        $contextId = ($context == null) ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
+        $contextId = $context?->getId() ?? \PKP\core\PKPApplication::CONTEXT_ID_NONE;
         $httpClient = Application::get()->getHttpClient();
 
         // API request: Get an OAuth token and ORCID.
@@ -194,7 +197,7 @@ class OrcidProfileHandler extends Handler
     {
         $templateMgr = TemplateManager::getManager($request);
         $context = $request->getContext();
-        $contextId = $context == null ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
+        $contextId = $context?->getId() ?? \PKP\core\PKPApplication::CONTEXT_ID_NONE;
 
         $templatePath = $this->plugin->getTemplateResource(self::TEMPLATE);
 
@@ -361,7 +364,7 @@ class OrcidProfileHandler extends Handler
     public function about($args, $request)
     {
         $context = $request->getContext();
-        $contextId = $context == null ? \PKP\core\PKPApplication::CONTEXT_ID_NONE : $context->getId();
+        $contextId = $context?->getId() ?? \PKP\core\PKPApplication::CONTEXT_ID_NONE;
         $templateMgr = TemplateManager::getManager($request);
         $templateMgr->assign('orcidIcon', $this->plugin->getIcon());
         $templateMgr->assign('isMemberApi', $this->plugin->isMemberApiEnabled($contextId));

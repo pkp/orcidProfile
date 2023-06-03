@@ -16,23 +16,10 @@
  */
 
 namespace APP\plugins\generic\orcidProfile;
-
-define('ORCID_URL', 'https://orcid.org/');
-define('ORCID_URL_SANDBOX', 'https://sandbox.orcid.org/');
-define('ORCID_API_URL_PUBLIC', 'https://pub.orcid.org/');
-define('ORCID_API_URL_PUBLIC_SANDBOX', 'https://pub.sandbox.orcid.org/');
-define('ORCID_API_URL_MEMBER', 'https://api.orcid.org/');
-define('ORCID_API_URL_MEMBER_SANDBOX', 'https://api.sandbox.orcid.org/');
-define('ORCID_API_VERSION_URL', 'v3.0/');
-define('ORCID_API_SCOPE_PUBLIC', '/authenticate');
-define('ORCID_API_SCOPE_MEMBER', '/activities/update');
-
-define('OAUTH_TOKEN_URL', 'oauth/token');
-define('ORCID_EMPLOYMENTS_URL', 'employments');
-define('ORCID_PROFILE_URL', 'person');
-define('ORCID_EMAIL_URL', 'email');
-define('ORCID_WORK_URL', 'work');
-define('ORCID_REVIEW_URL', 'peer-review');
+use APP\issue\Issue;
+use APP\journal\Journal;
+use APP\plugins\generic\citationStyleLanguage\CitationStyleLanguagePlugin;
+use APP\publication\Publication;
 
 use APP\author\Author;
 use APP\controllers\grid\users\author\form\AuthorForm;
@@ -73,6 +60,22 @@ use PKP\submission\PKPSubmission;
 use PKP\submission\reviewAssignment\ReviewAssignment;
 use PKP\submission\reviewAssignment\ReviewAssignmentDAO;
 use Sokil\IsoCodes\Database\Countries\Country;
+
+define('ORCID_URL', 'https://orcid.org/');
+define('ORCID_URL_SANDBOX', 'https://sandbox.orcid.org/');
+define('ORCID_API_URL_PUBLIC', 'https://pub.orcid.org/');
+define('ORCID_API_URL_PUBLIC_SANDBOX', 'https://pub.sandbox.orcid.org/');
+define('ORCID_API_URL_MEMBER', 'https://api.orcid.org/');
+define('ORCID_API_URL_MEMBER_SANDBOX', 'https://api.sandbox.orcid.org/');
+define('ORCID_API_VERSION_URL', 'v3.0/');
+define('ORCID_API_SCOPE_PUBLIC', '/authenticate');
+define('ORCID_API_SCOPE_MEMBER', '/activities/update');
+define('OAUTH_TOKEN_URL', 'oauth/token');
+define('ORCID_EMPLOYMENTS_URL', 'employments');
+define('ORCID_PROFILE_URL', 'person');
+define('ORCID_EMAIL_URL', 'email');
+define('ORCID_WORK_URL', 'work');
+define('ORCID_REVIEW_URL', 'peer-review');
 
 class OrcidProfilePlugin extends GenericPlugin
 {
@@ -338,7 +341,7 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
-     * @return false|void
+     * @return JSONMessage|null
      */
     public function publishReviewerWorkToOrcid(Submission $submission, Request $request)
     {
@@ -381,7 +384,7 @@ class OrcidProfilePlugin extends GenericPlugin
                             ]
                         );
                     } catch (ClientException $exception) {
-                        $reason = $exception->getResponse()->getBody(false);
+                        $reason = $exception->getResponse()->getBody();
                         $this->logInfo("Publication fail: {$reason}");
                         return new JSONMessage(false);
                     }
@@ -1163,7 +1166,7 @@ class OrcidProfilePlugin extends GenericPlugin
      *
      * @param Publication $publication Publication for which the data will be sent to ORCID
      *
-     * @return bool|bool[]
+     * @return bool|bool[]|JSONMessage
      *
      **/
     public function sendSubmissionToOrcid($publication, $request)
@@ -1209,7 +1212,7 @@ class OrcidProfilePlugin extends GenericPlugin
             return false;
         }
 
-        $orcidWork = $this->buildOrcidWork($publication, $context, $authors, $request, $issue);
+        $orcidWork = $this->buildOrcidWork($publication, $context, $authors->toArray(), $request, $issue);
         $this->logInfo('Request body (without put-code): ' . json_encode($orcidWork));
 
         $requestsSuccess = [];
@@ -1247,7 +1250,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     ]
                 );
             } catch (ClientException $exception) {
-                $reason = $exception->getResponse()->getBody(false);
+                $reason = $exception->getResponse()->getBody();
                 $this->logInfo("Publication fail: {$reason}");
                 return new JSONMessage(false);
             }
