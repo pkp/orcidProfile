@@ -1,7 +1,7 @@
 # Osman Durmaz <osmandurmaz@hotmail.de>, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-06-03 04:18+0000\n"
+"PO-Revision-Date: 2023-06-04 08:49+0000\n"
 "Last-Translator: Osman Durmaz <osmandurmaz@hotmail.de>\n"
 "Language-Team: Azerbaijani <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/az/>\n"
@@ -13,13 +13,13 @@ msgstr ""
 "X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
-msgstr "Orcid Profil …ôlav…ôsi"
+msgstr "Orcid Profil əlavəsi"
 
 msgid "plugins.generic.orcidProfile.emailOrOrcid"
-msgstr "Email adresi v…ô ya ORCID:"
+msgstr "Email adresi və ya ORCID:"
 
 msgid "plugins.generic.orcidProfile.manager.settings.title"
-msgstr "Orcid API t…ônziml…ôri"
+msgstr "Orcid API tənzimləri"
 
 msgid "plugins.generic.orcidProfile.description"
 msgstr ""
@@ -83,7 +83,7 @@ msgid "plugins.generic.orcidProfile.verify.denied"
 msgstr "Orcid qeydiyyatınıza girişi ləğv etdiniz."
 
 msgid "plugins.generic.orcidProfile.authorise"
-msgstr "Orcid ID-nizi s…ôlahiyy…ôtl…ôndirin v…ô qoŇüun"
+msgstr "Orcid ID-nizi səlahiyyətləndirin və qoşun"
 
 #, fuzzy
 msgid "plugins.generic.orcidProfile.manager.status.description"
@@ -100,88 +100,86 @@ msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
 msgstr "Orcid API"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public"
-msgstr "√úmumi"
+msgstr "Ümumi"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox"
-msgstr "√úmumi Sandbox"
+msgstr "Ümumi Sandbox"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member"
-msgstr "√úzv"
+msgstr "Üzv"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox"
-msgstr "√úzv Sandbox"
+msgstr "Üzv Sandbox"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId"
-msgstr "M√ľŇüt…ôri ID"
+msgstr "Müştəri ID"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret"
-msgstr "M√ľŇüt…ôri m…ôxfiliyi"
+msgstr "Müştəri məxfiliyi"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
-msgstr "Profil GiriŇü …ôhat…ôsi"
+msgstr "Profil Giriş əhatəsi"
 
 msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
-msgstr "Email t…ônziml…ôri"
+msgstr "Email tənzimləri"
 
 msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
 msgstr ""
-"Bir m…ôqal…ô q…ôbul edildiyi zaman ORCID s…ôlahiyy…ôti ist…ôm…ôk √ľ√ß√ľn "
-"email g√∂nd…ôr. M…ôs: n√ľsx…ô redakt…ô √ľ√ß√ľn g√∂nd…ôrildi"
+"Bir məqalə qəbul edildiyi zaman ORCID səlahiyyəti istəmək üçün email göndər. "
+"Məs: nüsxə redaktə üçün göndərildi"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
-msgstr "Orcid ist…ôk g√ľnd…ôliyi"
+msgstr "Orcid istək gündəliyi"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
-msgstr "∆Źlav…ô t…ôr…ôfind…ôn yazńĪlan g√ľnd…ôlik hasilatńĪn miqdarńĪnńĪ se√ßin"
+msgstr "Əlavə tərəfindən yazılan gündəlik hasilatın miqdarını seçin"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
-msgstr "X…ôtalar"
+msgstr "Xətalar"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
-msgstr "HamńĪsńĪ"
+msgstr "Hamısı"
 
 msgid "plugins.generic.orcidProfile.author.accessDenied"
-msgstr "Orcid giriŇüi r…ôdd edildi"
+msgstr "Orcid girişi rədd edildi"
 
 msgid "plugins.generic.orcidProfile.author.accessTokenStored"
 msgstr ""
-"{$orcidAccessScope} …ôhat…ôsil…ô veril…ôn ORCID qeydiyyat giriŇüi, bu tarix…"
-"ô q…ôd…ôr etibarlńĪdńĪr"
+"{$orcidAccessScope} əhatəsilə verilən ORCID qeydiyyat girişi, bu tarixə "
+"qədər etibarlıdır"
 
 msgid "plugins.generic.orcidProfile.author.requestAuthorization"
-msgstr ""
-"ńįŇütirak√ßńĪdan ORCID s…ôlahiyy…ôtl…ôndirm…ô ist…ôm…ôk √ľ√ß√ľn email "
-"g√∂nd…ôr"
+msgstr "İştirakçıdan ORCID səlahiyyətləndirmə istəmək üçün email göndər"
 
 msgid "plugins.generic.orcidProfile.author.deleteORCID"
-msgstr "Orcid iD v…ô giriŇü a√ßarńĪnńĪ silin!"
+msgstr "Orcid iD və giriş açarını silin!"
 
 msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
-msgstr "Kimliyi t…ôsdiql…ônmiŇü ORCID ID ist…ôm…ôk √ľ√ß√ľn aŇüańüńĪya baxńĪn"
+msgstr "Kimliyi təsdiqlənmiş ORCID ID istəmək üçün aşağıya baxın"
 
 msgid "plugins.generic.orcidProfile.verify.title"
-msgstr "Orcid s…ôlahiyy…ôtl…ôndirm…ôsi"
+msgstr "Orcid səlahiyyətləndirməsi"
 
 msgid "plugins.generic.orcidProfile.fieldset"
 msgstr "Orcid"
 
 msgid "plugins.generic.orcidProfile.connect"
-msgstr "Orc ID-nizi yaradńĪn v…ô ya qoŇüun"
+msgstr "Orc ID-nizi yaradın və ya qoşun"
 
 msgid "plugins.generic.orcidProfile.about.title"
-msgstr "Orcid n…ôdir?"
+msgstr "Orcid nədir?"
 
 msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
-msgstr "ORCID ID-l…ôrinizi nec…ô v…ô niy…ô toplayńĪrńĪq?"
+msgstr "ORCID ID-lərinizi necə və niyə toplayırıq?"
 
 msgid "plugins.generic.orcidProfile.about.display.title"
-msgstr "Orcid ID-l…ôri harada g√∂st…ôrilir?"
+msgstr "Orcid ID-ləri harada göstərilir?"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
-msgstr "EtibarsńĪz m√ľŇüt…ôri Ňü…ôxsiyy…ôti"
+msgstr "Etibarsız müştəri şəxsiyyəti"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
-msgstr "EtibarsńĪz m√ľŇüt…ôri sirri"
+msgstr "Etibarsız müştəri sirri"
 
 msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"
 msgstr "Məqalə nəşr əsnasında ORCID qeydiyyatınıza əlavə ediləcəkdir."
