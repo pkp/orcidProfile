@@ -374,7 +374,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		
 		// overwrite redirect base url if variable is provided in config.inc.php
 		$orcidRedirectBaseUrl = Config::getVar('orcidProfilePlugin', 'orcid_redirect_base_url');
-		if (!ValidatorFactory::make([$orcidRedirectBaseUrl], [['url']])->fails()) {
+		if (!ValidatorFactory::make([$orcidRedirectBaseUrl], [['required','url']])->fails()) {
 			$redirectUrl = preg_replace("#^https{0,1}:\/\/(.*)\/#U", $orcidRedirectBaseUrl, $redirectUrl);
 		}
 
