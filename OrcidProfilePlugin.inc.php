@@ -599,8 +599,16 @@ class OrcidProfilePlugin extends GenericPlugin {
 		$form = $params[0];
 		$user = $form->user;
 
-		$form->readUserVars(array('orcid'));
+		$form->readUserVars(array('orcid','orcidAccessToken','orcidAccessScope','orcidRefreshToken','orcidAccessExpiresOn','orcidSandbox'));
 		$user->setOrcid($form->getData('orcid'));
+		$user->setData('orcidAccessToken', $form->getData('orcidAccessToken'));
+		$user->setData('orcidAccessScope', $form->getData('orcidAccessScope'));
+		$user->setData('orcidRefreshToken', $form->getData('orcidRefreshToken'));
+		if ($form->getData('orcidAccessExpiresOn')) {
+			$user->setData('orcidAccessExpiresOn', $form->getData('orcidAccessExpiresOn')->toDateTimeString);
+		}
+
+
 		return false;
 	}
 
