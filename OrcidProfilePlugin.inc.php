@@ -281,12 +281,6 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'contexts' => array('frontend', 'backend')
 			)
 		);
-
-		switch ($template) {
-			case 'frontend/pages/userRegister.tpl':
-				$templateMgr->registerFilter("output", array($this, 'registrationFilter'));
-				break;
-		}
 		return false;
 	}
 
@@ -414,11 +408,11 @@ class OrcidProfilePlugin extends GenericPlugin {
 		return $this->getOrcidUrl() . 'oauth/';
 	}
 
-	public function isSandbox() {
-
-		$apiUrl = $this->getSetting($this->getCurrentContextId(), 'orcidProfileAPIPath');
-		return ($apiUrl == ORCID_API_URL_MEMBER_SANDBOX);
-
+	public function isSandbox()
+	{
+		$isSandBox = $this->getSetting($this->getCurrentContextId(), 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
+			$this->getSetting($this->getCurrentContextId(), 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX;
+		return $isSandBox;
 	}
 
 	/**
@@ -607,6 +601,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		if ($form->getData('orcidAccessExpiresOn')) {
 			$user->setData('orcidAccessExpiresOn', $form->getData('orcidAccessExpiresOn')->toDateTimeString);
 		}
+		$user->setData('orcidSandbox', true);
 
 
 		return false;

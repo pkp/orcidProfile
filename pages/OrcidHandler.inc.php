@@ -84,11 +84,12 @@ class OrcidHandler extends Handler
 		} else {
 			$response = json_decode($response->getBody(), true);
 			$orcid = $response['orcid'];
-			$orcidUri = ($plugin->getSetting($contextId, "isSandBox") == true ? ORCID_URL_SANDBOX : ORCID_URL) . $orcid;
+			$orcidUri = ($plugin->isSandBox() ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
 			$orcidAccessToken = $response['access_token'];
 			$orcidAccessScope = $response['scope'];
 			$orcidRefreshToken = $response['refresh_token'];
 			$orcidAccessExpiresOn = $response['expires_in'];
+
 
 		}
 
@@ -198,8 +199,7 @@ class OrcidHandler extends Handler
 		$publicationId = $request->getUserVar('state');
 		$authorDao = DAORegistry::getDAO('AuthorDAO');
 		$authors = $authorDao->getByPublicationId($publicationId);
-		$isSandBox = $plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
-			$plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX;
+
 
 
 		$publication = Services::get('publication')->get($publicationId);
@@ -289,11 +289,11 @@ class OrcidHandler extends Handler
 		}
 
 		// Set the orcid id using the full https uri
-		$orcidUri = ($isSandBox ? ORCID_URL_SANDBOX : ORCID_URL) . $responseJson['orcid'];
+		$orcidUri = ($plugin->isSandbox() ? ORCID_URL_SANDBOX : ORCID_URL) . $responseJson['orcid'];
 
 		if ($response->getStatusCode() == 200 && strlen($responseJson['orcid']) > 0) {
 			$authorToVerify->setOrcid($orcidUri);
-			if ($isSandBox) $authorToVerify->setData('orcidSandbox', true);
+			if ($plugin->isSandBox()) $authorToVerify->setData('orcidSandbox', true);
 			$templateMgr->assign('orcid', $orcidUri);
 			// remove the email token
 			$authorToVerify->setData('orcidEmailToken', null);
