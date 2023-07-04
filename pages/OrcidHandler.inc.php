@@ -60,7 +60,10 @@ class OrcidHandler extends Handler
 		$plugin = PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
 		$contextId = ($context == null) ? CONTEXT_ID_NONE : $context->getId();
 		$httpClient = Application::get()->getHttpClient();
-
+		$orcidAccessToken =  null;
+		$orcidAccessScope =  null;
+		$orcidRefreshToken = null;
+		$orcidAccessExpiresOn = null;
 		// API request: Get an OAuth token and ORCID.
 		$response = $httpClient->request(
 			'POST',
@@ -77,12 +80,17 @@ class OrcidHandler extends Handler
 		);
 		if ($response->getStatusCode() != 200) {
 			error_log('ORCID token URL error: ' . $response->getStatusCode() . ' (' . __FILE__ . ' line ' . __LINE__ . ', URL ' . $url . ')');
-			$orcidUri = $orcid = $accessToken = null;
+			$orcidUri = $orcid  = null;
 		} else {
 			$response = json_decode($response->getBody(), true);
 			$orcid = $response['orcid'];
-			$accessToken = $response['access_token'];
-			$orcidUri = ($plugin->getSetting($contextId, "isSandBox") == true ? ORCID_URL_SANDBOX : ORCID_URL) . $orcid;
+			$orcidUri = ($plugin->isSandBox() ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
+			$orcidAccessToken = $response['access_token'];
+			$orcidAccessScope = $response['scope'];
+			$orcidRefreshToken = $response['refresh_token'];
+			$orcidAccessExpiresOn = $response['expires_in'];
+
+
 		}
 
 		switch ($request->getUserVar('targetOp')) {
@@ -94,7 +102,7 @@ class OrcidHandler extends Handler
 					[
 						'headers' => [
 							'Accept' => 'application/json',
-							'Authorization' => 'Bearer ' . $accessToken,
+							'Authorization' => 'Bearer ' . $orcidAccessToken,
 						],
 					]
 				);
@@ -110,7 +118,7 @@ class OrcidHandler extends Handler
 					[
 						'headers' => [
 							'Accept' => 'application/json',
-							'Authorization' => 'Bearer ' . $accessToken,
+							'Authorization' => 'Bearer ' . $orcidAccessToken,
 						],
 					]
 				);
@@ -128,6 +136,10 @@ class OrcidHandler extends Handler
 					opener.document.getElementById("country").value = ' . json_encode(@$profileJson['addresses']['address'][0]['country']['value']) . ';
 					opener.document.getElementById("affiliation").value = ' . json_encode(@$employmentJson['employment-summary'][0]['organization']['name']) . ';
 					opener.document.getElementById("orcid").value = ' . json_encode($orcidUri) . ';
+					opener.document.getElementById("orcidAccessToken").value = ' . json_encode($orcidAccessToken) . ';
+					opener.document.getElementById("orcidAccessScope").value = ' . json_encode($orcidAccessScope) . ';
+					opener.document.getElementById("orcidRefreshToken").value = ' . json_encode($orcidRefreshToken) . ';
+					opener.document.getElementById("orcidAccessExpiresOn").value = ' . json_encode($orcidAccessExpiresOn) . ';
 					opener.document.getElementById("connect-orcid-button").style.display = "none";
 					window.close();
 					</script></body></html>
@@ -187,8 +199,7 @@ class OrcidHandler extends Handler
 		$publicationId = $request->getUserVar('state');
 		$authorDao = DAORegistry::getDAO('AuthorDAO');
 		$authors = $authorDao->getByPublicationId($publicationId);
-		$isSandBox = $plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_MEMBER_SANDBOX ||
-			$plugin->getSetting($contextId, 'orcidProfileAPIPath') == ORCID_API_URL_PUBLIC_SANDBOX;
+
 
 
 		$publication = Services::get('publication')->get($publicationId);
@@ -278,11 +289,11 @@ class OrcidHandler extends Handler
 		}
 
 		// Set the orcid id using the full https uri
-		$orcidUri = ($isSandBox ? ORCID_URL_SANDBOX : ORCID_URL) . $responseJson['orcid'];
+		$orcidUri = ($plugin->isSandbox() ? ORCID_URL_SANDBOX : ORCID_URL) . $responseJson['orcid'];
 
 		if ($response->getStatusCode() == 200 && strlen($responseJson['orcid']) > 0) {
 			$authorToVerify->setOrcid($orcidUri);
-			if ($isSandBox) $authorToVerify->setData('orcidSandbox', true);
+			if ($plugin->isSandBox()) $authorToVerify->setData('orcidSandbox', true);
 			$templateMgr->assign('orcid', $orcidUri);
 			// remove the email token
 			$authorToVerify->setData('orcidEmailToken', null);
