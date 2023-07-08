@@ -60,18 +60,14 @@ Use the Plugin Gallery from within your PKP application to install the plugin. F
 
 ### Setting a custom redirect URI
 
-In case your Orcid redirect URI does not correspond to your journal base Url (e.g. you may use a centralized redirect server if you have one institutional Orcid account but are running multiple journals on different domains) you may add a variable to the OJS config.inc.php file to overwrite the default redirect base Url. To do this add the following to the end of your config.inc.php file:
+In case your Orcid redirect URI does not correspond to your journal base Url (e.g. you may use a centralized redirect server if you have one institutional Orcid account but are running multiple journals on different domains)
+you may add a variable to the OJS config.inc.php file to overwrite the default redirect base Url as in the follwoing example
+
 
 ```
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Orcid Profile Plugin Settings ;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[orcid]
+orcid_redirect_base_url = "https://my_orcid_redirect.url/"
 
-[orcidProfilePlugin]
-
-; Example:
-; orcid_redirect_base_url = "https://my_orcid_redirect.url/"
-orcid_redirect_base_url = ""
 ```
 
 ## Debugging/Testing
