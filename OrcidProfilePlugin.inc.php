@@ -365,6 +365,12 @@ class OrcidProfilePlugin extends GenericPlugin {
 		// Use the Dispatcher to construct the url and set the page router.
 		$redirectUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'orcidapi',
 			$handlerMethod, null, $redirectParams);
+		
+		// overwrite redirect base url if variable is provided in config.inc.php
+		$orcidRedirectBaseUrl = Config::getVar('orcidProfilePlugin', 'orcid_redirect_base_url');
+		if (!ValidatorFactory::make([$orcidRedirectBaseUrl], [['required','url']])->fails()) {
+			$redirectUrl = preg_replace("#^https{0,1}:\/\/(.*)\/#U", $orcidRedirectBaseUrl, $redirectUrl);
+		}
 
 		return $this->getOauthPath() . 'authorize?' . http_build_query(
 				array(
