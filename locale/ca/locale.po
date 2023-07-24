@@ -1,16 +1,16 @@
-# Jordi LC <jordi.lacruz@uab.cat>, 2021.
+# Jordi LC <jordi.lacruz@uab.cat>, 2021, 2023.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-08-07 02:51+0000\n"
+"PO-Revision-Date: 2023-07-25 11:58+0000\n"
 "Last-Translator: Jordi LC <jordi.lacruz@uab.cat>\n"
 "Language-Team: Catalan <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/ca_ES/>\n"
-"Language: ca_ES\n"
+"orcid-profile-plugin/orcid-profile-plugin/ca/>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.13.1\n"
 
 msgid "plugins.generic.orcidProfile.about.display.title"
 msgstr "On es mostren els identificadors ORCID?"
@@ -239,3 +239,59 @@ msgstr "Contrasenya de client invàlida"
 
 msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
 msgstr "ID de client invàlida"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "El mòdul s'ha desactivat a causa d'errors de validació."
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Configuració guardada"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Ciutat"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "País"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Revisar la configuració de la localització"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Seleccioneu la ciutat i el país per permetre l'enviament d'informació del "
+"revisor/a a ORCID"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Credencials de client invàlides"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Estat del mòdul OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "Mòdul OrcidProfile activat"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Mòdul OrcidProfile desactivat"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Configurat globalment a config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Configurat en relació amb la revista"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "L'identificador de client és vàlid"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Client Secret és vàlid"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Client Secret no és vàlid, comproveu les vostres credencials"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "L'identificador de client no és vàlid, comproveu les dades introduïdes"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "S'han detectat ORCID duplicats en els col·laboradors/ores."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "S'han detectat ORCID no autenticats en els col·laboradors/ores."
