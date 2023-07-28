@@ -104,42 +104,42 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 			$schema->properties->orcidSandbox = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 			$schema->properties->orcidAccessToken = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 			$schema->properties->orcidAccessScope = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 			$schema->properties->orcidRefreshToken = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 			$schema->properties->orcidAccessExpiresOn = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 			$schema->properties->orcidAccessDenied = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 			$schema->properties->orcidEmailToken = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 			$schema->properties->orcidWorkPutCode = (object)[
 				'type' => 'string',
-				'apiSummary' => true,
+				'writeOnly' => 'true',
 				'validation' => ['nullable']
 			];
 		});
@@ -365,7 +365,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		// Use the Dispatcher to construct the url and set the page router.
 		$redirectUrl = $request->getDispatcher()->url($request, ROUTE_PAGE, null, 'orcidapi',
 			$handlerMethod, null, $redirectParams);
-		
+
 		// overwrite redirect base url if variable is provided in config.inc.php
 		$orcidRedirectBaseUrl = Config::getVar('orcidProfilePlugin', 'orcid_redirect_base_url');
 		if (!ValidatorFactory::make([$orcidRedirectBaseUrl], [['required','url']])->fails()) {
