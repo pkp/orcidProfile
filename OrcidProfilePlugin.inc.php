@@ -1122,8 +1122,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 				$pubIdType = $plugin->getPubIdType();
 
 				# Add article ids
-				$pubId = $publication->getData($pubIdType);
-
+				$pubId = $publication->getStoredPubId($pubIdType);
 				if ($pubId) {
 					$externalIds[] = [
 						'external-id-type' => self::PUBID_TO_ORCID_EXT_ID[$pubIdType],
