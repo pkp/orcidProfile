@@ -176,11 +176,13 @@ class OrcidHandler extends Handler {
 		$context = $request->getContext();
 		$contextId = ($context == null) ? CONTEXT_ID_NONE : $context->getId();
 
+		/** @var OrcidProfilePlugin $plugin */
 		$plugin = PluginRegistry::getPlugin('generic', 'orcidprofileplugin');
 		$templatePath = $plugin->getTemplateResource(self::TEMPLATE);
 
 
 		$publicationId = $request->getUserVar('state');
+		/** @var AuthorDAO $authorDao */
 		$authorDao = DAORegistry::getDAO('AuthorDAO');
 		$authors = $authorDao->getByPublicationId($publicationId);
 
@@ -294,7 +296,7 @@ class OrcidHandler extends Handler {
 			return;
 		}
 		// Set the orcid id using the full https uri
-		$orcidUri = ($plugin->isSandBox() ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
+		$orcidUri = ($plugin->isSandbox() ? ORCID_URL_SANDBOX : ORCID_URL) . $response['orcid'];
 		if (!empty($authorToVerify->getOrcid()) && $orcidUri != $authorToVerify->getOrcid()) {
 			// another ORCID id is stored for the author
 			$templateMgr->assign('duplicateOrcid', true);
