@@ -107,6 +107,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $clientSecret = $this->getSetting($contextId, 'orcidClientSecret');
 
         if (!$validator->validateClientSecret($clientSecret) || !$validator->validateClientId($clientId)) {
+            error_log(new Exception('The ORCID plugin is enabled, but its settings are invalid. In order to fix, access the plugin settings and try to save the form'));
             return $success;
         }
 
