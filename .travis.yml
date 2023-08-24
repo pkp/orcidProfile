@@ -1,7 +1,7 @@
 # @file
 # .travis.yml - PKP Plugins Integration
 
-dist: bionic
+dist: focal
 os: linux
 language: php
 
@@ -19,6 +19,7 @@ sudo: required
 php:
   - 8.0
   - 8.1.0
+  - 8.2.0
 
 env:
   matrix:
