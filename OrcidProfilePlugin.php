@@ -95,136 +95,143 @@ class OrcidProfilePlugin extends GenericPlugin
         if (Application::isUnderMaintenance()) {
             return true;
         }
-        if ($success && $this->getEnabled($mainContextId)) {
-            $contextId = ($mainContextId === null) ? $this->getCurrentContextId() : $mainContextId;
 
-            Hook::add('ArticleHandler::view', $this->submissionView(...));
-            Hook::add('PreprintHandler::view', $this->submissionView(...));
-
-            // Insert the OrcidProfileHandler to handle ORCID redirects
-            Hook::add('LoadHandler', $this->setupCallbackHandler(...));
-
-            // Register callback for Smarty filters; add CSS
-            Hook::add('TemplateManager::display', $this->handleTemplateDisplay(...));
-
-            // Add "Connect ORCID" button to PublicProfileForm
-            Hook::add('User::PublicProfile::AdditionalItems', $this->handleUserPublicProfileDisplay(...));
-
-            // Display additional ORCID access information and checkbox to send e-mail to authors in the AuthorForm
-            Hook::add('authorform::display', $this->handleFormDisplay(...));
-
-            // Send email to author, if the added checkbox was ticked
-            Hook::add('authorform::execute', $this->handleAuthorFormExecute(...));
-
-            // Handle ORCID on user registration
-            Hook::add('registrationform::execute', $this->collectUserOrcidId(...));
-
-            // Send emails to authors without ORCID id upon submission
-            //TODO Hook::add('submissionsubmitstep3form::execute', $this->handleSubmissionSubmitStep3FormExecute(...));
-
-            // Send emails to authors without authorised ORCID access on promoting a submission to copy editing. Not included in OPS.
-            if ($this->getSetting($contextId, 'sendMailToAuthorsOnPublication')) {
-                Hook::add('EditorAction::recordDecision', $this->handleEditorAction(...));
-            }
-
-            Hook::add('Publication::publish', $this->handlePublicationStatusChange(...));
-
-            Hook::add('ThankReviewerForm::thankReviewer', $this->handleThankReviewer(...));
-
-            // Add more ORCiD fields to author Schema
-            Hook::add('Schema::get::author', function ($hookName, $args) {
-                $schema = &$args[0];
-
-                $schema->properties->orcidSandbox = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessToken = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessScope = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidRefreshToken = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessExpiresOn = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessDenied = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidEmailToken = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidWorkPutCode = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-            });
-
-            // Add more ORCiD fields to user Schema
-            Hook::add('Schema::get::user', function ($hookName, $args) {
-                $schema = &$args[0];
-
-                $schema->properties->orcidAccessToken = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessScope = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidRefreshToken = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessExpiresOn = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidAccessDenied = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-                $schema->properties->orcidReviewPutCode = (object)[
-                    'type' => 'string',
-                    'apiSummary' => true,
-                    'validation' => ['nullable']
-                ];
-            });
-            Services::get('schema')->get(PKPSchemaService::SCHEMA_USER, true);
-
-            Hook::add('Mailer::Mailables', $this->addMailable(...));
-
-            Hook::add('Author::edit', $this->handleAuthorFormExecute(...));
-
-            Hook::add('Form::config::before', $this->addOrcidFormFields(...));
-
-
-            Hook::add('Installer::postInstall', $this->updateSchema(...));
-
-            Hook::add('Publication::validatePublish', $this->validate(...));
+        if (!$success || !$this->getEnabled($mainContextId)) {
+            return $success;
         }
+
+        $contextId = $mainContextId ?? $this->getCurrentContextId();
+        $validator = new OrcidValidator($this);
+
+        $clientId = $this->getSetting($contextId, 'orcidClientId');
+        $clientSecret = $this->getSetting($contextId, 'orcidClientSecret');
+
+        if (!$validator->validateClientSecret($clientSecret) || !$validator->validateClientId($clientId)) {
+            error_log(new Exception('The ORCID plugin is enabled, but its settings are invalid. In order to fix, access the plugin settings and try to save the form'));
+            return $success;
+        }
+
+        Hook::add('ArticleHandler::view', $this->submissionView(...));
+        Hook::add('PreprintHandler::view', $this->submissionView(...));
+
+        // Insert the OrcidProfileHandler to handle ORCID redirects
+        Hook::add('LoadHandler', $this->setupCallbackHandler(...));
+
+        // Register callback for Smarty filters; add CSS
+        Hook::add('TemplateManager::display', $this->handleTemplateDisplay(...));
+
+        // Add "Connect ORCID" button to PublicProfileForm
+        Hook::add('User::PublicProfile::AdditionalItems', $this->handleUserPublicProfileDisplay(...));
+
+        // Display additional ORCID access information and checkbox to send e-mail to authors in the AuthorForm
+        Hook::add('authorform::display', $this->handleFormDisplay(...));
+
+        // Send email to author, if the added checkbox was ticked
+        Hook::add('authorform::execute', $this->handleAuthorFormExecute(...));
+
+        // Handle ORCID on user registration
+        Hook::add('registrationform::execute', $this->collectUserOrcidId(...));
+
+        // Send emails to authors without ORCID id upon submission
+        //TODO Hook::add('submissionsubmitstep3form::execute', $this->handleSubmissionSubmitStep3FormExecute(...));
+
+        // Send emails to authors without authorised ORCID access on promoting a submission to copy editing. Not included in OPS.
+        if ($this->getSetting($contextId, 'sendMailToAuthorsOnPublication')) {
+            Hook::add('EditorAction::recordDecision', $this->handleEditorAction(...));
+        }
+
+        Hook::add('Publication::publish', $this->handlePublicationStatusChange(...));
+
+        Hook::add('ThankReviewerForm::thankReviewer', $this->handleThankReviewer(...));
+
+        // Add more ORCiD fields to author Schema
+        Hook::add('Schema::get::author', function ($hookName, $args) {
+            $schema = &$args[0];
+
+            $schema->properties->orcidSandbox = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidAccessToken = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidAccessScope = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidRefreshToken = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidAccessExpiresOn = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidAccessDenied = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidEmailToken = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidWorkPutCode = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+        });
+
+        // Add more ORCiD fields to user Schema
+        Hook::add('Schema::get::user', function ($hookName, $args) {
+            $schema = &$args[0];
+
+            $schema->properties->orcidAccessToken = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidAccessScope = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidRefreshToken = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidAccessExpiresOn = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidAccessDenied = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+            $schema->properties->orcidReviewPutCode = (object)[
+                'type' => 'string',
+                'apiSummary' => true,
+                'validation' => ['nullable']
+            ];
+        });
+        Services::get('schema')->get(PKPSchemaService::SCHEMA_USER, true);
+
+        Hook::add('Mailer::Mailables', $this->addMailable(...));
+        Hook::add('Author::edit', $this->handleAuthorFormExecute(...));
+        Hook::add('Form::config::before', $this->addOrcidFormFields(...));
+        Hook::add('Installer::postInstall', $this->updateSchema(...));
+        Hook::add('Publication::validatePublish', $this->validate(...));
 
         return $success;
     }
@@ -1057,29 +1064,6 @@ class OrcidProfilePlugin extends GenericPlugin
     public function getDisplayName()
     {
         return __('plugins.generic.orcidProfile.displayName');
-    }
-
-    public function setEnabled($enabled)
-    {
-        $contextId = $this->getCurrentContextId();
-        $request = Application::get()->getRequest();
-        $validator = new OrcidValidator($this);
-
-        if ($this->isSitePlugin()) {
-            $contextId = 0;
-        }
-        if ($request->getUserVar('save') == 1) {
-            $clientId = $request->getUserVar('orcidClientId');
-            $clientSecret = $request->getUserVar('orcidClientSecret');
-        } else {
-            $clientId = $this->getSetting($contextId, 'orcidClientId');
-            $clientSecret = $this->getSetting($contextId, 'orcidClientSecret');
-        }
-
-        if (!$validator->validateClientSecret($clientSecret) or !$validator->validateClientId($clientId)) {
-            $enabled = false;
-        }
-        $this->updateSetting($contextId, 'enabled', $enabled, 'bool');
     }
 
     public function manage($args, $request)

@@ -141,9 +141,7 @@ class OrcidProfileSettingsForm extends Form
         if (!$this->validator->validateClientSecret($clientSecret)) {
             $messages[] = __('plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error');
         }
-        if (strlen($clientId) == 0 or strlen($clientSecret) == 0) {
-            $this->plugin->setEnabled(false);
-        }
+
         return $messages;
     }
 }
