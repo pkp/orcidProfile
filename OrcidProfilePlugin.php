@@ -98,6 +98,16 @@ class OrcidProfilePlugin extends GenericPlugin
         if ($success && $this->getEnabled($mainContextId)) {
             $contextId = ($mainContextId === null) ? $this->getCurrentContextId() : $mainContextId;
 
+            $validator = new OrcidValidator($this);
+
+            $clientId = $this->getSetting($contextId, 'orcidClientId');
+            $clientSecret = $this->getSetting($contextId, 'orcidClientSecret');
+
+            if (!$validator->validateClientSecret($clientSecret) || !$validator->validateClientId($clientId)) {
+                error_log(new Exception('The ORCID plugin is enabled, but its settings are invalid. In order to fix, access the plugin settings and try to save the form'));
+                return $success;
+            }
+
             Hook::add('ArticleHandler::view', [&$this, 'submissionView']);
             Hook::add('PreprintHandler::view', [&$this, 'submissionView']);
 
@@ -1057,29 +1067,6 @@ class OrcidProfilePlugin extends GenericPlugin
     public function getDisplayName()
     {
         return __('plugins.generic.orcidProfile.displayName');
-    }
-
-    public function setEnabled($enabled)
-    {
-        $contextId = $this->getCurrentContextId();
-        $request = Application::get()->getRequest();
-        $validator = new OrcidValidator($this);
-
-        if ($this->isSitePlugin()) {
-            $contextId = 0;
-        }
-        if ($request->getUserVar('save') == 1) {
-            $clientId = $request->getUserVar('orcidClientId');
-            $clientSecret = $request->getUserVar('orcidClientSecret');
-        } else {
-            $clientId = $this->getSetting($contextId, 'orcidClientId');
-            $clientSecret = $this->getSetting($contextId, 'orcidClientSecret');
-        }
-
-        if (!$validator->validateClientSecret($clientSecret) or !$validator->validateClientId($clientId)) {
-            $enabled = false;
-        }
-        $this->updateSetting($contextId, 'enabled', $enabled, 'bool');
     }
 
     public function manage($args, $request)
