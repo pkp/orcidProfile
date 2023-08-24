@@ -1,0 +1,132 @@
+# Ahmad Irdha Mokhtar <airdham@icloud.com>, 2023.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2023-08-03 14:58+0000\n"
+"Last-Translator: Ahmad Irdha Mokhtar <airdham@icloud.com>\n"
+"Language-Team: Malay <http://translate.pkp.sfu.ca/projects/"
+"orcid-profile-plugin/orcid-profile-plugin/ms/>\n"
+"Language: ms\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.13.1\n"
+
+msgid "plugins.generic.orcidProfile.displayName"
+msgstr "Pemalam Profil ORCID"
+
+msgid "plugins.generic.orcidProfile.noData"
+msgstr "Tidak dapat mencari sebarang data daripada ORCID."
+
+msgid "plugins.generic.orcidProfile.emailOrOrcid"
+msgstr "Alamat e-mel atau iD ORCID:"
+
+msgid "plugins.generic.orcidProfile.manager.settings.title"
+msgstr "Tetapan API ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.hidden"
+msgstr "tersembunyi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
+msgstr ""
+"API ORCID telah dikonfigurasikan secara global oleh hos. Bukti kelayakan "
+"berikut telah disimpan."
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Disebabkan ralat pengesahan, pemalam telah dilumpuhkan."
+
+msgid "plugins.generic.orcidProfile.description"
+msgstr "Membenarkan pengimportan maklumat profil pengguna daripada ORCID."
+
+msgid "plugins.generic.orcidProfile.instructions"
+msgstr ""
+"Anda boleh praisi borang ini dengan maklumat daripada profil ORCID. Masukkan "
+"alamat e-mel atau ID ORCID yang digabungkan dengan profil ORCID, kemudian "
+"klik \"Serah\"."
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
+msgstr "API ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public"
+msgstr "Awam"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox"
+msgstr "Perlindungan Awam"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member"
+msgstr "Ahli"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox"
+msgstr "Perlindungan Ahli"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId"
+msgstr "ID Pelanggan"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret"
+msgstr "Rahsia Pelanggan"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
+msgstr "Skop Capaian Profil"
+
+msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
+msgstr "Tetapan E-Mel"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Tetapan disimpan"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
+msgstr "Log permintaan ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
+msgstr "Ralat"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
+msgstr "Semua"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Bandar"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Negara"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Tetapan Semak Lokasi"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Pilih Bandar, Negara untuk membolehkan penghantaran maklumat penyemak kepada "
+"ORCID"
+
+msgid "plugins.generic.orcidProfile.author.accessDenied"
+msgstr "Capaian ORCID telah ditolak pada"
+
+msgid "plugins.generic.orcidProfile.author.requestAuthorization"
+msgstr "Hantar e-mel untuk meminta kebenaran ORCID daripada penyumbang"
+
+msgid "plugins.generic.orcidProfile.author.deleteORCID"
+msgstr "Hapuskan ID ORCID dan token capaian!"
+
+msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
+msgstr "Lihat di bawah untuk meminta ID ORCID yang disahkan"
+
+msgid "plugins.generic.orcidProfile.author.unauthenticated"
+msgstr "ID ORCID tidak disahkan! Sila minta pengesahan daripada penyumbang."
+
+msgid "plugins.generic.orcidProfile.manager.settings.description"
+msgstr ""
+"Sila konfigurasikan akses API ORCID untuk digunakan dalam menarik maklumat "
+"profil ORCID ke dalam profil pengguna dan pengarang serta mengemas kini "
+"rekod ORCID yang disambungkan dengan penerbitan baharu (hanya untuk ahli "
+"ORCID)."
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
+msgstr "Pilih jumlah output pengelogan yang ditulis oleh pemalam"
+
+msgid "plugins.generic.orcidProfile.author.accessTokenStored"
+msgstr ""
+"Capaian rekod ORCID diberikan dengan skop {$orcidAccessScope}, sah sehingga"
+
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
+msgstr ""
+"Hantar e-mel untuk meminta kebenaran ORCID daripada pengarang apabila "
+"artikel diterima iaitu dihantar untuk menyalin penyuntingan"
