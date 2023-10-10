@@ -1077,7 +1077,7 @@ class OrcidProfilePlugin extends GenericPlugin
         switch ($request->getUserVar('verb')) {
             case 'settings':
 
-                $templateMgr = TemplateManager::getManager();
+                $templateMgr = TemplateManager::getManager($request);
                 $templateMgr->registerPlugin('function', 'plugin_url', [$this, 'smartyPluginUrl']);
 
                 $templateMgr->assign('orcidApiUrls', [
