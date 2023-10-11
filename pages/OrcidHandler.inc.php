@@ -76,6 +76,7 @@ class OrcidHandler extends Handler
 					'client_secret' => $plugin->getSetting($contextId, 'orcidClientSecret')
 				],
 				'headers' => ['Accept' => 'application/json'],
+				'allow_redirects' => ['strict' => true],
 			]
 		);
 		if ($response->getStatusCode() != 200) {
@@ -273,6 +274,7 @@ class OrcidHandler extends Handler
 				[
 					'headers' => $header,
 					'form_params' => $postData,
+					'allow_redirects' => ['strict' => true],
 				]
 			);
 
