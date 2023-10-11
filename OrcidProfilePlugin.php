@@ -305,6 +305,7 @@ class OrcidProfilePlugin extends GenericPlugin
                             [
                                 'headers' => $headers,
                                 'json' => $orcidReview,
+                                'allow_redirects' => ['strict' => true],
                             ]
                         );
                     } catch (ClientException $exception) {
@@ -1148,6 +1149,7 @@ class OrcidProfilePlugin extends GenericPlugin
                     [
                         'headers' => $headers,
                         'json' => $orcidWork,
+                        'allow_redirects' => ['strict' => true],
                     ]
                 );
             } catch (ClientException $exception) {
