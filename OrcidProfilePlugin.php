@@ -621,6 +621,27 @@ class OrcidProfilePlugin extends GenericPlugin
     }
 
     /**
+     * Output filter adds ORCiD interaction to contributors metadata add/edit form.
+     *
+     * @param $output string
+     * @param $templateMgr TemplateManager
+     * @return string
+     */
+    function authorFormFilter($output, $templateMgr) {
+        if (preg_match('/<input[^>]+name="submissionId"[^>]*>/', $output, $matches, PREG_OFFSET_CAPTURE)) {
+            $match = $matches[0][0];
+            $offset = $matches[0][1];
+            $templateMgr->assign('orcidIcon', $this->getIcon());
+            $newOutput = substr($output, 0, $offset + strlen($match));
+            $newOutput .= $templateMgr->fetch($this->getTemplateResource('authorFormOrcid.tpl'));
+            $newOutput .= substr($output, $offset + strlen($match));
+            $output = $newOutput;
+            $templateMgr->unregisterFilter('output', [$this, 'authorFormFilter']);
+        }
+        return $output;
+    }
+
+    /**
      * Hook callback: register output filter for user registration and article display.
      *
      * @param string $hookName
