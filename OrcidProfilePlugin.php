@@ -64,7 +64,7 @@ use Sokil\IsoCodes\Database\Countries\Country;
 define('ORCID_URL', 'https://orcid.org/');
 define('ORCID_URL_SANDBOX', 'https://sandbox.orcid.org/');
 define('ORCID_API_URL_PUBLIC', 'https://orcid.org/');
-define('ORCID_API_URL_PUBLIC_SANDBOX', 'https://pub.sandbox.orcid.org/');
+define('ORCID_API_URL_PUBLIC_SANDBOX', 'https://sandbox.orcid.org/');
 define('ORCID_API_URL_MEMBER', 'https://api.orcid.org/');
 define('ORCID_API_URL_MEMBER_SANDBOX', 'https://api.sandbox.orcid.org/');
 define('ORCID_API_VERSION_URL', 'v3.0/');
