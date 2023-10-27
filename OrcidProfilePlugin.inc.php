@@ -281,6 +281,12 @@ class OrcidProfilePlugin extends GenericPlugin {
 				'contexts' => array('frontend', 'backend')
 			)
 		);
+
+		switch ($template) {
+			case 'frontend/pages/userRegister.tpl':
+				$templateMgr->registerFilter('output', [$this, 'registrationFilter']);
+				break;
+		}
 		return false;
 	}
 
