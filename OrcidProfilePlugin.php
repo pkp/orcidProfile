@@ -46,7 +46,6 @@ use PKP\config\Config;
 use PKP\core\Core;
 use PKP\core\JSONMessage;
 use PKP\core\PKPApplication;
-use PKP\db\DAORegistry;
 use PKP\facades\Locale;
 use PKP\form\Form;
 use PKP\install\Installer;
@@ -58,7 +57,6 @@ use PKP\plugins\PluginRegistry;
 use PKP\services\PKPSchemaService;
 use PKP\submission\PKPSubmission;
 use PKP\submission\reviewAssignment\ReviewAssignment;
-use PKP\submission\reviewAssignment\ReviewAssignmentDAO;
 use Sokil\IsoCodes\Database\Countries\Country;
 
 define('ORCID_URL', 'https://orcid.org/');
@@ -271,11 +269,10 @@ class OrcidProfilePlugin extends GenericPlugin
     {
         $context = $request->getContext();
         $requestVars = $request->getUserVars();
-        /** @var ReviewAssignmentDAO */
-        $reviewAssignmentDao = DAORegistry::getDAO('ReviewAssignmentDAO');
+
         $reviewAssignmentId = $requestVars['reviewAssignmentId'];
         if (isset($reviewAssignmentId)) {
-            $review = $reviewAssignmentDao->getById($reviewAssignmentId);
+            $review = Repo::reviewAssignment()->get($reviewAssignmentId);
             $reviewer = Repo::user()->get($review->getData('reviewerId'));
 
             if ($reviewer->getOrcid() && $reviewer->getData('orcidAccessToken')) {
