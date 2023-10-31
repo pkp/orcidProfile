@@ -161,7 +161,15 @@ class OrcidProfilePlugin extends GenericPlugin {
 				return parent::getSetting($contextId, $name);
 		}
 
-		return $config_value ?: parent::getSetting($contextId, $name);
+        $config_value = $config_value ?? parent::getSetting($contextId, $name);
+        if ($name == 'orcidProfileAPIPath') {
+            if ($config_value == 'https://pub.orcid.org/') {
+                $config_value = ORCID_API_URL_PUBLIC;
+            } elseif ($config_value == 'https://pub.sandbox.orcid.org/') {
+                $config_value = ORCID_API_URL_PUBLIC_SANDBOX;
+            }
+        }
+        return $config_value;
 	}
 
 	/**
