@@ -272,7 +272,7 @@ class OrcidProfilePlugin extends GenericPlugin
 
         $reviewAssignmentId = $requestVars['reviewAssignmentId'];
         if (isset($reviewAssignmentId)) {
-            $review = Repo::reviewAssignment()->get($reviewAssignmentId);
+            $review = Repo::reviewAssignment()->get($reviewAssignmentId, $submission->getId());
             $reviewer = Repo::user()->get($review->getData('reviewerId'));
 
             if ($reviewer->getOrcid() && $reviewer->getData('orcidAccessToken')) {
