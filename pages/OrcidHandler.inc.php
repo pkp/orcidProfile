@@ -105,6 +105,7 @@ class OrcidHandler extends Handler
 							'Accept' => 'application/json',
 							'Authorization' => 'Bearer ' . $orcidAccessToken,
 						],
+						'allow_redirects' => ['strict' => true],
 					]
 				);
 				if ($response->getStatusCode() != 200) {
@@ -121,6 +122,7 @@ class OrcidHandler extends Handler
 							'Accept' => 'application/json',
 							'Authorization' => 'Bearer ' . $orcidAccessToken,
 						],
+						'allow_redirects' => ['strict' => true],
 					]
 				);
 				if ($response->getStatusCode() != 200) {
