@@ -94,7 +94,7 @@ class OrcidProfileHandler extends Handler
         // API request: Get an OAuth token and ORCID.
         $response = $httpClient->request(
             'POST',
-            $url = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') . OAUTH_TOKEN_URL,
+            $url = $this->plugin->getOrcidUrl() . OAUTH_TOKEN_URL,
             [
                 'form_params' => [
                     'code' => $request->getUserVar('code'),
@@ -260,7 +260,7 @@ class OrcidProfileHandler extends Handler
         }
 
         // fetch the access token
-        $url = $this->plugin->getSetting($contextId, 'orcidProfileAPIPath') . OAUTH_TOKEN_URL;
+        $url = $this->plugin->getOrcidUrl() . OAUTH_TOKEN_URL;
 
         $httpClient = Application::get()->getHttpClient();
         $header = ['Accept' => 'application/json'];
