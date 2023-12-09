@@ -70,7 +70,7 @@ class OrcidHandler extends Handler {
 
 		// API request: Get an OAuth token and ORCID.
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => $plugin->getSetting($contextId, 'orcidProfileAPIPath') . OAUTH_TOKEN_URL,
+			CURLOPT_URL => $plugin->getOrcidUrl() . OAUTH_TOKEN_URL,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HTTPHEADER => array('Accept: application/json'),
 			CURLOPT_POST => true,
@@ -235,7 +235,7 @@ class OrcidHandler extends Handler {
 		}
 
 		// fetch the access token
-		$url = $plugin->getSetting($contextId, 'orcidProfileAPIPath').OAUTH_TOKEN_URL;
+		$url = $plugin->getOrcidUrl().OAUTH_TOKEN_URL;
 
 		$ch = curl_init($url);
 
