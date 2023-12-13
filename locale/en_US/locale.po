@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2019-11-19T11:05:16+00:00\n"
+"PO-Revision-Date: 2023-12-13T11:05:16+00:00\n"
 "Language: \n"
 
 msgid "plugins.generic.orcidProfile.displayName"
@@ -215,13 +215,13 @@ msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
 msgstr "Client Id is valid"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
-msgstr "Client Id is invalid valid, please check your input"
+msgstr "Client Id is invalid, please check your input"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
 msgstr "Client Secret is valid"
 
 msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
-msgstr "Client Secret is invalid valid, please check your credentials"
+msgstr "Client Secret is invalid, please check your credentials"
 
 msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
 msgstr "Duplicate ORCiDs for contributors detected."
