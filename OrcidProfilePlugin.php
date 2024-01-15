@@ -20,7 +20,6 @@ use APP\issue\Issue;
 use APP\journal\Journal;
 use APP\plugins\generic\citationStyleLanguage\CitationStyleLanguagePlugin;
 use APP\publication\Publication;
-
 use APP\author\Author;
 use APP\controllers\grid\users\author\form\AuthorForm;
 use APP\core\Application;
@@ -92,10 +91,18 @@ class OrcidProfilePlugin extends GenericPlugin
     public function register($category, $path, $mainContextId = null)
     {
         $success = parent::register($category, $path, $mainContextId);
+
         if (Application::isUnderMaintenance()) {
             return true;
         }
+
         if ($success && $this->getEnabled($mainContextId)) {
+            
+            // Orcid functionality is set to sandbox mode and will not run the features of plugin
+            if (!Config::getVar('sandbox', 'orcid', true)) {
+                return false;
+            }
+
             $contextId = ($mainContextId === null) ? $this->getCurrentContextId() : $mainContextId;
 
             $validator = new OrcidValidator($this);
