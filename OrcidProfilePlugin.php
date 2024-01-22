@@ -98,8 +98,8 @@ class OrcidProfilePlugin extends GenericPlugin
 
         if ($success && $this->getEnabled($mainContextId)) {
             
-            // Orcid functionality is set to sandbox mode and will not run the features of plugin
-            if (!Config::getVar('sandbox', 'orcid', true)) {
+            // Application is set to sandbox mode and will not run the features of plugin
+            if (Config::getVar('general', 'sandbox', false)) {
                 return false;
             }
 
