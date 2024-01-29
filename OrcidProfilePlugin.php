@@ -97,11 +97,6 @@ class OrcidProfilePlugin extends GenericPlugin
         }
 
         if ($success && $this->getEnabled($mainContextId)) {
-            
-            // Application is set to sandbox mode and will not run the features of plugin
-            if (Config::getVar('general', 'sandbox', false)) {
-                return false;
-            }
 
             $contextId = ($mainContextId === null) ? $this->getCurrentContextId() : $mainContextId;
 
@@ -370,6 +365,12 @@ class OrcidProfilePlugin extends GenericPlugin
      */
     public function publishReviewerWorkToOrcid(Submission $submission, Request $request)
     {
+        // Application is set to sandbox mode and will not run the features of plugin
+        if (Config::getVar('general', 'sandbox', false)) {
+            error_log('Application is set to sandbox mode and will not have any interaction with orcid service');
+            return new JSONMessage(false, __('common.sandbox'));
+        }
+
         $context = $request->getContext();
         $requestVars = $request->getUserVars();
         /** @var ReviewAssignmentDAO */
@@ -1195,6 +1196,12 @@ class OrcidProfilePlugin extends GenericPlugin
      **/
     public function sendSubmissionToOrcid($publication, $request)
     {
+        // Application is set to sandbox mode and will not run the features of plugin
+        if (Config::getVar('general', 'sandbox', false)) {
+            error_log('Application is set to sandbox mode and will not have any interaction with orcid service');
+            return new JSONMessage(false, __('common.sandbox'));
+        }
+        
         $context = $request->getContext();
         $contextId = $this->currentContextId = $context->getId();
         $publicationId = $publication->getId();
