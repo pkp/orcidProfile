@@ -91,13 +91,10 @@ class OrcidProfilePlugin extends GenericPlugin
     public function register($category, $path, $mainContextId = null)
     {
         $success = parent::register($category, $path, $mainContextId);
-
         if (Application::isUnderMaintenance()) {
             return true;
         }
-
         if ($success && $this->getEnabled($mainContextId)) {
-
             $contextId = ($mainContextId === null) ? $this->getCurrentContextId() : $mainContextId;
 
             $validator = new OrcidValidator($this);
