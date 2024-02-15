@@ -18,6 +18,7 @@
 namespace APP\plugins\generic\orcidProfile;
 
 use APP\core\Application;
+use PKP\config\Config;
 use APP\core\Request;
 use APP\facades\Repo;
 use APP\handler\Handler;
@@ -87,6 +88,12 @@ class OrcidProfileHandler extends Handler
      */
     public function orcidAuthorize($args, $request)
     {
+        // Application is set to sandbox mode and will not run the features of plugin
+        if (Config::getVar('general', 'sandbox', false)) {
+            error_log('Application is set to sandbox mode and will not have any interaction with orcid service');
+            return;
+        }
+
         $context = $request->getContext();
         $contextId = $context?->getId() ?? \PKP\core\PKPApplication::CONTEXT_ID_NONE;
         $httpClient = Application::get()->getHttpClient();
@@ -198,6 +205,12 @@ class OrcidProfileHandler extends Handler
      */
     public function orcidVerify($args, $request)
     {
+        // Application is set to sandbox mode and will not run the features of plugin
+        if (Config::getVar('general', 'sandbox', false)) {
+            error_log('Application is set to sandbox mode and will not have any interaction with orcid service');
+            return;
+        }
+
         $templateMgr = TemplateManager::getManager($request);
         $context = $request->getContext();
         $contextId = $context?->getId() ?? \PKP\core\PKPApplication::CONTEXT_ID_NONE;
