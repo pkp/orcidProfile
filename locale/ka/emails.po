@@ -1,16 +1,16 @@
-# Dimitri Gogelia <dimitri.gogelia@iliauni.edu.ge>, 2022.
+# Dimitri Gogelia <dimitri.gogelia@iliauni.edu.ge>, 2022, 2024.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-04-22 07:58+0000\n"
+"PO-Revision-Date: 2024-02-22 08:39+0000\n"
 "Last-Translator: Dimitri Gogelia <dimitri.gogelia@iliauni.edu.ge>\n"
 "Language-Team: Georgian <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/emails/ka_GE/>\n"
-"Language: ka_GE\n"
+"orcid-profile-plugin/emails/ka/>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.18.2\n"
 
 msgid "emails.orcidCollectAuthorId.body"
 msgstr ""
@@ -61,7 +61,7 @@ msgstr ""
 "{$principalContactSignature}<br>\n"
 
 msgid "emails.orcidCollectAuthorId.subject"
-msgstr "Submission ORCID"
+msgstr "შენატანის ORCID"
 
 msgid "emails.orcidCollectAuthorId.description"
 msgstr "ელფოსტის ეს შაბლონი გამოიყენება ავტორების ORCID ID– ების შესაგროვებლად."
@@ -73,3 +73,9 @@ msgid "emails.orcidRequestAuthorAuthorization.description"
 msgstr ""
 "ელფოსტის ეს შაბლონი გამოიყენება ავტორებისგან ORCID ჩანაწერების დაშვების "
 "მოთხოვნით."
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "ORCID-ის OAuth-ავტორიზაციის ბმული"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "ORCID-ის შესახებ ინფორმაციის გვერდის URL-მისამართი"
