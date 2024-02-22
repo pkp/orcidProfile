@@ -22,10 +22,10 @@ php:
 
 env:
   matrix:
-  - APPLICATION=ojs BRANCH=main TEST=mysql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
-  - APPLICATION=ojs BRANCH=main TEST=pgsql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
-  - APPLICATION=ops BRANCH=main TEST=mysql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
-  - APPLICATION=ops BRANCH=main TEST=pgsql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
+  - APPLICATION=ojs BRANCH=stable-3_4_0 TEST=mysql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
+  - APPLICATION=ojs BRANCH=stable-3_4_0 TEST=pgsql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
+  - APPLICATION=ops BRANCH=stable-3_4_0 TEST=mysql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
+  - APPLICATION=ops BRANCH=stable-3_4_0 TEST=pgsql ORCID_URL=https://sandbox.orcid.org ORCID_APIPATH=https://api.sandbox.orcid.org  ORCID_APITYPE="Member Sandbox"
   global:
   - secure: m+AQsfJZriXSWFqZI0GztPJIGAj4PHvxjrXeNSrk+ew4MMlEeZCvKUtnAY+/C9LXa06Q2s+TpMOfAV+B6qcg3Cy1nP5Lbsj4qdIhJpqj1MxSqEZrJn5JonDthD2pQ4GlltJm6vUnlGF40pPF1JKoUl8vXCXLSgFppBnYP7jw9XSPwdzlK6Wcm1JhFQz2qJ7nojUj7q3mZuie89aSdZG45xMzsi8ndTQI8KlF0uKQ0UgvZMhYO5jd2uRHodcRZr7fPvIjfFAueMqsLuVsnQCl5d+xb+esH4ZhBQcAa1s7Q8ak/XE3zss6d3sx7FEsSTBsurNMIDLKtJtRRyD33sQTSvyHtUta6Hj2NjY6QXDc8lYZUGgLeZ5z9QyQ73oW3tkT1rz82e27MFpSB00TjIIxmUvxdbFTD9vD5yoaRq9O9bXG6IyC7zYggXpYvcbw1j+0z6hp4kAY6iF8EQRG3Vd08noyOH5qtM1LBZ2czqUBeE70PoBX1EfT2kQwFJfhNdp8EuHdiBiP3dTxQMcwBdkDgw/rIY0+yrDzwgRKzB+OqbGdh8Cr9P73tKx3IXdoFngnLIWDGO+CFh84pLbT+PuHj8BlJUFqnNF409ENHNCpW6pBQA3Dc5LJV1q3VokXePVJF3rKfijF9Et/2IfxfC1Wp2soGB8rROQOyvnaj+H1URc=
   - secure: W6P3TLUdCjDr07U1T/H7ZY7K1aXBvIj9R/s2c0ZuLFyRGW3GIgikLDqorpHQjVRxIT62uhve/JWfdQlbO/USz/WVIJVzb5pd/LMOOssAevRzTP478Hd77h7kXXmQ4xjkCctkIqyaPC++s3+g6emsvPan1gqc2OJ/Hd/iRTVCsU1qqPYNlaNHjeXRuK74y03OF3Jwag+hpdwyCJKlP+WnOHfWnYtmMhsyCIZPTfjzTZ4pEuMlLsJQo2JpS4DUyKxPOM6v+zVw3ugSnUOUYMBH3SZ3MWXn0wDzZ63HZtElDfl2FYrCKjnSCWaeUUQycMK5vqxMbhPgjYmyBPjC8MJQTZh9zJJRSbxlsI3IJ1zDEnxgszi0xxUEcOhwFlO/wjvVdKvQ52hZmqAJhFXsMEX0oyDndHivCH4GdO3DUOQYy57FKXj0jEJiCTyfAn43FOhfAjJBFkqlSbMmOtz6h4XKwLJFdJq0FOjTh/+Jl5BW2mQX45V7mrafLsaN63yuVpkF4djLgn4JcxSSvW6Oq8GCruQZt1OfbUlgB/HWuZuxtR+e+2/9oz7TZQJofjldr+WDu297R1Wbq59suwlezz5I+jcAMcJvSifmCFXOedSzpqd1KmcYiuFQ3S2XWy4VSmlTXDxivHkSMXdoW95TT+9aZBaC2SlJnNFKS/rfPzB2P3o=
