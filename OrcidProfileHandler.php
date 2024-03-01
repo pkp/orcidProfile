@@ -26,10 +26,10 @@ use Carbon\Carbon;
 use Exception;
 use PKP\core\Core;
 use PKP\core\PKPRequest;
+use PKP\core\PKPSessionGuard;
 use PKP\plugins\PluginRegistry;
 use PKP\security\authorization\PKPSiteAccessPolicy;
 use PKP\security\authorization\UserRequiredPolicy;
-use PKP\session\SessionManager;
 use PKP\submission\PKPSubmission;
 
 class OrcidProfileHandler extends Handler
@@ -71,7 +71,7 @@ class OrcidProfileHandler extends Handler
         }
 
         if (!Application::isInstalled()) {
-            SessionManager::disable();
+            PKPSessionGuard::disableSession();
         }
 
         $this->setEnforceRestrictedSite(false);
