@@ -1,16 +1,17 @@
 # TAKASHI IMAGIRE <imagire@gmail.com>, 2021.
+# Bjorn-Ole Kamm <pkp_trans@b-ok.de>, 2024.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-12-11 19:15+0000\n"
-"Last-Translator: TAKASHI IMAGIRE <imagire@gmail.com>\n"
+"PO-Revision-Date: 2024-05-10 04:59+0000\n"
+"Last-Translator: Bjorn-Ole Kamm <pkp_trans@b-ok.de>\n"
 "Language-Team: Japanese <http://translate.pkp.sfu.ca/projects/"
-"orcid-profile-plugin/orcid-profile-plugin/ja_JP/>\n"
-"Language: ja_JP\n"
+"orcid-profile-plugin/orcid-profile-plugin/ja/>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.18.2\n"
 
 msgid "plugins.generic.orcidProfile.about.display"
 msgstr ""
@@ -196,3 +197,57 @@ msgstr "ORCIDからユーザーのプロフィール情報を取り込めるよ�
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "ORCIDプロフィールプラグイン"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "設定が保存されました"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "国"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "無効なクライアント資格情報"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "ORCIDプロフィールプラグインは有効"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "クライアントシークレットは無効：認証情報を確認してください"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "クライエントIDは有効"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "クライエントシークリットは有効"
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "投稿者の認証されていないORCiDが検出されました。"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "検証エラーのため、プラグインは無効化されました。"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "都市"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "場所設定の確認"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr "ORCIDへの査読者情報の送信を有効にするために、都市、国を選択してください"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "ORCIDプロフィールプラグイン状態"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "ORCIDプロフィールプラグインは無効"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "config.inc.phpでグローバルに設定されています"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "雑誌別に設定されています"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "クライアントIDは無効：入力を確認してください"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "投稿者のORCiDの重複が検出されました。"
