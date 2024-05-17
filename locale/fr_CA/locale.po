@@ -1,11 +1,11 @@
 # Marie-Hélène Vézina [UdeMontréal] <marie-helene.vezina@umontreal.ca>, 2022, 2023.
-# "Marie-Hélène Vézina [UdeMontréal]" <marie-helene.vezina@umontreal.ca>, 2023.
+# "Marie-Hélène Vézina [UdeMontréal]" <marie-helene.vezina@umontreal.ca>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:16+00:00\n"
-"PO-Revision-Date: 2023-11-01 14:38+0000\n"
+"PO-Revision-Date: 2024-04-27 04:07+0000\n"
 "Last-Translator: \"Marie-Hélène Vézina [UdeMontréal]\" <marie-helene."
 "vezina@umontreal.ca>\n"
 "Language-Team: French (Canada) <http://translate.pkp.sfu.ca/projects/"
@@ -85,7 +85,7 @@ msgid "plugins.generic.orcidProfile.fieldset"
 msgstr "ORCID"
 
 msgid "plugins.generic.orcidProfile.connect"
-msgstr "Connecter votre identifiant ORCID ou s'inscrire"
+msgstr "Créer ou connecter votre identifiant ORCiID"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
 msgstr "Tout enregistrer"
@@ -180,7 +180,7 @@ msgid "plugins.generic.orcidProfile.about.title"
 msgstr "Qu'est-ce que ORCID ?"
 
 msgid "plugins.generic.orcidProfile.authorise"
-msgstr "Connecter votre identifiant ORCID et l'autoriser"
+msgstr "Connecter et autoriser votre identifiant ORCID"
 
 msgid "plugins.generic.orcidProfile.failure.contact"
 msgstr ""
