@@ -1334,7 +1334,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 	 * @param Submission $submission The Article object for which the external identifiers should be build.
 	 * @param Publication $publication The Article object for which the external identifiers should be build.
 	 * @param Journal $context Context the Submission is part of.
-	 * @param Issue $issue The Issue object the Article object belongs to.
+	 * @param Issue|null $issue The Issue object the Article object belongs to.
 	 * @return array            An associative array corresponding to ORCID external-id JSON.
 	 */
 	protected function buildOrcidExternalIds($submission, $publication, $context, $issue, $articleUrl) {
@@ -1369,16 +1369,18 @@ class OrcidProfilePlugin extends GenericPlugin {
 				}
 
 				# Add issue ids if they exist
-				$pubId = $issue->getStoredPubId($pubIdType);
-				if ($pubId) {
-					$externalIds[] = [
-						'external-id-type' => self::PUBID_TO_ORCID_EXT_ID[$pubIdType],
-						'external-id-value' => $pubId,
-						'external-id-url' => [
-							'value' => $plugin->getResolvingURL($contextId, $pubId)
-						],
-						'external-id-relationship' => 'part-of'
-					];
+				if ($issue !== null) {
+					$pubId = $issue->getStoredPubId($pubIdType);
+					if ($pubId) {
+						$externalIds[] = [
+							'external-id-type' => self::PUBID_TO_ORCID_EXT_ID[$pubIdType],
+							'external-id-value' => $pubId,
+							'external-id-url' => [
+								'value' => $plugin->getResolvingURL($contextId, $pubId)
+							],
+							'external-id-relationship' => 'part-of'
+						];
+					}
 				}
 			}
 		} else {
