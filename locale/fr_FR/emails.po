@@ -1,8 +1,9 @@
 # Emma U <emmaupkp@gmail.com>, 2021.
+# Rodolphe Lemétayer <rlemetayer@protonmail.com>, 2024.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-09-17 23:52+0000\n"
-"Last-Translator: Emma U <emmaupkp@gmail.com>\n"
+"PO-Revision-Date: 2024-06-21 20:39+0000\n"
+"Last-Translator: Rodolphe Lemétayer <rlemetayer@protonmail.com>\n"
 "Language-Team: French <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/emails/fr_FR/>\n"
 "Language: fr_FR\n"
@@ -10,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.18.2\n"
 
 msgid "emails.orcidRequestAuthorAuthorization.body"
 msgstr ""
@@ -80,3 +81,9 @@ msgstr ""
 
 msgid "emails.orcidCollectAuthorId.subject"
 msgstr "Soumission ORCID"
+
+msgid "emailTemplate.variable.authorOrcidUrl"
+msgstr "Lien d'autorisation OAuth ORCID"
+
+msgid "emailTemplate.variable.orcidAboutUrl"
+msgstr "URL de la page à propos d'ORCID"
