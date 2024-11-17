@@ -1,3 +1,233 @@
 # Ernedin Zajko <ezajko@root.ba>, 2024.
+# Ana Jelenković <jelenkovicana@hotmail.com>, 2024.
 msgid ""
-msgstr "X-Generator: Weblate\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit"
+msgstr ""
+"PO-Revision-Date: 2024-11-18 12:40+0000\n"
+"Last-Translator: Ana Jelenković <jelenkovicana@hotmail.com>\n"
+"Language-Team: Serbian <http://translate.pkp.sfu.ca/projects/"
+"orcid-profile-plugin/orcid-profile-plugin/sr/>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.18.2\n"
+
+msgid "plugins.generic.orcidProfile.about.orcidExplanation"
+msgstr ""
+"ORCID je nezavisna neprofitna organizacija koja obezbeđuje trajni "
+"identifikator – ORCID ID – koji vas razlikuje od drugih istraživača i "
+"mehanizam za povezivanje vaših rezultata istraživanja i aktivnosti sa vašim "
+"ID-om. ORCID je integrisan u mnoge sisteme koje koriste izdavači, "
+"finansijeri, institucije i druge usluge vezane za istraživanje. Saznajte "
+"više na <a href=\"https://orcid.org\">orcid.org</a>."
+
+msgid "plugins.generic.orcidProfile.about.display.title"
+msgstr "Gde se prikazuju ORCID ID-ovi?"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId.error"
+msgstr "Nevažeći ID klijenta"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.journal"
+msgstr "Konfigurisano na osnovu dnevnika"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretInvalid"
+msgstr "Tajna klijenta je nevažeća, proverite svoje akreditive"
+
+msgid "plugins.generic.orcidProfile.instructions"
+msgstr ""
+"Možete unapred da popunite ovaj obrazac informacijama sa ORCID profila. "
+"Unesite adresu e-pošte ili ORCID iD povezan sa ORCID profilom, a zatim "
+"kliknite na „Pošalji“."
+
+msgid "plugins.generic.orcidProfile.manager.settings.sendMailToAuthorsOnPublication"
+msgstr ""
+"Pošaljite e-mail da zatražite ORCID ovlašćenje od autora kada članak bude "
+"prihvaćen tj. poslato na uređivanje kopija"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.memberSandbox"
+msgstr "Sanbox člana"
+
+msgid "plugins.generic.orcidProfile.author.requestAuthorization"
+msgstr "Pošaljite e-poštu da zatražite ORCID ovlašćenje od saradnika"
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"
+msgstr "Podnesak je dodat u vaš ORCID zapis."
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcid"
+msgstr "ORCID ID je već sačuvan za ovu prijavu."
+
+msgid "plugins.generic.orcidProfile.failure.contact"
+msgstr ""
+"Molimo kontaktirajte menadžera časopisa sa svojim imenom, ORCID ID-om i "
+"detaljima vaše prijave."
+
+msgid "plugins.generic.orcidProfile.displayName"
+msgstr "Dodatak za ORCID profil"
+
+msgid "plugins.generic.orcidProfile.description"
+msgstr "Omogućava uvoz informacija o korisničkom profilu iz ORCID-a."
+
+msgid "plugins.generic.orcidProfile.noData"
+msgstr "Nije moguće pronaći podatke od ORCID-a."
+
+msgid "plugins.generic.orcidProfile.emailOrOrcid"
+msgstr "Adresa e-pošte ili ORCID ID:"
+
+msgid "plugins.generic.orcidProfile.manager.settings.title"
+msgstr "ORCID API podešavanja"
+
+msgid "plugins.generic.orcidProfile.manager.settings.hidden"
+msgstr "sakriven"
+
+msgid "plugins.generic.orcidProfile.manager.settings.description"
+msgstr ""
+"Konfigurišite pristup ORCID API-ju za korišćenje za uvlačenje informacija o "
+"ORCID profilu u profile korisnika i autora i ažuriranje povezanih ORCID "
+"zapisa novim publikacijama (samo za članove ORCID-a)."
+
+msgid "plugins.generic.orcidProfile.manager.settings.description.globallyconfigured"
+msgstr ""
+"ORCID API je globalno konfigurisao host. Sledeći akreditivi su sačuvani."
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Zbog grešaka u validaciji, dodatak je onemogućen."
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath"
+msgstr "ORCID API"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.public"
+msgstr "Javno"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.publicSandbox"
+msgstr "Javni Sandbox"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidProfileAPIPath.member"
+msgstr "Član"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientId"
+msgstr "Klijent ID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidScope"
+msgstr "Obim pristupa profilu"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret"
+msgstr "Tajna Klijenta"
+
+msgid "plugins.generic.orcidProfile.manager.settings.mailSectionTitle"
+msgstr "Podešavanja E-pošte"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Podešavanja sačuvana"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
+msgstr "ORCID dnevnik zahteva"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
+msgstr "Izaberite količinu izlaza evidencije koju je napisao dodatak"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
+msgstr "Greške"
+
+msgid "plugins.generic.orcidProfile.manager.settings.logLevel.all"
+msgstr "Sve"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Grad"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Država"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Pregledajte podešavanja lokacije"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr ""
+"Izaberite Grad, Državu da biste omogućili slanje informacija o recenzentu "
+"ORCID-u"
+
+msgid "plugins.generic.orcidProfile.author.accessDenied"
+msgstr "ORCID pristup je odbijen na"
+
+msgid "plugins.generic.orcidProfile.author.accessTokenStored"
+msgstr "Pristup ORCID zapisu je odobren sa opsegom {$orcidAccessScope}, važi do"
+
+msgid "plugins.generic.orcidProfile.author.deleteORCID"
+msgstr "Izbrišite ORCID ID i pristupni token!"
+
+msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
+msgstr "Pogledajte ispod da biste zatražili autentifikovani ORCID ID"
+
+msgid "plugins.generic.orcidProfile.author.unauthenticated"
+msgstr ""
+"ORCID iD nije autentifikovan! Zatražite potvrdu autentičnosti od saradnika."
+
+msgid "plugins.generic.orcidProfile.verify.title"
+msgstr "ORCID Autorizacija"
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"
+msgstr "Prijava nije mogla da se doda u vaš ORCID zapis."
+
+msgid "plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"
+msgstr "Podnesak će biti dodat u vaš ORCID zapis tokom objavljivanja."
+
+msgid "plugins.generic.orcidProfile.verify.success"
+msgstr "Vaš ORCID ID je verifikovan i uspešno povezan sa podnošenjem."
+
+msgid "plugins.generic.orcidProfile.verify.failure"
+msgstr "Vaš ORCID ID nije mogao biti verifikovan. Veza više nije važeća."
+
+msgid "plugins.generic.orcidProfile.verify.denied"
+msgstr "Odbili ste pristup svom ORCID zapisu."
+
+msgid "plugins.generic.orcidProfile.authFailure"
+msgstr "ORCID veza za autorizaciju je već korišćena ili je nevažeća."
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Nevažeći klijentski akreditivi"
+
+msgid "plugins.generic.orcidProfile.fieldset"
+msgstr "ORCID"
+
+msgid "plugins.generic.orcidProfile.connect"
+msgstr "Kreirajte ili povežite svoj ORCID iD"
+
+msgid "plugins.generic.orcidProfile.authorise"
+msgstr "Ovlastite i povežite svoj ORCID ID"
+
+msgid "plugins.generic.orcidProfile.about.title"
+msgstr "Šta je ORCID?"
+
+msgid "plugins.generic.orcidProfile.about.howAndWhy.title"
+msgstr "Kako i zašto mi prikupljamo ORCID ID?"
+
+msgid "plugins.generic.orcidProfile.manager.settings.orcidClientSecret.error"
+msgstr "Nevažeća tajna klijenta"
+
+msgid "plugins.generic.orcidProfile.manager.status.description"
+msgstr "Status dodatka OrcidProfile"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.enabled"
+msgstr "Dodatak OrcidProfile je omogućen"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.disabled"
+msgstr "Dodatak OrcidProfile je onemogućen"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.global"
+msgstr "Globalno konfigurisano u config.inc.php"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdValid"
+msgstr "Id klijenta je važeći"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientIdInvalid"
+msgstr "Id klijenta je nevažeći, proverite svoj unos"
+
+msgid "plugins.generic.orcidProfile.manager.status.configuration.clientSecretValid"
+msgstr "Tajna klijenta je važeća"
+
+msgid "plugins.generic.orcidProfile.verify.duplicateOrcidAuthor"
+msgstr "Otkriveni su duplikati ORCiD-a za saradnike."
+
+msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
+msgstr "Otkriveni su ORCiD-ovi sa nepotvrđenim identitetom za saradnike."
