@@ -501,17 +501,16 @@ class OrcidProfilePlugin extends GenericPlugin
                 }
             }
 
-            $translatedTitleAvailable = false;
-            foreach ($supportedSubmissionLocales as $defaultLanguage) {
-                if ($defaultLanguage !== $publicationLocale) {
-                    $iso2LanguageCode = substr($defaultLanguage, 0, 2);
-                    $defaultTitle = $submission->getLocalizedData($iso2LanguageCode);
-                    if (strlen($defaultTitle) > 0 && !$translatedTitleAvailable) {
-                        $orcidReview['subject-name']['translated-title'] = ['value' => $defaultTitle, 'language-code' => $iso2LanguageCode];
-                        $translatedTitleAvailable = true;
-                    }
+            $allTitles = $submission->getCurrentPublication()->getData('title');
+            $submissionLocale = $submission->getData('locale');
+            foreach ($allTitles as $locale => $title) {
+                if ($locale === $submissionLocale) {
+                    $orcidReview['subject-name']['title'] = ['value' => $title];
+                } else {
+                    $orcidReview['subject-name']['translated-title'] = ['value' => $title, 'language-code' => substr($locale, 0, 2)];
                 }
             }
+
             return $orcidReview;
         }
     }
@@ -1198,7 +1197,7 @@ class OrcidProfilePlugin extends GenericPlugin
             error_log('Application is set to sandbox mode and will not have any interaction with orcid service');
             return new JSONMessage(false, __('common.sandbox'));
         }
-        
+
         $context = $request->getContext();
         $contextId = $this->currentContextId = $context->getId();
         $publicationId = $publication->getId();
