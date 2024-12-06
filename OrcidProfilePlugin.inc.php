@@ -1162,7 +1162,6 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 				if (!empty($submission->getData('pub-id::doi'))) {
 					$externalIds = [
-
 						'external-id-type' => 'doi',
 						'external-id-value' => $submission->getData('pub-id::doi'),
 						'external-id-url' => [
@@ -1176,17 +1175,14 @@ class OrcidProfilePlugin extends GenericPlugin {
 
 			}
 
-			$translatedTitleAvailable = false;
-			foreach ($supportedSubmissionLocales as $defaultLanguage) {
-				if ($defaultLanguage !== $publicationLocale) {
-					$iso2LanguageCode = substr($defaultLanguage, 0, 2);
-					$defaultTitle = $submission->getLocalizedTitle($iso2LanguageCode);
-					if (strlen($defaultTitle) > 0 && !$translatedTitleAvailable) {
-						$orcidReview['subject-name']['translated-title'] = ['value' => $defaultTitle, 'language-code' => $iso2LanguageCode];
-						$translatedTitleAvailable = true;
-					}
+			$allTitles = $submission->getCurrentPublication()->getData('title');
+			$submissionLocale = $submission->getData('locale');
+			foreach ($allTitles as $locale => $title) {
+				if ($locale === $submissionLocale) {
+					$orcidReview['subject-name']['title'] = ['value' => $title];
+				} else {
+					$orcidReview['subject-name']['translated-title'] = ['value' => $title, 'language-code' => substr($locale, 0, 2)];
 				}
-
 			}
 		}
 		return $orcidReview;
