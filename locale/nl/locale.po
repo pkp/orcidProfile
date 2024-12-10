@@ -1,18 +1,19 @@
+# Dorien van Rheenen <d.van.rheenen@rug.nl>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-19T11:05:17+00:00\n"
-"PO-Revision-Date: 2020-10-20 22:50+0000\n"
-"Last-Translator: Hans Spijker <hans.spijker@huygens.knaw.nl>\n"
+"PO-Revision-Date: 2024-11-04 16:42+0000\n"
+"Last-Translator: Dorien van Rheenen <d.van.rheenen@rug.nl>\n"
 "Language-Team: Dutch <http://translate.pkp.sfu.ca/projects/"
 "orcid-profile-plugin/orcid-profile-plugin/nl/>\n"
-"Language: nl_NL\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.18.2\n"
 
 msgid "plugins.generic.orcidProfile.displayName"
 msgstr "ORCID profiel plugin"
@@ -72,7 +73,7 @@ msgid "plugins.generic.orcidProfile.manager.settings.logSectionTitle"
 msgstr "Logboek van ORCID aanvragen"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.help"
-msgstr "Selecteer welke gegevens worden gelogd."
+msgstr "Selecteer welke gegevens worden gelogd"
 
 msgid "plugins.generic.orcidProfile.manager.settings.logLevel.error"
 msgstr "Fouten"
@@ -87,13 +88,14 @@ msgid "plugins.generic.orcidProfile.author.accessTokenStored"
 msgstr "Toegang tot ORCID was toegestaan met bereik {$orcidAccessScope}, geldig tot"
 
 msgid "plugins.generic.orcidProfile.author.requestAuthorization"
-msgstr "Verstuur een e-mail aan de bijdrager om ORCID-authorisatie aan te vragen."
+msgstr ""
+"Verstuur een e-mail aan de bijdrager om ORCID-authorisatie aan te vragen"
 
 msgid "plugins.generic.orcidProfile.author.deleteORCID"
 msgstr "Verwijder ORCID ID en toegangscode!"
 
 msgid "plugins.generic.orcidProfile.author.orcidEmptyNotice"
-msgstr "Zie hieronder voor de aanvraag van een geauthenticeerd ORCID ID."
+msgstr "Zie hieronder voor de aanvraag van een geauthenticeerd ORCID ID"
 
 msgid "plugins.generic.orcidProfile.author.unauthenticated"
 msgstr "ORCID ID is niet geauthenticeerd! Vraag authenticatie aan de bijdrager."
@@ -203,3 +205,24 @@ msgstr ""
 "Stuur een e-mail om een ORCID-autorisatie van auteurs aan te vragen wanneer "
 "een artikel is geaccepteerd, dat wil zeggen, wanneer het artikel zich in de "
 "fase van eindredactie bevindt"
+
+msgid "plugins.generic.orcidProfile.manager.settings.saved"
+msgstr "Instellingen opgeslagen"
+
+msgid "plugins.generic.orcidProfile.manager.settings.country"
+msgstr "Land"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review"
+msgstr "Locatie-instellingen beoordelen"
+
+msgid "plugins.generic.orcidProfile.manager.settings.review.help"
+msgstr "Selecteer Stad, Land voor het verzenden van reviewergegevens naar ORCID"
+
+msgid "plugins.generic.orcidProfile.manager.settings.city"
+msgstr "Stad"
+
+msgid "plugins.generic.orcidProfile.invalidClient"
+msgstr "Ongeldige aanmeldgegevens"
+
+msgid "plugins.generic.orcidProfile.manager.settings.pluginDisabled"
+msgstr "Vanwege validatiefouten is de plugin uitgeschakeld."
