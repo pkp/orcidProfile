@@ -94,7 +94,7 @@ msgstr "Odmówiono dostępu do ORCID w"
 
 msgid "plugins.generic.orcidProfile.author.accessTokenStored"
 msgstr ""
-"Dostęp do rekordu ORCID przyznany z zakresem {$ orcidAccessScope}, ważny do"
+"Dostęp do rekordu ORCID przyznany z zakresem {$orcidAccessScope}, ważny do"
 
 msgid "plugins.generic.orcidProfile.author.requestAuthorization"
 msgstr "Wyślij email z prośbą o autoryzację"
