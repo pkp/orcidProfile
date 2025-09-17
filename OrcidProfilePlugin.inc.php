@@ -290,6 +290,10 @@ class OrcidProfilePlugin extends GenericPlugin {
 			)
 		);
 
+		if ($template == 'frontend/pages/userRegister.tpl') {
+			$templateMgr->registerFilter('output', [$this, 'registrationFilter']);
+		}
+
 		return false;
 	}
 
