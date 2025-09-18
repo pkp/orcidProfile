@@ -437,7 +437,7 @@ class OrcidProfilePlugin extends GenericPlugin
 
     public function buildOrcidReview($submission, $review, $request, $issue = null)
     {
-        $publicationUrl = $request->getDispatcher()->url($request, PKPApplication::ROUTE_PAGE, null, 'article', 'view', $submission->getId());
+        $publicationUrl = $request->getDispatcher()->url($request, PKPApplication::ROUTE_PAGE, null, $this->getAppSpecificUrlHandlerName(), 'view', $submission->getId());
         $context = $request->getContext();
         $publicationLocale = ($submission->getData('locale')) ? $submission->getData('locale') : 'en';
         $pubIdPlugins = PluginRegistry::loadCategory('pubIds', true, $context->getId()); // DO not remove
@@ -1359,7 +1359,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $publicationLocale = ($publication->getData('locale')) ? $publication->getData('locale') : 'en';
         $supportedSubmissionLocales = $context->getSupportedSubmissionLocales();
 
-        $publicationUrl = $request->getDispatcher()->url($request, Application::ROUTE_PAGE, null, 'article', 'view', $submission->getId());
+        $publicationUrl = $request->getDispatcher()->url($request, Application::ROUTE_PAGE, null, $this->getAppSpecificUrlHandlerName(), 'view', $submission->getId());
 
         $orcidWork = [
             'title' => [
@@ -1706,5 +1706,17 @@ class OrcidProfilePlugin extends GenericPlugin
         }
 
         return false;
+    }
+
+    /**
+     * Gets the correct application-specific URL handler name for generating publication URLs
+     */
+    private function getAppSpecificUrlHandlerName(): string
+    {
+        $appName = Application::get()->getName();
+        return match ($appName) {
+            'ops' => 'preprint',
+            default => 'article',
+        };
     }
 }
