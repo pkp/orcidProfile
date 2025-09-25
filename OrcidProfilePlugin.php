@@ -146,42 +146,42 @@ class OrcidProfilePlugin extends GenericPlugin
 
                 $schema->properties->orcidSandbox = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidAccessToken = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidAccessScope = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidRefreshToken = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidAccessExpiresOn = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidAccessDenied = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidEmailToken = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidWorkPutCode = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
             });
@@ -192,32 +192,32 @@ class OrcidProfilePlugin extends GenericPlugin
 
                 $schema->properties->orcidAccessToken = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidAccessScope = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidRefreshToken = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidAccessExpiresOn = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidAccessDenied = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
                 $schema->properties->orcidReviewPutCode = (object)[
                     'type' => 'string',
-                    'apiSummary' => true,
+                    'writeOnly' => 'true',
                     'validation' => ['nullable']
                 ];
             });
