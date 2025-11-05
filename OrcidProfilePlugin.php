@@ -17,7 +17,6 @@
 
 namespace APP\plugins\generic\orcidProfile;
 use APP\issue\Issue;
-use APP\journal\Journal;
 use APP\plugins\generic\citationStyleLanguage\CitationStyleLanguagePlugin;
 use APP\publication\Publication;
 use APP\author\Author;
@@ -42,6 +41,7 @@ use PKP\components\forms\FieldOptions;
 use PKP\components\forms\FieldText;
 use PKP\components\forms\publication\ContributorForm;
 use PKP\config\Config;
+use PKP\context\Context;
 use PKP\core\Core;
 use PKP\core\JSONMessage;
 use PKP\core\PKPApplication;
@@ -1342,7 +1342,7 @@ class OrcidProfilePlugin extends GenericPlugin
      *  Example of valid ORCID JSON for adding works to an ORCID record.
      *
      * @param Publication $publication extract data from this Article
-     * @param Journal $context Context object the Submission is part of
+     * @param Context $context Context object the Submission is part of
      * @param Author[] $authors Array of Author objects, the contributors of the publication
      * @param Issue $issue Issue the Article is part of
      * @param Request $request the current request
@@ -1422,7 +1422,7 @@ class OrcidProfilePlugin extends GenericPlugin
      *
      * @param Submission $submission The Article object for which the external identifiers should be build.
      * @param Publication $publication The Article object for which the external identifiers should be build.
-     * @param Journal $context Context the Submission is part of.
+     * @param Context $context Context the Submission is part of.
      * @param Issue $issue The Issue object the Article object belongs to.
      *
      * @return array            An associative array corresponding to ORCID external-id JSON.
