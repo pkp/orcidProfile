@@ -16,9 +16,9 @@
 
 namespace APP\plugins\generic\orcidProfile\mailables;
 
-use APP\journal\Journal;
 use APP\plugins\generic\orcidProfile\mailables\traits\OrcidVariables;
 use APP\submission\Submission;
+use PKP\context\Context;
 use PKP\mail\Mailable;
 use PKP\mail\traits\Configurable;
 use PKP\mail\traits\Recipient;
@@ -35,7 +35,7 @@ class OrcidCollectAuthorId extends Mailable
     protected static ?string $emailTemplateKey = 'ORCID_COLLECT_AUTHOR_ID';
     protected static array $toRoleIds = [Role::ROLE_ID_AUTHOR];
 
-    public function __construct(Journal $context, Submission $submission, string $oauthUrl)
+    public function __construct(Context $context, Submission $submission, string $oauthUrl)
     {
         parent::__construct([$context, $submission]);
         $this->setupOrcidVariables($oauthUrl);
