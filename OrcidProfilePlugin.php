@@ -468,11 +468,18 @@ class OrcidProfilePlugin extends GenericPlugin
      */
     public function setupCallbackHandler($hookName, $params)
     {
-        $page = $params[0];
-        if ($this->getEnabled() && $page == 'orcidapi') {
-            define('HANDLER_CLASS', OrcidProfileHandler::class);
-            return true;
+        // Params follow the PKPPageRouter::route() signature for LoadHandler hook:
+        // [&$page, &$op, &$sourceFile, &$handler]
+        $page = $params[0] ?? null;
+
+        if ($this->getEnabled() && $page === 'orcidapi') {
+            // OJS/PKP 3.5+: HANDLER_CLASS is deprecated and will throw.
+            // Set the handler object directly via the hook params, by-reference.
+            $handler = &$params[3];
+            $handler = new OrcidProfileHandler();
+            return true; // Signal that the handler has been provided
         }
+
         return false;
     }
 
