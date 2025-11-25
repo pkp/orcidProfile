@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/pkp/orcidProfile.svg?branch=main)](https://travis-ci.org/pkp/orcidProfile)
 
+> [!WARNING]
+> As of OJS/OPS 3.5, the ORCID plugin is no longer required and all ORCID-related functionality has been integrated into the core application. This plugin will not be updated for OJS 3.5 and later. Any questions or issue about ORCID functionality in OJS/OPS 3.5 and later should be directed to the [community forum](https://forum.pkp.sfu.ca/) or the [pkp-lib repository](https://github.com/pkp/pkp-lib).
+
+
 Table of Contents
 =================
 
