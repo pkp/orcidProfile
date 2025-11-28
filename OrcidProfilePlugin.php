@@ -124,9 +124,6 @@ class OrcidProfilePlugin extends GenericPlugin
         // Display additional ORCID access information and checkbox to send e-mail to authors in the AuthorForm
         Hook::add('authorform::display', $this->handleFormDisplay(...));
 
-        // Send email to author, if the added checkbox was ticked
-        Hook::add('authorform::execute', $this->handleAuthorFormExecute(...));
-
         // Handle ORCID on user registration
         Hook::add('registrationform::execute', $this->collectUserOrcidId(...));
 
@@ -144,6 +141,7 @@ class OrcidProfilePlugin extends GenericPlugin
 
         Hook::add('Mailer::Mailables', $this->addMailable(...));
         Hook::add('Author::edit', $this->handleAuthorFormExecute(...));
+        Hook::add('Author::add', $this->handleAuthorFormExecute(...));
         Hook::add('Form::config::before', $this->addOrcidFormFields(...));
         Hook::add('Installer::postInstall', $this->updateSchema(...));
         Hook::add('Publication::validatePublish', $this->validate(...));
@@ -735,19 +733,17 @@ class OrcidProfilePlugin extends GenericPlugin
      */
     public function handleAuthorFormExecute($hookname, $args)
     {
-        if (count($args) == 3) {
-            /** @var Author */
-            $author = &$args[0];
-            $values = $args[2];
+        $request = Application::get()->getRequest();
+        /** @var Author */
+        $author = &$args[0];
+        
+        if ($author && $request->getUserVar('requestOrcidAuthorization')) {
+            $this->sendAuthorMail($author);
+        }
 
-            if ($author && $values['requestOrcidAuthorization']) {
-                $this->sendAuthorMail($author);
-            }
-
-            if ($author && $values['deleteORCID']) {
-                $author->setOrcid(null);
-                $this->removeOrcidAccessToken($author, false);
-            }
+        if ($author && $request->getUserVar('deleteORCID')) {
+            $author->setOrcid(null);
+            $this->removeOrcidAccessToken($author, false);
         }
     }
 
@@ -755,10 +751,8 @@ class OrcidProfilePlugin extends GenericPlugin
      * Send mail with ORCID authorization link to the e-mail address of the supplied Author object.
      *
      * @param Author $author
-     * @param bool $updateAuthor If true update the author fields in the database.
-     *    Use this only if not called from a function, which does this anyway.
      */
-    public function sendAuthorMail($author, $updateAuthor = false)
+    public function sendAuthorMail($author)
     {
         $request = Application::get()->getRequest();
         $context = $request->getContext();
@@ -790,10 +784,8 @@ class OrcidProfilePlugin extends GenericPlugin
             $mailable->body($emailTemplate->getLocalizedData('body'))
                 ->subject($emailTemplate->getLocalizedData('subject'));
             Mail::send($mailable);
-
-            if ($updateAuthor) {
-                Repo::author()->dao->update($author);
-            }
+            
+            Repo::author()->dao->update($author);
         }
     }
 
@@ -1516,7 +1508,7 @@ class OrcidProfilePlugin extends GenericPlugin
                 foreach ($authors as $author) {
                     $orcidAccessExpiresOn = Carbon::parse($author->getData('orcidAccessExpiresOn'));
                     if ($author->getData('orcidAccessToken') == null || $orcidAccessExpiresOn->isPast()) {
-                        $this->sendAuthorMail($author, true);
+                        $this->sendAuthorMail($author);
                     }
                 }
             }
