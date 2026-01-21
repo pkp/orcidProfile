@@ -764,7 +764,7 @@ class OrcidProfilePlugin extends GenericPlugin
         $context = $request->getContext();
 
         // This should only ever happen within a context, never site-wide.
-        if ($context != null) {
+        if ($context != null && $context instanceof Journal) {
             $contextId = $context->getId();
             $publicationId = $author->getData('publicationId');
             $publication = Repo::publication()->get($publicationId);
