@@ -89,7 +89,7 @@ class OrcidHandler extends Handler
 			$orcidAccessToken = $response['access_token'];
 			$orcidAccessScope = $response['scope'];
 			$orcidRefreshToken = $response['refresh_token'];
-			$orcidAccessExpiresOn = $response['expires_in'];
+			$orcidAccessExpiresOn = (int)$response['expires_in'];
 
 
 		}
@@ -174,7 +174,7 @@ class OrcidHandler extends Handler
 		$orcidAccessExpiresOn = Carbon\Carbon::now();
 		// expires_in field from the response contains the lifetime in seconds of the token
 		// See https://members.orcid.org/api/get-oauthtoken
-		$orcidAccessExpiresOn->addSeconds($orcidResponse['expires_in']);
+		$orcidAccessExpiresOn->addSeconds((int)$orcidResponse['expires_in']);
 		$userOrAuthor->setOrcid($orcidUri);
 		// remove the access denied marker, because now the access was granted
 		$userOrAuthor->setData('orcidAccessDenied', null);
