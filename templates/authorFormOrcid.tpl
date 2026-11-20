@@ -10,7 +10,7 @@
  *}
 {fbvFormSection list="true" title="ORCID" translate=false}
 	{if $orcidAccessToken}
-		<p>{translate key='plugins.generic.orcidProfile.author.accessTokenStored' orcidAccessScope=$orcidAccessScope} {$orcidAccessExpiresOn|date_format:$datetimeFormatShort}</p>
+		<p>{translate key='plugins.generic.orcidProfile.author.accessTokenStored' orcidAccessScope=$orcidAccessScope|escape} {$orcidAccessExpiresOn|date_format:$datetimeFormatShort}</p>
 	{/if}
 	{if $orcidAccessDenied}
 		<p>{translate key='plugins.generic.orcidProfile.author.accessDenied'} {$orcidAccessDenied|date_format:$datetimeFormatShort}</p>
@@ -38,7 +38,7 @@
 		{else}
 		var orcidIconSvg = '';
 		{/if}
-		var orcidLink = $('<a href="{$orcid}" target="_blank">' + orcidIconSvg + '{$orcid|escape}</a>');
+		var orcidLink = $('<a target="_blank">' + orcidIconSvg + '{$orcid|escape}</a>').attr('href', {$orcid|json_encode});
 		orcidLink.insertAfter(orcidInput);
 		{else}
 		$('<span>{translate key='plugins.generic.orcidProfile.author.orcidEmptyNotice'}</span>').insertAfter(orcidInput);
