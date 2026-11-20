@@ -25,9 +25,9 @@
 
 {capture name=orcidLink assign=orcidLink}
 {if $orcidAuthenticated}
-	<a href="{$orcid}" target="_blank">{$orcidIcon}{$orcid}</a>
+	<a href="{$orcid|escape}" target="_blank">{$orcidIcon}{$orcid|escape}</a>
 {else}
-	<a href="{$orcid}" target="_blank">{$orcid}</a>&nbsp;{$orcidButton}
+	<a href="{$orcid|escape}" target="_blank">{$orcid|escape}</a>&nbsp;{$orcidButton}
 {/if}
 {/capture}
 

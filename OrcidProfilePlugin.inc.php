@@ -77,6 +77,7 @@ class OrcidProfilePlugin extends GenericPlugin {
 		HookRegistry::register('authorform::execute', array($this, 'handleAuthorFormExecute'));
 
 		// Handle ORCID on user registration
+		HookRegistry::register('registrationform::validate', array($this, 'validateRegistrationForm'));
 		HookRegistry::register('registrationform::execute', array($this, 'collectUserOrcidId'));
 
 		// Send emails to authors without ORCID id upon submission
@@ -602,26 +603,41 @@ class OrcidProfilePlugin extends GenericPlugin {
 	}
 
 	/**
+	 * Validate ORCID and reject invalid values during user registration.
+	 *
+	 * @param string $hookName
+	 * @param array $params
+	 * @return false
+	 */
+	function validateRegistrationForm($hookName, $params) {
+		/** @var RegistrationForm $form */
+		$form = $params[0];
+
+		$form->readUserVars(['orcid']);
+
+		$validator = new FormValidatorORCID($form, 'orcid', 'optional', 'plugins.generic.orcidProfile.verify.orcidValueInvalid');
+		if (!$validator->isValid()) {
+			$form->addError($validator->getField(), $validator->getMessage());
+			$form->errorFields[$validator->getField()] = 1;
+		}
+
+
+		return false;
+	}
+
+	/**
 	 * Collect the ORCID when registering a user.
 	 *
-	 * @param $hookName string
-	 * @param $params array
+	 * @param string $hookName
+	 * @param array $params
 	 * @return bool
 	 */
 	function collectUserOrcidId($hookName, $params) {
 		$form = $params[0];
 		$user = $form->user;
 
-		$form->readUserVars(array('orcid','orcidAccessToken','orcidAccessScope','orcidRefreshToken','orcidAccessExpiresOn','orcidSandbox'));
+		$form->readUserVars(['orcid']);
 		$user->setOrcid($form->getData('orcid'));
-		$user->setData('orcidAccessToken', $form->getData('orcidAccessToken'));
-		$user->setData('orcidAccessScope', $form->getData('orcidAccessScope'));
-		$user->setData('orcidRefreshToken', $form->getData('orcidRefreshToken'));
-		if ($form->getData('orcidAccessExpiresOn')) {
-			$user->setData('orcidAccessExpiresOn', $form->getData('orcidAccessExpiresOn')->toDateTimeString);
-		}
-		$user->setData('orcidSandbox', true);
-
 
 		return false;
 	}
