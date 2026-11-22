@@ -48,6 +48,7 @@ use PKP\core\PKPApplication;
 use PKP\db\DAORegistry;
 use PKP\facades\Locale;
 use PKP\form\Form;
+use PKP\form\validation\FormValidatorORCID;
 use PKP\install\Installer;
 use PKP\linkAction\LinkAction;
 use PKP\linkAction\request\AjaxModal;
@@ -58,6 +59,7 @@ use PKP\services\PKPSchemaService;
 use PKP\submission\PKPSubmission;
 use PKP\submission\reviewAssignment\ReviewAssignment;
 use PKP\submission\reviewAssignment\ReviewAssignmentDAO;
+use PKP\user\form\RegistrationForm;
 use Sokil\IsoCodes\Database\Countries\Country;
 
 define('ORCID_URL', 'https://orcid.org/');
@@ -126,6 +128,7 @@ class OrcidProfilePlugin extends GenericPlugin
             Hook::add('authorform::execute', [$this, 'handleAuthorFormExecute']);
 
             // Handle ORCID on user registration
+            Hook::add('registrationform::validate', [$this, 'validateRegistrationForm']);
             Hook::add('registrationform::execute', [$this, 'collectUserOrcidId']);
 
             // Send emails to authors without ORCID id upon submission
@@ -933,6 +936,29 @@ class OrcidProfilePlugin extends GenericPlugin
         if ($saveAuthor) {
             Repo::author()->dao->update($author);
         }
+    }
+
+    /**
+     * Validate ORCID and reject invalid values during user registration.
+     *
+     * @param $hookName
+     * @param $params
+     * @return bool
+     */
+    public function validateRegistrationForm($hookName, $params)
+    {
+        /** @var RegistrationForm $form */
+        $form = $params[0];
+
+        $form->readUserVars(['orcid']);
+
+        $validator = new FormValidatorORCID($form, 'orcid', 'optional', 'plugins.generic.orcidProfile.verify.orcidValueInvalid');
+        if (!$validator->isValid()) {
+            $form->addError($validator->getField(), $validator->getMessage())   ;
+            $form->errorFields[$validator->getField()] = 1;
+        }
+
+        return false;
     }
 
     /**
