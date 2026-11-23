@@ -264,3 +264,6 @@ msgstr "Duplicate ORCiDs for contributors detected."
 
 msgid "plugins.generic.orcidProfile.verify.hasUnauthenticatedOrcid"
 msgstr "Unauthenticated ORCiDs for contributors detected."
+
+msgid "plugins.generic.orcidProfile.verify.orcidValueInvalid"
+msgstr "The ORCID value is not a valid ORCID URI. Please reconnect your ORCID and try again."
